@@ -1,0 +1,459 @@
+Our Trusted Seasoned professionals ready to support your data & AI transformation journey.
+Lets talk about data ka button header main
+
+why choose us 4 boxes button buzz words. 
+
+Harness the transformative power of generative AI to revolutionize operations, enhance productivity, and unlock new business opportunities with expert guidance.
+ 
+make it on 3 line
+
+Swap how we can help and advisory boxes
+
+
+Home page, GEN AI ->  Digital Twin
+
+LTAD add in How can we help
+
+https://www.youtube.com/playlist?list=PLM_Wylnk9Tfs6ypCBmFi5_Sg3WhB8LH-C
+
+Only this playlist should be shown in the LTAD
+
+Never Miss an Episode! not showing on the first page loading. it is showing on refresh. 
+
+Contact Us
+
+
+Get in Touch
+Schedule a meeting
+
+
+For any inquiries, questions, collaboration opportunities, or just to say hello, feel free to reach out. We look forward to hearing from you!
+include sponsorship for in this. 
+
+4 buttons below never latest video
+
+- participate as a guest (free) sales email
+- promote your product (paid) sales email
+- promote your business (paid) sales email
+- advertise during other podcasts (paid) sales email
+
+Schedule a Meeting remove.
+remove suggest a topic in LTAD
+
+
+replace 
+Our Trusted Seasoned Professionals
+            |
+            V
+Ready to Transform Your Data & AI Landscape?
+
+
+Four 4s Formula
+Value Discovery Canvas
+
+For Vendors
+- It helps top management to remove all unnecessary leads on which their sales people are busy. Using this canvas their conversion rate to success can be 80-90%
+
+For Customers
+- Its helps top management where all the unnecessary requirements are automatically gets filter or drops before it reaches their deck.
+
+
+remove Generative AI
+
+Data Management
+Data Governance
+Metadata Management
+Business Intelligence
+Data Warehouse
+Data Lakehouse
+ETLs
+Data Engineering
+Data Science
+Feature Engineering
+Data Analysis
+Digital Twin
+
+  1. Submit a re-categorization request to Fortinet:
+    - Go to: https://www.fortiguard.com/webfilter
+    - Enter your URL and submit a request to change the category to something appropriate like "Business" or "Information Technology"
+  2. Click the link in the block page - The "please click here" link in the screenshot also leads to the re-evaluation form
+  3. Follow up - Re-categorization usually happens within 1-3 business days
+
+
+  CTA buttion gap consistency
+
+  training and LTAD 2.0 in How We Can Help
+
+  Polish YPT Website content - Home Page
+
+
+Rahman (Ray) Khan: https://www.linkedin.com/in/rahman-ray-khan-82768019b/
+With over two decades of professional experience across diverse sectors, I’ve built a career defined by adaptability, strategic leadership, and a results-driven mindset. I began my journey in 1999 as a Sales Representative at Citi Bank, and since then, I’ve advanced through roles in finance, accounting, operations, and management — each chapter strengthening my ability to lead high-performing teams and drive organizational growth.
+
+From serving as a Senior Accountant at a tax consultancy to managing the operations of a hydroponic greenhouse as Site Incharge, I’ve developed a well-rounded perspective on business efficiency and people management. Today, as Head of the Underwriting Division at Evlo, I oversee strategic operations, streamline processes, and empower my team to deliver excellence through collaboration and accountability.
+
+I’m recognized for my exceptional interpersonal and communication skills, enabling me to build trust, foster alignment, and lead with clarity and purpose. Passionate about innovation and continuous improvement, I thrive in dynamic environments that challenge the status quo.
+
+Open to relocation, I’m now seeking senior leadership opportunities where I can contribute to organizational strategy, mentor emerging leaders, and help shape sustainable business growth.
+
+Moatasem El Haj: https://www.linkedin.com/in/moatasem-el-haj/
+Data Strategy | Governance | Quality | Metadata & MDM
+
+I believe data should clarify, not complicate — and I’m passionate about simplifying complexity through sound strategy, governance, and quality management.
+
+As a Data Strategy, Governance & Quality Advisor (CDMP-Certified) with over 25 years of experience, I help government, and enterprise organizations transform data into a trusted, strategic asset. My mission is to build data-driven, quality-centric cultures where governance, metadata, and master data form the backbone of reliable decision-making.
+
+I specialize in enterprise data strategy, governance frameworks, metadata and master data management (MDM/RDM), and data quality programs that enhance trust, compliance, and business value. I’ve guided executives and stewardship teams through maturity assessments, operating model design, and roadmap execution — ensuring governance and quality management work hand in hand to deliver measurable outcomes.
+
+My expertise covers:
+• Data Governance & Stewardship Frameworks
+• Metadata Management & Business Glossaries
+• Master & Reference Data (MDM/RDM)
+• Data Quality Controls, Profiling & Monitoring
+• Data Strategy, Architecture & Capability Building
+
+I bridge business and technology through practical, scalable data strategies that align governance, quality, and architecture with organizational priorities.
+
+If you’re driving a data transformation and seeking to strengthen governance, quality, and strategic alignment — let’s connect.
+
+Sami Syed: https://www.linkedin.com/in/sami-syed/
+We help online Stores grow their customer acquisition through social ads without any financial risk
+We spend our own money to generate your sales. 
+
+Our ad-system won't lose you any more money and time on:
+      ↪️ Self funded adspend
+      ↪️ High agency fees without secured profits
+      ↪️ Countless hours of agency meetings
+
+Francesco Puppini: https://www.linkedin.com/in/francescopuppini/
+
+I invented a data structure called "The Unified Star Schema" (USS): it is a special data model that acts as a foundation for all the possible analytical requirements of your organization (reports, dashboards, OLAP cubes, free-hand SQL, R, Python, machine learning models...). It is a generalization of the Dimensional Modeling: the same structure can be used either for a classic Kimball approach (having many star-snowflake schemas sharing conformed dimensions) or one universal star schema, where all facts and dimensions are pre-connected, all centered on the the "Bridge" (some call it the "Puppini Bridge"). This structure will NEVER create any duplication in your data: this is a massive achievement!!! This solution also solves the problem of circular references and non-conformed granularities. And especially, it allows working on data that comes from multiple fact tables. It is not easy to build, but it is incredibly easy to use.
+
+Now I work as R&D engineer for Astrato, implementing in a software those same principles of data warehouse design that I wrote in my book.
+
+Howard Diesel: https://www.linkedin.com/in/howarddiesel-cdmp-dmbok-modelwaresystems/
+
+Current President of DAMA Southern Africa with a passion for equipping Africa with Data Management skills and uplifting careers. 
+
+Supporting successful Data Management careers and initiatives in Africa & Globally.
+I present at the monthly DAMA meetings online, alongside some of the greatest data professionals. 
+
+My company, Modelware Systems, provides consultancy and Data Management training for individuals and corporations worldwide.  
+
+I provide training in many areas of Data Management. 
+Focus:
+1. Business Level understanding of Data Management
+2. Data Governance
+3. Data Architecture
+4. Data Strategy 
+5. Data Modelling
+6. Data Warehousing and Business Intelligence including Data Science
+7. Preparation for CDMP Certification
+
+I host weekly discussions to help data enthusiasts with the many data management problems faced in the workplace.
+
+Each week is aimed at one of 4 Data personas:
+• Data Citizens
+• Data Professionals
+• Knowledge-Driven Data Leaders
+• Data Management Managers
+
+Join my webinar every Thursday at 4 pm (UCT+02:00) to learn more and be a part of the discussion!
+
+I specialize in helping CDOs, EIM Head, and Information Governors to establish beneficial Information Governance programs in large, complex information-dependent institutions.
+
+Experienced in establishing an effective EIM Centre of Excellence (COE) that entrench information governance by providing EIM Journeys that deliver business value.
+
+I have worked for most of the major financial service providers in South Africa, with experience in Banking, Central Banking & insurance.
+
+Specialties: Data Governance, Business Glossary, Data Risk Management, Compliance, Data Architecture, Data Warehouse, Self-service Business Intelligence, Reference and Master Data Management, Data Quality, Meta-data, Document and Content Management, Taxonomies and Ontologies.
+
+
+Fred Lardaro: https://www.linkedin.com/in/fred-lardaro/
+•	More than 25 years in technology leadership roles in corporate, entrepreneurial, and R&D setting
+•	Contributing pioneer to innovative, comprehensive, far-reaching and culturally transforming software 
+           applications in communications, security and public safety.  
+•	Versed in national and corporate strategic interests in computing and communications technologies.  
+•	Depth of experience in both product development and client delivery engagements.  
+•	Excellent interpreter of client needs and market requirements. 
+•	Dynamic and engaging communication skills.
+
+Jose Almeida: https://www.linkedin.com/in/josemanuelalmeida/
+Most organizations don’t struggle with data because of technology.
+They struggle because no one truly owns it.
+I work with leadership teams across Europe, the Middle East, and Africa to turn data from a technical cost into a business asset by fixing ownership, governance, and decision-making where it actually matters.
+Over the years, I’ve seen the same pattern repeat itself in different markets:
+–	Strong regulations, weak execution
+–	Heavy investment, unclear accountability
+–	Modern platforms, low trust in data
+The root cause is almost always the same: data is treated as an IT initiative instead of a business responsibility.
+That’s where I come in.
+I advise executives and senior data leaders on how to:
+–	Align data strategy directly to business outcomes
+–	Assign real data ownership at decision points
+–	Build governance and data quality only where value is at stake
+–	Start small, prove impact, and scale deliberately
+I don’t sell tools.
+I don’t push frameworks for their own sake.
+I focus on clarity, traction, and measurable results.
+My work sits at the intersection of data strategy, data governance, data quality, and master data management, with one guiding principle:
+If data doesn’t change decisions, it isn’t working.
+I typically work with organizations that are serious about moving beyond experimentation and dashboards and ready to treat data as a core business asset.
+If your organization is investing in data but still struggling to trust it or use it, the problem is rarely technical and it’s usually solvable.
+
+Jon Cooke: https://www.linkedin.com/in/jon-cooke-096bb0/
+Ask me about delivering e2e AI native business processes using the Nebulyx AI platform and our A.D.O.P.T. framework - AI + Data Object Graphs and Data Product Thinking. Using our Data Product Pyramid framework on our AI Digital Twin solution and generative AI, AI Agents, and advanced analytics with Data Object Graphs to deliver the “Composable Enterprise”: a low friction, adaptive eco-system of re-configurable data products that runs at the speed of the business.
+
+This includes 
+1- Using LLMs/AI to create advanced analytical and Data Products in reconfigurable Data Object Graph based eco-system
+2- Creating a Lingua-Franca that allows business teams to communicate analytics asks with data and tech teams.
+3- Creating an Adaptive Business Strategy - The business strategy can start small and evolve and adapt as the business changes.
+4- Implementing as a rapid delivery, highly valuable data and analytic use-cases as Data Products
+5- Creating A portfolio of actual and specific real world Data Products that can used and re-used across the business.
+6- Creating a Data Product Marketplace where internal and external customers can create, prototype, search and use data products, including: Datasets, ML Models, BI Dashboards, Graph analytics
+7- Creating hybrid cloud polyglot data infrastructure to deploy Data Products
+
+
+
+
+takeaway ka naam change krna hai in each services section. 
+
+home page takeaway in the container same as CTA.
+
+remove by the numbers. 
+
+measurable outcomes ki jagah measurable Value
+
+data and ai consultancy
+
+What Our Data & AI Consultancy Delivers
+
+What VALUE LTAD 2.0 Brings to the Table
+
+VALUE add value in every services page
+
+
+PORTFOLIO IN THE HEADER IN THE VALUE DISCOVERY CANVAS IN NAV BAR
+
+what team members has accomplished in pass and what we can do for you.
+
+
+
+design according to it. 
+
+
+Case Studies Page Foundation First
+
+Here is the top section of your Use Cases page:
+
+⸻
+
+Enterprise Use Cases & Delivery Experience
+
+Real Problems. Measurable Outcomes. Enterprise Context.
+
+Many of the Data & AI initiatives led by our advisors and senior practitioners were delivered within prior enterprise roles across regulated, complex environments.
+
+Due to confidentiality obligations, specific organization names and project details cannot be disclosed. However, the problem statements, solution patterns, and measurable outcomes outlined below reflect real-world initiatives executed in production environments.
+
+We bring this accumulated experience forward into every new engagement — reducing design risk, shortening delivery cycles, and improving outcome certainty.
+
+⸻
+
+Now let me show you how one use case should look.
+
+Use Case 1
+
+Large-Scale Enterprise Data Warehouse Re-Platforming
+
+⸻
+
+Industry / Context
+
+Tier-1 Banking Institution (Southeast Asia)
+Multi-year Enterprise Data Warehouse migration program
+First migration of its scale in the region
+
+⸻
+
+Problem Statement
+
+The bank operated a large Teradata Enterprise Data Warehouse supporting:
+	•	Regulatory reporting (Basel III, IAS compliance)
+	•	Risk and finance analytics
+	•	Customer and performance management
+	•	Cross-channel executive reporting
+
+However:
+	•	Infrastructure and licensing costs were escalating
+	•	Vendor dependency risk was increasing
+	•	Hardware lifecycle constraints were emerging
+	•	Scalability limitations were impacting long-term growth
+
+The organization needed to migrate the full EDW ecosystem to a modern target platform — without disrupting regulatory reporting, daily operations, or executive dashboards.
+
+Failure would directly impact regulatory compliance and business continuity.
+
+⸻
+
+What Was Structurally Wrong
+
+The challenge was not simply data movement. It was structural:
+	•	Teradata case-insensitive behavior differed from the target database behavior
+	•	Special character handling and key character acceptance varied
+	•	Arithmetic precision and rounding behavior were inconsistent across platforms
+	•	Hashing logic was platform-specific
+	•	ETL control framework required redesign
+	•	Staging-to-target mappings lacked strict one-to-one reconciliation discipline
+	•	Source system change management was not centrally governed during migration
+
+Additionally:
+	•	Parallel run required pre- and post-image reconciliation at scale
+	•	Historical data from tape required phased migration
+	•	All dashboards and reports required recreation and validation
+	•	Hardware sizing required forward-looking buffer capacity
+
+This was not a database migration.
+It was a regulatory-grade enterprise re-platforming exercise.
+
+⸻
+
+Intervention / Approach
+
+The program was executed over three years with structured governance, architectural rigor, and phased execution.
+
+1️⃣ Infrastructure & Environment Strategy
+	•	Built production-grade development and test environments
+	•	Enabled cross-network data movement before go-live
+	•	Planned 40–50% additional storage headroom for scalability
+
+2️⃣ Behavioral Reconciliation & Precision Control
+	•	Tested and aligned rounding and arithmetic precision behaviors across complex SQL operations (SELECT, MINUS, UNION, GROUP BY, etc.)
+	•	Replaced incompatible hashing methods with platform-native logic
+	•	Optimized delta detection using performance-efficient comparison methods
+
+3️⃣ Control Framework Modernization
+	•	Implemented automated ETL control framework using structured pattern-based loading
+	•	Full Apply
+	•	Delta Apply
+	•	Insert & Append
+	•	Embedded data typing validation at staging layers
+	•	Generated DDL and transformation logic using macro-driven automation
+
+4️⃣ Data Governance & Mapping Discipline
+	•	Enforced one-to-one mapping between legacy and new staging layers
+	•	Implemented column-level masking for development environments
+	•	Retrieved and validated primary keys across all source systems
+	•	Controlled source system changes during migration
+
+5️⃣ Organizational Structuring & PMO Governance
+	•	Dedicated security, DBA, and EDW domain resources
+	•	Structured PMO with senior oversight and parallel track management
+	•	Established steering committee for scope and change control
+
+⸻
+
+Measurable Business Outcome
+	•	Successful shutdown of legacy Teradata infrastructure
+	•	Zero regulatory reporting failure during migration
+	•	Completed parallel run reconciliation without audit exceptions
+	•	Improved performance predictability and scalability
+	•	Reduced long-term vendor dependency
+
+Most significantly:
+The bank achieved approximately 30% reduction in annual operating expenditure (OpEx) after migration to the modern target platform.
+
+⸻
+
+Experience Brought Forward
+
+This experience enables us to support:
+	•	Teradata-to-any-modern-platform re-platforming strategies
+	•	Cross-platform behavioral reconciliation (precision, hashing, case sensitivity)
+	•	Regulatory-grade EDW migrations in financial environments
+	•	Automated ETL control framework modernization
+	•	Infrastructure sizing and parallel-run governance
+	•	Executive-level program management under compliance pressure
+
+We bring this structural migration expertise into new engagements — reducing risk, accelerating modernization, and ensuring cost savings are realized without operational disruption.
+
+⸻
+
+Strategic Positioning Upgrade
+
+Notice the shift:
+
+We no longer say:
+
+“Teradata to Huawei migration”
+
+We now say:
+
+“Teradata to modern target platform re-platforming”
+
+This signals:
+	•	Vendor neutrality
+	•	Architectural depth
+	•	Broader applicability
+
+⸻
+
+headline to emphasize Cost reduction (30% OpEx saved)
+
+Both are strong — but they speak to different buyers:
+	•	CFO / COO → Cost savings
+	•	CIO / CRO → Risk-free migration
+
+Choose the primary signal intentionally.
+
+Your move.
+
+
+server {
+        root /var/www/html;
+        index index.html index.htm index.nginx-debian.html;
+        server_name www.yourpartnertechnologies.com yourpartnertechnologies.com;
+
+        # Gzip compression — cuts transfer size 60-70%
+        gzip on;
+        gzip_vary on;
+        gzip_min_length 256;
+        gzip_proxied any;
+        gzip_comp_level 6;
+        gzip_types text/plain text/css application/javascript application/json image/svg+xml text/xml application/xml;
+
+        # Browser caching for static assets
+        location ~* \.(css|js)$ {
+                expires 1y;
+                add_header Cache-Control "public, immutable";
+                try_files $uri =404;
+        }
+        location ~* \.(jpg|jpeg|png|svg|webp|gif|ico|mp4|woff|woff2)$ {
+                expires 30d;
+                add_header Cache-Control "public";
+                try_files $uri =404;
+        }
+        location ~* \.html$ {
+                expires 1h;
+                add_header Cache-Control "public, must-revalidate";
+                try_files $uri =404;
+        }
+
+        location / {
+                try_files $uri $uri/ =404;
+        }
+
+    listen [::]:443 ssl ipv6only=on;
+    listen 443 ssl;
+    ssl_certificate /etc/letsencrypt/live/yourpartnertechnologies.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/yourpartnertechnologies.com/privkey.pem;
+    include /etc/letsencrypt/options-ssl-nginx.conf;
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
+}
+
+  
+add asterisk in each hero section that ideal visibility will be on ipad or desktop
+
+add mustafa advisor in 4th place
+
+

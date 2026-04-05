@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tables, Columns &amp; Rows in Databases Explained Simply</title>
+  <meta name="description" content="Understand tables, columns, and rows: the building blocks of every relational database. Clear examples for beginners and professionals.">
+  <meta name="robots" content="index, follow">
+  <meta name="keywords" content="tables columns rows database, relational database structure, what is a database table, database columns fields, database rows records, SQL basics, structured data, database fundamentals, data schema">
+  <meta name="author" content="Mustafa Qizilbash">
+  <meta property="og:title" content="Tables, Columns &amp; Rows in Databases Explained Simply">
+  <meta property="og:description" content="Understand tables, columns, and rows: the building blocks of every relational database. Clear examples for beginners and professionals.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://yourpartnertechnologies.com/blog/tables-columns-rows-database-explained.html">
+  <meta property="og:image" content="https://yourpartnertechnologies.com/assets/images/Blogs_YPT/Blog04/Hero%20Banner.webp">
+  <meta property="og:site_name" content="Your Partner Technologies">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Tables, Columns &amp; Rows in Databases Explained Simply">
+  <meta name="twitter:description" content="Understand tables, columns, and rows: the building blocks of every relational database. Clear examples for beginners and professionals.">
+  <meta name="twitter:image" content="https://yourpartnertechnologies.com/assets/images/Blogs_YPT/Blog04/Hero%20Banner.webp">
+  <link rel="canonical" href="https://yourpartnertechnologies.com/blog/tables-columns-rows-database-explained.html">
+  <link rel="icon" type="image/png" href="https://objectstorage.us-sanjose-1.oraclecloud.com/n/axtx9ohfletb/b/ypt/o/Logo-64.png">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5MRNP3KJ8B"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-5MRNP3KJ8B');</script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Tables, Columns & Rows in Databases Explained Simply",
+    "description": "Understand tables, columns, and rows: the building blocks of every relational database. Clear examples for beginners and professionals.",
+    "image": "https://yourpartnertechnologies.com/assets/images/Blogs_YPT/Blog04/Hero%20Banner.webp",
+    "author": {
+      "@type": "Person",
+      "name": "Mustafa Qizilbash"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Your Partner Technologies",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://objectstorage.us-sanjose-1.oraclecloud.com/n/axtx9ohfletb/b/ypt/o/Logo-128.png"
+      }
+    },
+    "datePublished": "2025-10-07",
+    "dateModified": "2025-10-07",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://yourpartnertechnologies.com/blog/tables-columns-rows-database-explained.html"
+    },
+    "keywords": "tables columns rows database, relational database structure, what is a database table, database columns fields, database rows records, SQL basics, structured data, database fundamentals"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is a database table?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A database table is an organised collection of related data arranged in rows and columns. Each table represents a specific subject area, such as customers, products, or transactions, and stores all records of that type."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the difference between a column and a row?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A column (also called a field or attribute) defines a specific type of information, such as 'Name' or 'Date of Birth'. A row (also called a record) contains the actual data values for one specific entity instance."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is a record in a database?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A record is one complete entry in a database table, consisting of one row containing values for every column. For example, one customer's full details (name, email, phone) form a single record."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why do tables need primary keys?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Primary keys uniquely identify each row, preventing duplicate records and enabling reliable relationships between tables."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do tables relate to each other?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Tables are connected through primary and foreign keys. A foreign key in one table references the primary key of another, enabling SQL joins and cross-table queries."
+        }
+      }
+    ]
+  }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/tailwind.min.css">
+  <link rel="stylesheet" href="../css/styles.min.css">
+  <link rel="stylesheet" href="blog-styles.css">
+
+</head>
+<body class="text-gray-200 antialiased leading-relaxed overflow-x-hidden" style="background:#000;max-width:100vw;">
+  <div class="reading-progress" id="progressBar"></div>
+  <!-- Floating Orbs -->
+  <div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+  <div id="header-placeholder"></div>
+  <header class="blog-hero">
+    <div class="blog-hero-content">
+      <div class="blog-hero-tags">
+        <span>Database Fundamentals</span>
+        <span>SQL</span>
+        <span>Data Architecture</span>
+        <span>Structured Data</span>
+        <span>Data Modelling</span>
+      </div>
+      <h1>Tables, Columns &amp; Rows in Databases Explained Simply</h1>
+      <div class="blog-hero-meta"><span>Mustafa Qizilbash</span><span>October 7, 2025</span><span>5 min read</span></div>
+      <div class="blog-hero-image"><img src="../assets/images/Blogs_YPT/Blog04/Hero%20Banner.webp" alt="Tables, Columns &amp; Rows Explained: The Core Structure of Every Database" loading="eager" width="1200" height="630"></div>
+    </div>
+  </header>
+  <div class="blog-content-wrapper">
+  <nav class="blog-breadcrumbs" aria-label="Breadcrumb">
+    <ol><li><a href="../index.html">Home</a></li><li><a href="index.html">Blog</a></li><li><span>Tables, Columns &amp; Rows</span></li></ol>
+  </nav>
+  <div class="blog-layout">
+    <article class="article-body">
+
+      <p>Before you can work with databases, run SQL queries, build data models, or design analytics pipelines, you need absolute clarity on three foundational concepts: <strong>Tables</strong>, <strong>Columns</strong>, and <strong>Rows</strong>. They are the structural grammar of every relational database, from a small SQLite file to a cloud-scale enterprise <a href="../services/data-ai-services.html">data warehouse</a>. If you have not yet read our guide on <a href="what-is-data.html">what data is</a>, start there first.</p>
+
+      <h2 id="why-these-concepts-matter">Why These Concepts Matter</h2>
+
+      <p>These are not just beginner topics. Misunderstanding leads to:</p>
+      <ul>
+        <li>Poor schema design that does not scale</li>
+        <li>Inconsistent data entry and reporting errors</li>
+        <li>Incorrect query logic and misleading analytics</li>
+        <li>Data integration failures</li>
+      </ul>
+
+      <h2 id="the-intuitive-explanation-think-of-your-family">The Intuitive Explanation: Think of Your Family</h2>
+
+      <img src="../assets/images/Blogs_YPT/Blog04/After%20Introduction.webp" alt="Family members illustrated as database table rows with name, relationship, and date of birth columns" class="blog-image" loading="lazy" width="1200" height="630">
+
+      <p>Imagine your family as a data table. Each family member has a Name, Relationship, and Date of Birth. These shared categories are the <strong>Columns</strong>. One person's full details = one <strong>Row</strong>. All six together = the <strong>Table</strong>.</p>
+
+      <h3 id="visualised-the-family-table">Visualised: The Family Table</h3>
+
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Relationship</th>
+              <th>Date of Birth</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>John</td>
+              <td>Grandfather</td>
+              <td>01 Jan 1950</td>
+            </tr>
+            <tr>
+              <td>Mary</td>
+              <td>Grandmother</td>
+              <td>15 Mar 1952</td>
+            </tr>
+            <tr>
+              <td>Robert</td>
+              <td>Father</td>
+              <td>20 Jun 1975</td>
+            </tr>
+            <tr>
+              <td>Susan</td>
+              <td>Mother</td>
+              <td>05 Sep 1977</td>
+            </tr>
+            <tr>
+              <td>James</td>
+              <td>Son</td>
+              <td>10 Nov 2003</td>
+            </tr>
+            <tr>
+              <td>Emma</td>
+              <td>Daughter</td>
+              <td>22 Feb 2006</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 id="formal-definitions">Formal Definitions</h2>
+
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr>
+              <th>Term</th>
+              <th>Also Known As</th>
+              <th>Role in the Database</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Table</td>
+              <td>Relation, Dataset</td>
+              <td>The full organised collection of related data</td>
+            </tr>
+            <tr>
+              <td>Column</td>
+              <td>Field, Attribute</td>
+              <td>A specific type of information shared across all rows</td>
+            </tr>
+            <tr>
+              <td>Row</td>
+              <td>Record, Tuple</td>
+              <td>One individual data entry</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>In <a href="what-is-an-entity-in-data-modelling.html">data modelling terms</a>: Table = Entity Type, Column = Attribute, Row = Entity Instance.</p>
+
+      <h3 id="columns-define-structure-rows-contain-data">Columns Define Structure; Rows Contain Data</h3>
+
+      <p>Columns define <em>what kind</em> of information is stored. Rows contain the <em>actual data</em>. A column called "Date of Birth" tells you the type of information expected. The value "01 Jan 1950" in a specific row is the actual data point. Understanding this distinction is critical for writing accurate queries and designing effective schemas.</p>
+
+      <h2 id="tables-in-real-database-environments">Tables in Real Database Environments</h2>
+
+      <p>In real-world systems, tables relate to each other through <a href="primary-key-foreign-key-explained.html">Primary Keys and Foreign Keys</a>. A Customers table might link to an Orders table, which links to a Products table. These relationships allow you to query across multiple tables, combining data to answer complex business questions.</p>
+
+      <h2 id="the-power-of-queries-what-you-can-do-with-tables">The Power of Queries: What You Can Do With Tables</h2>
+
+      <img src="../assets/images/Blogs_YPT/Blog04/Before%20SQL%20Section.webp" alt="SQL query operations: filter, count, and sort demonstrated on a family table" class="blog-image" loading="lazy" width="1200" height="630">
+
+      <pre><code><span class="comment">-- Filter: Find family members born after 1970</span>
+<span class="keyword">SELECT</span> Name, Relationship
+<span class="keyword">FROM</span> Family
+<span class="keyword">WHERE</span> DateOfBirth &gt; '1970-01-01';
+
+<span class="comment">-- Count: How many family members are there?</span>
+<span class="keyword">SELECT</span> <span class="function">COUNT</span>(*) <span class="keyword">FROM</span> Family;
+
+<span class="comment">-- Sort: Order by oldest to youngest</span>
+<span class="keyword">SELECT</span> Name, DateOfBirth
+<span class="keyword">FROM</span> Family
+<span class="keyword">ORDER BY</span> DateOfBirth <span class="keyword">ASC</span>;</code></pre>
+
+      <h2 id="common-mistakes-to-avoid">Common Mistakes to Avoid</h2>
+
+      <ul>
+        <li><strong>Mixing column types</strong>: Storing dates as free text, or mixing numbers and strings in the same column, leads to query failures and unreliable analytics.</li>
+        <li><strong>Poorly named columns</strong>: Ambiguous names like "Data1" or "Field_A" make tables difficult to understand, maintain, and integrate with other systems.</li>
+        <li><strong>Missing <a href="primary-key-foreign-key-explained.html">primary keys</a></strong>: Without a unique identifier for each row, duplicate records creep in and table relationships break down.</li>
+      </ul>
+
+      <div class="takeaway-box">
+        <h3>Key Takeaway</h3>
+        <p>Tables, columns, and rows are the universal language of structured data. Whether you are working in Excel, MySQL, PostgreSQL, Snowflake, or BigQuery, this three-part structure is always the same. Master it, and you have the grammar to speak fluently in every data environment. Our <a href="../trainings.html">data foundations training</a> covers these concepts and more in depth.</p>
+      </div>
+
+      <img src="../assets/images/Blogs_YPT/Blog04/ConclusionCTA.webp" alt="Team collaborating on data schema design" class="blog-image" loading="lazy" width="1200" height="630">
+
+      <div class="cta-box">
+        <h3>Ready to build solid data foundations?</h3>
+        <p>Your Partner Technologies helps organisations design scalable, well-structured database architectures.</p>
+        <a href="../contact.html" class="cta-button">Talk to Us</a>
+      </div>
+
+    </article>
+    <aside class="sidebar">
+      <div class="sidebar-card">
+        <h3>Table of Contents</h3>
+        <ul class="toc-list">
+          <li><a href="#why-these-concepts-matter">Why These Concepts Matter</a></li>
+          <li><a href="#the-intuitive-explanation-think-of-your-family">The Intuitive Explanation: Think of Your Family</a></li>
+          <li><a href="#formal-definitions">Formal Definitions</a></li>
+          <li><a href="#tables-in-real-database-environments">Tables in Real Database Environments</a></li>
+          <li><a href="#the-power-of-queries-what-you-can-do-with-tables">The Power of Queries: What You Can Do With Tables</a></li>
+          <li><a href="#common-mistakes-to-avoid">Common Mistakes to Avoid</a></li>
+          <li><a href="#frequently-asked-questions">Frequently Asked Questions</a></li>
+        </ul>
+      </div>
+      <div class="sidebar-card">
+        <h3>Topics</h3>
+        <div class="sidebar-tags">
+          <span class="sidebar-tag">Database Fundamentals</span>
+          <span class="sidebar-tag">SQL</span>
+          <span class="sidebar-tag">Data Architecture</span>
+          <span class="sidebar-tag">Structured Data</span>
+          <span class="sidebar-tag">Data Modelling</span>
+        </div>
+      </div>
+      <div class="sidebar-card sidebar-cta">
+        <h3>Get Expert Help</h3>
+        <p>Need help designing your database architecture?</p>
+        <a href="../contact.html" class="cta-button">Contact Us</a>
+      </div>
+    </aside>
+  </div>
+  </div>
+  <div id="faq-section"></div>
+  <section class="related-posts">
+    <h2>You Might Also Like</h2>
+    <div class="related-grid">
+      <a href="what-is-an-entity-in-data-modelling.html" class="related-card">
+        <img src="../assets/images/Blogs_YPT/Blog02/Hero%20Banner.webp" alt="What is an Entity in Data Modelling?" loading="lazy" width="600" height="315">
+        <h3>What is an Entity in Data Modelling?</h3>
+      </a>
+      <a href="primary-key-foreign-key-explained.html" class="related-card">
+        <img src="../assets/images/Blogs_YPT/Blog05/Hero%20Banner.webp" alt="Primary Key vs Foreign Key Explained" loading="lazy" width="600" height="315">
+        <h3>Primary Key vs Foreign Key Explained</h3>
+      </a>
+      <a href="what-is-data.html" class="related-card">
+        <img src="../assets/images/Blogs_YPT/Blog01/Hero%20Banner.webp" alt="What is Data?" loading="lazy" width="600" height="315">
+        <h3>What is Data?</h3>
+      </a>
+    </div>
+  </section>
+  <div id="footer-placeholder"></div>
+  <script src="../js/main.min.js" defer></script>
+  <script>
+document.addEventListener('DOMContentLoaded', function() {
+    var bar = document.getElementById('progressBar');
+    window.addEventListener('scroll', function() {
+        var s = window.scrollY, t = document.documentElement.scrollHeight - window.innerHeight;
+        bar.style.width = (s / t * 100) + '%';
+    });
+    document.querySelectorAll('.toc-list a').forEach(function(l) {
+        l.addEventListener('click', function(e) {
+            e.preventDefault();
+            var t = document.querySelector(l.getAttribute('href'));
+            if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+    });
+    renderFAQ({ color: 'cyan', faqs: [
+        { q: 'What is a database table?', a: 'A database table is an organised collection of related <a href="what-is-data.html" style="color:#22d3ee;text-decoration:underline;">data</a> arranged in rows and columns. Each table represents a specific subject area, such as customers, products, or transactions, and stores all records of that type.' },
+        { q: 'What is the difference between a column and a row?', a: 'A column (also called a field or attribute) defines a specific type of information, such as &quot;Name&quot; or &quot;Date of Birth&quot;. A row (also called a record) contains the actual data values for one specific <a href="what-is-an-entity-in-data-modelling.html" style="color:#22d3ee;text-decoration:underline;">entity instance</a>.' },
+        { q: 'What is a record in a database?', a: 'A record is one complete entry in a database table, consisting of one row containing values for every column. For example, one customer\'s full details (name, email, phone) form a single record.' },
+        { q: 'Why do tables need primary keys?', a: '<a href="primary-key-foreign-key-explained.html" style="color:#22d3ee;text-decoration:underline;">Primary keys</a> uniquely identify each row, preventing duplicate records and enabling reliable relationships between tables.' },
+        { q: 'How do tables relate to each other?', a: 'Tables are connected through <a href="primary-key-foreign-key-explained.html" style="color:#22d3ee;text-decoration:underline;">primary and foreign keys</a>. A foreign key in one table references the primary key of another, enabling SQL joins and cross-table queries.' }
+    ] });
+});
+  </script>
+</body>
+</html>

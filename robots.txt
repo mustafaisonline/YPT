@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://yourpartnertechnologies.com/sitemap.xml

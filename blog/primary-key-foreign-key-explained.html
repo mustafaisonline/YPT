@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Primary Key vs Foreign Key Explained with Examples</title>
+  <meta name="description" content="Learn the difference between primary keys and foreign keys in databases. How they enforce integrity and enable SQL joins.">
+  <meta name="robots" content="index, follow">
+  <meta name="keywords" content="primary key foreign key database, primary key definition, foreign key definition, database relationships, SQL join, relational database design, data integrity, entity relationship, PKey FKey">
+  <meta name="author" content="Mustafa Qizilbash">
+  <meta property="og:title" content="Primary Key vs Foreign Key Explained with Examples">
+  <meta property="og:description" content="Learn the difference between primary keys and foreign keys in databases. How they enforce integrity and enable SQL joins.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://yourpartnertechnologies.com/blog/primary-key-foreign-key-explained.html">
+  <meta property="og:image" content="https://yourpartnertechnologies.com/assets/images/Blogs_YPT/Blog05/Hero%20Banner.webp">
+  <meta property="og:site_name" content="Your Partner Technologies">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Primary Key vs Foreign Key Explained with Examples">
+  <meta name="twitter:description" content="Learn the difference between primary keys and foreign keys in databases. How they enforce integrity and enable SQL joins.">
+  <meta name="twitter:image" content="https://yourpartnertechnologies.com/assets/images/Blogs_YPT/Blog05/Hero%20Banner.webp">
+  <link rel="canonical" href="https://yourpartnertechnologies.com/blog/primary-key-foreign-key-explained.html">
+  <link rel="icon" type="image/png" href="https://objectstorage.us-sanjose-1.oraclecloud.com/n/axtx9ohfletb/b/ypt/o/Logo-64.png">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5MRNP3KJ8B"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-5MRNP3KJ8B');</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Primary Key vs Foreign Key Explained with Examples","description":"Learn the difference between primary keys and foreign keys in databases. How they enforce integrity and enable SQL joins.","author":{"@type":"Person","name":"Mustafa Qizilbash"},"publisher":{"@type":"Organization","name":"Your Partner Technologies","logo":{"@type":"ImageObject","url":"https://objectstorage.us-sanjose-1.oraclecloud.com/n/axtx9ohfletb/b/ypt/o/Logo-128.png"}},"datePublished":"2025-10-09","dateModified":"2025-10-09","mainEntityOfPage":"https://yourpartnertechnologies.com/blog/primary-key-foreign-key-explained.html","image":"https://yourpartnertechnologies.com/assets/images/Blogs_YPT/Blog05/Hero%20Banner.webp","keywords":"primary key foreign key database"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is a primary key in a database?","acceptedAnswer":{"@type":"Answer","text":"A primary key is a column (or combination of columns) that uniquely identifies each row in a table. It must be unique, never null, and ideally never changes after creation."}},{"@type":"Question","name":"What is a foreign key?","acceptedAnswer":{"@type":"Answer","text":"A foreign key is a column in one table that references the primary key of another table. It creates a relationship between the two tables and enforces referential integrity."}},{"@type":"Question","name":"Can a table have multiple foreign keys?","acceptedAnswer":{"@type":"Answer","text":"Yes. A table can have multiple foreign keys, each referencing a different table. For example, an Orders table might have foreign keys to both a Customers table and a Products table."}},{"@type":"Question","name":"What happens if you insert an invalid foreign key value?","acceptedAnswer":{"@type":"Answer","text":"The database will reject the insert if referential integrity constraints are enabled. This prevents orphaned records, meaning entries that reference non-existent entities."}},{"@type":"Question","name":"Why not just store all data in one big table?","acceptedAnswer":{"@type":"Answer","text":"A single table creates massive redundancy, inconsistency risks, and update complexity. Using normalised tables with keys ensures data quality, reduces storage, and enables flexible querying."}}]}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/tailwind.min.css">
+  <link rel="stylesheet" href="../css/styles.min.css">
+  <link rel="stylesheet" href="blog-styles.css">
+
+</head>
+<body class="text-gray-200 antialiased leading-relaxed overflow-x-hidden" style="background:#000;max-width:100vw;">
+  <div class="reading-progress" id="progressBar"></div>
+  <!-- Floating Orbs -->
+  <div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+  <div id="header-placeholder"></div>
+  <header class="blog-hero"><div class="blog-hero-content"><div class="blog-hero-tags"><span>Database Design</span><span>SQL</span><span>Data Architecture</span><span>Relational Databases</span><span>Data Modelling</span></div><h1>Primary Key vs Foreign Key Explained with Examples</h1><div class="blog-hero-meta"><span>Mustafa Qizilbash</span><span>October 9, 2025</span><span>5 min read</span></div><div class="blog-hero-image"><img src="../assets/images/Blogs_YPT/Blog05/Hero%20Banner.webp" alt="Primary Key vs Foreign Key: Database Relationships Explained Clearly" loading="eager" width="1200" height="630"></div></div></header>
+  <div class="blog-content-wrapper">
+  <nav class="blog-breadcrumbs" aria-label="Breadcrumb"><ol><li><a href="../index.html">Home</a></li><li><a href="index.html">Blog</a></li><li><span>Primary Key vs Foreign Key</span></li></ol></nav>
+  <div class="blog-layout">
+    <article class="article-body">
+
+      <p>If <a href="tables-columns-rows-database-explained.html">tables</a> are the building blocks of a relational database, then Primary Keys and Foreign Keys are the connectors that transform isolated tables into a coherent, queryable system. Without them, you cannot enforce data integrity, prevent duplication, or run meaningful cross-table queries.</p>
+
+      <h2 id="the-problem-they-solve">The Problem They Solve: Redundancy and Inconsistency</h2>
+      <p>Imagine a Family table that stores each person's birth country. When five members share &ldquo;United States of America&rdquo;, it&rsquo;s stored five times. This creates:</p>
+      <ul>
+        <li><strong>Storage redundancy</strong>: the same long string repeated unnecessarily</li>
+        <li><strong>Inconsistency risk</strong>: typos like &ldquo;Unted States&rdquo; creep in without detection</li>
+        <li><strong>Update complexity</strong>: renaming a country means updating every single row</li>
+      </ul>
+      <p>The solution: extract the repeated data into a lookup table and use keys to link the two tables together.</p>
+
+      <img src="../assets/images/Blogs_YPT/Blog05/After%20Problem%20Statement.webp" alt="Before and after comparison showing data redundancy solved by primary and foreign keys" class="blog-image" loading="lazy" width="1200" height="630">
+
+      <h2 id="step-by-step">Step-by-Step: How Primary and Foreign Keys Work</h2>
+
+      <h3 id="step-1">Step 1: Create a Separate Location Reference Table</h3>
+      <p>First, extract the repeating country data into its own dedicated table with a unique identifier for each entry:</p>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr><th>ID (Primary Key)</th><th>Country Name</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>001</td><td>United States of America</td></tr>
+            <tr><td>002</td><td>United Kingdom</td></tr>
+            <tr><td>003</td><td>Canada</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 id="step-2">Step 2: Update Family Table to Use the Code (Foreign Key)</h3>
+      <p>Now replace the full country name in the Family table with a short code that references the Location table:</p>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr><th>Name</th><th>Relationship</th><th>Date of Birth</th><th>Location_ID (Foreign Key)</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>John</td><td>Grandfather</td><td>01 Jan 1950</td><td>001</td></tr>
+            <tr><td>Mary</td><td>Grandmother</td><td>15 Mar 1952</td><td>001</td></tr>
+            <tr><td>Robert</td><td>Father</td><td>20 Jun 1975</td><td>002</td></tr>
+            <tr><td>Susan</td><td>Mother</td><td>05 Sep 1977</td><td>001</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>This is a pattern central to <a href="master-data-management-reference-data-explained.html">reference data management</a>.</p>
+
+      <h2 id="what-is-a-primary-key">What Is a Primary Key?</h2>
+      <p>A Primary Key uniquely identifies each row in a table. It is the single source of truth for that record&rsquo;s identity. The rules are strict:</p>
+      <ul>
+        <li><strong>No nulls</strong>: every row must have a value</li>
+        <li><strong>Must be unique</strong>: no two rows can share the same primary key</li>
+        <li><strong>Should be stable</strong>: once assigned, it should not change</li>
+      </ul>
+      <p>Common patterns include auto-incrementing integers, UUIDs, and natural business keys (such as ISO country codes).</p>
+
+      <h2 id="what-is-a-foreign-key">What Is a Foreign Key?</h2>
+      <p>A Foreign Key is a column in one table that references the Primary Key of another table. It enforces <strong>referential integrity</strong>, ensuring that every reference points to a valid, existing record. If the Location table has no entry with ID 999, then no row in the Family table can use 999 as its Location_ID.</p>
+
+      <h2 id="sql-join-using-keys">Running a SQL JOIN Using Keys</h2>
+
+      <img src="../assets/images/Blogs_YPT/Blog05/Before%20JOIN%20Section.webp" alt="SQL JOIN diagram connecting Family and Birth_Location tables" class="blog-image" loading="lazy" width="1200" height="630">
+
+      <p>With both keys in place, you can combine data from multiple tables using a SQL JOIN:</p>
+      <pre><code>SELECT f.Name, f.Relationship, b.CountryName
+FROM Family f
+JOIN Birth_Location b ON f.Location_ID = b.ID;</code></pre>
+
+      <p>This query produces the following result:</p>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr><th>Name</th><th>Relationship</th><th>Country Name</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>John</td><td>Grandfather</td><td>United States of America</td></tr>
+            <tr><td>Mary</td><td>Grandmother</td><td>United States of America</td></tr>
+            <tr><td>Robert</td><td>Father</td><td>United Kingdom</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 id="quick-reference">Primary Key vs Foreign Key: Quick Reference</h2>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr><th>Feature</th><th>Primary Key</th><th>Foreign Key</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Purpose</td><td>Uniquely identifies a row</td><td>References a Primary Key in another table</td></tr>
+            <tr><td>Uniqueness</td><td>Must be unique</td><td>Does not need to be unique</td></tr>
+            <tr><td>Null values</td><td>Never allowed</td><td>Allowed in some systems</td></tr>
+            <tr><td>Location</td><td>Parent/reference table</td><td>Child/dependent table</td></tr>
+            <tr><td>Count per table</td><td>Only one</td><td>Multiple allowed</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 id="why-this-matters">Why This Matters Beyond Simple Queries</h2>
+      <p>Primary keys and foreign keys are not just SQL plumbing. They underpin critical enterprise data capabilities:</p>
+      <ul>
+        <li><strong><a href="what-is-an-entity-in-data-modelling.html">Data normalisation</a></strong>: eliminating redundancy through structured table relationships</li>
+        <li><strong>Data integrity enforcement</strong>: preventing orphaned records and invalid references</li>
+        <li><strong><a href="master-data-management-reference-data-explained.html">Master Data Management (MDM)</a></strong>: maintaining golden records that other systems reference</li>
+        <li><strong>Data lineage and governance</strong>: tracing how data flows between tables and systems</li>
+        <li><strong><a href="../services/data-ai-services.html">Data architecture</a></strong>: building scalable warehouse and lakehouse designs on solid relational foundations</li>
+      </ul>
+
+      <div class="takeaway-box">
+        <h3>Key Takeaway</h3>
+        <p>Primary Keys give every record a unique, stable identity. Foreign Keys create the connections that make relational databases truly relational. Together, they transform a collection of spreadsheets into a scalable, governed, queryable data system. Our <a href="../trainings.html">data modelling and Data Vault training</a> programmes cover these relational design principles in depth.</p>
+      </div>
+
+      <img src="../assets/images/Blogs_YPT/Blog05/ConclusionCTA.webp" alt="Data engineer designing entity-relationship diagrams" class="blog-image" loading="lazy" width="1200" height="630">
+
+      <div class="cta-box">
+        <h3>Want database architecture built on solid foundations?</h3>
+        <p>Your Partner Technologies delivers data modelling and architecture expertise for scalable, governed systems.</p>
+        <a href="../contact.html" class="cta-button">Talk to Us &rarr;</a>
+      </div>
+
+    </article>
+    <aside class="sidebar">
+      <div class="sidebar-card toc-card">
+        <h3>Table of Contents</h3>
+        <ul class="toc-list">
+          <li><a href="#the-problem-they-solve">The Problem They Solve</a></li>
+          <li><a href="#step-by-step">Step-by-Step: How Keys Work</a></li>
+          <li><a href="#what-is-a-primary-key">What Is a Primary Key?</a></li>
+          <li><a href="#what-is-a-foreign-key">What Is a Foreign Key?</a></li>
+          <li><a href="#sql-join-using-keys">Running a SQL JOIN</a></li>
+          <li><a href="#quick-reference">Quick Reference Table</a></li>
+          <li><a href="#why-this-matters">Why This Matters</a></li>
+          <li><a href="#faqs">FAQs</a></li>
+        </ul>
+      </div>
+      <div class="sidebar-card tags-card">
+        <h3>Topics</h3>
+        <div class="tag-list">
+          <span>Database Design</span><span>SQL</span><span>Data Architecture</span><span>Relational Databases</span><span>Data Modelling</span>
+        </div>
+      </div>
+      <div class="sidebar-card cta-card">
+        <h3>Need Expert Guidance?</h3>
+        <p>Let us help you design robust, scalable database architectures.</p>
+        <a href="../contact.html" class="cta-button">Get in Touch &rarr;</a>
+      </div>
+    </aside>
+  </div>
+  </div>
+  <div id="faq-section"></div>
+  <section class="related-posts"><h2>You Might Also Like</h2><div class="related-grid">
+    <a href="tables-columns-rows-database-explained.html" class="related-card"><img src="../assets/images/Blogs_YPT/Blog04/Hero%20Banner.webp" alt="Tables, Columns &amp; Rows Explained" loading="lazy" width="400" height="210"><h3>Tables, Columns &amp; Rows Explained</h3></a>
+    <a href="what-is-an-entity-in-data-modelling.html" class="related-card"><img src="../assets/images/Blogs_YPT/Blog02/Hero%20Banner.webp" alt="What is an Entity?" loading="lazy" width="400" height="210"><h3>What is an Entity?</h3></a>
+    <a href="master-data-management-reference-data-explained.html" class="related-card"><img src="../assets/images/Blogs_YPT/Blog10/Hero%20Banner.webp" alt="Master Data Management" loading="lazy" width="400" height="210"><h3>Master Data Management</h3></a>
+  </div></section>
+  <div id="footer-placeholder"></div>
+  <script src="../js/main.min.js" defer></script>
+  <script>
+document.addEventListener('DOMContentLoaded', function() {
+    var bar = document.getElementById('progressBar');
+    window.addEventListener('scroll', function() {
+        var s = window.scrollY, t = document.documentElement.scrollHeight - window.innerHeight;
+        bar.style.width = (s / t * 100) + '%';
+    });
+    document.querySelectorAll('.toc-list a').forEach(function(l) {
+        l.addEventListener('click', function(e) {
+            e.preventDefault();
+            var t = document.querySelector(l.getAttribute('href'));
+            if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+    });
+    renderFAQ({ color: 'cyan', faqs: [
+        { q: 'What is a primary key in a database?', a: 'A primary key is a column (or combination of columns) that uniquely identifies each <a href="tables-columns-rows-database-explained.html" style="color:#22d3ee;text-decoration:underline;">row</a> in a table. It must be unique, never null, and ideally never changes after creation.' },
+        { q: 'What is a foreign key?', a: 'A foreign key is a column in one table that references the primary key of another table. It creates a relationship between the two tables and enforces referential integrity.' },
+        { q: 'Can a table have multiple foreign keys?', a: 'Yes. A table can have multiple foreign keys, each referencing a different table. For example, an Orders table might have foreign keys to both a Customers table and a Products table.' },
+        { q: 'What happens if you insert an invalid foreign key value?', a: 'The database will reject the insert if referential integrity constraints are enabled. This prevents orphaned records, meaning entries that reference non-existent <a href="what-is-an-entity-in-data-modelling.html" style="color:#22d3ee;text-decoration:underline;">entities</a>.' },
+        { q: 'Why not just store all data in one big table?', a: 'A single table creates massive redundancy, inconsistency risks, and update complexity. Using normalised tables with keys ensures <a href="good-data-vs-bad-data-quality.html" style="color:#22d3ee;text-decoration:underline;">data quality</a>, reduces storage, and enables flexible querying.' }
+    ] });
+});
+  </script>
+</body>
+</html>

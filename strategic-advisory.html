@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5MRNP3KJ8B"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-5MRNP3KJ8B');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data &amp; AI Strategic Advisory | Your Partner Technologies</title>
+    <meta name="description" content="Independent strategic Data & AI advisory. Direction before scale. Clarity before commitment. Aligning architecture, governance, and investment decisions.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://yourpartnertechnologies.com/strategic-advisory.html">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://objectstorage.us-sanjose-1.oraclecloud.com/n/axtx9ohfletb/b/ypt/o/Logo-64.png">
+    <!-- Open Graph / Social Sharing -->
+    <meta property="og:title" content="Strategic Advisory - Your Partner Technologies">
+    <meta property="og:description" content="Independent strategic Data & AI advisory. Direction before scale. Clarity before commitment.">
+    <meta property="og:image" content="https://objectstorage.us-sanjose-1.oraclecloud.com/n/axtx9ohfletb/b/ypt/o/social-media-sharing-card.webp">
+    <meta property="og:url" content="https://yourpartnertechnologies.com/strategic-advisory.html">
+    <meta property="og:type" content="website">
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Strategic Advisory - Your Partner Technologies">
+    <meta name="twitter:description" content="Independent strategic Data & AI advisory. Direction before scale. Clarity before commitment.">
+    <meta name="twitter:image" content="https://objectstorage.us-sanjose-1.oraclecloud.com/n/axtx9ohfletb/b/ypt/o/social-media-sharing-card.webp">
+    <!-- Preload Inter Font for faster rendering -->
+    <link rel="preconnect" href="https://rsms.me" crossorigin>
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://rsms.me/inter/inter.css"></noscript>
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="css/tailwind.min.css">
+    <!-- Custom Styles (minified) -->
+    <link rel="stylesheet" href="css/styles.min.css">
+    <style>
+        .glow-border { position: relative; }
+        .glow-border::after { content: ''; position: absolute; inset: 1px; border-radius: inherit; border: 1.5px solid rgba(255, 255, 255, 0.3); opacity: 0.7; pointer-events: none; z-index: 1; }
+        .typewriter-container { display: inline-block; max-width: 100%; }
+        .typewriter { overflow: hidden; border-right: 3px solid #22d3ee; white-space: nowrap; animation: typing 3s steps(40, end) forwards, blink-caret 0.75s step-end infinite; width: 0; }
+        @keyframes typing { from { width: 0 } to { width: 100% } }
+        @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: #22d3ee } }
+        @media (max-width: 768px) {
+            .typewriter-container { display: block; }
+            .typewriter { white-space: normal; width: auto; border-right: none; animation: none; opacity: 1; }
+        }
+
+        /* Hero reveal */
+        .hero-reveal{opacity:0;transform:translateY(30px)}
+        .page-loaded .hero-reveal{animation:reveal-up .7s cubic-bezier(.22,1,.36,1) forwards}
+        .page-loaded .hero-reveal:nth-child(1){animation-delay:.1s}
+        .page-loaded .hero-reveal:nth-child(2){animation-delay:.25s}
+        .page-loaded .hero-reveal:nth-child(3){animation-delay:.4s}
+        .page-loaded .hero-reveal:nth-child(4){animation-delay:.55s}
+        .page-loaded .hero-reveal:nth-child(5){animation-delay:.7s}
+        .page-loaded .hero-reveal:nth-child(6){animation-delay:.85s}
+        .hero-card-reveal{opacity:0;transform:translateX(40px)}
+        .page-loaded .hero-card-reveal{animation:reveal-right .8s cubic-bezier(.22,1,.36,1) .5s forwards}
+
+        /* Scroll reveal */
+        [data-reveal]{opacity:0;transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1)}
+        [data-reveal="up"]{transform:translateY(40px)}
+        [data-reveal="down"]{transform:translateY(-40px)}
+        [data-reveal="left"]{transform:translateX(40px)}
+        [data-reveal="right"]{transform:translateX(-40px)}
+        [data-reveal="zoom"]{transform:scale(.92)}
+        [data-reveal="fade"]{transform:none}
+        [data-reveal].revealed{opacity:1;transform:none}
+
+        @keyframes reveal-up{to{opacity:1;transform:translateY(0)}}
+        @keyframes reveal-right{to{opacity:1;transform:translateX(0)}}
+
+        /* ===== Section Divider ===== */
+        .section-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin: 3rem 0;
+        }
+        .section-divider::before,
+        .section-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+        }
+        .section-divider-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ===== Number Badge ===== */
+        .number-badge {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1rem;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        /* ===== Enhanced Card (hover lift) ===== */
+        .enhanced-card {
+            transition: transform 0.3s cubic-bezier(0.22,1,0.36,1), box-shadow 0.3s ease;
+        }
+        .enhanced-card:hover {
+            transform: translateY(-6px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        /* ===== CTA Rolling Gradient Border ===== */
+        .cta-rolling-wrap {
+            position: relative;
+            border-radius: 1.75rem;
+            overflow: hidden;
+            padding: 3px;
+        }
+        .cta-rolling-wrap::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            background: linear-gradient(135deg, #22d3ee, #a855f7, #ec4899, #22d3ee);
+            opacity: 0.6;
+        }
+        .cta-rolling-inner {
+            position: relative;
+            border-radius: 1.5rem;
+            background: rgba(10,10,10,0.97);
+            padding: 2.5rem 2rem;
+            z-index: 1;
+        }
+
+        /* ===== Stat Card ===== */
+        .stat-card {
+            transition: transform 0.3s cubic-bezier(0.22,1,0.36,1), box-shadow 0.3s ease;
+        }
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+        }
+
+        /* ===== Compounding effect highlight ===== */
+        .compound-highlight {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.08), rgba(251, 146, 60, 0.08));
+            border: 1px solid rgba(239, 68, 68, 0.2);
+        }
+
+        /* ===== Data & AI Ecosystem (Hub & Spoke) ===== */
+        .eco-section { max-width: 1500px; margin: 0 auto; overflow: hidden; }
+        .eco-card {
+            text-decoration: none; display: flex; flex-direction: column; align-items: center;
+            padding: 1.5rem 1.25rem; border-radius: 1.25rem;
+            border: 1px solid rgba(255,255,255,0.07); background: rgba(255,255,255,0.025);
+            transition: all 0.4s cubic-bezier(.25,.46,.45,.94); position: relative; overflow: hidden;
+        }
+        .eco-card::before {
+            content: ''; position: absolute; inset: 0;
+            background: radial-gradient(ellipse at 50% 50%, var(--eco-glow, rgba(34,211,238,0.06)), transparent 70%);
+            opacity: 0; transition: opacity 0.4s ease; pointer-events: none;
+        }
+        .eco-card:hover::before { opacity: 1; }
+        .eco-card:hover {
+            border-color: var(--eco-color, rgba(34,211,238,0.4));
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3), 0 0 30px var(--eco-glow, rgba(34,211,238,0.08));
+            transform: translateY(-4px);
+        }
+        .eco-card__tag {
+            font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+            padding: 0.2rem 0.6rem; border-radius: 9999px; margin-bottom: 0.75rem;
+            border: 1px solid; opacity: 0.8;
+        }
+        .eco-card__icon {
+            width: 48px; height: 48px; border-radius: 14px;
+            display: flex; align-items: center; justify-content: center; margin-bottom: 0.75rem;
+        }
+        .eco-card__title { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.35rem; text-align: center; }
+        .eco-card__subtitle { font-size: 0.78rem; color: #d1d5db; font-weight: 500; text-align: center; margin-bottom: 0.35rem; font-style: italic; }
+        .eco-card__desc { font-size: 0.82rem; color: #9ca3af; line-height: 1.55; text-align: center; }
+        .eco-card__cta {
+            margin-top: auto; padding-top: 0.75rem; font-size: 0.78rem; font-weight: 600;
+            display: flex; align-items: center; gap: 0.3rem; transition: gap 0.3s ease;
+        }
+        .eco-card:hover .eco-card__cta { gap: 0.6rem; }
+        .eco-card--hub {
+            padding: 2rem 1.75rem; border: 1.5px solid rgba(34,197,94,0.3);
+            background: rgba(34,197,94,0.04);
+        }
+        .eco-card--hub::after {
+            content: ''; position: absolute; inset: 0; border-radius: inherit;
+            background: radial-gradient(circle at 50% 50%, rgba(34,197,94,0.08), transparent 70%);
+            pointer-events: none;
+        }
+        .eco-card--hub .eco-card__title { font-size: 1.25rem; }
+        .eco-card--hub .eco-card__desc { font-size: 0.88rem; }
+        .eco-hub-glow {
+            position: absolute; inset: -3px; border-radius: 1.35rem;
+            overflow: hidden; z-index: -1; pointer-events: none;
+        }
+        .eco-hub-glow::before {
+            content: ''; position: absolute; top: 50%; left: 50%; width: 200%; aspect-ratio: 1;
+            transform: translate(-50%, -50%);
+            background: conic-gradient(transparent 30%, rgba(34,197,94,0.6) 50%, transparent 70%);
+
+        }
+        .eco-hub-glow::after {
+            content: ''; position: absolute; inset: 2px; border-radius: 1.25rem;
+            background: rgba(10,10,10,0.97); z-index: 1;
+        }
+        .eco-slide--circles .eco-orbit {
+            position: relative; width: 100%; max-width: 1400px; margin: -100px auto -50px;
+            height: 1200px; pointer-events: none;
+        }
+        .eco-slide--circles .eco-orbit__spoke,
+        .eco-slide--circles .eco-orbit__hub { pointer-events: auto; }
+        .eco-slide--circles .eco-spokes-svg {
+            position: absolute; inset: 0; z-index: 0; pointer-events: none;
+        }
+        .eco-slide--circles .eco-spoke-line {
+            stroke-width: 1.5; stroke-dasharray: 8 4; fill: none;
+        }
+        .eco-slide--circles .eco-spoke-glow {
+            fill: none;
+        }
+        .eco-slide--circles .eco-particle { opacity: 0.7; }
+        .eco-slide--circles .eco-orbit__ring {
+            position: absolute; width: 600px; height: 600px;
+            top: 50%; left: 50%; transform: translate(-50%, -50%);
+            border-radius: 50%; border: 1px dashed rgba(255,255,255,0.06);
+            pointer-events: none;
+        }
+        .eco-slide--circles .eco-orbit__ring::after {
+            content: ''; position: absolute; inset: -2px; border-radius: 50%;
+            border: 1px solid rgba(34,197,94,0.04);
+        }
+        .eco-slide--circles .eco-card {
+            border-radius: 1.25rem; width: 220px; height: auto;
+            padding: 1.2rem 1.1rem; justify-content: flex-start; align-items: center;
+        }
+        .eco-slide--circles .eco-card:hover { transform: translateY(-4px) scale(1.02); }
+        .eco-slide--circles .eco-card::before { border-radius: 1.25rem; }
+        .eco-slide--circles .eco-card__tag { font-size: 0.6rem; padding: 0.15rem 0.5rem; margin-bottom: 0.5rem; }
+        .eco-slide--circles .eco-card__icon { width: 40px; height: 40px; border-radius: 12px; margin-bottom: 0.5rem; }
+        .eco-slide--circles .eco-card__title { font-size: 0.85rem !important; line-height: 1.25; margin-bottom: 0.15rem; }
+        .eco-slide--circles .eco-card__subtitle { font-size: 0.68rem; color: #d1d5db; font-weight: 500; text-align: center; line-height: 1.3; margin-bottom: 0.4rem; font-style: italic; }
+        .eco-slide--circles .eco-card__desc { display: block; font-size: 0.68rem; line-height: 1.45; color: #9ca3af; }
+        .eco-slide--circles .eco-card__cta { font-size: 0.72rem !important; padding-top: 0.5rem; }
+        .eco-slide--circles .eco-card--hub {
+            width: 340px; height: 340px; padding: 2.2rem 2rem; border-radius: 50%;
+        }
+        .eco-slide--circles .eco-card--hub::after { border-radius: 50%; }
+        .eco-slide--circles .eco-card--hub .eco-card__title { font-size: 1rem !important; }
+        .eco-slide--circles .eco-card--hub .eco-card__subtitle { font-size: 0.65rem; }
+        .eco-slide--circles .eco-card--hub .eco-card__desc { display: block; font-size: 0.68rem; line-height: 1.3; }
+        .eco-slide--circles .eco-card--hub .eco-card__cta { font-size: 0.72rem !important; }
+        .eco-slide--circles .eco-hub-glow { border-radius: 50%; }
+        .eco-slide--circles .eco-hub-glow::after { border-radius: 50%; }
+        .eco-slide--circles .eco-orbit__hub {
+            position: absolute; z-index: 2;
+            top: 50%; left: 50%; transform: translate(-50%, -50%);
+        }
+        .eco-slide--circles .eco-orbit__spoke { position: absolute; z-index: 2; }
+        .eco-slide--circles .eco-orbit__spoke:nth-child(4) { left: 590px; top: 127px; }
+        .eco-slide--circles .eco-orbit__spoke:nth-child(5) { left: 958px; top: 290px; }
+        .eco-slide--circles .eco-orbit__spoke:nth-child(6) { left: 960px; top: 725px; }
+        .eco-slide--circles .eco-orbit__spoke:nth-child(7) { left: 590px; top: 900px; }
+        .eco-slide--circles .eco-orbit__spoke:nth-child(8) { left: 217px; top: 725px; }
+        .eco-slide--circles .eco-orbit__spoke:nth-child(9) { left: 217px; top: 280px; }
+        .eco-flip-wrap { perspective: 1200px; display: block; text-decoration: none; }
+        .eco-slide--circles .eco-flip-wrap { width: 220px; }
+        .eco-flip-inner {
+            position: relative; width: 100%;
+            transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transform-style: preserve-3d;
+        }
+        .eco-flip-inner.flipped { transform: rotateY(180deg); }
+        .eco-flip-front, .eco-flip-back { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+        .eco-flip-back { position: absolute; top: 0; left: 0; width: 100%; height: 100%; transform: rotateY(180deg); }
+        .eco-flip-back.eco-card {
+            justify-content: center;
+            background: rgba(10, 10, 10, 0.95) !important;
+            border: 1px solid var(--eco-color, rgba(255,255,255,0.1));
+        }
+        .eco-flip-wrap .eco-card:hover { transform: none !important; box-shadow: none; }
+        .eco-flip-wrap .eco-card { width: 100% !important; height: 100%; overflow: visible !important; transition: none !important; }
+        .eco-flip-inner, .eco-flip-inner * { pointer-events: none; }
+        .eco-orbit__spoke { cursor: pointer; }
+        @media (max-width: 1024px) {
+            .eco-flip-wrap { width: 100%; }
+            .eco-slide--circles .eco-flip-wrap { width: 100%; }
+            .eco-slide--circles .eco-orbit {
+                position: static; height: auto; margin: 0 auto;
+                display: flex; flex-direction: column; gap: 1.5rem; align-items: center;
+                pointer-events: auto;
+            }
+            .eco-slide--circles .eco-spokes-svg { display: none; }
+            .eco-slide--circles .eco-orbit__ring { display: none; }
+            .eco-slide--circles .eco-card {
+                border-radius: 1.25rem; width: 100%; height: auto;
+                padding: 1.35rem 1.1rem; justify-content: flex-start;
+            }
+            .eco-slide--circles .eco-card--hub {
+                border-radius: 1.25rem; width: 100%; height: auto; padding: 1.75rem 1.5rem;
+            }
+            .eco-slide--circles .eco-card__desc { display: block; }
+            .eco-slide--circles .eco-card__subtitle { font-size: 0.8rem; margin-bottom: 0.3rem; }
+            .eco-slide--circles .eco-card__title { font-size: 1.1rem !important; }
+            .eco-slide--circles .eco-card__cta { font-size: 0.85rem !important; }
+            .eco-slide--circles .eco-card__tag { font-size: 0.7rem; padding: 0.2rem 0.7rem; }
+            .eco-slide--circles .eco-card__icon { width: 48px; height: 48px; border-radius: 14px; }
+            .eco-slide--circles .eco-hub-glow,
+            .eco-slide--circles .eco-hub-glow::after { border-radius: 1.35rem; }
+            .eco-slide--circles .eco-orbit__hub {
+                position: static; max-width: 440px; transform: none;
+            }
+            .eco-slide--circles .eco-orbit__spoke {
+                position: static; max-width: 340px; transform: none !important;
+            }
+        }
+        @media (max-width: 768px) {
+            .eco-card { padding: 1.25rem 1rem; }
+            .eco-card--hub { padding: 1.5rem 1.25rem; }
+        }
+    </style>
+    <link rel="dns-prefetch" href="https://objectstorage.us-sanjose-1.oraclecloud.com">
+    <link rel="preconnect" href="https://objectstorage.us-sanjose-1.oraclecloud.com" crossorigin>
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "datePublished": "2025-01-15",
+        "dateModified": "2026-03-04",
+        "provider": {
+            "@type": "Organization",
+            "name": "Your Partner Technologies",
+            "url": "https://yourpartnertechnologies.com"
+        },
+        "name": "Strategic Data & AI Advisory",
+        "description": "Independent strategic Data & AI advisory. Direction before scale. Clarity before commitment. Aligning architecture, governance, and investment decisions.",
+        "url": "https://yourpartnertechnologies.com/strategic-advisory.html",
+        "serviceType": "Strategic Advisory"
+    }
+    </script>
+</head>
+<body class="text-gray-200 antialiased leading-relaxed overflow-x-hidden" style="background: #000; max-width: 100vw;">
+
+    <!-- Floating Orbs Background Decoration -->
+    <div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <!-- Navigation -->
+    <div id="header-placeholder"></div>
+
+    <!-- Page Header / Hero -->
+    <header class="page-header shadow-2xl relative z-10 overflow-hidden flex items-center" style="min-height: 100vh;">
+        <!-- Video Background -->
+        <video class="absolute inset-0 w-full h-full object-cover z-0" autoplay muted loop playsinline preload="none">
+            <source src="https://objectstorage.us-sanjose-1.oraclecloud.com/n/axtx9ohfletb/b/ypt/o/services.mp4" type="video/mp4">
+        </video>
+        <!-- Dark overlay -->
+        <div class="absolute inset-0 z-[1]" style="background: rgba(0,0,0,0.7);"></div>
+
+        <div class="container mx-auto px-4 relative z-[2] py-24">
+            <div class="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+                <div class="text-center lg:text-left">
+                    <div class="hero-reveal inline-block bg-cyan-500/20 text-white text-sm font-semibold px-4 py-1.5 rounded-full mb-6">
+                        Strategic Data &amp; AI Advisory
+                    </div>
+                    <h1 class="hero-reveal text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white mb-4">
+                        <span class="text-white">Data &amp; AI Strategic Advisory</span>
+                    </h1>
+                    <div class="hero-reveal typewriter-container mb-6">
+                        <p class="typewriter text-xl font-bold text-white" style="-webkit-text-fill-color: white;">
+                            Direction Before Scale. Clarity Before Commitment.
+                        </p>
+                    </div>
+                    <p class="hero-reveal text-md text-white/80 mb-4">
+                        We operate as an independent strategic authority, aligning Data &amp; AI architecture, governance, and capital allocation before execution begins.
+                    </p>
+                    <p class="hero-reveal text-white/70 text-sm italic">
+                        We do not start with tools.<br>We start with decisions.
+                    </p>
+                </div>
+                <div class="relative hero-card-reveal">
+                    <div class="glow-border backdrop-blur-sm p-6 md:p-8 rounded-2xl overflow-hidden" style="background: linear-gradient(135deg, rgba(34, 211, 238, 0.15) 0%, rgba(20, 30, 45, 0.95) 50%, rgba(59, 130, 246, 0.1) 100%);">
+                        <div class="flex items-center gap-3 mb-6">
+                            <div class="w-10 h-10 bg-cyan-500/20 rounded-xl flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-cyan-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+                            </div>
+                            <span class="text-white font-semibold">How We Engage</span>
+                        </div>
+                        <p class="text-white/80 text-sm mb-5">Engagements operate at executive level and are structured, time-bound, and outcome-driven. Typical mandates include:</p>
+                        <ul class="text-white space-y-4 mb-6">
+                            <li class="flex items-start gap-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-8.64"/><path d="M22 4L12 14.01l-3-3"/></svg>
+                                <span><strong class="text-white">Board-level Data &amp; AI briefings:</strong> <span class="text-gray-400">executive alignment and strategic clarity</span></span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-8.64"/><path d="M22 4L12 14.01l-3-3"/></svg>
+                                <span><strong class="text-white">Enterprise roadmap definition:</strong> <span class="text-gray-400">multi-year direction and investment sequencing</span></span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-8.64"/><path d="M22 4L12 14.01l-3-3"/></svg>
+                                <span><strong class="text-white">AI governance framework design:</strong> <span class="text-gray-400">oversight structures before scale</span></span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-8.64"/><path d="M22 4L12 14.01l-3-3"/></svg>
+                                <span><strong class="text-white">Independent vendor evaluation:</strong> <span class="text-gray-400">strategic autonomy in selection</span></span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-8.64"/><path d="M22 4L12 14.01l-3-3"/></svg>
+                                <span><strong class="text-white">Portfolio rationalization:</strong> <span class="text-gray-400">initiative triage and course correction</span></span>
+                            </li>
+                        </ul>
+                        <div class="pt-4 border-t border-gray-700/50">
+                            <p class="text-white/70 text-sm"><em>We are not embedded for volume delivery.</em><br><strong class="text-white">We are engaged for directional correction.</strong></p>
+                        </div>
+                    </div>
+                    <div class="absolute -top-4 -right-4 w-24 h-24 bg-cyan-500/10 rounded-full blur-2xl"></div>
+                    <div class="absolute -bottom-4 -left-4 w-32 h-32 bg-blue-500/10 rounded-full blur-2xl"></div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content" class="container mx-auto px-4 pt-16 pb-4 relative z-10">
+
+        <!-- ═══ Divider: Hero → Takeaway ═══ -->
+        <div class="section-divider" data-reveal="fade">
+            <div class="section-divider-icon" style="background: rgba(34, 211, 238, 0.15);">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-cyan-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-8.64"/><path d="M22 4L12 14.01l-3-3"/></svg>
+            </div>
+        </div>
+
+        <!-- ═══ TAKEAWAY: What Strategic Advisory Delivers ═══ -->
+        <section class="mb-16" data-reveal="up">
+            <div class="text-center mb-10">
+                <span class="inline-block bg-cyan-500/20 text-cyan-400 text-xs font-semibold px-3 py-1 rounded-full mb-3">Structural Outcomes</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-3">What Strategic Advisory Delivers</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">Structural outcomes that reshape how Data &amp; AI decisions are made at enterprise level.</p>
+            </div>
+
+            <!-- Stat Cards Grid: Row 1 (3 cards) -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5 mb-5">
+                <!-- Card 1: Board-Level Investment Clarity -->
+                <div class="stat-card bg-gray-800/30 rounded-xl border border-cyan-500/15 p-6" data-reveal="up" data-delay="0">
+                    <div class="text-3xl font-extrabold text-cyan-400 mb-2">100%</div>
+                    <h3 class="text-white font-bold text-lg mb-2">Board-Level Investment Clarity</h3>
+                    <p class="text-gray-400 text-sm mb-4">Major Data &amp; AI investments supported by defensible architectural logic and explicit governance alignment.</p>
+                    <ul class="space-y-2">
+                        <li class="flex items-start gap-2 text-sm text-gray-400"><svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-cyan-400 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-8.64"/><path d="M22 4L12 14.01l-3-3"/></svg>Capital committed with defined accountability</li>
+                        <li class="flex items-start gap-2 text-sm text-gray-400"><svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-cyan-400 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-8.64"/><path d="M22 4L12 14.01l-3-3"/></svg>Clear value narrative before approval</li>
+                        <li class="flex items-start gap-2 text-sm text-gray-400"><svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-cyan-400 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-8.64"/><path d="M22 4L12 14.01l-3-3"/></svg>Reduced political and portfolio ambiguity</li>
+                    </ul>
+                </div>
+
+                <!-- Card 2: Reduction in Strategic Rework -->
+                <div class="stat-card bg-gray-800/30 rounded-xl border border-cyan-500/15 p-6" data-reveal="up" data-delay="100">
+                    <div class="text-3xl font-extrabold text-cyan-400 mb-2">60&ndash;80%</div>
+                    <h3 class="text-white font-bold text-lg mb-2">Reduction in Strategic Rework</h3>
+                    <p class="text-gray-400 text-sm mb-4">Preventing architectural misalignment before execution avoids downstream correction cycles.</p>
+                    <ul class="space-y-2">
+                        <li class="flex items-start gap-2 text-sm text-gray-400"><svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-cyan-400 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-8.64"/><path d="M22 4L12 14.01l-3-3"/></svg>Fewer vendor-driven reversals</li>
+                        <li class="flex items-start gap-2 text-sm text-gray-400"><svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-cyan-400 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-8.64"/><path d="M22 4L12 14.01l-3-3"/></svg>Reduced platform fragmentation</li>
+                        <li class="flex items-start gap-2 text-sm text-gray-400"><svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-cyan-400 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-8.64"/><path d="M22 4L12 14.01l-3-3"/></svg>Lower long-term modernization cost</li>
+                    </ul>
+                </div>
+
+                <!-- Card 3: Governance Alignment Before Scale -->
+                <div class="stat-card bg-gray-800/30 rounded-xl border border-cyan-500/15 p-6" data-reveal="up" data-delay="200">
+                    <div class="text-3xl font-extrabold text-cyan-400 mb-2">Enterprise-Wide</div>
+                    <h3 class="text-white font-bold text-lg mb-2">Governance Alignment Before Scale</h3>
+                    <p class="text-gray-400 text-sm mb-4">AI and data expansion governed by defined decision rights and oversight structures.</p>
+                    <ul class="space-y-2">
+                        <li class="flex items-start gap-2 text-sm text-gray-400"><svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-cyan-400 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-8.64"/><path d="M22 4L12 14.01l-3-3"/></svg>Clear executive ownership</li>
+                        <li class="flex items-start gap-2 text-sm text-gray-400"><svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-cyan-400 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-8.64"/><path d="M22 4L12 14.01l-3-3"/></svg>Risk controls embedded at design stage</li>
+                        <li class="flex items-start gap-2 text-sm text-gray-400"><svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-cyan-400 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-8.64"/><path d="M22 4L12 14.01l-3-3"/></svg>Compliance aligned before exposure</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Stat Cards Grid: Row 2 (2 cards, full width) -->
+            <div class="grid md:grid-cols-2 gap-5 mb-8">
+                <!-- Card 4: Architectural Coherence -->
+                <div class="stat-card bg-gray-800/30 rounded-xl border border-cyan-500/15 p-6" data-reveal="up" data-delay="300">
+                    <div class="text-3xl font-extrabold text-cyan-400 mb-2">Long-Term</div>
+                    <h3 class="text-white font-bold text-lg mb-2">Architectural Coherence</h3>
+                    <p class="text-gray-400 text-sm mb-4">Data platforms, AI initiatives, and operating models evolve within a unified strategic blueprint.</p>
+                    <ul class="space-y-2">
+                        <li class="flex items-start gap-2 text-sm text-gray-400"><svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-cyan-400 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-8.64"/><path d="M22 4L12 14.01l-3-3"/></svg>No parallel shadow architectures</li>
+                        <li class="flex items-start gap-2 text-sm text-gray-400"><svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-cyan-400 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-8.64"/><path d="M22 4L12 14.01l-3-3"/></svg>No isolated pilot ecosystems</li>
+                        <li class="flex items-start gap-2 text-sm text-gray-400"><svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-cyan-400 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-8.64"/><path d="M22 4L12 14.01l-3-3"/></svg>Controlled execution under strategic direction</li>
+                    </ul>
+                </div>
+
+                <!-- Card 5: Capital Efficiency -->
+                <div class="stat-card bg-gray-800/30 rounded-xl border border-cyan-500/15 p-6" data-reveal="up" data-delay="400">
+                    <div class="text-3xl font-extrabold text-cyan-400 mb-2">Measurable</div>
+                    <h3 class="text-white font-bold text-lg mb-2">Capital Efficiency</h3>
+                    <p class="text-gray-400 text-sm mb-4">Investment sequencing aligned to portfolio impact, not tool enthusiasm.</p>
+                    <ul class="space-y-2">
+                        <li class="flex items-start gap-2 text-sm text-gray-400"><svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-cyan-400 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-8.64"/><path d="M22 4L12 14.01l-3-3"/></svg>Initiatives validated before spend</li>
+                        <li class="flex items-start gap-2 text-sm text-gray-400"><svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-cyan-400 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-8.64"/><path d="M22 4L12 14.01l-3-3"/></svg>Early termination of misaligned programs</li>
+                        <li class="flex items-start gap-2 text-sm text-gray-400"><svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-cyan-400 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-8.64"/><path d="M22 4L12 14.01l-3-3"/></svg>Capital deployed with strategic discipline</li>
+                    </ul>
+                </div>
+            </div>
+
+            <p class="text-center text-gray-500 text-sm italic">Strategic advisory does not accelerate activity.<br><span class="text-cyan-400 font-medium">It prevents misdirected activity.</span></p>
+        </section>
+
+        <!-- ═══ PROBLEM STATEMENT: The Direction & Governance Gap ═══ -->
+        <section class="mb-16" data-reveal="up">
+            <div class="flex items-center justify-center gap-3 mb-4">
+                <div class="w-10 h-10 bg-red-500/20 rounded-full flex items-center justify-center flex-shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-red-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                </div>
+                <span class="text-red-400 text-xl font-bold">Problem Statement</span>
+            </div>
+            <div class="text-center mb-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-2">The Direction &amp; Governance Gap</h2>
+                <p class="text-red-400 text-sm font-medium">Why Data &amp; AI Programs Lose Coherence at Scale</p>
+            </div>
+            <div class="rounded-2xl border border-red-500/20 p-8 md:p-10 mb-8" style="background: linear-gradient(135deg, rgba(239, 68, 68, 0.08) 0%, rgba(20, 30, 45, 0.95) 40%, rgba(20, 30, 45, 0.95) 60%, rgba(34, 197, 94, 0.06) 100%);">
+                <div class="grid lg:grid-cols-2 gap-8 items-start">
+                    <div>
+                        <p class="text-white text-lg font-bold leading-relaxed mb-4">Organizations do not fail in Data &amp; AI because of missing technology.</p>
+                        <p class="text-red-400 text-lg font-bold leading-relaxed">They fail because strategic direction, governance discipline, and capital sequencing are not established before execution accelerates.</p>
+                    </div>
+                    <div>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-4">Across enterprises, a recurring pattern emerges: AI ambition outpaces governance maturity, platforms evolve without architectural continuity, vendors influence long-term direction without independent oversight, and parallel initiatives compete for capital without portfolio coherence. Over time, complexity compounds and leadership confidence declines.</p>
+                        <p class="text-gray-500 text-sm italic">The failure is rarely immediate.<br><span class="text-red-400 font-medium">It is structural.</span></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4 Numbered Problem Cards -->
+            <div class="grid md:grid-cols-2 gap-5">
+                <!-- Problem 1: Orange -->
+                <div class="rounded-xl border border-orange-500/40 p-6 enhanced-card" style="background: linear-gradient(135deg, rgba(251, 146, 60, 0.05) 0%, rgba(17, 24, 39, 0.95) 50%);" data-reveal="left" data-delay="0">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="number-badge" style="background: linear-gradient(135deg, #f97316, #ea580c); box-shadow: 0 4px 15px rgba(249, 115, 22, 0.4);">1</div>
+                        <h3 class="text-white font-bold text-lg">Fragmented Architectural Evolution</h3>
+                    </div>
+                    <p class="text-gray-400 text-sm mb-3">Technology decisions made incrementally without long-term coherence:</p>
+                    <ul class="space-y-2 mb-4">
+                        <li class="flex items-start gap-2 text-sm text-gray-400"><span class="text-orange-400 mt-1">&#8226;</span>Platform additions without unified blueprint</li>
+                        <li class="flex items-start gap-2 text-sm text-gray-400"><span class="text-orange-400 mt-1">&#8226;</span>Integration patterns shaped by vendor preference</li>
+                        <li class="flex items-start gap-2 text-sm text-gray-400"><span class="text-orange-400 mt-1">&#8226;</span>Data domains evolving without enterprise alignment</li>
+                    </ul>
+                    <p class="text-orange-400 text-xs font-medium"><strong>Impact:</strong> Escalating complexity, increasing modernization cost, and architectural fragility.</p>
+                </div>
+
+                <!-- Problem 2: Red -->
+                <div class="rounded-xl border border-red-500/40 p-6 enhanced-card" style="background: linear-gradient(135deg, rgba(239, 68, 68, 0.05) 0%, rgba(17, 24, 39, 0.95) 50%);" data-reveal="right" data-delay="100">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="number-badge" style="background: linear-gradient(135deg, #ef4444, #dc2626); box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4);">2</div>
+                        <h3 class="text-white font-bold text-lg">Vendor-Driven Strategic Drift</h3>
+                    </div>
+                    <p class="text-gray-400 text-sm mb-3">External implementation partners influencing direction:</p>
+                    <ul class="space-y-2 mb-4">
+                        <li class="flex items-start gap-2 text-sm text-gray-400"><span class="text-red-400 mt-1">&#8226;</span>Roadmaps shaped by tool ecosystems</li>
+                        <li class="flex items-start gap-2 text-sm text-gray-400"><span class="text-red-400 mt-1">&#8226;</span>Architecture constrained by delivery convenience</li>
+                        <li class="flex items-start gap-2 text-sm text-gray-400"><span class="text-red-400 mt-1">&#8226;</span>Long-term lock-in masked as short-term acceleration</li>
+                    </ul>
+                    <p class="text-red-400 text-xs font-medium"><strong>Impact:</strong> Reduced strategic independence and constrained future flexibility.</p>
+                </div>
+
+                <!-- Problem 3: Green -->
+                <div class="rounded-xl border border-green-500/40 p-6 enhanced-card" style="background: linear-gradient(135deg, rgba(34, 197, 94, 0.05) 0%, rgba(17, 24, 39, 0.95) 50%);" data-reveal="left" data-delay="200">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="number-badge" style="background: linear-gradient(135deg, #22c55e, #16a34a); box-shadow: 0 4px 15px rgba(34, 197, 94, 0.4);">3</div>
+                        <h3 class="text-white font-bold text-lg">Governance Lag Behind AI Ambition</h3>
+                    </div>
+                    <p class="text-gray-400 text-sm mb-3">AI initiatives scaled before oversight matures:</p>
+                    <ul class="space-y-2 mb-4">
+                        <li class="flex items-start gap-2 text-sm text-gray-400"><span class="text-green-400 mt-1">&#8226;</span>Undefined decision rights at executive level</li>
+                        <li class="flex items-start gap-2 text-sm text-gray-400"><span class="text-green-400 mt-1">&#8226;</span>Risk frameworks introduced reactively</li>
+                        <li class="flex items-start gap-2 text-sm text-gray-400"><span class="text-green-400 mt-1">&#8226;</span>Compliance considerations addressed late</li>
+                    </ul>
+                    <p class="text-green-400 text-xs font-medium"><strong>Impact:</strong> Regulatory exposure, reputational risk, and executive hesitation.</p>
+                </div>
+
+                <!-- Problem 4: Purple -->
+                <div class="rounded-xl border border-purple-500/40 p-6 enhanced-card" style="background: linear-gradient(135deg, rgba(168, 85, 247, 0.05) 0%, rgba(17, 24, 39, 0.95) 50%);" data-reveal="right" data-delay="300">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="number-badge" style="background: linear-gradient(135deg, #a855f7, #9333ea); box-shadow: 0 4px 15px rgba(168, 85, 247, 0.4);">4</div>
+                        <h3 class="text-white font-bold text-lg">Portfolio Without Investment Discipline</h3>
+                    </div>
+                    <p class="text-gray-400 text-sm mb-3">Capital deployed without structured prioritization:</p>
+                    <ul class="space-y-2 mb-4">
+                        <li class="flex items-start gap-2 text-sm text-gray-400"><span class="text-purple-400 mt-1">&#8226;</span>Parallel initiatives competing for sponsorship</li>
+                        <li class="flex items-start gap-2 text-sm text-gray-400"><span class="text-purple-400 mt-1">&#8226;</span>Value narratives unclear at approval stage</li>
+                        <li class="flex items-start gap-2 text-sm text-gray-400"><span class="text-purple-400 mt-1">&#8226;</span>Projects progressing without measurable impact alignment</li>
+                    </ul>
+                    <p class="text-purple-400 text-xs font-medium"><strong>Impact:</strong> Capital inefficiency and declining board confidence.</p>
+                </div>
+                <!-- ═══ THE COMPOUNDING EFFECT ═══ -->
+                <div class="md:col-span-2 rounded-2xl border border-orange-500/20 p-8 md:p-10" data-reveal="zoom" style="background: linear-gradient(135deg, rgba(251, 146, 60, 0.06) 0%, rgba(20, 25, 45, 0.97) 30%, rgba(15, 20, 40, 0.97) 70%, rgba(139, 92, 246, 0.05) 100%);">
+                    <h3 class="text-white text-xl font-bold mb-4">The Compounding Effect</h3>
+                    <p class="text-gray-400 leading-relaxed">Left unaddressed, these structural weaknesses do not self-correct. Execution amplifies them: more tools increase fragmentation, more vendors accelerate drift, and more initiatives dilute capital discipline. Strategic intervention must precede scale, not follow failure. That <strong class="text-white">structural efficiency</strong> and <span class="text-green-400">disciplined decision-making</span> gap is precisely where we intervene.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══ Divider: Compounding → Advisory Mandate ═══ -->
+        <div class="section-divider" data-reveal="fade">
+            <div class="section-divider-icon" style="background: rgba(34, 211, 238, 0.15);">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-cyan-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+            </div>
+        </div>
+
+        <!-- ═══ OUR ADVISORY MANDATE ═══ -->
+        <section class="mb-16" data-reveal="up">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-2">Our Advisory Mandate</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">Executive-level direction at the points that determine long-term success</p>
+            </div>
+
+            <!-- 5 Mandate Cards2-col grid, 5th spans full -->
+            <div class="grid md:grid-cols-2 gap-5 mb-5">
+                <!-- Mandate 1: Enterprise Data & AI Operating Model -->
+                <div class="rounded-xl border border-cyan-500/30 p-6 md:p-8 enhanced-card" style="background: linear-gradient(135deg, rgba(34, 211, 238, 0.06) 0%, rgba(15, 20, 40, 0.97) 40%);" data-reveal="up" data-delay="0">
+                    <div class="flex items-center gap-3 mb-5">
+                        <div class="w-10 h-10 bg-cyan-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-cyan-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+                        </div>
+                        <div>
+                            <h3 class="text-white font-bold text-lg">Enterprise Data &amp; AI Operating Model</h3>
+                            <p class="text-green-400 text-sm font-medium">Structure Before Scale</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 text-sm mb-5 leading-relaxed">Define how Data &amp; AI functions operate, govern, and create measurable enterprise value.</p>
+                    <ul class="space-y-2.5">
+                        <li class="flex items-start gap-2 text-sm text-gray-400"><svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-green-400 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-8.64"/><path d="M22 4L12 14.01l-3-3"/></svg>Executive ownership and decision rights</li>
+                        <li class="flex items-start gap-2 text-sm text-gray-400"><svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-green-400 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-8.64"/><path d="M22 4L12 14.01l-3-3"/></svg>Federated vs centralized operating models</li>
+                        <li class="flex items-start gap-2 text-sm text-gray-400"><svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-green-400 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-8.64"/><path d="M22 4L12 14.01l-3-3"/></svg>Accountability across domains</li>
+                        <li class="flex items-start gap-2 text-sm text-gray-400"><svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-green-400 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-8.64"/><path d="M22 4L12 14.01l-3-3"/></svg>Value realization structures</li>
+                    </ul>
+                </div>
+
+                <!-- Mandate 2: Governance & Accountability Architecture -->
+                <div class="rounded-xl border border-cyan-500/30 p-6 md:p-8 enhanced-card" style="background: linear-gradient(135deg, rgba(34, 211, 238, 0.06) 0%, rgba(15, 20, 40, 0.97) 40%);" data-reveal="up" data-delay="100">
+                    <div class="flex items-center gap-3 mb-5">
+                        <div class="w-10 h-10 bg-cyan-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-cyan-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                        </div>
+                        <div>
+                            <h3 class="text-white font-bold text-lg">Governance &amp; Accountability Architecture</h3>
+                            <p class="text-green-400 text-sm font-medium">Oversight Embedded from Day One</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 text-sm mb-5 leading-relaxed">Establish governance structures before AI and data expansion accelerates.</p>
+                    <ul class="space-y-2.5">
+                        <li class="flex items-start gap-2 text-sm text-gray-400"><svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-green-400 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-8.64"/><path d="M22 4L12 14.01l-3-3"/></svg>Defined decision hierarchies</li>
+                        <li class="flex items-start gap-2 text-sm text-gray-400"><svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-green-400 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-8.64"/><path d="M22 4L12 14.01l-3-3"/></svg>Risk and compliance alignment</li>
+                        <li class="flex items-start gap-2 text-sm text-gray-400"><svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-green-400 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-8.64"/><path d="M22 4L12 14.01l-3-3"/></svg>Policy frameworks aligned to scale</li>
+                        <li class="flex items-start gap-2 text-sm text-gray-400"><svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-green-400 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-8.64"/><path d="M22 4L12 14.01l-3-3"/></svg>Board-ready reporting structures</li>
+                    </ul>
+                </div>
+
+                <!-- Mandate 3: Architectural Direction & Platform Coherence -->
+                <div class="rounded-xl border border-cyan-500/30 p-6 md:p-8 enhanced-card" style="background: linear-gradient(135deg, rgba(34, 211, 238, 0.06) 0%, rgba(15, 20, 40, 0.97) 40%);" data-reveal="up" data-delay="200">
+                    <div class="flex items-center gap-3 mb-5">
+                        <div class="w-10 h-10 bg-cyan-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-cyan-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+                        </div>
+                        <div>
+                            <h3 class="text-white font-bold text-lg">Architectural Direction &amp; Platform Coherence</h3>
+                            <p class="text-green-400 text-sm font-medium">Blueprint Before Build</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 text-sm mb-5 leading-relaxed">Define defensible architectural direction before vendor execution begins.</p>
+                    <ul class="space-y-2.5">
+                        <li class="flex items-start gap-2 text-sm text-gray-400"><svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-green-400 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-8.64"/><path d="M22 4L12 14.01l-3-3"/></svg>Enterprise-level architectural principles</li>
+                        <li class="flex items-start gap-2 text-sm text-gray-400"><svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-green-400 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-8.64"/><path d="M22 4L12 14.01l-3-3"/></svg>Platform rationalization and integration alignment</li>
+                        <li class="flex items-start gap-2 text-sm text-gray-400"><svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-green-400 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-8.64"/><path d="M22 4L12 14.01l-3-3"/></svg>Long-term scalability guardrails</li>
+                        <li class="flex items-start gap-2 text-sm text-gray-400"><svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-green-400 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-8.64"/><path d="M22 4L12 14.01l-3-3"/></svg>Prevention of fragmented ecosystem growth</li>
+                    </ul>
+                </div>
+
+                <!-- Mandate 4: Investment Prioritization & Sequencing -->
+                <div class="rounded-xl border border-cyan-500/30 p-6 md:p-8 enhanced-card" style="background: linear-gradient(135deg, rgba(34, 211, 238, 0.06) 0%, rgba(15, 20, 40, 0.97) 40%);" data-reveal="up" data-delay="300">
+                    <div class="flex items-center gap-3 mb-5">
+                        <div class="w-10 h-10 bg-cyan-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-cyan-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+                        </div>
+                        <div>
+                            <h3 class="text-white font-bold text-lg">Investment Prioritization &amp; Sequencing</h3>
+                            <p class="text-green-400 text-sm font-medium">Capital Discipline Before Commitment</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 text-sm mb-5 leading-relaxed">Validate and sequence initiatives to prevent portfolio fragmentation.</p>
+                    <ul class="space-y-2.5">
+                        <li class="flex items-start gap-2 text-sm text-gray-400"><svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-green-400 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-8.64"/><path d="M22 4L12 14.01l-3-3"/></svg>Initiative triage and termination discipline</li>
+                        <li class="flex items-start gap-2 text-sm text-gray-400"><svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-green-400 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-8.64"/><path d="M22 4L12 14.01l-3-3"/></svg>Value narrative clarity at approval stage</li>
+                        <li class="flex items-start gap-2 text-sm text-gray-400"><svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-green-400 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-8.64"/><path d="M22 4L12 14.01l-3-3"/></svg>Portfolio dependency mapping</li>
+                        <li class="flex items-start gap-2 text-sm text-gray-400"><svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-green-400 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-8.64"/><path d="M22 4L12 14.01l-3-3"/></svg>Phased capital allocation strategy</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Mandate 5: Vendor & Ecosystem Oversightcentered, same width as one card -->
+            <div class="flex justify-center mt-5">
+                <div class="rounded-xl border border-cyan-500/30 p-6 md:p-8 enhanced-card" style="width: 100%; max-width: calc(50% - 0.625rem); background: linear-gradient(135deg, rgba(34, 211, 238, 0.06) 0%, rgba(15, 20, 40, 0.97) 40%);" data-reveal="up" data-delay="400">
+                    <div class="flex items-center gap-3 mb-5">
+                        <div class="w-10 h-10 bg-cyan-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-cyan-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><path d="M2 12h20"/></svg>
+                        </div>
+                        <div>
+                            <h3 class="text-white font-bold text-lg">Vendor &amp; Ecosystem Oversight</h3>
+                            <p class="text-green-400 text-sm font-medium">Independence in a Vendor-Driven Market</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 text-sm mb-5 leading-relaxed">Ensure implementation partners operate within enterprise-aligned direction.</p>
+                    <ul class="space-y-2.5">
+                        <li class="flex items-start gap-2 text-sm text-gray-400"><svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-green-400 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-8.64"/><path d="M22 4L12 14.01l-3-3"/></svg>Independent architecture review</li>
+                        <li class="flex items-start gap-2 text-sm text-gray-400"><svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-green-400 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-8.64"/><path d="M22 4L12 14.01l-3-3"/></svg>Vendor roadmap evaluation</li>
+                        <li class="flex items-start gap-2 text-sm text-gray-400"><svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-green-400 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-8.64"/><path d="M22 4L12 14.01l-3-3"/></svg>Lock-in risk assessment</li>
+                        <li class="flex items-start gap-2 text-sm text-gray-400"><svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-green-400 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-8.64"/><path d="M22 4L12 14.01l-3-3"/></svg>Alignment to long-term strategy</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══ Strategic Ecosystem: Hub & Spoke ═══ -->
+        <section id="ecosystem" class="mb-4 py-4 px-6 md:px-8" data-reveal="up">
+            <div class="eco-section">
+                <h3 class="text-3xl font-bold text-center mb-3 text-gradient from-blue-400 to-cyan-400" style="margin-bottom: 0.5rem; position: relative; z-index: 5;" data-reveal="up" data-delay="100">Our Strategic Advisory Framework</h3>
+                <p class="text-white text-center max-w-2xl mx-auto mb-1 font-semibold text-base md:text-lg" style="position: relative; z-index: 5;" data-reveal="up" data-delay="200">Six Strategic Capabilities. One Coherent Direction.</p>
+                <p class="text-gray-400 text-center text-base max-w-3xl mx-auto mb-2" style="position: relative; z-index: 5;" data-reveal="up" data-delay="250">Enterprises don't fail due to lack of technology. They fail due to fragmented decisions, misaligned architecture, and vendor-driven roadmaps. Our framework ensures every Data &amp; AI initiative operates within a unified control model. Before scale, before automation, before capital commitment.</p>
+
+                <!-- ========== Hub & Spoke ========== -->
+                <div class="eco-slide--circles" data-reveal="fade" data-delay="300">
+                            <div class="eco-orbit">
+                                <svg class="eco-spokes-svg" viewBox="0 0 1400 1200" preserveAspectRatio="xMidYMid meet">
+                                    <defs>
+                                        <filter id="spokeBlur"><feGaussianBlur stdDeviation="3"/></filter>
+                                        <filter id="dotGlow"><feGaussianBlur stdDeviation="2.5"/></filter>
+                                        <filter id="particleGlow"><feGaussianBlur stdDeviation="4"/></filter>
+                                        <path id="path1" d="M700,430 L700,300"/>
+                                        <path id="path2" d="M847,515 L960,450"/>
+                                        <path id="path3" d="M847,685 L960,750"/>
+                                        <path id="path4" d="M700,770 L700,900"/>
+                                        <path id="path5" d="M553,685 L440,750"/>
+                                        <path id="path6" d="M553,515 L440,450"/>
+                                    </defs>
+                                    <circle cx="700" cy="600" r="300" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="1" stroke-dasharray="8 6"/>
+                                    <circle cx="700" cy="600" r="300" fill="none" stroke="rgba(34,197,94,0.03)" stroke-width="6" filter="url(#spokeBlur)"/>
+                                    <line x1="700" y1="430" x2="700" y2="300" class="eco-spoke-line" stroke="rgba(34,211,238,0.3)"/>
+                                    <line x1="700" y1="430" x2="700" y2="300" class="eco-spoke-glow" stroke="rgba(34,211,238,0.06)" stroke-width="8" stroke-dasharray="8 4" filter="url(#spokeBlur)"/>
+                                    <line x1="847" y1="515" x2="960" y2="450" class="eco-spoke-line" stroke="rgba(236,72,153,0.3)"/>
+                                    <line x1="847" y1="515" x2="960" y2="450" class="eco-spoke-glow" stroke="rgba(236,72,153,0.06)" stroke-width="8" stroke-dasharray="8 4" filter="url(#spokeBlur)"/>
+                                    <line x1="847" y1="685" x2="960" y2="750" class="eco-spoke-line" stroke="rgba(251,146,60,0.3)"/>
+                                    <line x1="847" y1="685" x2="960" y2="750" class="eco-spoke-glow" stroke="rgba(251,146,60,0.06)" stroke-width="8" stroke-dasharray="8 4" filter="url(#spokeBlur)"/>
+                                    <line x1="700" y1="770" x2="700" y2="900" class="eco-spoke-line" stroke="rgba(59,130,246,0.3)"/>
+                                    <line x1="700" y1="770" x2="700" y2="900" class="eco-spoke-glow" stroke="rgba(59,130,246,0.06)" stroke-width="8" stroke-dasharray="8 4" filter="url(#spokeBlur)"/>
+                                    <line x1="553" y1="685" x2="440" y2="750" class="eco-spoke-line" stroke="rgba(168,85,247,0.3)"/>
+                                    <line x1="553" y1="685" x2="440" y2="750" class="eco-spoke-glow" stroke="rgba(168,85,247,0.06)" stroke-width="8" stroke-dasharray="8 4" filter="url(#spokeBlur)"/>
+                                    <line x1="553" y1="515" x2="440" y2="450" class="eco-spoke-line" stroke="rgba(239,68,68,0.3)"/>
+                                    <line x1="553" y1="515" x2="440" y2="450" class="eco-spoke-glow" stroke="rgba(239,68,68,0.06)" stroke-width="8" stroke-dasharray="8 4" filter="url(#spokeBlur)"/>
+                                    <circle r="4" fill="#22d3ee" opacity="0.8" class="eco-particle">
+                                        <animateMotion dur="2s" repeatCount="indefinite"><mpath href="#path1"/></animateMotion>
+                                        <animate attributeName="opacity" values="0;0.9;0" dur="2s" repeatCount="indefinite"/>
+                                    </circle>
+                                    <circle r="4" fill="#ec4899" opacity="0.8" class="eco-particle">
+                                        <animateMotion dur="2.4s" repeatCount="indefinite" begin="0.3s"><mpath href="#path2"/></animateMotion>
+                                        <animate attributeName="opacity" values="0;0.9;0" dur="2.4s" repeatCount="indefinite" begin="0.3s"/>
+                                    </circle>
+                                    <circle r="4" fill="#fb923c" opacity="0.8" class="eco-particle">
+                                        <animateMotion dur="2.2s" repeatCount="indefinite" begin="0.6s"><mpath href="#path3"/></animateMotion>
+                                        <animate attributeName="opacity" values="0;0.9;0" dur="2.2s" repeatCount="indefinite" begin="0.6s"/>
+                                    </circle>
+                                    <circle r="4" fill="#3b82f6" opacity="0.8" class="eco-particle">
+                                        <animateMotion dur="2.5s" repeatCount="indefinite" begin="0.5s"><mpath href="#path4"/></animateMotion>
+                                        <animate attributeName="opacity" values="0;0.9;0" dur="2.5s" repeatCount="indefinite" begin="0.5s"/>
+                                    </circle>
+                                    <circle r="4" fill="#a855f7" opacity="0.8" class="eco-particle">
+                                        <animateMotion dur="2.6s" repeatCount="indefinite" begin="0.9s"><mpath href="#path5"/></animateMotion>
+                                        <animate attributeName="opacity" values="0;0.9;0" dur="2.6s" repeatCount="indefinite" begin="0.9s"/>
+                                    </circle>
+                                    <circle r="4" fill="#ef4444" opacity="0.8" class="eco-particle">
+                                        <animateMotion dur="2.3s" repeatCount="indefinite" begin="1.2s"><mpath href="#path6"/></animateMotion>
+                                        <animate attributeName="opacity" values="0;0.9;0" dur="2.3s" repeatCount="indefinite" begin="1.2s"/>
+                                    </circle>
+                                    <circle cx="700" cy="300" r="6" fill="#22d3ee" opacity="0.35" filter="url(#dotGlow)"/><circle cx="700" cy="300" r="3" fill="#22d3ee" opacity="0.9"/>
+                                    <circle cx="960" cy="450" r="6" fill="#ec4899" opacity="0.35" filter="url(#dotGlow)"/><circle cx="960" cy="450" r="3" fill="#ec4899" opacity="0.9"/>
+                                    <circle cx="960" cy="750" r="6" fill="#fb923c" opacity="0.35" filter="url(#dotGlow)"/><circle cx="960" cy="750" r="3" fill="#fb923c" opacity="0.9"/>
+                                    <circle cx="700" cy="900" r="6" fill="#3b82f6" opacity="0.35" filter="url(#dotGlow)"/><circle cx="700" cy="900" r="3" fill="#3b82f6" opacity="0.9"/>
+                                    <circle cx="440" cy="750" r="6" fill="#a855f7" opacity="0.35" filter="url(#dotGlow)"/><circle cx="440" cy="750" r="3" fill="#a855f7" opacity="0.9"/>
+                                    <circle cx="440" cy="450" r="6" fill="#ef4444" opacity="0.35" filter="url(#dotGlow)"/><circle cx="440" cy="450" r="3" fill="#ef4444" opacity="0.9"/>
+                                    <circle cx="700" cy="600" r="10" fill="#22c55e" opacity="0.2" filter="url(#dotGlow)"/><circle cx="700" cy="600" r="4" fill="#22c55e" opacity="0.7"/>
+                                </svg>
+                                <div class="eco-orbit__ring"></div>
+                                <div class="eco-orbit__hub">
+                                    <a href="strategic-advisory.html" class="eco-card eco-card--hub" style="--eco-color:rgba(34,197,94,0.4);--eco-glow:rgba(34,197,94,0.1);">
+                                        <div class="eco-hub-glow"></div>
+                                        <span class="eco-card__tag" style="color:#22c55e;border-color:rgba(34,197,94,0.3);background:rgba(34,197,94,0.08);">Core</span>
+                                        <div class="eco-card__icon" style="background:rgba(34,197,94,0.15);border:1.5px solid rgba(34,197,94,0.4);">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-green-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+                                        </div>
+                                        <div class="eco-card__title text-green-400">Strategic Data &amp; AI Direction</div>
+                                        <div class="eco-card__subtitle">Architectural Coherence. Executive Alignment. Controlled Execution.</div>
+                                        <div class="eco-card__desc">We define the roadmap, operating model, and governance structure that anchor enterprise Data &amp; AI investments, ensuring implementation partners execute within a clear, board-aligned direction.</div>
+                                        <span class="eco-card__cta text-green-400">Explore Strategic Advisory →</span>
+                                    </a>
+                                </div>
+                                <div class="eco-orbit__spoke">
+                                    <a href="services/value-discovery-canvas.html" class="eco-flip-wrap" style="--eco-color:rgba(34,211,238,0.4);--eco-glow:rgba(34,211,238,0.08);">
+                                        <div class="eco-flip-inner">
+                                            <div class="eco-card eco-flip-front">
+                                                <span class="eco-card__tag" style="color:#22d3ee;border-color:rgba(34,211,238,0.3);background:rgba(34,211,238,0.08);">Foundation</span>
+                                                <div class="eco-card__icon" style="background:rgba(34,211,238,0.12);border:1.5px solid rgba(34,211,238,0.35);">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-cyan-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+                                                </div>
+                                                <div class="eco-card__title text-cyan-400">Value Discovery Canvas</div>
+                                                <div class="eco-card__subtitle">Clarity Before Capital Is Committed</div>
+                                            </div>
+                                            <div class="eco-card eco-flip-back" style="border-color:rgba(34,211,238,0.3);background:rgba(34,211,238,0.06);">
+                                                <div class="eco-card__desc">A structured executive framework used to validate, prioritise, and sequence Data &amp; AI initiatives, eliminating misaligned investments and isolated pilots. Available as a standalone board-level engagement.</div>
+                                                <span class="eco-card__cta text-cyan-400">Learn More →</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="eco-orbit__spoke">
+                                    <a href="services/agentic-ai.html" class="eco-flip-wrap" style="--eco-color:rgba(236,72,153,0.4);--eco-glow:rgba(236,72,153,0.08);">
+                                        <div class="eco-flip-inner">
+                                            <div class="eco-card eco-flip-front">
+                                                <span class="eco-card__tag" style="color:#ec4899;border-color:rgba(236,72,153,0.3);background:rgba(236,72,153,0.08);">Innovation</span>
+                                                <div class="eco-card__icon" style="background:rgba(236,72,153,0.12);border:1.5px solid rgba(236,72,153,0.35);">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-pink-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a4 4 0 0 1 4 4c0 1.95-1.4 3.58-3.25 3.93"/><path d="M8.24 9.93A4 4 0 0 1 12 2"/><circle cx="12" cy="17" r="5"/><path d="M12 14v3l2 1"/></svg>
+                                                </div>
+                                                <div class="eco-card__title text-pink-400">Agentic AI Oversight</div>
+                                                <div class="eco-card__subtitle">Autonomous Intelligence. Governed, Accountable, Scalable</div>
+                                            </div>
+                                            <div class="eco-card eco-flip-back" style="border-color:rgba(236,72,153,0.3);background:rgba(236,72,153,0.06);">
+                                                <div class="eco-card__desc">We advise on the responsible design and deployment of enterprise-grade AI systems that reason and act within real workflows, without compromising governance, compliance, or architectural integrity.</div>
+                                                <span class="eco-card__cta text-pink-400">Learn More →</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="eco-orbit__spoke">
+                                    <a href="services/ltad2.html" class="eco-flip-wrap" style="--eco-color:rgba(251,146,60,0.4);--eco-glow:rgba(251,146,60,0.08);">
+                                        <div class="eco-flip-inner">
+                                            <div class="eco-card eco-flip-front">
+                                                <span class="eco-card__tag" style="color:#fb923c;border-color:rgba(251,146,60,0.3);background:rgba(251,146,60,0.08);">Enablement</span>
+                                                <div class="eco-card__icon" style="background:rgba(251,146,60,0.12);border:1.5px solid rgba(251,146,60,0.35);">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-orange-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/><path d="M11 8v6"/><path d="M8 11h6"/></svg>
+                                                </div>
+                                                <div class="eco-card__title text-orange-400">Technology &amp; Vendor Governance (LTAD 2.0)</div>
+                                                <div class="eco-card__subtitle">Tool Selection Without Vendor Bias</div>
+                                            </div>
+                                            <div class="eco-card eco-flip-back" style="border-color:rgba(251,146,60,0.3);background:rgba(251,146,60,0.06);">
+                                                <div class="eco-card__desc">We ensure technology decisions align with long-term architectural strategy, evaluating niche and emerging platforms within a defensible, outcome-driven framework. Independent. Fit-for-purpose. Future-aware.</div>
+                                                <span class="eco-card__cta text-orange-400">Learn More →</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="eco-orbit__spoke">
+                                    <a href="services/data-ai-services.html" class="eco-flip-wrap" style="--eco-color:rgba(59,130,246,0.4);--eco-glow:rgba(59,130,246,0.08);">
+                                        <div class="eco-flip-inner">
+                                            <div class="eco-card eco-flip-front">
+                                                <span class="eco-card__tag" style="color:#3b82f6;border-color:rgba(59,130,246,0.3);background:rgba(59,130,246,0.08);">Execution</span>
+                                                <div class="eco-card__icon" style="background:rgba(59,130,246,0.12);border:1.5px solid rgba(59,130,246,0.35);">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                                                </div>
+                                                <div class="eco-card__title text-blue-400">Data &amp; AI Services</div>
+                                                <div class="eco-card__subtitle">Controlled Delivery. Governed Execution.</div>
+                                            </div>
+                                            <div class="eco-card eco-flip-back" style="border-color:rgba(59,130,246,0.3);background:rgba(59,130,246,0.06);">
+                                                <div class="eco-card__desc">End-to-end Data &amp; AI execution capabilities, from architecture design and data engineering to analytics, GenAI, and agentic AI deployment, all governed within our strategic framework.</div>
+                                                <span class="eco-card__cta text-blue-400">View Services →</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="eco-orbit__spoke">
+                                    <a href="trainings.html" class="eco-flip-wrap" style="--eco-color:rgba(168,85,247,0.4);--eco-glow:rgba(168,85,247,0.08);">
+                                        <div class="eco-flip-inner">
+                                            <div class="eco-card eco-flip-front">
+                                                <span class="eco-card__tag" style="color:#a855f7;border-color:rgba(168,85,247,0.3);background:rgba(168,85,247,0.08);">Ecosystem</span>
+                                                <div class="eco-card__icon" style="background:rgba(168,85,247,0.12);border:1.5px solid rgba(168,85,247,0.35);">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-purple-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                                                </div>
+                                                <div class="eco-card__title text-purple-400">Leadership &amp; Capability Development</div>
+                                                <div class="eco-card__subtitle">Internal Strength. Reduced Dependency.</div>
+                                            </div>
+                                            <div class="eco-card eco-flip-back" style="border-color:rgba(168,85,247,0.3);background:rgba(168,85,247,0.06);">
+                                                <div class="eco-card__desc">We elevate internal Data &amp; AI leadership maturity, equipping executives and teams to govern transformation independently and sustainably.</div>
+                                                <span class="eco-card__cta text-purple-400">Learn More →</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="eco-orbit__spoke">
+                                    <a href="services/ltad.html" class="eco-flip-wrap" style="--eco-color:rgba(239,68,68,0.4);--eco-glow:rgba(239,68,68,0.08);">
+                                        <div class="eco-flip-inner">
+                                            <div class="eco-card eco-flip-front">
+                                                <span class="eco-card__tag" style="color:#ef4444;border-color:rgba(239,68,68,0.3);background:rgba(239,68,68,0.08);">Visibility</span>
+                                                <div class="eco-card__icon" style="background:rgba(239,68,68,0.12);border:1.5px solid rgba(239,68,68,0.35);">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-red-400" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                                                </div>
+                                                <div class="eco-card__title text-red-400">Executive &amp; Industry Influence</div>
+                                                <div class="eco-card__subtitle">Strategic Insight Across a Global Data Community</div>
+                                            </div>
+                                            <div class="eco-card eco-flip-back" style="border-color:rgba(239,68,68,0.3);background:rgba(239,68,68,0.06);">
+                                                <div class="eco-card__desc">Through curated executive dialogues and global ecosystem access, we surface emerging risks, innovations, and patterns shaping the Data &amp; AI landscape.</div>
+                                                <span class="eco-card__cta text-red-400">Learn More →</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ═══ CTA SectionRolling Gradient Border ═══ -->
+        <section class="text-center mb-0" data-reveal="zoom">
+            <div class="cta-rolling-wrap">
+                <div class="cta-rolling-inner">
+                    <h3 class="text-2xl sm:text-3xl font-bold mb-4 text-white">Ready to Align Your Data &amp; AI Direction?</h3>
+                    <p class="text-gray-400 max-w-2xl mx-auto mb-6">
+                        Let's discuss how independent strategic advisory can bring clarity, governance, and measurable value to your transformation.
+                    </p>
+                    <a href="contact.html" class="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white font-semibold py-3 px-6 rounded-full transition duration-300 transform hover:scale-105 inline-block">
+                        Request a Strategic Discussion
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FAQ Section -->
+    <div id="faq-section"></div>
+
+    <!-- Footer -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Main Script (minified) -->
+    <script src="js/main.min.js" defer></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        renderFAQ({
+            color: 'cyan',
+            faqs: [
+                { q: 'What is strategic advisory vs traditional consulting?', a: 'Strategic advisory focuses on guiding decision-making at the executive level, helping you define the right direction, evaluate trade-offs, and maintain coherence across initiatives. Unlike traditional consulting, we don\'t just deliver reports; we stay engaged as a trusted partner throughout execution.' },
+                { q: 'What topics does YPT\'s strategic advisory cover?', a: 'Our advisory services span data strategy, AI roadmap development, technology vendor evaluation, <a href="services/data-ai-services.html" style="color:#22d3ee;text-decoration:underline;">data governance frameworks</a>, organizational design for data teams, investment prioritization, and executive-level guidance on emerging technologies like <a href="services/agentic-ai.html" style="color:#22d3ee;text-decoration:underline;">Agentic AI</a> and Generative AI.' },
+                { q: 'How does a strategic advisory engagement typically work?', a: 'Engagements usually start with a diagnostic phase to understand your current state, followed by strategy development and an ongoing advisory retainer. We participate in steering committees, review architectural decisions, and provide on-demand guidance as challenges arise.' },
+                { q: 'How does vendor neutrality benefit strategic advisory engagements?', a: 'Because we have no vendor partnerships or referral fees, our advisory recommendations are based entirely on your business needs. When we evaluate tools via <a href="services/ltad2.html" style="color:#22d3ee;text-decoration:underline;">LTAD 2.0</a> or recommend architectures, clients trust that the guidance serves their interests, not a technology vendor\'s sales targets.' },
+                { q: 'Who should consider YPT\'s strategic advisory?', a: 'Organizations that are undertaking significant data or AI transformations, struggling with fragmented data initiatives, evaluating new technology investments, or lacking internal senior data leadership. We serve as a fractional Chief Data Officer or strategic advisor to your existing leadership.' },
+                { q: 'How long does a strategic advisory engagement last?', a: 'Advisory retainers are typically 3-12 months, though many clients maintain ongoing relationships. The duration depends on the complexity of your transformation and how quickly internal capabilities are built to sustain the direction independently. <a href="contact.html" style="color:#22d3ee;text-decoration:underline;">Get in touch</a> to discuss your needs.' }
+            ]
+        });
+    });
+    </script>
+    <!-- Page animations -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.body.classList.add('page-loaded');
+
+        // Scroll reveal observer
+        var els = document.querySelectorAll('[data-reveal]');
+        var observer = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    var delay = parseInt(entry.target.getAttribute('data-delay') || '0', 10);
+                    setTimeout(function() { entry.target.classList.add('revealed'); }, delay);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.12 });
+        els.forEach(function(el) { observer.observe(el); });
+
+        // Dynamic section divider colors
+        document.querySelectorAll('.section-divider').forEach(function(div) {
+            var icon = div.querySelector('.section-divider-icon');
+            if (icon) {
+                var bg = getComputedStyle(icon).backgroundColor;
+                var rgba = bg.replace('rgb', 'rgba').replace(')', ', 0.5)');
+                div.style.setProperty('--div-color', rgba);
+            }
+        });
+    });
+    </script>
+    <style>
+        .section-divider::before { background: linear-gradient(90deg, transparent, var(--div-color, rgba(100,100,100,0.3)), transparent); }
+        .section-divider::after  { background: linear-gradient(90deg, transparent, var(--div-color, rgba(100,100,100,0.3)), transparent); }
+    </style>
+    <script>
+    // Eco Flip Cards (JS-driven to avoid 3D hover jitter)
+    document.querySelectorAll('.eco-orbit__spoke').forEach(function(spoke) {
+        spoke.addEventListener('mouseenter', function() {
+            var inner = spoke.querySelector('.eco-flip-inner');
+            if (inner) inner.classList.add('flipped');
+        });
+        spoke.addEventListener('mouseleave', function() {
+            var inner = spoke.querySelector('.eco-flip-inner');
+            if (inner) inner.classList.remove('flipped');
+        });
+        spoke.addEventListener('click', function() {
+            var link = spoke.querySelector('a.eco-flip-wrap');
+            if (link && link.href) window.location.href = link.href;
+        });
+    });
+    </script>
+</body>
+</html>

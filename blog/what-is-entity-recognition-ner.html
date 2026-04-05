@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>What is Named Entity Recognition (NER)? Guide &amp; Examples</title>
+  <meta name="description" content="Discover how Named Entity Recognition extracts structured data from text. Learn NER methods, use cases, and why it matters for AI and data governance.">
+  <meta name="robots" content="index, follow">
+  <meta name="keywords" content="entity recognition NER, named entity recognition, NER in data science, unstructured data processing, entity extraction, NLP data modelling, data governance, text analytics, unstructured to structured data">
+  <meta name="author" content="Mustafa Qizilbash">
+  <meta property="og:title" content="What is Named Entity Recognition (NER)? Guide &amp; Examples">
+  <meta property="og:description" content="Discover how Named Entity Recognition extracts structured data from text. Learn NER methods, use cases, and why it matters for AI and data governance.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://yourpartnertechnologies.com/blog/what-is-entity-recognition-ner.html">
+  <meta property="og:image" content="https://yourpartnertechnologies.com/assets/images/Blogs_YPT/Blog03/Hero%20Banner.webp">
+  <meta property="og:site_name" content="Your Partner Technologies">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="What is Named Entity Recognition (NER)? Guide &amp; Examples">
+  <meta name="twitter:description" content="Discover how Named Entity Recognition extracts structured data from text. Learn NER methods, use cases, and why it matters for AI and data governance.">
+  <meta name="twitter:image" content="https://yourpartnertechnologies.com/assets/images/Blogs_YPT/Blog03/Hero%20Banner.webp">
+  <link rel="canonical" href="https://yourpartnertechnologies.com/blog/what-is-entity-recognition-ner.html">
+  <link rel="icon" type="image/png" href="https://objectstorage.us-sanjose-1.oraclecloud.com/n/axtx9ohfletb/b/ypt/o/Logo-64.png">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5MRNP3KJ8B"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-5MRNP3KJ8B');</script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "What is Named Entity Recognition (NER)? Guide & Examples",
+    "description": "Discover how Named Entity Recognition (NER) extracts structured data from unstructured text, and why it is essential for data governance, AI, and enterprise data modelling.",
+    "image": "https://yourpartnertechnologies.com/assets/images/Blogs_YPT/Blog03/Hero%20Banner.webp",
+    "author": {
+      "@type": "Person",
+      "name": "Mustafa Qizilbash"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Your Partner Technologies",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://objectstorage.us-sanjose-1.oraclecloud.com/n/axtx9ohfletb/b/ypt/o/Logo-128.png"
+      }
+    },
+    "datePublished": "2025-10-05",
+    "dateModified": "2025-10-05",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://yourpartnertechnologies.com/blog/what-is-entity-recognition-ner.html"
+    },
+    "keywords": "entity recognition NER, named entity recognition, NER in data science, unstructured data processing, entity extraction, NLP data modelling, data governance, text analytics"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is Named Entity Recognition in simple terms?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "NER is an AI technique that automatically finds and labels important items (people, places, dates, organisations) in unstructured text like emails, documents, and web pages, converting them into structured, usable data."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How does NER differ from keyword search?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Keyword search finds exact text matches. NER understands context. It can identify that 'Apple' refers to a company in a business document and a fruit in a recipe, then categorise each correctly as an entity."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What types of entities can NER extract?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Common entity types include persons, organisations, locations, dates, monetary values, percentages, and domain-specific entities like product names, medical terms, or legal references."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why is NER important for data governance?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "NER enables organisations to tag, catalogue, and track entities across unstructured content, supporting data lineage, metadata enrichment, and compliance programmes."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What tools are used for NER?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Popular NER tools include spaCy, Stanford NER, Google Cloud Natural Language API, AWS Comprehend, and Azure Text Analytics. Enterprise solutions often use hybrid approaches combining these with custom rules."
+        }
+      }
+    ]
+  }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/tailwind.min.css">
+  <link rel="stylesheet" href="../css/styles.min.css">
+  <link rel="stylesheet" href="blog-styles.css">
+
+</head>
+<body class="text-gray-200 antialiased leading-relaxed overflow-x-hidden" style="background:#000;max-width:100vw;">
+  <div class="reading-progress" id="progressBar"></div>
+  <!-- Floating Orbs -->
+  <div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+  <div id="header-placeholder"></div>
+  <header class="blog-hero">
+    <div class="blog-hero-content">
+      <div class="blog-hero-tags">
+        <span>Data Science</span>
+        <span>NLP</span>
+        <span>Data Modelling</span>
+        <span>Data Governance</span>
+        <span>Unstructured Data</span>
+        <span>AI</span>
+      </div>
+      <h1>What is Named Entity Recognition (NER)? Guide &amp; Examples</h1>
+      <div class="blog-hero-meta"><span>Mustafa Qizilbash</span><span>October 5, 2025</span><span>5 min read</span></div>
+      <div class="blog-hero-image"><img src="../assets/images/Blogs_YPT/Blog03/Hero%20Banner.webp" alt="What is Entity Recognition (NER)? How It Turns Unstructured Text Into Structured Data" loading="eager" width="1200" height="630"></div>
+    </div>
+  </header>
+  <div class="blog-content-wrapper">
+  <nav class="blog-breadcrumbs" aria-label="Breadcrumb">
+    <ol><li><a href="../index.html">Home</a></li><li><a href="index.html">Blog</a></li><li><span>Entity Recognition (NER)</span></li></ol>
+  </nav>
+  <div class="blog-layout">
+    <article class="article-body">
+
+      <p>Most enterprise data strategies focus on structured data, the neat rows and columns in a database. But today's organisations generate the majority of their information in <a href="types-of-data-structured-semi-structured-unstructured.html">unstructured</a> formats: emails, PDFs, contracts, support tickets, social media posts, call transcripts, and meeting notes. Named Entity Recognition (NER) is the technology that makes it possible, automatically identifying and extracting meaningful <a href="what-is-an-entity-in-data-modelling.html">entities</a> from raw, unstructured text. It is a core capability within modern <a href="../services/agentic-ai.html">AI and NLP solutions</a>.</p>
+
+      <img src="../assets/images/Blogs_YPT/Blog03/After%20Introduction.webp" alt="Professional surrounded by unstructured document types being transformed into structured data" class="blog-image" loading="lazy" width="1200" height="630">
+
+      <h2 id="what-is-named-entity-recognition-ner">What Is Named Entity Recognition (NER)?</h2>
+
+      <p>Named Entity Recognition (NER), also referred to as entity identification or entity extraction, is a Natural Language Processing (NLP) technique used to identify and extract meaningful entities from unstructured text. In a structured database, <a href="what-is-an-entity-in-data-modelling.html">entities</a> such as Customer, Product, Invoice, or Location are explicitly defined in a schema. In unstructured content, those same entities are buried in prose. NER automatically surfaces them.</p>
+
+      <h2 id="why-unstructured-data-creates-a-business-problem">Why Unstructured Data Creates a Business Problem</h2>
+
+      <p>Modern organisations produce enormous volumes of unstructured content from:</p>
+      <ul>
+        <li>Customer emails, support tickets, and chat logs</li>
+        <li>Contracts, policies, and compliance documents</li>
+        <li>Social media posts, reviews, and feedback forms</li>
+        <li>Audio and video content converted to text</li>
+        <li>Internal reports, meeting notes, and presentations</li>
+      </ul>
+      <p>Without automated entity extraction, analysts must manually interpret this content, a process that does not scale.</p>
+
+      <h2 id="how-entity-recognition-works">How Entity Recognition Works</h2>
+
+      <img src="../assets/images/Blogs_YPT/Blog03/Before%20NER%20Methods%20Section.webp" alt="Four NER approaches: Deep Neural Networks, Pattern Matching, Exact-Match, Hybrid Methods" class="blog-image" loading="lazy" width="1200" height="630">
+
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr>
+              <th>Approach</th>
+              <th>How It Works</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Deep Neural Networks</td>
+              <td>Learn contextual meaning from large text volumes</td>
+            </tr>
+            <tr>
+              <td>Pattern Matching</td>
+              <td>Identify entities using predefined linguistic rules and regular expressions</td>
+            </tr>
+            <tr>
+              <td>Exact-Match Processing</td>
+              <td>Compare text against master data lists or reference dictionaries</td>
+            </tr>
+            <tr>
+              <td>Hybrid Methods</td>
+              <td>Combine statistical learning with rule-based techniques</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>Advanced NER capabilities also include:</p>
+      <ul>
+        <li>Entity disambiguation</li>
+        <li>Relationship extraction</li>
+        <li>Entity linking: connecting extracted entities to <a href="master-data-management-reference-data-explained.html">master reference systems</a></li>
+      </ul>
+
+      <h2 id="a-practical-example-ner-in-action">A Practical Example: NER in Action</h2>
+
+      <img src="../assets/images/Blogs_YPT/Blog03/Before%20Example%20Section.webp" alt="NER annotation of a sentence showing Person, Location, Date, and Organisation entities" class="blog-image" loading="lazy" width="1200" height="630">
+
+      <p>Consider the following sentence:</p>
+      <blockquote>"Ali visited Kuala Lumpur on 5 January 2026 to meet PETRONAS executives."</blockquote>
+
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr>
+              <th>Entity</th>
+              <th>Label</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Ali</td>
+              <td>Person</td>
+            </tr>
+            <tr>
+              <td>Kuala Lumpur</td>
+              <td>Location</td>
+            </tr>
+            <tr>
+              <td>5 January 2026</td>
+              <td>Date</td>
+            </tr>
+            <tr>
+              <td>PETRONAS</td>
+              <td>Organisation</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 id="ner-in-the-data-governance-and-modelling-lifecycle">NER in the Data Governance and Modelling Lifecycle</h2>
+
+      <p>In the data science lifecycle, Entity Recognition is applied during the data wrangling and preprocessing phase. It also plays a central role in metadata enrichment. For <a href="what-is-an-entity-in-data-modelling.html">data modellers</a>, NER validates the conceptual modelling phase, confirming that real-world entities appearing in unstructured documents align with the entities defined in the logical and physical data models. Integrating NER into your <a href="../services/data-ai-services.html">data and AI strategy</a> unlocks governance over previously inaccessible content.</p>
+
+      <div class="takeaway-box">
+        <h3>Key Takeaway</h3>
+        <p>Entity Recognition is foundational infrastructure for any organisation that wants to derive value from unstructured content. In an era where the majority of enterprise data exists outside structured databases, NER is the capability that makes it accessible, governable, and analytically useful.</p>
+      </div>
+
+      <blockquote>The organisations leading on <a href="good-data-vs-bad-data-quality.html">data quality</a> and AI readiness are those investing in turning unstructured chaos into structured clarity.</blockquote>
+
+      <img src="../assets/images/Blogs_YPT/Blog03/ConclusionCTA.webp" alt="Unstructured documents transformed into structured data" class="blog-image" loading="lazy" width="1200" height="630">
+
+      <div class="cta-box">
+        <h3>Ready to unlock the value in your unstructured data?</h3>
+        <p>Your Partner Technologies builds NLP and data engineering capabilities that transform unstructured content into governed, structured data assets.</p>
+        <a href="../contact.html" class="cta-button">Get in Touch</a>
+      </div>
+
+    </article>
+    <aside class="sidebar">
+      <div class="sidebar-card">
+        <h3>Table of Contents</h3>
+        <ul class="toc-list">
+          <li><a href="#what-is-named-entity-recognition-ner">What Is Named Entity Recognition (NER)?</a></li>
+          <li><a href="#why-unstructured-data-creates-a-business-problem">Why Unstructured Data Creates a Business Problem</a></li>
+          <li><a href="#how-entity-recognition-works">How Entity Recognition Works</a></li>
+          <li><a href="#a-practical-example-ner-in-action">A Practical Example: NER in Action</a></li>
+          <li><a href="#ner-in-the-data-governance-and-modelling-lifecycle">NER in the Data Governance and Modelling Lifecycle</a></li>
+          <li><a href="#frequently-asked-questions">Frequently Asked Questions</a></li>
+        </ul>
+      </div>
+      <div class="sidebar-card">
+        <h3>Topics</h3>
+        <div class="sidebar-tags">
+          <span class="sidebar-tag">Data Science</span>
+          <span class="sidebar-tag">NLP</span>
+          <span class="sidebar-tag">Data Modelling</span>
+          <span class="sidebar-tag">Data Governance</span>
+          <span class="sidebar-tag">Unstructured Data</span>
+          <span class="sidebar-tag">AI</span>
+        </div>
+      </div>
+      <div class="sidebar-card sidebar-cta">
+        <h3>Get Expert Help</h3>
+        <p>Need help extracting value from your unstructured data?</p>
+        <a href="../contact.html" class="cta-button">Contact Us</a>
+      </div>
+    </aside>
+  </div>
+  </div>
+  <div id="faq-section"></div>
+  <section class="related-posts">
+    <h2>You Might Also Like</h2>
+    <div class="related-grid">
+      <a href="what-is-an-entity-in-data-modelling.html" class="related-card">
+        <img src="../assets/images/Blogs_YPT/Blog02/Hero%20Banner.webp" alt="What is an Entity in Data Modelling?" loading="lazy" width="600" height="315">
+        <h3>What is an Entity in Data Modelling?</h3>
+      </a>
+      <a href="types-of-data-structured-semi-structured-unstructured.html" class="related-card">
+        <img src="../assets/images/Blogs_YPT/Blog06/Hero%20Banner.webp" alt="Types of Data Explained" loading="lazy" width="600" height="315">
+        <h3>Types of Data Explained</h3>
+      </a>
+      <a href="what-is-data.html" class="related-card">
+        <img src="../assets/images/Blogs_YPT/Blog01/Hero%20Banner.webp" alt="What is Data?" loading="lazy" width="600" height="315">
+        <h3>What is Data?</h3>
+      </a>
+    </div>
+  </section>
+  <div id="footer-placeholder"></div>
+  <script src="../js/main.min.js" defer></script>
+  <script>
+document.addEventListener('DOMContentLoaded', function() {
+    var bar = document.getElementById('progressBar');
+    window.addEventListener('scroll', function() {
+        var s = window.scrollY, t = document.documentElement.scrollHeight - window.innerHeight;
+        bar.style.width = (s / t * 100) + '%';
+    });
+    document.querySelectorAll('.toc-list a').forEach(function(l) {
+        l.addEventListener('click', function(e) {
+            e.preventDefault();
+            var t = document.querySelector(l.getAttribute('href'));
+            if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+    });
+    renderFAQ({ color: 'cyan', faqs: [
+        { q: 'What is Named Entity Recognition in simple terms?', a: 'NER is an AI technique that automatically finds and labels important items (people, places, dates, organisations) in unstructured text like emails, documents, and web pages, converting them into structured, usable <a href="what-is-data.html" style="color:#22d3ee;text-decoration:underline;">data</a>.' },
+        { q: 'How does NER differ from keyword search?', a: 'Keyword search finds exact text matches. NER understands context. It can identify that &quot;Apple&quot; refers to a company in a business document and a fruit in a recipe, then categorise each correctly as an <a href="what-is-an-entity-in-data-modelling.html" style="color:#22d3ee;text-decoration:underline;">entity</a>.' },
+        { q: 'What types of entities can NER extract?', a: 'Common entity types include persons, organisations, locations, dates, monetary values, percentages, and domain-specific entities like product names, medical terms, or legal references.' },
+        { q: 'Why is NER important for data governance?', a: 'NER enables organisations to tag, catalogue, and track entities across <a href="types-of-data-structured-semi-structured-unstructured.html" style="color:#22d3ee;text-decoration:underline;">unstructured content</a>, supporting data lineage, metadata enrichment, and compliance programmes.' },
+        { q: 'What tools are used for NER?', a: 'Popular NER tools include spaCy, Stanford NER, Google Cloud Natural Language API, AWS Comprehend, and Azure Text Analytics. Enterprise solutions often use hybrid approaches combining these with custom rules.' }
+    ] });
+});
+  </script>
+</body>
+</html>

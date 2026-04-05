@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Good Data vs Bad Data: 8 Key Data Quality Dimensions</title>
+  <meta name="description" content="What separates good data from bad? Explore the 8 data quality dimensions with real-world examples and business impact analysis.">
+  <meta name="robots" content="index, follow">
+  <meta name="keywords" content="good data vs bad data quality, data quality dimensions, data accuracy, data completeness, data consistency, poor data quality impact, data quality management, data governance, data quality framework">
+  <meta name="author" content="Mustafa Qizilbash">
+  <meta property="og:title" content="Good Data vs Bad Data: 8 Key Data Quality Dimensions">
+  <meta property="og:description" content="What separates good data from bad? Explore the 8 data quality dimensions with real-world examples and business impact analysis.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://yourpartnertechnologies.com/blog/good-data-vs-bad-data-quality.html">
+  <meta property="og:image" content="https://yourpartnertechnologies.com/assets/images/Blogs_YPT/Blog07/Hero%20Banner.webp">
+  <meta property="og:site_name" content="Your Partner Technologies">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Good Data vs Bad Data: 8 Key Data Quality Dimensions">
+  <meta name="twitter:description" content="What separates good data from bad? Explore the 8 data quality dimensions with real-world examples and business impact analysis.">
+  <meta name="twitter:image" content="https://yourpartnertechnologies.com/assets/images/Blogs_YPT/Blog07/Hero%20Banner.webp">
+  <link rel="canonical" href="https://yourpartnertechnologies.com/blog/good-data-vs-bad-data-quality.html">
+  <link rel="icon" type="image/png" href="https://objectstorage.us-sanjose-1.oraclecloud.com/n/axtx9ohfletb/b/ypt/o/Logo-64.png">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5MRNP3KJ8B"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-5MRNP3KJ8B');</script>
+  <!-- Schema.org Article -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Good Data vs Bad Data: 8 Key Data Quality Dimensions",
+    "description": "Learn what separates good data from bad data across 8 key quality dimensions: accuracy, completeness, consistency, and more. With real-world examples and business impact analysis.",
+    "author": {
+      "@type": "Person",
+      "name": "Mustafa Qizilbash"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Your Partner Technologies",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://objectstorage.us-sanjose-1.oraclecloud.com/n/axtx9ohfletb/b/ypt/o/Logo-128.png"
+      }
+    },
+    "datePublished": "2025-10-13",
+    "dateModified": "2025-10-13",
+    "mainEntityOfPage": "https://yourpartnertechnologies.com/blog/good-data-vs-bad-data-quality.html",
+    "image": "https://yourpartnertechnologies.com/assets/images/Blogs_YPT/Blog07/Hero%20Banner.webp",
+    "keywords": "good data vs bad data quality"
+  }
+  </script>
+  <!-- FAQ Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What makes data \"good quality\"?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Good data meets eight core dimensions: accurate, complete, consistent, relevant, timely, reliable, valid, and accessible. All eight must be maintained for data to be trustworthy."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What are the 8 dimensions of data quality?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Accuracy (reflects reality), completeness (no missing fields), consistency (same across systems), relevance (serves its purpose), timeliness (current), reliability (trustworthy source), validity (conforms to rules), and accessibility (available to authorised users)."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the business impact of bad data?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Bad data causes financial losses (wrong billing, failed deliveries), regulatory fines, operational waste (20-30% of time on corrections), strategic misdirection, and damaged stakeholder trust."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How can organisations improve data quality?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Through data profiling, validation rules at entry, Master Data Management, data stewardship (human accountability), and data lineage tracking."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the relationship between data quality and data governance?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Data governance provides the framework, policies, and accountability structure that makes sustained data quality possible. Without governance, quality improvements are temporary and localised."
+        }
+      }
+    ]
+  }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/tailwind.min.css">
+  <link rel="stylesheet" href="../css/styles.min.css">
+  <link rel="stylesheet" href="blog-styles.css">
+</head>
+<body class="text-gray-200 antialiased leading-relaxed overflow-x-hidden" style="background:#000;max-width:100vw;">
+  <div class="reading-progress" id="progressBar"></div>
+  <!-- Floating Orbs -->
+  <div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+  <div id="header-placeholder"></div>
+
+  <header class="blog-hero">
+    <div class="blog-hero-content">
+      <div class="blog-hero-tags">
+        <span>Data Quality</span>
+        <span>Data Governance</span>
+        <span>Data Management</span>
+        <span>Business Intelligence</span>
+        <span>Data Strategy</span>
+      </div>
+      <h1>Good Data vs Bad Data: 8 Key Data Quality Dimensions</h1>
+      <div class="blog-hero-meta">
+        <span>Mustafa Qizilbash</span>
+        <span>October 13, 2025</span>
+        <span>6 min read</span>
+      </div>
+      <div class="blog-hero-image"><img src="../assets/images/Blogs_YPT/Blog07/Hero%20Banner.webp" alt="Good Data vs Bad Data: The 8 Data Quality Dimensions Every Organisation Needs" loading="eager" width="1200" height="630"></div>
+    </div>
+  </header>
+  <div class="blog-content-wrapper">
+  <nav class="blog-breadcrumbs" aria-label="Breadcrumb">
+    <ol>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="index.html">Blog</a></li>
+      <li><span>Good Data vs Bad Data</span></li>
+    </ol>
+  </nav>
+
+  <div class="blog-layout">
+    <article class="article-body">
+
+      <p><a href="what-is-data.html">Data</a> is only as valuable as its quality. An organisation can operate a state-of-the-art analytics platform and still make catastrophically wrong decisions if the data feeding those decisions is inaccurate, incomplete, or inconsistent. Data quality is not a technical concern delegated to IT. It is a business risk that demands <a href="../strategic-advisory.html">strategic advisory</a> attention at the leadership level.</p>
+
+      <h2 id="the-business-cost-of-poor-data-quality">The Business Cost of Poor Data Quality</h2>
+
+      <p>Poor data quality is not an abstract problem. It has measurable, concrete consequences across every business function:</p>
+
+      <ul>
+        <li><strong>Financial impact:</strong> Incorrect billing, failed deliveries, and duplicate payments drain revenue and inflate operational costs.</li>
+        <li><strong>Regulatory exposure:</strong> Inaccurate data can lead to compliance violations and regulatory fines, particularly in financial services, healthcare, and public sector organisations.</li>
+        <li><strong>Operational inefficiency:</strong> Studies consistently show that knowledge workers spend 20-30% of their time finding and correcting bad data, time that produces zero business value.</li>
+        <li><strong>Strategic misdirection:</strong> Decisions based on flawed data lead organisations in the wrong direction, from product launches to market entry strategies.</li>
+        <li><strong>Damaged trust:</strong> When stakeholders, customers, or regulators discover data errors, confidence erodes quickly and is difficult to rebuild.</li>
+      </ul>
+
+      <img src="../assets/images/Blogs_YPT/Blog07/After%20Business%20Cost%20Section.webp" alt="Split illustration showing confident decisions with good data vs confusion with bad data" class="blog-image" loading="lazy" width="1200" height="630">
+
+      <h2 id="the-8-dimensions-of-data-quality">The 8 Dimensions of Data Quality</h2>
+
+      <p>Data quality is not a single attribute. It is a composite of eight distinct dimensions. Each dimension must be actively measured, monitored, and managed.</p>
+
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Quality Dimension</th>
+              <th>Definition</th>
+              <th>Failure Symptom</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Accurate</strong></td>
+              <td>Correctly reflects reality</td>
+              <td>Wrong addresses, incorrect figures</td>
+            </tr>
+            <tr>
+              <td><strong>Complete</strong></td>
+              <td>All required fields present</td>
+              <td>Missing contact details, null values</td>
+            </tr>
+            <tr>
+              <td><strong>Consistent</strong></td>
+              <td>Same values across systems</td>
+              <td>&ldquo;UK&rdquo; vs &ldquo;United Kingdom&rdquo;</td>
+            </tr>
+            <tr>
+              <td><strong>Relevant</strong></td>
+              <td>Serves its intended purpose</td>
+              <td>Unused stored data consuming resources</td>
+            </tr>
+            <tr>
+              <td><strong>Timely</strong></td>
+              <td>Current and recent</td>
+              <td>Reporting on outdated data</td>
+            </tr>
+            <tr>
+              <td><strong>Reliable</strong></td>
+              <td>Trustworthy collection methods</td>
+              <td>Biased surveys, flawed sensors</td>
+            </tr>
+            <tr>
+              <td><strong>Valid</strong></td>
+              <td>Conforms to defined rules</td>
+              <td>Dates entered as free text</td>
+            </tr>
+            <tr>
+              <td><strong>Accessible</strong></td>
+              <td>Available to authorised users</td>
+              <td>Siloed systems, locked-down data</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 id="good-data-in-practice">Real-World Examples: Good Data in Practice</h2>
+
+      <img src="../assets/images/Blogs_YPT/Blog07/Before%20Good%20Data%20Examples.webp" alt="Eight data quality dimensions illustrated as icon cards" class="blog-image" loading="lazy" width="1200" height="630">
+
+      <p>When organisations invest in data quality, the results are tangible and measurable:</p>
+
+      <ul>
+        <li><strong>Accurate customer addresses (logistics):</strong> A delivery company with validated, geocoded addresses achieves near-zero failed deliveries, reducing costs and improving customer satisfaction.</li>
+        <li><strong>Complete financial records (audit):</strong> Organisations with complete, gap-free financial records pass audits faster, with fewer findings and lower compliance costs.</li>
+        <li><strong>Consistent product catalogue (retail):</strong> A retailer with a single, consistent product master across all channels avoids pricing conflicts, stock discrepancies, and customer confusion.</li>
+        <li><strong>Timely market data (financial services):</strong> Trading desks that receive real-time, up-to-date market data make better-informed decisions and manage risk more effectively.</li>
+        <li><strong>Validated medical records (healthcare):</strong> Hospitals with validated patient data reduce medication errors, duplicate records, and misdiagnoses, directly improving patient outcomes.</li>
+      </ul>
+
+      <h2 id="bad-data-in-practice">Real-World Examples: Bad Data in Practice</h2>
+
+      <img src="../assets/images/Blogs_YPT/Blog07/Before%20Bad%20Data%20Examples.webp" alt="Bad data scenarios: inaccurate sales, incomplete profiles, inconsistent codes, outdated info" class="blog-image" loading="lazy" width="1200" height="630">
+
+      <p>The consequences of poor data quality are equally concrete:</p>
+
+      <ul>
+        <li><strong>Inaccurate sales figures (CRM):</strong> A CRM system with duplicated or incorrectly attributed sales data inflates pipeline reports, misleads leadership, and distorts forecasting.</li>
+        <li><strong>Incomplete customer profiles:</strong> Marketing teams working with incomplete customer data waste budget on untargeted campaigns and miss high-value segments entirely.</li>
+        <li><strong>Inconsistent inventory records:</strong> When warehouse systems and e-commerce platforms disagree on stock levels, the result is overselling, stockouts, and operational chaos.</li>
+        <li><strong>Outdated product information:</strong> Product listings with stale pricing, discontinued items, or incorrect specifications erode customer trust and increase return rates.</li>
+      </ul>
+
+      <h2 id="data-quality-management-framework">A Data Quality Management Framework</h2>
+
+      <p>Sustained data quality requires a structured management framework, not a one-time cleanup project. The five pillars of an effective data quality programme are:</p>
+
+      <ul>
+        <li><strong>Data Profiling:</strong> Systematically assess the current state of your data. Identify anomalies, gaps, and patterns before applying fixes. Profiling answers the question: <em>How bad is it, and where?</em></li>
+        <li><strong>Validation Rules at Entry:</strong> Prevent bad data from entering your systems in the first place. Implement format validation, mandatory fields, and business rule checks at every data entry point.</li>
+        <li><strong><a href="master-data-management-reference-data-explained.html">Master Data Management (MDM)</a>:</strong> Establish a single, authoritative source for core <a href="what-is-an-entity-in-data-modelling.html">entities</a>, including customers, products, and suppliers, that all systems reference. MDM eliminates the &ldquo;which system is correct?&rdquo; problem.</li>
+        <li><strong>Data Stewardship:</strong> Assign human accountability for data quality within each business domain. Data stewards are the people responsible for defining, monitoring, and enforcing quality standards.</li>
+        <li><strong>Data Lineage:</strong> Track where data originates, how it transforms, and where it flows. When issues arise, lineage makes root cause analysis possible rather than guesswork.</li>
+        <li><strong>Professional Development:</strong> Equip your team with the skills to manage quality through <a href="../trainings.html">certified data management training</a> programmes.</li>
+      </ul>
+
+      <div class="takeaway-box">
+        <strong>Key Takeaway</strong>
+        <p>Good data quality is not aspirational. It is an operational requirement. Across all eight dimensions, every organisation needs a defined standard and the <a href="../services/data-ai-services.html">governance programme</a> to maintain it. In data, garbage in = garbage out. The inverse is equally true: quality in = quality decisions out.</p>
+      </div>
+
+      <img src="../assets/images/Blogs_YPT/Blog07/ConclusionCTA.webp" alt="Data quality dashboard showing health indicators across domains" class="blog-image" loading="lazy" width="1200" height="630">
+
+      <div class="cta-box">
+        <h3>Ready to build a data quality framework that lasts?</h3>
+        <p>Your Partner Technologies builds data quality frameworks, MDM programmes, and governance structures that make data a trustworthy asset.</p>
+        <a href="../contact.html" class="cta-button">Talk to Us &rarr;</a>
+      </div>
+
+    </article>
+
+    <aside class="sidebar">
+      <div class="sidebar-card toc-card">
+        <h3>Table of Contents</h3>
+        <ul class="toc-list">
+          <li><a href="#the-business-cost-of-poor-data-quality">The Business Cost of Poor Data Quality</a></li>
+          <li><a href="#the-8-dimensions-of-data-quality">The 8 Dimensions of Data Quality</a></li>
+          <li><a href="#good-data-in-practice">Good Data in Practice</a></li>
+          <li><a href="#bad-data-in-practice">Bad Data in Practice</a></li>
+          <li><a href="#data-quality-management-framework">Data Quality Management Framework</a></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-card tags-card">
+        <h3>Tags</h3>
+        <div class="tag-list">
+          <span class="tag">Data Quality</span>
+          <span class="tag">Data Governance</span>
+          <span class="tag">Data Management</span>
+          <span class="tag">Business Intelligence</span>
+          <span class="tag">Data Strategy</span>
+        </div>
+      </div>
+
+      <div class="sidebar-card cta-card">
+        <h3>Need Data Quality Help?</h3>
+        <p>We build governance frameworks that make data a trustworthy business asset.</p>
+        <a href="../contact.html" class="cta-button">Get in Touch &rarr;</a>
+      </div>
+    </aside>
+  </div>
+
+  </div>
+
+  <div id="faq-section"></div>
+  <section class="related-posts">
+    <h2>You Might Also Like</h2>
+    <div class="related-grid">
+      <a href="what-is-data.html" class="related-card">
+        <img src="../assets/images/Blogs_YPT/Blog01/Hero%20Banner.webp" alt="What is Data?" loading="lazy" width="600" height="315">
+        <h3>What is Data?</h3>
+      </a>
+      <a href="master-data-management-reference-data-explained.html" class="related-card">
+        <img src="../assets/images/Blogs_YPT/Blog10/Hero%20Banner.webp" alt="Master Data Management" loading="lazy" width="600" height="315">
+        <h3>Master Data Management</h3>
+      </a>
+      <a href="types-of-data-structured-semi-structured-unstructured.html" class="related-card">
+        <img src="../assets/images/Blogs_YPT/Blog06/Hero%20Banner.webp" alt="Types of Data" loading="lazy" width="600" height="315">
+        <h3>Types of Data</h3>
+      </a>
+    </div>
+  </section>
+  <div id="footer-placeholder"></div>
+
+  <script src="../js/main.min.js" defer></script>
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+      var bar = document.getElementById('progressBar');
+      window.addEventListener('scroll', function() {
+          var s = window.scrollY, t = document.documentElement.scrollHeight - window.innerHeight;
+          bar.style.width = (s / t * 100) + '%';
+      });
+      document.querySelectorAll('.toc-list a').forEach(function(l) {
+          l.addEventListener('click', function(e) {
+              e.preventDefault();
+              var t = document.querySelector(l.getAttribute('href'));
+              if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          });
+      });
+      renderFAQ({ color: 'cyan', faqs: [
+          { q: 'What makes data "good quality"?', a: 'Good <a href="what-is-data.html" style="color:#22d3ee;text-decoration:underline;">data</a> meets eight core dimensions: accurate, complete, consistent, relevant, timely, reliable, valid, and accessible. All eight must be maintained for data to be trustworthy.' },
+          { q: 'What are the 8 dimensions of data quality?', a: 'Accuracy (reflects reality), completeness (no missing fields), consistency (same across systems), relevance (serves its purpose), timeliness (current), reliability (trustworthy source), validity (conforms to rules), and accessibility (available to authorised users).' },
+          { q: 'What is the business impact of bad data?', a: 'Bad data causes financial losses (wrong billing, failed deliveries), regulatory fines, operational waste (20\u201330% of time on corrections), strategic misdirection, and damaged stakeholder trust.' },
+          { q: 'How can organisations improve data quality?', a: 'Through data profiling, validation rules at entry, <a href="master-data-management-reference-data-explained.html" style="color:#22d3ee;text-decoration:underline;">Master Data Management</a>, data stewardship (human accountability), and data lineage tracking.' },
+          { q: 'What is the relationship between data quality and data governance?', a: 'Data governance provides the framework, policies, and accountability structure that makes sustained data quality possible. Without governance, quality improvements are temporary and localised.' }
+      ] });
+  });
+  </script>
+</body>
+</html>

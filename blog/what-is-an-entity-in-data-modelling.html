@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>What is an Entity in Data Modelling? Types &amp; Examples</title>
+  <meta name="description" content="Learn what an entity means in data modelling, including entity types, attributes, and real-world examples for data professionals.">
+  <meta name="robots" content="index, follow">
+  <meta name="keywords" content="what is an entity in data modelling, entity type, entity instance, entity attribute, data modelling, relational database, database design, entity relationship diagram, data architecture">
+  <meta name="author" content="Mustafa Qizilbash">
+  <meta property="og:title" content="What is an Entity in Data Modelling? Types &amp; Examples">
+  <meta property="og:description" content="Learn what an entity means in data modelling, including entity types, attributes, and real-world examples for data professionals.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://yourpartnertechnologies.com/blog/what-is-an-entity-in-data-modelling.html">
+  <meta property="og:image" content="https://yourpartnertechnologies.com/assets/images/Blogs_YPT/Blog02/Hero%20Banner.webp">
+  <meta property="og:site_name" content="Your Partner Technologies">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="What is an Entity in Data Modelling? Types &amp; Examples">
+  <meta name="twitter:description" content="Learn what an entity means in data modelling, including entity types, attributes, and real-world examples for data professionals.">
+  <meta name="twitter:image" content="https://yourpartnertechnologies.com/assets/images/Blogs_YPT/Blog02/Hero%20Banner.webp">
+  <link rel="canonical" href="https://yourpartnertechnologies.com/blog/what-is-an-entity-in-data-modelling.html">
+  <link rel="icon" type="image/png" href="https://objectstorage.us-sanjose-1.oraclecloud.com/n/axtx9ohfletb/b/ypt/o/Logo-64.png">
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5MRNP3KJ8B"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-5MRNP3KJ8B');</script>
+  <!-- Schema.org Article -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "What is an Entity in Data Modelling? Types & Examples",
+    "description": "Understand the concept of an entity in data modelling, including entity types, attributes, and instances. A practical guide for data professionals, developers, and business analysts.",
+    "author": {
+      "@type": "Person",
+      "name": "Mustafa Qizilbash"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Your Partner Technologies",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://objectstorage.us-sanjose-1.oraclecloud.com/n/axtx9ohfletb/b/ypt/o/Logo-128.png"
+      }
+    },
+    "datePublished": "2025-10-03",
+    "dateModified": "2025-10-03",
+    "mainEntityOfPage": "https://yourpartnertechnologies.com/blog/what-is-an-entity-in-data-modelling.html",
+    "image": "https://yourpartnertechnologies.com/assets/images/Blogs_YPT/Blog02/Hero%20Banner.webp",
+    "keywords": "what is an entity in data modelling"
+  }
+  </script>
+  <!-- FAQ Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is an entity in a database?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "An entity is anything that can be uniquely identified and described, such as a customer, product, or transaction. In relational databases, entities are represented as tables."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the difference between entity type and entity instance?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "An entity type is the blueprint or template (like a blank form), while an entity instance is a specific record with actual data (like a completed form). Entity types map to tables; instances map to rows."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What are entity attributes?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Attributes are the properties that describe an entity, such as Name, Price, or Date of Birth. They map to columns in a database table and can be simple, composite, derived, or multi-valued."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do entities relate to tables, columns, and rows?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "An entity type = table, an entity attribute = column, and an entity instance = row. This mapping is the foundation of relational database design."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why is understanding entities important for data strategy?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Correct entity modelling prevents data redundancy, supports database normalisation, enables clean integration across systems, and is a prerequisite for effective master data management."
+        }
+      }
+    ]
+  }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/tailwind.min.css">
+  <link rel="stylesheet" href="../css/styles.min.css">
+  <link rel="stylesheet" href="blog-styles.css">
+
+</head>
+<body class="text-gray-200 antialiased leading-relaxed overflow-x-hidden" style="background:#000;max-width:100vw;">
+  <div class="reading-progress" id="progressBar"></div>
+  <!-- Floating Orbs -->
+  <div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+  <div id="header-placeholder"></div>
+
+  <header class="blog-hero">
+    <div class="blog-hero-content">
+      <div class="blog-hero-tags">
+        <span>Data Modelling</span>
+        <span>Database Design</span>
+        <span>Data Fundamentals</span>
+        <span>Data Architecture</span>
+      </div>
+      <h1>What is an Entity in Data Modelling? Types &amp; Examples</h1>
+      <div class="blog-hero-meta">
+        <span>Mustafa Qizilbash</span>
+        <span>October 3, 2025</span>
+        <span>5 min read</span>
+      </div>
+      <div class="blog-hero-image"><img src="../assets/images/Blogs_YPT/Blog02/Hero%20Banner.webp" alt="What is an Entity in Data Modelling? Types, Attributes &amp; Instances Explained" loading="eager" width="1200" height="630"></div>
+    </div>
+  </header>
+  <div class="blog-content-wrapper">
+  <nav class="blog-breadcrumbs" aria-label="Breadcrumb">
+    <ol>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="index.html">Blog</a></li>
+      <li><span>What is an Entity?</span></li>
+    </ol>
+  </nav>
+
+  <div class="blog-layout">
+    <article class="article-body">
+
+      <p>If you are building a database, designing a data model, or studying for a data or software engineering certification, one concept sits at the foundation of everything: the entity. Misunderstand this, and every downstream design decision becomes compromised. Get it right, and you have the bedrock for scalable, reliable <a href="what-is-data.html">data</a> systems. This is why <a href="../services/data-ai-services.html">data modelling expertise</a> is central to every well-designed architecture.</p>
+
+      <h2 id="what-is-an-entity-in-data-and-databases">What Is an Entity in Data and Databases?</h2>
+
+      <p>An entity is anything that can be uniquely identified and described within a data system. In data modelling, entities typically represent real-world objects, people, concepts, or events, such as a Customer, Product, Invoice, or Transaction.</p>
+
+      <p>Entities are structured around three concepts:</p>
+      <ol>
+        <li><strong>Entity Type</strong>: the blueprint or schema</li>
+        <li><strong>Entity Attribute</strong>: the properties or fields</li>
+        <li><strong>Entity Instance</strong>: the actual data record</li>
+      </ol>
+
+      <img src="../assets/images/Blogs_YPT/Blog02/After%20Introduction.webp" alt="Entity Type, Attributes, and Instance diagram showing book examples" class="blog-image" loading="lazy" width="1200" height="630">
+
+      <h2 id="entity-type-the-blueprint">Entity Type: The Blueprint</h2>
+
+      <p>An Entity Type is a template that defines the structure of a category of entities. Think of it as the design of a form before anyone has filled it in.</p>
+
+      <p>Key characteristics:</p>
+      <ul>
+        <li>Represents a general class (e.g., Customer, Employee, Product)</li>
+        <li>Defines the attributes applicable to all records</li>
+        <li>Maps directly to a <a href="tables-columns-rows-database-explained.html">table</a> in a relational database</li>
+      </ul>
+
+      <p><strong>Example, Library System:</strong> The Book Entity Type defines: Title, Author, ISBN, Publication Year.</p>
+
+      <h2 id="entity-attribute-the-properties">Entity Attribute: The Properties</h2>
+
+      <p>An Entity Attribute is a property that describes an entity.</p>
+
+      <img src="../assets/images/Blogs_YPT/Blog02/Before%20Attribute%20Types%20Table.webp" alt="Entity attribute types diagram" class="blog-image" loading="lazy" width="1200" height="630">
+
+      <p>Key characteristics:</p>
+      <ul>
+        <li>Defines a specific property (e.g., Name, Age, Price)</li>
+        <li>Maps to a <a href="tables-columns-rows-database-explained.html">column</a> in a database table</li>
+      </ul>
+
+      <h3>Types of Attributes in Data Modelling</h3>
+
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Attribute Type</th>
+              <th>Description</th>
+              <th>Example</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Simple</td>
+              <td>Indivisible</td>
+              <td>Age</td>
+            </tr>
+            <tr>
+              <td>Composite</td>
+              <td>Can be split into sub-attributes</td>
+              <td>Full Name (First + Last)</td>
+            </tr>
+            <tr>
+              <td>Single-valued</td>
+              <td>One value per entity</td>
+              <td>Date of Birth</td>
+            </tr>
+            <tr>
+              <td>Multi-valued</td>
+              <td>Multiple values per entity</td>
+              <td>Phone Numbers</td>
+            </tr>
+            <tr>
+              <td>Derived</td>
+              <td>Calculated from other data</td>
+              <td>Age (from Date of Birth)</td>
+            </tr>
+            <tr>
+              <td>Key</td>
+              <td>Uniquely identifies the entity</td>
+              <td>ISBN, Employee ID</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 id="entity-instance-the-real-record">Entity Instance: The Real Record</h2>
+
+      <p>An Entity Instance is a specific, individual realisation of an entity type. It is where real data lives. Maps to a <a href="tables-columns-rows-database-explained.html">row</a> in a relational database table.</p>
+
+      <h2 id="the-mental-model-how-it-all-connects">The Mental Model: How It All Connects</h2>
+
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Concept</th>
+              <th>Database Term</th>
+              <th>Real-World Analogy</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Entity Type</td>
+              <td>Table</td>
+              <td>Blank application form template</td>
+            </tr>
+            <tr>
+              <td>Entity Attribute</td>
+              <td>Column / Field</td>
+              <td>A labelled field on the form</td>
+            </tr>
+            <tr>
+              <td>Entity Instance</td>
+              <td>Row / Record</td>
+              <td>One completed application</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <blockquote>
+        Entity Type is the design. Entity Instance is the real-world data built from that design.
+      </blockquote>
+
+      <h2 id="why-this-matters-for-database-and-system-design">Why This Matters for Database and System Design</h2>
+
+      <ul>
+        <li><strong>Schema design</strong>: correctly structured entity types prevent data redundancy</li>
+        <li><strong>Database normalisation</strong>: prerequisite to applying 1NF, 2NF, 3NF</li>
+        <li><strong>Scalability</strong>: well-designed entity types grow cleanly</li>
+        <li><strong>Data integration</strong>: consistent definitions reduce <a href="master-data-management-reference-data-explained.html">MDM</a> complexity</li>
+        <li><strong>AI and ML readiness</strong>: clean entity data improves model quality</li>
+        <li><strong>Professional development</strong>: mastering entity modelling is covered in <a href="../trainings.html">Data Vault, FCO-IM, and data foundations training</a></li>
+      </ul>
+
+      <div class="takeaway-box">
+        <strong>Key Takeaway</strong>
+        <p>Entity, Entity Type, Attribute, and Instance are not abstract academic concepts. They are the grammar of every database ever built. Whether designing a CRM, data warehouse, or microservice API, these definitions determine how clean, consistent, and scalable your data system will be.</p>
+      </div>
+
+      <img src="../assets/images/Blogs_YPT/Blog02/ConclusionCTA.webp" alt="Data architect working on entity-relationship diagrams" class="blog-image" loading="lazy" width="1200" height="630">
+
+      <h2 id="frequently-asked-questions">Frequently Asked Questions</h2>
+
+      <div class="cta-box">
+        <h3>Need expert help with data modelling and architecture?</h3>
+        <p>Your Partner Technologies delivers data modelling, architecture, and governance expertise tailored to your business.</p>
+        <a href="../services.html" class="cta-button">Explore Our Services &rarr;</a>
+      </div>
+
+    </article>
+
+    <aside class="sidebar">
+      <div class="sidebar-card toc-card">
+        <h3>Table of Contents</h3>
+        <ul class="toc-list">
+          <li><a href="#what-is-an-entity-in-data-and-databases">What Is an Entity in Data and Databases?</a></li>
+          <li><a href="#entity-type-the-blueprint">Entity Type: The Blueprint</a></li>
+          <li><a href="#entity-attribute-the-properties">Entity Attribute: The Properties</a></li>
+          <li><a href="#entity-instance-the-real-record">Entity Instance: The Real Record</a></li>
+          <li><a href="#the-mental-model-how-it-all-connects">The Mental Model: How It All Connects</a></li>
+          <li><a href="#why-this-matters-for-database-and-system-design">Why This Matters for Database and System Design</a></li>
+          <li><a href="#frequently-asked-questions">Frequently Asked Questions</a></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-card tags-card">
+        <h3>Tags</h3>
+        <div class="tag-list">
+          <span class="tag">Data Modelling</span>
+          <span class="tag">Database Design</span>
+          <span class="tag">Data Fundamentals</span>
+          <span class="tag">Data Architecture</span>
+        </div>
+      </div>
+
+      <div class="sidebar-card cta-card">
+        <h3>Need Data Architecture Help?</h3>
+        <p>We design scalable data models and architectures tailored to your business.</p>
+        <a href="../contact.html" class="cta-button">Get in Touch &rarr;</a>
+      </div>
+    </aside>
+  </div>
+
+  </div>
+  <div id="faq-section"></div>
+  <section class="related-posts">
+    <h2>You Might Also Like</h2>
+    <div class="related-grid">
+      <a href="what-is-data.html" class="related-card">
+        <img src="../assets/images/Blogs_YPT/Blog01/Hero%20Banner.webp" alt="What is Data? Definition, Types &amp; Business Value" loading="lazy" width="600" height="315">
+        <h3>What is Data? Definition, Types &amp; Business Value</h3>
+      </a>
+      <a href="tables-columns-rows-database-explained.html" class="related-card">
+        <img src="../assets/images/Blogs_YPT/Blog04/Hero%20Banner.webp" alt="Tables, Columns &amp; Rows Explained" loading="lazy" width="600" height="315">
+        <h3>Tables, Columns &amp; Rows Explained</h3>
+      </a>
+      <a href="primary-key-foreign-key-explained.html" class="related-card">
+        <img src="../assets/images/Blogs_YPT/Blog05/Hero%20Banner.webp" alt="Primary Key vs Foreign Key Explained" loading="lazy" width="600" height="315">
+        <h3>Primary Key vs Foreign Key Explained</h3>
+      </a>
+    </div>
+  </section>
+
+  <div id="footer-placeholder"></div>
+
+  <script src="../js/main.min.js" defer></script>
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+      // Reading progress bar
+      var bar = document.getElementById('progressBar');
+      window.addEventListener('scroll', function() {
+          var s = window.scrollY, t = document.documentElement.scrollHeight - window.innerHeight;
+          bar.style.width = (s / t * 100) + '%';
+      });
+      // Smooth TOC scrolling
+      document.querySelectorAll('.toc-list a').forEach(function(l) {
+          l.addEventListener('click', function(e) {
+              e.preventDefault();
+              var t = document.querySelector(l.getAttribute('href'));
+              if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          });
+      });
+      // Render FAQ
+      renderFAQ({
+          color: 'cyan',
+          faqs: [
+              { q: 'What is an entity in a database?', a: 'An entity is anything that can be uniquely identified and described, such as a customer, product, or transaction. In relational databases, entities are represented as <a href="tables-columns-rows-database-explained.html" style="color:#22d3ee;text-decoration:underline;">tables</a>.' },
+              { q: 'What is the difference between entity type and entity instance?', a: 'An entity type is the blueprint or template (like a blank form), while an entity instance is a specific record with actual data (like a completed form). Entity types map to tables; instances map to rows.' },
+              { q: 'What are entity attributes?', a: 'Attributes are the properties that describe an entity, such as Name, Price, or Date of Birth. They map to columns in a database table and can be simple, composite, derived, or multi-valued.' },
+              { q: 'How do entities relate to tables, columns, and rows?', a: 'An entity type = table, an entity attribute = column, and an entity instance = row. This mapping is the foundation of relational database design. Read more about <a href="tables-columns-rows-database-explained.html" style="color:#22d3ee;text-decoration:underline;">tables, columns, and rows</a>.' },
+              { q: 'Why is understanding entities important for data strategy?', a: 'Correct entity modelling prevents data redundancy, supports database normalisation, enables clean integration across systems, and is a prerequisite for effective <a href="master-data-management-reference-data-explained.html" style="color:#22d3ee;text-decoration:underline;">master data management</a>. It all starts with understanding <a href="what-is-data.html" style="color:#22d3ee;text-decoration:underline;">what data is</a>.' }
+          ]
+      });
+  });
+  </script>
+</body>
+</html>

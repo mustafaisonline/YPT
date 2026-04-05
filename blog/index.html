@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5MRNP3KJ8B"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-5MRNP3KJ8B');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data & AI Insights Blog | Your Partner Technologies</title>
+    <meta name="description" content="Expert articles on data strategy, AI, machine learning, and digital transformation. Practical guides for leaders and professionals.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://yourpartnertechnologies.com/blog/">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://objectstorage.us-sanjose-1.oraclecloud.com/n/axtx9ohfletb/b/ypt/o/Logo-64.png">
+    <!-- Open Graph -->
+    <meta property="og:title" content="Data & AI Insights Blog | Your Partner Technologies">
+    <meta property="og:description" content="Expert articles on data strategy, AI, machine learning, and digital transformation. Practical guides for leaders and professionals.">
+    <meta property="og:image" content="https://objectstorage.us-sanjose-1.oraclecloud.com/n/axtx9ohfletb/b/ypt/o/social-media-sharing-card.webp">
+    <meta property="og:url" content="https://yourpartnertechnologies.com/blog/">
+    <meta property="og:type" content="website">
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Data & AI Insights Blog | Your Partner Technologies">
+    <meta name="twitter:description" content="Expert articles on data strategy, AI, machine learning, and digital transformation. Practical guides for leaders and professionals.">
+    <meta name="twitter:image" content="https://objectstorage.us-sanjose-1.oraclecloud.com/n/axtx9ohfletb/b/ypt/o/social-media-sharing-card.webp">
+    <!-- Fonts & Styles -->
+    <link rel="preconnect" href="https://rsms.me" crossorigin>
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://rsms.me/inter/inter.css"></noscript>
+    <link rel="stylesheet" href="../css/tailwind.min.css">
+    <link rel="stylesheet" href="../css/styles.min.css">
+    <style>
+        /* ---- Hero ---- */
+        .blog-listing-hero {
+            position: relative;
+            padding: 80px 32px 60px;
+            text-align: center;
+            overflow: hidden;
+        }
+        .blog-listing-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 60% 50% at 20% 40%, rgba(34,211,238,0.08) 0%, transparent 70%),
+                radial-gradient(ellipse 50% 60% at 80% 30%, rgba(59,130,246,0.07) 0%, transparent 70%),
+                radial-gradient(ellipse 40% 50% at 50% 90%, rgba(168,85,247,0.05) 0%, transparent 70%);
+        }
+        .blog-listing-hero::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M20 20.5V18H18v2.5h-2.5V22H18v2.5h2V22h2.5v-1.5H20z'/%3E%3C/g%3E%3C/svg%3E");
+        }
+        .blog-listing-hero > * { position: relative; z-index: 1; }
+        .blog-listing-hero h1 {
+            font-size: clamp(2rem, 4.5vw, 3rem);
+            font-weight: 800;
+            background: linear-gradient(135deg, #22d3ee 0%, #3b82f6 50%, #a855f7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+        .blog-listing-hero p {
+            color: rgba(255,255,255,0.5);
+            font-size: 1.05rem;
+            max-width: 560px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* ---- Content area ---- */
+        .blog-listing-body {
+            position: relative;
+            z-index: 10;
+            padding: 40px 32px 80px;
+        }
+        .blog-listing-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* ---- Search ---- */
+        .blog-search {
+            position: relative;
+            margin-bottom: 28px;
+        }
+        .blog-search input {
+            width: 100%;
+            padding: 12px 16px 12px 44px;
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.1);
+            background: rgba(10,10,20,0.95);
+            font-size: 0.92rem;
+            color: #e5e7eb;
+            outline: none;
+            transition: border-color 0.2s, background 0.2s;
+        }
+        .blog-search input::placeholder { color: rgba(255,255,255,0.3); }
+        .blog-search input:focus {
+            border-color: rgba(34,211,238,0.4);
+            background: rgba(255,255,255,0.06);
+        }
+        .blog-search svg {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: rgba(255,255,255,0.3);
+            width: 18px;
+            height: 18px;
+            pointer-events: none;
+        }
+
+        /* ---- Filter bar ---- */
+        .blog-filter-bar {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 40px;
+            justify-content: center;
+        }
+        .blog-filter-bar button {
+            padding: 7px 18px;
+            border-radius: 20px;
+            font-size: 0.84rem;
+            font-weight: 500;
+            border: 1px solid rgba(255,255,255,0.1);
+            background: transparent;
+            color: rgba(255,255,255,0.45);
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+        .blog-filter-bar button:hover {
+            border-color: rgba(34,211,238,0.3);
+            color: rgba(255,255,255,0.7);
+        }
+        .blog-filter-bar button.active {
+            background: rgba(34,211,238,0.15);
+            color: #22d3ee;
+            border-color: rgba(34,211,238,0.35);
+        }
+
+        /* ---- Grid ---- */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        /* ---- Card (dark glass) ---- */
+        .blog-card {
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.08);
+            background: rgba(255,255,255,0.03);
+            text-decoration: none;
+            transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+        }
+        .blog-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(34,211,238,0.25);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+        }
+        .blog-card-img {
+            width: 100%;
+            aspect-ratio: 16/9;
+            overflow: hidden;
+        }
+        .blog-card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.4s ease;
+        }
+        .blog-card:hover .blog-card-img img { transform: scale(1.05); }
+
+        .blog-card-body { padding: 20px; display: flex; flex-direction: column; flex: 1; }
+
+        .blog-card-category {
+            font-size: 0.72rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #22d3ee;
+            margin-bottom: 10px;
+            display: inline-block;
+            align-self: flex-start;
+            background: rgba(34,211,238,0.1);
+            padding: 3px 10px;
+            border-radius: 12px;
+        }
+        .blog-card-title {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: #fff;
+            line-height: 1.45;
+            margin-bottom: 10px;
+            transition: color 0.2s;
+        }
+        .blog-card:hover .blog-card-title { color: #22d3ee; }
+        .blog-card-excerpt {
+            font-size: 0.88rem;
+            color: rgba(255,255,255,0.4);
+            line-height: 1.6;
+            margin-bottom: 16px;
+            flex: 1;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .blog-card-meta {
+            font-size: 0.76rem;
+            color: rgba(255,255,255,0.3);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-wrap: wrap;
+            margin-top: auto;
+            padding-top: 14px;
+            border-top: 1px solid rgba(255,255,255,0.06);
+        }
+
+        /* ---- Empty ---- */
+        .blog-empty {
+            text-align: center;
+            padding: 60px 20px;
+            color: rgba(255,255,255,0.4);
+            font-size: 1.05rem;
+        }
+
+        /* ---- Reveal ---- */
+        [data-reveal]{opacity:0;transition:opacity .6s ease,transform .6s ease}
+        [data-reveal="up"]{transform:translateY(30px)}
+        [data-reveal].revealed{opacity:1;transform:none}
+
+        /* ---- Responsive ---- */
+        @media (max-width: 900px) {
+            .blog-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+        }
+        @media (max-width: 640px) {
+            .blog-listing-hero { padding: 60px 20px 44px; }
+            .blog-listing-body { padding: 28px 16px 60px; }
+            .blog-grid { grid-template-columns: 1fr; gap: 20px; }
+        }
+    </style>
+    <link rel="dns-prefetch" href="https://objectstorage.us-sanjose-1.oraclecloud.com">
+    <link rel="preconnect" href="https://objectstorage.us-sanjose-1.oraclecloud.com" crossorigin>
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Blog",
+        "url": "https://yourpartnertechnologies.com/blog/",
+        "name": "Data & AI Insights Blog | Your Partner Technologies",
+        "description": "Expert articles on data strategy, AI, machine learning, and digital transformation. Practical guides for leaders and professionals.",
+        "publisher": {
+            "@type": "Organization",
+            "name": "Your Partner Technologies",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://objectstorage.us-sanjose-1.oraclecloud.com/n/axtx9ohfletb/b/ypt/o/Logo-128.png"
+            }
+        },
+        "isPartOf": {
+            "@type": "WebSite",
+            "url": "https://yourpartnertechnologies.com"
+        }
+    }
+    </script>
+</head>
+<body class="text-gray-200 antialiased leading-relaxed overflow-x-hidden" style="background: #000; max-width: 100vw;">
+
+    <!-- Floating Orbs -->
+    <div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <!-- Navigation -->
+    <div id="header-placeholder"></div>
+
+    <!-- Hero -->
+    <section class="blog-listing-hero">
+        <h1>Your Partner Technologies Blog</h1>
+        <p>Insights on AI, data strategy, and digital transformation. Written by our team of data and technology consultants.</p>
+    </section>
+
+    <!-- Blog Content -->
+    <div class="blog-listing-body">
+        <div class="blog-listing-inner">
+
+            <!-- Search -->
+            <div class="blog-search">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35" stroke-linecap="round"/></svg>
+                <input type="text" id="blog-search-input" placeholder="Search articles...">
+            </div>
+
+            <!-- Filter Bar -->
+            <div class="blog-filter-bar" id="filter-bar"></div>
+
+            <!-- Blog Grid -->
+            <div class="blog-grid" id="blog-grid"></div>
+
+            <!-- Empty State -->
+            <div id="empty-state" class="blog-empty hidden">No posts found.</div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Main Script -->
+    <script src="../js/main.min.js" defer></script>
+
+    <!-- Blog Data & Rendering -->
+    <script>
+    var BLOG_POSTS = [
+        {
+            slug:        "master-data-management-reference-data-explained",
+            title:       "Master Data Management (MDM) & Reference Data Explained",
+            excerpt:     "Understand Master Data Management and Reference Data: what they are, why they matter, and how they form the foundation of a Single Source of Truth.",
+            image:       "../assets/images/Blogs_YPT/Blog10/Hero Banner.webp",
+            category:    "Data Governance",
+            author:      "Mustafa Qizilbash",
+            date:        "2025-10-19",
+            readTime:    6
+        },
+        {
+            slug:        "what-is-inference-data-machine-learning",
+            title:       "What is Inference in Data Science & Machine Learning?",
+            excerpt:     "Understand what inference means in statistics and machine learning, including how models generalise from training data to make predictions on new inputs.",
+            image:       "../assets/images/Blogs_YPT/Blog09/Hero Banner.webp",
+            category:    "Data Science",
+            author:      "Mustafa Qizilbash",
+            date:        "2025-10-17",
+            readTime:    5
+        },
+        {
+            slug:        "causality-data-correlation-vs-causation",
+            title:       "Causality in Data: Why Correlation Is Not Causation",
+            excerpt:     "Understand causality in data and why correlation does not imply causation. Learn how to establish causal relationships with real-world examples.",
+            image:       "../assets/images/Blogs_YPT/Blog08/Hero Banner.webp",
+            category:    "Data Science",
+            author:      "Mustafa Qizilbash",
+            date:        "2025-10-15",
+            readTime:    6
+        },
+        {
+            slug:        "good-data-vs-bad-data-quality",
+            title:       "Good Data vs Bad Data: The 8 Data Quality Dimensions",
+            excerpt:     "Learn what separates good data from bad data across 8 key quality dimensions: accuracy, completeness, consistency, and more.",
+            image:       "../assets/images/Blogs_YPT/Blog07/Hero Banner.webp",
+            category:    "Data Quality",
+            author:      "Mustafa Qizilbash",
+            date:        "2025-10-13",
+            readTime:    6
+        },
+        {
+            slug:        "types-of-data-structured-semi-structured-unstructured",
+            title:       "Types of Data: Structured, Semi-Structured & Unstructured",
+            excerpt:     "Understand the three fundamental types of data and how each impacts storage, processing, governance, and analytics strategy.",
+            image:       "../assets/images/Blogs_YPT/Blog06/Hero Banner.webp",
+            category:    "Data Architecture",
+            author:      "Mustafa Qizilbash",
+            date:        "2025-10-11",
+            readTime:    5
+        },
+        {
+            slug:        "primary-key-foreign-key-explained",
+            title:       "Primary Key vs Foreign Key: Database Relationships Explained",
+            excerpt:     "Learn the difference between primary keys and foreign keys, including how they create relationships, enforce data integrity, and enable SQL joins.",
+            image:       "../assets/images/Blogs_YPT/Blog05/Hero Banner.webp",
+            category:    "Database Design",
+            author:      "Mustafa Qizilbash",
+            date:        "2025-10-09",
+            readTime:    5
+        },
+        {
+            slug:        "tables-columns-rows-database-explained",
+            title:       "Tables, Columns & Rows: The Core Structure of Every Database",
+            excerpt:     "Understand tables, columns, and rows: the fundamental building blocks of every relational database and structured data system.",
+            image:       "../assets/images/Blogs_YPT/Blog04/Hero Banner.webp",
+            category:    "Database Fundamentals",
+            author:      "Mustafa Qizilbash",
+            date:        "2025-10-07",
+            readTime:    5
+        },
+        {
+            slug:        "what-is-entity-recognition-ner",
+            title:       "What is Entity Recognition (NER)? Unstructured to Structured Data",
+            excerpt:     "Discover how Named Entity Recognition extracts structured data from unstructured text. Essential for data governance, AI, and enterprise data modelling.",
+            image:       "../assets/images/Blogs_YPT/Blog03/Hero Banner.webp",
+            category:    "Data Science",
+            author:      "Mustafa Qizilbash",
+            date:        "2025-10-05",
+            readTime:    5
+        },
+        {
+            slug:        "what-is-an-entity-in-data-modelling",
+            title:       "What is an Entity in Data Modelling? Types, Attributes & Instances",
+            excerpt:     "Understand the concept of an entity in data modelling, including entity types, attributes, and instances. A practical guide for data professionals.",
+            image:       "../assets/images/Blogs_YPT/Blog02/Hero Banner.webp",
+            category:    "Data Modelling",
+            author:      "Mustafa Qizilbash",
+            date:        "2025-10-03",
+            readTime:    5
+        },
+        {
+            slug:        "what-is-data",
+            title:       "What is Data? Definition, Types & Business Value Explained",
+            excerpt:     "Learn what data really means, from its core definition to its role in modern AI, analytics, and business decision-making.",
+            image:       "../assets/images/Blogs_YPT/Blog01/Hero Banner.webp",
+            category:    "Data Fundamentals",
+            author:      "Mustafa Qizilbash",
+            date:        "2025-10-01",
+            readTime:    5
+        }
+    ];
+
+    document.addEventListener('DOMContentLoaded', function() {
+        var grid = document.getElementById('blog-grid');
+        var emptyState = document.getElementById('empty-state');
+        var filterBar = document.getElementById('filter-bar');
+        var searchInput = document.getElementById('blog-search-input');
+        var activeCategory = 'all';
+        var searchQuery = '';
+
+        // Extract unique categories
+        var categories = ['All'];
+        BLOG_POSTS.forEach(function(p) {
+            if (p.category && categories.indexOf(p.category) === -1) categories.push(p.category);
+        });
+
+        // Render filter buttons
+        categories.forEach(function(cat) {
+            var btn = document.createElement('button');
+            btn.textContent = cat;
+            btn.className = cat === 'All' ? 'active' : '';
+            btn.setAttribute('data-category', cat === 'All' ? 'all' : cat);
+            btn.addEventListener('click', function() {
+                activeCategory = this.getAttribute('data-category');
+                renderCards();
+                filterBar.querySelectorAll('button').forEach(function(b) {
+                    b.classList.toggle('active', b.getAttribute('data-category') === activeCategory);
+                });
+            });
+            filterBar.appendChild(btn);
+        });
+
+        // Search handler
+        searchInput.addEventListener('input', function() {
+            searchQuery = this.value.toLowerCase().trim();
+            renderCards();
+        });
+
+        function formatDate(dateStr) {
+            var d = new Date(dateStr + 'T00:00:00');
+            return d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+        }
+
+        function renderCards() {
+            var filtered = BLOG_POSTS.filter(function(p) {
+                var matchesCat = activeCategory === 'all' || p.category === activeCategory;
+                var matchesSearch = !searchQuery || p.title.toLowerCase().indexOf(searchQuery) !== -1 || p.excerpt.toLowerCase().indexOf(searchQuery) !== -1 || p.category.toLowerCase().indexOf(searchQuery) !== -1;
+                return matchesCat && matchesSearch;
+            });
+
+            grid.innerHTML = '';
+
+            if (filtered.length === 0) {
+                emptyState.classList.remove('hidden');
+                return;
+            }
+            emptyState.classList.add('hidden');
+
+            filtered.forEach(function(post, i) {
+                var card = document.createElement('a');
+                card.href = post.slug + '.html';
+                card.className = 'blog-card';
+                card.setAttribute('data-reveal', 'up');
+                card.setAttribute('data-delay', String(i * 80));
+                card.innerHTML =
+                    (post.image ? '<div class="blog-card-img"><img src="' + post.image + '" alt="' + post.title + '" loading="lazy" width="600" height="338"></div>' : '') +
+                    '<div class="blog-card-body">' +
+                        '<span class="blog-card-category">' + post.category + '</span>' +
+                        '<div class="blog-card-title">' + post.title + '</div>' +
+                        '<p class="blog-card-excerpt">' + post.excerpt + '</p>' +
+                        '<div class="blog-card-meta">' +
+                            '<span>' + post.author + '</span>' +
+                            '<span>&middot;</span>' +
+                            '<time datetime="' + post.date + '">' + formatDate(post.date) + '</time>' +
+                            '<span>&middot;</span>' +
+                            '<span>' + post.readTime + ' min read</span>' +
+                        '</div>' +
+                    '</div>';
+                grid.appendChild(card);
+            });
+
+            // Trigger reveal animation
+            var observer = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        var delay = parseInt(entry.target.getAttribute('data-delay') || '0', 10);
+                        setTimeout(function() { entry.target.classList.add('revealed'); }, delay);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.12 });
+            grid.querySelectorAll('[data-reveal]').forEach(function(el) { observer.observe(el); });
+        }
+
+        renderCards();
+    });
+    </script>
+</body>
+</html>

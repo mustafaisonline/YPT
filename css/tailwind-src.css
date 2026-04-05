@@ -1,0 +1,33 @@
+@import "tailwindcss";
+
+@source "../*.html";
+@source "../team/*.html";
+@source "../case-studies/*.html";
+@source "../services/*.html";
+@source "../blog/*.html";
+@source "../js/*.js";
+
+/* Text gradient utilities - self-contained, don't rely on Tailwind gradient vars */
+@layer utilities {
+  .text-gradient {
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+
+  .text-gradient.from-blue-400.to-cyan-400 {
+    background-image: linear-gradient(to right, #60a5fa, #22d3ee);
+  }
+
+  .text-gradient.from-red-400.to-orange-400 {
+    background-image: linear-gradient(to right, #f87171, #fb923c);
+  }
+
+  .text-gradient.from-cyan-400.to-blue-400 {
+    background-image: linear-gradient(to right, #22d3ee, #60a5fa);
+  }
+
+  .text-gradient.from-pink-400.to-purple-400 {
+    background-image: linear-gradient(to right, #f472b6, #c084fc);
+  }
+}

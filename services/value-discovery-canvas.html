@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5MRNP3KJ8B"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-5MRNP3KJ8B');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Value Discovery Canvas | Your Partner Technologies</title>
+    <meta name="description" content="A structured, value-led conversation and execution model designed to help organizations systematically identify, shape, and deliver Data & AI initiatives.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://yourpartnertechnologies.com/services/value-discovery-canvas.html">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://objectstorage.us-sanjose-1.oraclecloud.com/n/axtx9ohfletb/b/ypt/o/Logo-64.png">
+    <!-- Open Graph / Social Sharing -->
+    <meta property="og:title" content="Value Discovery Canvas: Four 4s Formula - Your Partner Technologies">
+    <meta property="og:description" content="A structured, value-led conversation and execution model designed to help organizations systematically identify, shape, and deliver Data & AI initiatives.">
+    <meta property="og:image" content="https://objectstorage.us-sanjose-1.oraclecloud.com/n/axtx9ohfletb/b/ypt/o/social-media-sharing-card.webp">
+    <meta property="og:url" content="https://yourpartnertechnologies.com/services/value-discovery-canvas.html">
+    <meta property="og:type" content="website">
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Value Discovery Canvas: Four 4s Formula - Your Partner Technologies">
+    <meta name="twitter:description" content="A structured, value-led conversation and execution model designed to help organizations systematically identify, shape, and deliver Data & AI initiatives.">
+    <meta name="twitter:image" content="https://objectstorage.us-sanjose-1.oraclecloud.com/n/axtx9ohfletb/b/ypt/o/social-media-sharing-card.webp">
+    <!-- Preload Inter Font for faster rendering -->
+    <link rel="preconnect" href="https://rsms.me" crossorigin>
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://rsms.me/inter/inter.css"></noscript>
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="../css/tailwind.min.css">
+    <!-- Custom Styles (minified) -->
+    <link rel="stylesheet" href="../css/styles.min.css">
+    <style>
+        .glow-border { position: relative; }
+        .glow-border::after { content: ''; position: absolute; inset: 1px; border-radius: inherit; border: 1.5px solid rgba(255, 255, 255, 0.3); opacity: 0.7; pointer-events: none; z-index: 1; }
+        .typewriter-container { display: inline-block; max-width: 100%; }
+        .typewriter { overflow: hidden; border-right: 3px solid #22d3ee; white-space: nowrap; animation: typing 2.5s steps(25, end) forwards, blink-caret 0.75s step-end infinite; width: 0; }
+        @keyframes typing { from { width: 0 } to { width: 100% } }
+        @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: #22d3ee } }
+        @media (max-width: 768px) {
+            .typewriter-container { display: block; }
+            .typewriter { white-space: normal; width: auto; border-right: none; animation: none; opacity: 1; }
+        }
+
+        .enhanced-card {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+        .enhanced-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(135deg, rgba(34, 211, 238, 0.1) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
+        }
+        .enhanced-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        .enhanced-card:hover::before { opacity: 1; }
+        .number-badge {
+            width: 48px; height: 48px;
+            background: linear-gradient(135deg, #22d3ee, #3b82f6);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: bold; font-size: 1.25rem; color: white;
+            flex-shrink: 0;
+            box-shadow: 0 4px 15px rgba(34, 211, 238, 0.4);
+        }
+        .stat-number { font-size: 5rem; font-weight: 800; }
+
+        /* Flip Card */
+        .flip-card { perspective: 1000px; min-height: 280px; }
+        .flip-card-inner {
+            position: relative; width: 100%; height: 100%; min-height: 280px;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+        }
+        .flip-card:hover .flip-card-inner { transform: rotateY(180deg); }
+        .flip-card-front, .flip-card-back {
+            position: absolute; width: 100%; height: 100%;
+            backface-visibility: hidden; -webkit-backface-visibility: hidden;
+            border-radius: 1rem;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            text-align: center; padding: 2rem;
+        }
+        .flip-card-back {
+            transform: rotateY(180deg);
+            padding: 1.25rem;
+            justify-content: flex-start;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(34, 211, 238, 0.3) transparent;
+        }
+        .flip-card-front .stat-title { font-size: 1.25rem; font-weight: 700; }
+        .flip-card-back .stat-number { font-size: 2rem; }
+        .flip-card-back .back-title { font-size: 0.95rem; font-weight: 700; }
+        .flip-card-back .back-desc { font-size: 0.85rem; line-height: 1.5; }
+        .flip-card-orange .flip-card-front, .flip-card-orange .flip-card-back { background: rgba(251, 146, 60, 0.1); border: 1px solid rgba(251, 146, 60, 0.2); }
+        .flip-card-green .flip-card-front, .flip-card-green .flip-card-back { background: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.2); }
+        .flip-card-cyan .flip-card-front, .flip-card-cyan .flip-card-back { background: rgba(34, 211, 238, 0.1); border: 1px solid rgba(34, 211, 238, 0.2); }
+        .flip-card-purple .flip-card-front, .flip-card-purple .flip-card-back { background: rgba(168, 85, 247, 0.1); border: 1px solid rgba(168, 85, 247, 0.2); }
+        .text-orange { color: #fb923c; }
+        .text-green { color: #4ade80; }
+        .text-cyan-bright { color: #22d3ee; }
+        .text-purple { color: #a855f7; }
+
+        /* Hero staggered reveal on page load */
+        .hero-reveal { opacity: 0; transform: translateY(30px); }
+        .page-loaded .hero-reveal {
+            animation: reveal-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+        .page-loaded .hero-reveal:nth-child(1) { animation-delay: 0.1s; }
+        .page-loaded .hero-reveal:nth-child(2) { animation-delay: 0.25s; }
+        .page-loaded .hero-reveal:nth-child(3) { animation-delay: 0.4s; }
+        .page-loaded .hero-reveal:nth-child(4) { animation-delay: 0.55s; }
+        .page-loaded .hero-reveal:nth-child(5) { animation-delay: 0.7s; }
+
+        /* Hero card reveal from right */
+        .hero-card-reveal { opacity: 0; transform: translateX(40px); }
+        .page-loaded .hero-card-reveal {
+            animation: reveal-right 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.5s forwards;
+        }
+
+        /* Scroll-triggered reveal system */
+        [data-reveal] {
+            opacity: 0;
+            transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        [data-reveal="up"] { transform: translateY(50px); }
+        [data-reveal="down"] { transform: translateY(-50px); }
+        [data-reveal="left"] { transform: translateX(50px); }
+        [data-reveal="right"] { transform: translateX(-50px); }
+        [data-reveal="zoom"] { transform: scale(0.85); }
+        [data-reveal="fade"] { transform: none; }
+        [data-reveal].revealed {
+            opacity: 1;
+            transform: translateY(0) translateX(0) scale(1);
+        }
+
+        /* Keyframes shared by hero + card */
+        @keyframes reveal-up { to { opacity: 1; transform: translateY(0); } }
+        @keyframes reveal-right { to { opacity: 1; transform: translateX(0); } }
+    </style>
+    <link rel="dns-prefetch" href="https://objectstorage.us-sanjose-1.oraclecloud.com">
+    <link rel="preconnect" href="https://objectstorage.us-sanjose-1.oraclecloud.com" crossorigin>
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "datePublished": "2025-01-15",
+        "dateModified": "2026-03-04",
+        "provider": {
+            "@type": "Organization",
+            "name": "Your Partner Technologies",
+            "url": "https://yourpartnertechnologies.com"
+        },
+        "name": "Value Discovery Canvas: Four 4s Formula",
+        "description": "A structured, value-led conversation and execution model to help organizations systematically identify, shape, and deliver Data & AI initiatives.",
+        "url": "https://yourpartnertechnologies.com/services/value-discovery-canvas.html",
+        "serviceType": "Value Discovery Framework"
+    }
+    </script>
+</head>
+<body class="text-gray-200 antialiased leading-relaxed overflow-x-hidden" style="background: #000; max-width: 100vw;">
+
+    <!-- Floating Orbs Background Decoration -->
+    <div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <!-- Navigation -->
+    <div id="header-placeholder"></div>
+
+    <!-- Hero Section -->
+    <header class="page-header shadow-2xl relative z-10 overflow-hidden flex items-center" style="min-height: 100vh;">
+        <!-- Background Video -->
+        <video class="absolute inset-0 w-full h-full object-cover z-0" autoplay muted loop playsinline preload="none">
+            <source src="https://objectstorage.us-sanjose-1.oraclecloud.com/n/axtx9ohfletb/b/ypt/o/Value-Discovery-Canvas-Hero.mp4" type="video/mp4">
+        </video>
+        <!-- Dark overlay -->
+        <div class="absolute inset-0 z-[1]" style="background: rgba(0,0,0,0.65);"></div>
+        <!-- Content -->
+        <div class="container mx-auto px-4 relative z-[2] py-24">
+                <div id="breadcrumbs"></div>
+                <div class="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+                    <!-- Left Column: Headlines -->
+                    <div class="text-center lg:text-left">
+                        <div class="hero-reveal inline-block bg-cyan-500/20 text-white text-sm font-semibold px-4 py-1.5 rounded-full mb-6">
+                            Proprietary Framework
+                        </div>
+                        <h1 class="hero-reveal text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white mb-4">
+                            <span class="text-white">Value Discovery Canvas</span>
+                        </h1>
+                        <div class="hero-reveal typewriter-container mb-6">
+                            <p class="typewriter text-xl font-bold text-white" style="">
+                                Four 4s Formula
+                            </p>
+                        </div>
+                        <p class="hero-reveal text-md text-white mb-5">
+                            A structured, value-led conversation and execution model designed to help organizations systematically identify, shape, and deliver Data &amp; AI initiatives.
+                        </p>
+                        <a href="../services.html" class="hero-reveal inline-flex items-center gap-2 text-white hover:text-gray-200 text-sm font-medium transition group">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 transition-transform group-hover:-translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
+                            Back to Services
+                        </a>
+                    </div>
+
+                    <!-- Right Column: Value Prop Card -->
+                    <div class="relative hero-card-reveal">
+                        <div class="glow-border backdrop-blur-sm p-6 md:p-8 rounded-2xl overflow-hidden" style="background: linear-gradient(135deg, rgba(34, 211, 238, 0.15) 0%, rgba(20, 30, 45, 0.95) 50%, rgba(59, 130, 246, 0.1) 100%);">
+                            <div class="flex items-center gap-3 mb-4">
+                                <div class="w-10 h-10 bg-cyan-500/20 rounded-xl flex items-center justify-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-cyan-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+                                </div>
+                                <span class="text-white font-semibold">Framework Highlights</span>
+                            </div>
+                            <ul class="text-white space-y-3 mb-4">
+                                <li class="flex items-start gap-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-8.64"/><path d="M22 4L12 14.01l-3-3"/></svg>
+                                    <span><span class="text-white font-semibold">Structured conversation model</span>: align stakeholders early</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-8.64"/><path d="M22 4L12 14.01l-3-3"/></svg>
+                                    <span><span class="text-white font-semibold">Value-driven outcomes</span>: business-first, not technology-first</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-8.64"/><path d="M22 4L12 14.01l-3-3"/></svg>
+                                    <span><span class="text-white font-semibold">Measurable business impact</span>: defensible investment decisions</span>
+                                </li>
+                            </ul>
+                            <div class="pt-4 border-t border-gray-700/50">
+                                <p class="text-white italic text-sm">
+                                    Fewer false starts. Clearer priorities. <span class="font-semibold not-italic">Decisions grounded in value</span>.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content" class="container mx-auto px-4 pt-16 pb-4 relative z-10">
+
+        <!-- The Takeaway Section -->
+        <section class="mb-16" data-reveal="up">
+            <div class="flex items-center justify-center gap-4 mb-4">
+                <div class="number-badge">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                </div>
+            </div>
+            <p class="text-xl text-gray-300 text-center max-w-2xl mx-auto mb-2">What Value the Value Discovery Canvas Delivers</p>
+            <p class="text-gray-500 text-center max-w-3xl mx-auto mb-10">Four measurable outcomes that transform how organizations discover and deliver Data & AI value</p>
+
+            <!-- Stats Row -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="flip-card flip-card-orange" data-reveal="up" data-delay="50">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <div class="stat-number text-orange" style="font-size: 3.5rem;">70-80%</div>
+                            <p class="text-gray-300 stat-title mt-2">Effort Optimization</p>
+                        </div>
+                        <div class="flip-card-back">
+                            <div class="stat-number text-orange" style="font-size: 2rem;">70-80%</div>
+                            <p class="text-white back-title mb-3">Vendor World: Solutioning Optimization</p>
+                            <p class="text-gray-300 back-desc">Through structured, value-led qualification, 70-80% of leads will not qualify to proceed to the pre-sales and solutioning stage. This ensures that valuable solutioning resources are invested only in opportunities with genuine business alignment, improving win rates and reducing effort spent on engagements unlikely to convert.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="flip-card flip-card-green" data-reveal="up" data-delay="150">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <div class="stat-number text-green" style="font-size: 3.5rem;">60-70%</div>
+                            <p class="text-gray-300 stat-title mt-2">Noise Cancellation</p>
+                        </div>
+                        <div class="flip-card-back">
+                            <div class="stat-number text-green" style="font-size: 2rem;">60-70%</div>
+                            <p class="text-white back-title mb-3">Noise Cancellation for C-Level</p>
+                            <p class="text-gray-300 back-desc">For customers base, 60-70% of new Data & AI initiatives are filtered out before they ever reach the C-suite. Only initiatives with clear value narratives and business alignment progress, saving executives their most precious resource: time.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="flip-card flip-card-cyan" data-reveal="up" data-delay="250">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <div class="stat-number text-cyan-bright" style="font-size: 3.5rem;">30-40%</div>
+                            <p class="text-gray-300 stat-title mt-2">New Initiatives</p>
+                        </div>
+                        <div class="flip-card-back">
+                            <div class="stat-number text-cyan-bright" style="font-size: 2rem;">30-40%</div>
+                            <p class="text-white back-title mb-3">New Initiatives from Grassroot Level</p>
+                            <p class="text-gray-300 back-desc">For customers base, the Value Discovery Canvas empowers people closest to the problem (analysts, engineers, and domain experts) to articulate their ideas as structured, value-aligned business cases. As a result, 30-40% of new initiatives can originate from the grassroot level, giving leadership access to innovation that previously never made it past the operational floor.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="flip-card flip-card-purple" data-reveal="up" data-delay="350">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <div class="stat-number text-purple" style="font-size: 3.5rem;">90-95%</div>
+                            <p class="text-gray-300 stat-title mt-2">OKR & KPI Mapping</p>
+                        </div>
+                        <div class="flip-card-back">
+                            <div class="stat-number text-purple" style="font-size: 2rem;">90-95%</div>
+                            <p class="text-white back-title mb-3">OKR & KPI Mapping Before Kickoff</p>
+                            <p class="text-gray-300 back-desc">For customers base, today, only 20-30% of Data &amp; AI initiatives are properly mapped to business OKRs and KPIs before kickoff. With the Value Discovery Canvas, this jumps to 90-95%, ensuring value alignment is built in from day one, every initiative starts with measurable success criteria, and leadership can confidently back projects grounded in clear business value.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Problem Statement Section -->
+        <section class="mb-16" data-reveal="up">
+            <div class="flex items-center justify-center gap-4 mb-4">
+                <div class="number-badge">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                </div>
+                <h2 class="text-3xl font-bold" style="background: linear-gradient(to right, #22d3ee, #3b82f6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Problem Statement</h2>
+            </div>
+            <p class="text-xl text-gray-300 text-center max-w-2xl mx-auto mb-2">The Value Gap in Data & AI</p>
+            <p class="text-gray-500 text-center max-w-3xl mx-auto mb-10">Why most Data & AI initiatives fail to deliver, and who pays the price</p>
+
+            <!-- Core Problem Statement -->
+            <div class="backdrop-blur-sm p-8 md:p-12 rounded-3xl shadow-2xl border mb-10 relative overflow-hidden" style="background: linear-gradient(135deg, rgba(34, 211, 238, 0.12) 0%, rgba(20, 30, 45, 0.95) 30%, rgba(20, 30, 45, 0.95) 70%, rgba(59, 130, 246, 0.08) 100%); border-color: rgba(34, 211, 238, 0.3);">
+                <div class="absolute top-0 right-0 w-64 h-64 bg-cyan-500/5 rounded-full blur-3xl"></div>
+                <div class="relative grid md:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <p class="text-white text-2xl font-semibold mb-4">Organizations don't lack Data & AI ideas.</p>
+                        <p class="text-2xl font-bold" style="color: #22d3ee;">They lack a structured way to separate value from noise.</p>
+                    </div>
+                    <div class="space-y-4">
+                        <p class="text-gray-300"><span class="text-white font-semibold">On the customer side,</span> C-level executives are overwhelmed with initiative requests that have <span class="text-white font-semibold">no clear value narrative</span>. Meanwhile, people on the ground, the ones closest to real problems, <span class="font-semibold" style="color: #22d3ee;">cannot translate their ideas into language that leadership acts on</span>. The result is wasted time, misaligned investments, and initiatives that never deliver.</p>
+                        <p class="text-gray-300"><span class="text-white font-semibold">On the vendor side,</span> solutioning effort is often invested before opportunities are fully qualified. Up to 70-80% of forecasted opportunities may not have genuine business backing, consuming pre-sales and solution architecture resources on engagements unlikely to convert.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Problem Detail Cards -->
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="enhanced-card bg-gray-800/50 backdrop-blur-sm p-6 rounded-2xl" style="border: 1px solid rgba(251, 146, 60, 0.3);" data-reveal="up" data-delay="100">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background: rgba(251, 146, 60, 0.2);">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" style="color: #fb923c;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                        </div>
+                        <span class="font-semibold" style="color: #fb923c;">Vendor Side: Inflated Pipelines</span>
+                    </div>
+                    <p class="text-gray-300 text-sm mb-3">Sales teams routinely present unqualified opportunities as real deals:</p>
+                    <ul class="space-y-2 text-gray-400 text-sm">
+                        <li class="flex items-start gap-2"><span style="color: #fb923c;" class="mt-1">&#8226;</span>70-80% of forecasted leads lack genuine business sponsorship</li>
+                        <li class="flex items-start gap-2"><span style="color: #fb923c;" class="mt-1">&#8226;</span>Deals progress on relationship, not on validated business need</li>
+                        <li class="flex items-start gap-2"><span style="color: #fb923c;" class="mt-1">&#8226;</span>Revenue forecasts become unreliable, eroding trust and planning</li>
+                    </ul>
+                    <p class="font-semibold text-sm mt-4" style="color: #fb923c;">The canvas forces every lead through a value filter. If it can't articulate business value, it stops.</p>
+                </div>
+
+                <div class="enhanced-card bg-gray-800/50 backdrop-blur-sm p-6 rounded-2xl" style="border: 1px solid rgba(34, 211, 238, 0.3);" data-reveal="up" data-delay="200">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background: rgba(34, 211, 238, 0.2);">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" style="color: #22d3ee;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                        </div>
+                        <span class="font-semibold" style="color: #22d3ee;">Customer Side: Executive Time Wasted</span>
+                    </div>
+                    <p class="text-gray-300 text-sm mb-3">C-level leaders are drowning in initiative requests with no clear value:</p>
+                    <ul class="space-y-2 text-gray-400 text-sm">
+                        <li class="flex items-start gap-2"><span style="color: #22d3ee;" class="mt-1">&#8226;</span>60-70% of proposals lack business alignment or measurable outcomes</li>
+                        <li class="flex items-start gap-2"><span style="color: #22d3ee;" class="mt-1">&#8226;</span>Decision fatigue leads to blanket approvals or blanket rejections</li>
+                        <li class="flex items-start gap-2"><span style="color: #22d3ee;" class="mt-1">&#8226;</span>Strategic initiatives get buried alongside low-value requests</li>
+                    </ul>
+                    <p class="font-semibold text-sm mt-4" style="color: #22d3ee;">The canvas filters 60-70% of noise before it reaches the C-suite. Only value-backed initiatives progress.</p>
+                </div>
+
+                <div class="enhanced-card bg-gray-800/50 backdrop-blur-sm p-6 rounded-2xl" style="border: 1px solid rgba(168, 85, 247, 0.3);" data-reveal="up" data-delay="300">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background: rgba(168, 85, 247, 0.2);">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" style="color: #a855f7;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                        </div>
+                        <span class="font-semibold" style="color: #a855f7;">Customer Side: Grassroot Ideas Lost in Translation</span>
+                    </div>
+                    <p class="text-gray-300 text-sm mb-3">The people closest to real problems can't get their ideas heard:</p>
+                    <ul class="space-y-2 text-gray-400 text-sm">
+                        <li class="flex items-start gap-2"><span style="color: #a855f7;" class="mt-1">&#8226;</span>Great ideas die because they lack executive-ready framing</li>
+                        <li class="flex items-start gap-2"><span style="color: #a855f7;" class="mt-1">&#8226;</span>No structured path from insight to business case</li>
+                        <li class="flex items-start gap-2"><span style="color: #a855f7;" class="mt-1">&#8226;</span>Innovation stays trapped at the operational level</li>
+                    </ul>
+                    <p class="font-semibold text-sm mt-4" style="color: #a855f7;">The canvas gives everyone, from analysts to engineers, a structured path to convert ideas into tangible, defensible business cases.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Structured Canvases Matter -->
+        <section class="mb-16 inner-glow backdrop-blur-sm p-8 md:p-12 rounded-3xl shadow-2xl gradient-border" data-reveal="up">
+            <h2 class="text-3xl font-bold mb-6 text-gradient from-blue-400 to-cyan-400">Why Structured Canvases Matter</h2>
+
+            <div class="bg-gray-800/40 p-6 rounded-xl border border-cyan-500/20 mb-8">
+                <p class="text-xl text-cyan-400 font-medium italic text-center">
+                    "Canvases are not a consulting artifact. They are enablement and scale mechanism."
+                </p>
+            </div>
+
+            <p class="text-gray-300 text-lg mb-6">
+                We must anchor conversations around business problems, decision-making, and value before discussing technology. While the structure and terminology may differ, the intent is consistent: align stakeholders early, frame opportunities in business terms, and create a shared understanding before execution begins.
+            </p>
+
+            <p class="text-gray-300 text-lg mb-8">
+                This canvas is not about introducing another framework; it is about institutionalizing how we engage business requirements. The result is clearer value narratives, and a more scalable approach.
+            </p>
+
+            <div class="border-t border-cyan-500/20 pt-8">
+                <p class="text-gray-300 text-lg mb-4">
+                    The <span class="text-cyan-400 font-semibold">Four 4s Formula Canvas</span> is a structured, value-led conversation and execution model designed to help organizations systematically identify, shape, and deliver Data & AI initiatives.
+                </p>
+                <p class="text-gray-300 text-lg">
+                    It guides teams from understanding where data products sit in their lifecycle, through translating business questions into actionable decisions, aligning stakeholders around a clear decision narrative, and finally ensuring accountability, speed, and measurable impact. By combining lifecycle thinking, value creation, executive alignment, and governance into a single coherent canvas, the <span class="text-cyan-400 font-semibold">Four 4s Formula</span> enables consistent, repeatable, and outcome-driven Data & AI engagements that move organizations beyond ad-hoc analytics toward sustained business value.
+                </p>
+            </div>
+        </section>
+
+        <!-- Value Discovery Canvas -->
+        <section class="mb-16" data-reveal="up">
+            <h2 class="text-3xl font-bold mb-6 text-gradient from-blue-400 to-cyan-400 text-center">The Canvas Framework</h2>
+            <p class="text-gray-400 text-center max-w-3xl mx-auto mb-8">
+                The core canvas that captures all dimensions of a Data & AI initiative in a single view.
+            </p>
+            <div class="inner-glow backdrop-blur-sm p-4 md:p-8 rounded-3xl shadow-2xl gradient-border">
+                <img src="https://objectstorage.us-sanjose-1.oraclecloud.com/n/axtx9ohfletb/b/ypt/o/Value-Discovery-Canvas.jpg" alt="Value Discovery Canvas (Four 4s Formula)" class="w-full rounded-xl shadow-lg" loading="lazy">
+                <p class="text-gray-400 text-sm text-center mt-4 italic">
+                    Ideally to fill this canvas based on input in 30 Minutes max.
+                </p>
+            </div>
+        </section>
+
+        <!-- Opportunity Evaluation & Scoring Sheet -->
+        <section class="mb-16" data-reveal="up">
+            <div class="inner-glow backdrop-blur-sm p-8 md:p-12 rounded-3xl shadow-2xl gradient-border">
+                <h2 class="text-3xl font-bold mb-6 text-gradient from-blue-400 to-cyan-400">Opportunity Evaluation & Scoring Sheet</h2>
+
+                <p class="text-gray-300 text-lg mb-6">
+                    The <span class="text-cyan-400 font-semibold">Opportunity Evaluation & Scoring Sheet</span> provides a structured and objective way to assess, compare, and prioritize Data & AI opportunities before committing significant investment. It translates early-stage discussions into measurable criteria by evaluating strategic alignment, business value, user impact, delivery feasibility, risk, and governance readiness.
+                </p>
+
+                <p class="text-gray-300 text-lg mb-8">
+                    By applying consistent scoring across these dimensions, organizations can move beyond intuition-driven decisions, create transparency in prioritization, and focus resources on opportunities with the highest likelihood of delivering meaningful business impact. This approach enables leadership teams to make informed, defensible decisions while ensuring alignment between strategy, execution, and value realization.
+                </p>
+
+                <div class="bg-gray-800/40 p-4 rounded-xl">
+                    <img src="https://objectstorage.us-sanjose-1.oraclecloud.com/n/axtx9ohfletb/b/ypt/o/Opportunity-Evaluation-and-Scoring-Sheet.jpg" alt="Opportunity Evaluation & Scoring Sheet" class="w-full rounded-lg shadow-lg" loading="lazy">
+                </div>
+
+                <!-- Scoring Categories -->
+                <div class="grid md:grid-cols-3 gap-6 mt-8">
+                    <div class="bg-gray-800/60 p-6 rounded-xl border border-cyan-500/20">
+                        <h3 class="text-xl font-bold text-cyan-400 mb-3">Business Viability</h3>
+                        <ul class="text-gray-400 space-y-2 text-sm">
+                            <li><span class="text-gray-300">Strategic Alignment:</span> Does the initiative support current executive priorities?</li>
+                            <li><span class="text-gray-300">Business Value Generators:</span> Expected measurable business value</li>
+                            <li><span class="text-gray-300">Change Timeframe:</span> Expected timeframe to deliver meaningful change</li>
+                        </ul>
+                        <p class="text-cyan-400 text-sm mt-4 font-medium">Rating: 1-5 (1 = Low Impact, 5 = High Impact)</p>
+                    </div>
+                    <div class="bg-gray-800/60 p-6 rounded-xl border border-cyan-500/20">
+                        <h3 class="text-xl font-bold text-cyan-400 mb-3">Experience Value</h3>
+                        <ul class="text-gray-400 space-y-2 text-sm">
+                            <li><span class="text-gray-300">Key Personas:</span> User groups impacted by this initiative</li>
+                            <li><span class="text-gray-300">Value Proposition Appeal:</span> Compelling value proposition for identified personas</li>
+                            <li><span class="text-gray-300">Change Resistance:</span> Level of change tolerance expected</li>
+                        </ul>
+                        <p class="text-cyan-400 text-sm mt-4 font-medium">Rating: 1-5 (1 = Low Impact, 5 = High Impact)</p>
+                    </div>
+                    <div class="bg-gray-800/60 p-6 rounded-xl border border-cyan-500/20">
+                        <h3 class="text-xl font-bold text-cyan-400 mb-3">Technical Feasibility</h3>
+                        <ul class="text-gray-400 space-y-2 text-sm">
+                            <li><span class="text-gray-300">Implementation & Operational Risk:</span> Key risks associated with delivery</li>
+                            <li><span class="text-gray-300">Safeguards & Controls:</span> Appropriate safeguards for governance</li>
+                            <li><span class="text-gray-300">Technology Readiness:</span> Can it be delivered using existing platforms?</li>
+                        </ul>
+                        <p class="text-cyan-400 text-sm mt-4 font-medium">Rating: 1-5 (1 = Low Impact, 5 = High Impact)</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Use Case -->
+        <section class="mb-16" data-reveal="up">
+            <div class="inner-glow backdrop-blur-sm p-8 md:p-12 rounded-3xl shadow-2xl gradient-border">
+                <h2 class="text-3xl font-bold mb-6 text-gradient from-blue-400 to-cyan-400">Use Case</h2>
+
+                <p class="text-gray-300 text-lg mb-6">
+                    The <span class="text-cyan-400 font-semibold">Use Case</span> step provides a structured way to capture and evaluate Data & AI use cases by grounding them in real business needs and accountable ownership. Each use case is defined by the problem it aims to solve, the proposed idea or approach, and the specific business objective that defines success.
+                </p>
+
+                <p class="text-gray-300 text-lg mb-8">
+                    It further clarifies which KPIs and measurable outputs will be influenced, ensuring progress and impact can be tracked objectively. By explicitly identifying the accountable business stakeholder responsible for outcomes, this approach enables clear ownership, informed prioritization, and confident decision-making on which initiatives should move forward.
+                </p>
+
+                <div class="bg-gray-800/40 p-4 rounded-xl">
+                    <img src="https://objectstorage.us-sanjose-1.oraclecloud.com/n/axtx9ohfletb/b/ypt/o/Use-Case.jpg" alt="Use Case Form" class="w-full rounded-lg shadow-lg" loading="lazy">
+                </div>
+
+                <!-- Use Case Components -->
+                <div class="grid md:grid-cols-2 gap-6 mt-8">
+                    <div class="bg-gray-800/60 p-6 rounded-xl border border-cyan-500/20">
+                        <h3 class="text-xl font-bold text-cyan-400 mb-3">Problem to Solve</h3>
+                        <p class="text-gray-400 text-sm">
+                            What key business issue requires attention, and how is it being managed with current processes or tools?
+                        </p>
+                    </div>
+                    <div class="bg-gray-800/60 p-6 rounded-xl border border-cyan-500/20">
+                        <h3 class="text-xl font-bold text-cyan-400 mb-3">Business Objective</h3>
+                        <p class="text-gray-400 text-sm">
+                            What business outcome would define success for this initiative?
+                        </p>
+                    </div>
+                    <div class="bg-gray-800/60 p-6 rounded-xl border border-cyan-500/20">
+                        <h3 class="text-xl font-bold text-cyan-400 mb-3">KPIs and Key Outputs</h3>
+                        <p class="text-gray-400 text-sm">
+                            Which KPIs will this initiative influence, and what 3-5 measurable indicators will demonstrate progress and success?
+                        </p>
+                    </div>
+                    <div class="bg-gray-800/60 p-6 rounded-xl border border-cyan-500/20">
+                        <h3 class="text-xl font-bold text-cyan-400 mb-3">Accountable Stakeholder</h3>
+                        <p class="text-gray-400 text-sm">
+                            Name, Title/Role, Business Function - OKR Ownership
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Use Case Prioritization Chart -->
+        <section class="mb-16" data-reveal="up">
+            <div class="inner-glow backdrop-blur-sm p-8 md:p-12 rounded-3xl shadow-2xl gradient-border">
+                <h2 class="text-3xl font-bold mb-6 text-gradient from-blue-400 to-cyan-400">Use Case Prioritization Chart</h2>
+
+                <p class="text-gray-300 text-lg mb-8">
+                    The <span class="text-cyan-400 font-semibold">Use Case Prioritization Chart</span> provides a visual and comparative view of Data & AI use cases to support clear, outcome-driven decision-making. By mapping initiatives based on their relative business impact and feasibility, the chart helps leadership teams distinguish between high-priority opportunities, quick wins, exploratory initiatives, and lower-priority candidates. This visual approach enables transparent trade-off discussions, aligns stakeholders on sequencing and investment focus, and ensures resources are directed toward use cases with the greatest potential to deliver measurable business value in a timely and manageable way.
+                </p>
+
+                <div class="bg-gray-800/40 p-4 rounded-xl mb-8">
+                    <img src="https://objectstorage.us-sanjose-1.oraclecloud.com/n/axtx9ohfletb/b/ypt/o/User-Case-Prioritization.jpg" alt="Use Case Prioritization Chart" class="w-full rounded-lg shadow-lg" loading="lazy">
+                </div>
+
+                <!-- Quadrant Descriptions -->
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-gradient-to-br from-cyan-500/10 to-blue-500/10 p-6 rounded-xl border border-cyan-500/30">
+                        <h3 class="text-xl font-bold text-cyan-400 mb-2">Long Term</h3>
+                        <p class="text-gray-400 text-sm">
+                            <span class="text-gray-300">High Business Impact + Low Feasibility:</span> Projects with no immediate priority and will take more long-term to the Line.
+                        </p>
+                    </div>
+                    <div class="bg-gradient-to-br from-green-500/10 to-cyan-500/10 p-6 rounded-xl border border-green-500/30">
+                        <h3 class="text-xl font-bold text-green-400 mb-2">Low Hanging</h3>
+                        <p class="text-gray-400 text-sm">
+                            <span class="text-gray-300">High Business Impact + High Feasibility:</span> Projects which can be implemented in shortest possible time with potential business value.
+                        </p>
+                    </div>
+                    <div class="bg-gradient-to-br from-gray-500/10 to-gray-600/10 p-6 rounded-xl border border-gray-500/30">
+                        <h3 class="text-xl font-bold text-gray-400 mb-2">Hold</h3>
+                        <p class="text-gray-400 text-sm">
+                            <span class="text-gray-300">Low Business Impact + Low Feasibility:</span> Projects with low priority and can be put on hold for some time.
+                        </p>
+                    </div>
+                    <div class="bg-gradient-to-br from-yellow-500/10 to-orange-500/10 p-6 rounded-xl border border-yellow-500/30">
+                        <h3 class="text-xl font-bold text-yellow-400 mb-2">Explore</h3>
+                        <p class="text-gray-400 text-sm">
+                            <span class="text-gray-300">Low Business Impact + High Feasibility:</span> Projects which are technology or use and require a POC.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How to Apply -->
+        <section class="mb-16" data-reveal="up">
+            <h2 class="text-3xl font-bold mb-4 text-gradient from-blue-400 to-cyan-400 text-center">How to Apply the Four 4s Formula</h2>
+            <p class="text-gray-400 text-center max-w-3xl mx-auto mb-10">
+                There are <span class="text-cyan-400 font-semibold">three structured ways</span> to adopt and apply the Four 4s Formula, depending on the level of involvement and support required.
+            </p>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Option 1 -->
+                <div class="inner-glow backdrop-blur-sm p-8 rounded-2xl shadow-xl gradient-border card-glow transition-all duration-300 hover:scale-105 flex flex-col">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="bg-cyan-500/20 text-cyan-400 text-sm font-semibold px-3 py-1 rounded-full">Option 1</span>
+                        <span class="bg-green-500/20 text-green-400 text-sm font-semibold px-3 py-1 rounded-full">Free</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2">Executive Introduction</h3>
+                    <p class="text-cyan-400 font-medium mb-4">30 Minutes</p>
+                    <p class="text-gray-400 flex-grow">
+                        For leaders who want a <span class="text-gray-300">high-level understanding</span> of how the Four 4s Formula – Value Discovery Canvas works in practice, a <span class="text-gray-300">30-minute introductory session</span> is available. This session provides a concise walkthrough of the canvas and explains how it is used to structure value-led Data & AI conversations at an executive level.
+                    </p>
+                    <a href="../contact.html" class="mt-6 block text-center bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white font-semibold py-3 px-6 rounded-full transition duration-300">
+                        Request Session
+                    </a>
+                </div>
+
+                <!-- Option 2 -->
+                <div class="inner-glow backdrop-blur-sm p-8 rounded-2xl shadow-xl gradient-border card-glow transition-all duration-300 hover:scale-105 flex flex-col border-2 border-cyan-500/50">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="bg-cyan-500/20 text-cyan-400 text-sm font-semibold px-3 py-1 rounded-full">Option 2</span>
+                        <span class="bg-blue-500/20 text-blue-400 text-sm font-semibold px-3 py-1 rounded-full">Paid</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2">Guided Executive Value Application</h3>
+                    <p class="text-cyan-400 font-medium mb-4">2 × 90 Minutes</p>
+                    <p class="text-gray-400 flex-grow">
+                        For organizations that want to <span class="text-gray-300">apply the Four 4s Formula – Value Discovery Canvas using their own internal teams</span>, a structured, paid engagement is available, delivered across <span class="text-gray-300">two 90-minute facilitated sessions</span>. These sessions guide participants through the complete canvas in detail, systematically evaluating sampled Data & AI initiatives while ensuring disciplined problem framing, decision clarity, clear ownership, and value alignment, without outsourcing ownership or execution.
+                    </p>
+                    <a href="../contact.html" class="mt-6 block text-center bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white font-semibold py-3 px-6 rounded-full transition duration-300">
+                        Get Started
+                    </a>
+                </div>
+
+                <!-- Option 3 -->
+                <div class="inner-glow backdrop-blur-sm p-8 rounded-2xl shadow-xl gradient-border card-glow transition-all duration-300 hover:scale-105 flex flex-col">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="bg-cyan-500/20 text-cyan-400 text-sm font-semibold px-3 py-1 rounded-full">Option 3</span>
+                        <span class="bg-blue-500/20 text-blue-400 text-sm font-semibold px-3 py-1 rounded-full">Paid</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2">Canvas-as-a-Service</h3>
+                    <p class="text-cyan-400 font-medium mb-4">Professional Services Engagement</p>
+                    <p class="text-gray-400 flex-grow">
+                        For organizations that prefer to <span class="text-gray-300">outsource the application</span> of the Four 4s Formula – Value Discovery Canvas, a <span class="text-gray-300">separate professional services engagement</span> can be established. Under this model, our team works directly with business stakeholders to facilitate structured interviews, synthesize inputs, and produce a <span class="text-gray-300">decision-ready, value-led canvas</span> that leadership can confidently act upon.
+                    </p>
+                    <a href="../contact.html" class="mt-6 block text-center bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white font-semibold py-3 px-6 rounded-full transition duration-300">
+                        Contact Us
+                    </a>
+                </div>
+            </div>
+
+            <!-- Closing Quote -->
+            <div class="mt-12 inner-glow backdrop-blur-sm p-8 rounded-2xl shadow-xl gradient-border text-center">
+                <p class="text-xl text-cyan-400 font-medium italic">
+                    "Move from framework awareness to decision clarity, and from clarity to value."
+                </p>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="text-center py-12" data-reveal="up">
+            <h3 class="text-3xl font-bold mb-4 text-white">Ready to Apply the Four 4s Formula?</h3>
+            <p class="text-gray-400 max-w-2xl mx-auto mb-8">
+                Transform how your organization discovers, prioritizes, and delivers Data & AI value.
+            </p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="../contact.html" class="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white font-semibold py-4 px-8 rounded-full transition duration-300 transform hover:scale-105 inline-block">
+                    Get in Touch
+                </a>
+                <a href="../services.html" class="bg-transparent border-2 border-cyan-500 hover:border-cyan-400 text-cyan-400 hover:text-cyan-300 font-semibold py-4 px-8 rounded-full transition duration-300 transform hover:scale-105 inline-block">
+                    View All Services
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FAQ Section -->
+    <div id="faq-section"></div>
+
+    <!-- Footer -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Scripts -->
+    <!-- Main Script (minified) -->
+    <script src="../js/main.min.js" defer></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        renderBreadcrumbs([
+            { name: 'Home', url: '../index.html' },
+            { name: 'Execution &amp; Capabilities', url: '../services.html' },
+            { name: 'Value Discovery Canvas' }
+        ]);
+    });
+    </script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        renderFAQ({
+            color: 'cyan',
+            faqs: [
+                { q: 'What is the Value Discovery Canvas?', a: 'The Value Discovery Canvas, also known as the Four 4s framework, is YPT\'s proprietary workshop methodology for identifying and prioritizing high-value AI and data use cases. It provides a structured, time-boxed approach to transform broad ambitions into actionable, prioritized initiatives.' },
+                { q: 'What does the "Four 4s" framework stand for?', a: 'The Four 4s represent four critical dimensions evaluated for each potential use case: business value, technical feasibility, data readiness, and organizational alignment. Each dimension is scored to create a balanced prioritization matrix that guides investment decisions.' },
+                { q: 'How long does a Value Discovery Canvas workshop take?', a: 'A typical workshop runs 1-2 days depending on the scope and number of stakeholders involved. We can also run condensed half-day sessions for focused teams or extended multi-day workshops for enterprise-wide discovery across multiple business units.' },
+                { q: 'Who should attend a Value Discovery Canvas workshop?', a: 'Ideal participants include business leaders who understand strategic priorities, domain experts who know operational pain points, data and technology leaders who can assess feasibility, and executive sponsors who can champion selected initiatives. We recommend 8-15 participants.' },
+                { q: 'What are the outputs of a Value Discovery Canvas workshop?', a: 'You receive a prioritized portfolio of AI/data use cases with business cases, a feasibility assessment for each initiative, a recommended implementation sequence, resource estimates, and a 90-day action plan. From there, YPT can support <a href="data-ai-services.html" style="color:#22d3ee;text-decoration:underline;">execution through our Data &amp; AI services</a>.' },
+                { q: 'How do I book a Value Discovery Canvas workshop?', a: '<a href="../contact.html" style="color:#22d3ee;text-decoration:underline;">Contact us</a> to schedule a brief consultation. We\'ll understand your objectives, recommend the right workshop format, and align the session with your <a href="../strategic-advisory.html" style="color:#22d3ee;text-decoration:underline;">strategic advisory</a> goals if applicable.' }
+            ]
+        });
+    });
+    </script>
+    <!-- Page Load & Scroll Reveal -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.body.classList.add('page-loaded');
+
+        // Scroll-triggered reveals via IntersectionObserver
+        var els = document.querySelectorAll('[data-reveal]');
+        var observer = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    var delay = parseInt(entry.target.getAttribute('data-delay') || '0', 10);
+                    setTimeout(function() {
+                        entry.target.classList.add('revealed');
+                    }, delay);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.12 });
+
+        els.forEach(function(el) { observer.observe(el); });
+    });
+    </script>
+</body>
+</html>

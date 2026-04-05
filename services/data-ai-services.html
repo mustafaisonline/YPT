@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5MRNP3KJ8B"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-5MRNP3KJ8B');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data &amp; AI Services &amp; Solutions | Your Partner Technologies</title>
+    <meta name="description" content="Comprehensive Data & AI services including Data Solutioning, Strategy, Governance, Data Warehouse, Lakehouse, BI, and specialized data modeling approaches.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://yourpartnertechnologies.com/services/data-ai-services.html">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://objectstorage.us-sanjose-1.oraclecloud.com/n/axtx9ohfletb/b/ypt/o/Logo-64.png">
+    <!-- Open Graph / Social Sharing -->
+    <meta property="og:title" content="Data & AI Services - Your Partner Technologies">
+    <meta property="og:description" content="Comprehensive Data & AI services including Data Solutioning, Strategy, Governance, Data Warehouse, Lakehouse, BI, and specialized data modeling approaches.">
+    <meta property="og:image" content="https://objectstorage.us-sanjose-1.oraclecloud.com/n/axtx9ohfletb/b/ypt/o/social-media-sharing-card.webp">
+    <meta property="og:url" content="https://yourpartnertechnologies.com/services/data-ai-services.html">
+    <meta property="og:type" content="website">
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Data & AI Services - Your Partner Technologies">
+    <meta name="twitter:description" content="Comprehensive Data & AI services including Data Solutioning, Strategy, Governance, Data Warehouse, Lakehouse, BI, and specialized data modeling approaches.">
+    <meta name="twitter:image" content="https://objectstorage.us-sanjose-1.oraclecloud.com/n/axtx9ohfletb/b/ypt/o/social-media-sharing-card.webp">
+    <!-- Preload Inter Font for faster rendering -->
+    <link rel="preconnect" href="https://rsms.me" crossorigin>
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://rsms.me/inter/inter.css"></noscript>
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="../css/tailwind.min.css">
+    <!-- Custom Styles (minified) -->
+    <link rel="stylesheet" href="../css/styles.min.css">
+    <style>
+        .number-badge {
+            width: 48px; height: 48px;
+            background: linear-gradient(135deg, #22c55e, #10b981);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: bold; font-size: 1.25rem; color: white;
+            flex-shrink: 0;
+            box-shadow: 0 4px 15px rgba(34, 197, 94, 0.4);
+        }
+        .glow-border { position: relative; }
+        .glow-border::after { content: ''; position: absolute; inset: 1px; border-radius: inherit; border: 1.5px solid rgba(255, 255, 255, 0.3); opacity: 0.7; pointer-events: none; z-index: 1; }
+        .typewriter-container { display: inline-block; max-width: 100%; }
+        .typewriter { overflow: hidden; border-right: 3px solid #4ade80; white-space: nowrap; animation: typing 2.5s steps(25, end) forwards, blink-caret 0.75s step-end infinite; width: 0; }
+        @keyframes typing { from { width: 0 } to { width: 100% } }
+        @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: #4ade80 } }
+        @media (max-width: 768px) {
+            .typewriter-container { display: block; }
+            .typewriter { white-space: normal; width: auto; border-right: none; animation: none; opacity: 1; }
+        }
+
+        /* Flip Card */
+        .flip-card { perspective: 1000px; min-height: 280px; }
+        .flip-card-inner {
+            position: relative; width: 100%; height: 100%; min-height: 280px;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+        }
+        .flip-card:hover .flip-card-inner { transform: rotateY(180deg); }
+        .flip-card-front, .flip-card-back {
+            position: absolute; width: 100%; height: 100%;
+            backface-visibility: hidden; -webkit-backface-visibility: hidden;
+            border-radius: 1rem; display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            text-align: center; padding: 2rem;
+        }
+        .flip-card-back {
+            transform: rotateY(180deg);
+            padding: 1.25rem;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(34, 197, 94, 0.3) transparent;
+        }
+        .flip-card-front .stat-title { font-size: 1.25rem; font-weight: 700; }
+        .flip-card-back .stat-number { font-size: 2rem; }
+        .flip-card-back .back-title { font-size: 0.95rem; font-weight: 700; }
+        .flip-card-back .back-desc { font-size: 0.85rem; line-height: 1.5; }
+        .flip-card-green .flip-card-front, .flip-card-green .flip-card-back { background: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.2); }
+        .flip-card-emerald .flip-card-front, .flip-card-emerald .flip-card-back { background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.2); }
+        .flip-card-blue .flip-card-front, .flip-card-blue .flip-card-back { background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.2); }
+        .flip-card-purple .flip-card-front, .flip-card-purple .flip-card-back { background: rgba(168, 85, 247, 0.1); border: 1px solid rgba(168, 85, 247, 0.2); }
+
+        .hero-reveal { opacity: 0; transform: translateY(30px); }
+        .page-loaded .hero-reveal { animation: reveal-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+        .page-loaded .hero-reveal:nth-child(1) { animation-delay: 0.1s; }
+        .page-loaded .hero-reveal:nth-child(2) { animation-delay: 0.25s; }
+        .page-loaded .hero-reveal:nth-child(3) { animation-delay: 0.4s; }
+        .page-loaded .hero-reveal:nth-child(4) { animation-delay: 0.55s; }
+        .page-loaded .hero-reveal:nth-child(5) { animation-delay: 0.7s; }
+        .hero-card-reveal { opacity: 0; transform: translateX(40px); }
+        .page-loaded .hero-card-reveal { animation: reveal-right 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.5s forwards; }
+        [data-reveal] { opacity: 0; transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1); }
+        [data-reveal="up"] { transform: translateY(50px); }
+        [data-reveal="down"] { transform: translateY(-50px); }
+        [data-reveal="left"] { transform: translateX(50px); }
+        [data-reveal="right"] { transform: translateX(-50px); }
+        [data-reveal="zoom"] { transform: scale(0.85); }
+        [data-reveal="fade"] { transform: none; }
+        [data-reveal].revealed { opacity: 1; transform: translateY(0) translateX(0) scale(1); }
+        @keyframes reveal-up { to { opacity: 1; transform: translateY(0); } }
+        @keyframes reveal-right { to { opacity: 1; transform: translateX(0); } }
+    </style>
+    <link rel="dns-prefetch" href="https://objectstorage.us-sanjose-1.oraclecloud.com">
+    <link rel="preconnect" href="https://objectstorage.us-sanjose-1.oraclecloud.com" crossorigin>
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "datePublished": "2025-01-15",
+        "dateModified": "2026-03-04",
+        "provider": {
+            "@type": "Organization",
+            "name": "Your Partner Technologies",
+            "url": "https://yourpartnertechnologies.com"
+        },
+        "name": "Data & AI Services",
+        "description": "Comprehensive Data & AI services including Data Solutioning, Strategy, Governance, Data Warehouse, Lakehouse, BI, and specialized data modeling approaches.",
+        "url": "https://yourpartnertechnologies.com/services/data-ai-services.html",
+        "serviceType": ["Data Solutioning", "Data Strategy", "Data Governance", "Data Warehouse", "Lakehouse", "Business Intelligence"]
+    }
+    </script>
+</head>
+<body class="text-gray-200 antialiased leading-relaxed overflow-x-hidden" style="background: #000; max-width: 100vw;">
+
+    <!-- Floating Orbs Background Decoration -->
+    <div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <!-- Navigation -->
+    <div id="header-placeholder"></div>
+
+    <!-- Page Header -->
+    <header class="page-header shadow-2xl relative z-10 overflow-hidden flex items-center" style="min-height: 100vh;">
+        <!-- Background Video -->
+        <video class="absolute inset-0 w-full h-full object-cover z-0" autoplay muted loop playsinline preload="none">
+            <source src="https://objectstorage.us-sanjose-1.oraclecloud.com/n/axtx9ohfletb/b/ypt/o/Data%20and%20ai%20consultancy.mp4" type="video/mp4">
+        </video>
+        <!-- Dark overlay -->
+        <div class="absolute inset-0 z-[1]" style="background: rgba(0,0,0,0.7);"></div>
+        <div class="container mx-auto px-4 relative z-[2] py-24">
+            <div id="breadcrumbs"></div>
+            <div class="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+                <!-- Left Column: Headlines -->
+                <div class="text-center lg:text-left">
+                    <div class="hero-reveal inline-block bg-green-500/20 text-white text-sm font-semibold px-4 py-1.5 rounded-full mb-6">
+                        End-to-End Solutions
+                    </div>
+                    <h1 class="hero-reveal text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white mb-4">
+                        <span class="text-white">Data & AI Services</span>
+                    </h1>
+                    <div class="hero-reveal typewriter-container mb-6">
+                        <p class="typewriter text-xl font-bold text-white" style="-webkit-text-fill-color: white;">
+                            End-to-End Data Solutions
+                        </p>
+                    </div>
+                    <p class="hero-reveal text-md text-white/80 mb-5">
+                        Comprehensive services to help you build, manage, and optimize your entire data ecosystem.
+                    </p>
+                    <a href="../services.html" class="hero-reveal inline-flex items-center gap-2 text-white hover:text-gray-200 text-sm font-medium transition group">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 transition-transform group-hover:-translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
+                        Back to Services
+                    </a>
+                </div>
+
+                <!-- Right Column: Value Prop Card -->
+                <div class="relative hero-card-reveal">
+                    <div class="glow-border backdrop-blur-sm p-6 md:p-8 rounded-2xl overflow-hidden" style="background: linear-gradient(135deg, rgba(34, 197, 94, 0.15) 0%, rgba(20, 30, 45, 0.95) 50%, rgba(16, 185, 129, 0.1) 100%);">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-10 h-10 bg-green-500/20 rounded-xl flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-green-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+                            </div>
+                            <span class="text-white font-semibold">Service Highlights</span>
+                        </div>
+                        <ul class="text-white space-y-3 mb-4">
+                            <li class="flex items-start gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-8.64"/><path d="M22 4L12 14.01l-3-3"/></svg>
+                                <span><span class="text-white font-semibold">Full Data Lifecycle</span>: from ingestion to insights</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-8.64"/><path d="M22 4L12 14.01l-3-3"/></svg>
+                                <span><span class="text-white font-semibold">Governance to Analytics</span>: quality, compliance, and value</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-8.64"/><path d="M22 4L12 14.01l-3-3"/></svg>
+                                <span><span class="text-white font-semibold">Digital Twin & AI</span>: advanced modeling and intelligence</span>
+                            </li>
+                        </ul>
+                        <div class="pt-4 border-t border-gray-700/50">
+                            <p class="text-white italic text-sm">
+                                Your data, done right. <span class="text-white font-semibold not-italic">Strategy to execution</span>.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content" class="container mx-auto px-4 pt-16 pb-4 relative z-10">
+
+        <!-- The Takeaway Section -->
+        <section class="mb-16" data-reveal="up">
+            <div class="flex items-center justify-center gap-4 mb-4">
+                <div class="number-badge" style="background: linear-gradient(135deg, #22c55e, #10b981);">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                </div>
+            </div>
+            <p class="text-xl text-gray-300 text-center max-w-2xl mx-auto mb-2">What Value Our Data & AI Services Deliver</p>
+            <p class="text-gray-500 text-center max-w-3xl mx-auto mb-10">Four measurable outcomes that transform how organizations manage and leverage their data ecosystem</p>
+
+            <!-- Stats Row -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="flip-card flip-card-green" data-reveal="up" data-delay="50">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <div class="stat-number" style="color: #22c55e; font-size: 3.5rem;">30-50%</div>
+                            <p class="text-gray-300 stat-title mt-2">Lower Advisory Overhead</p>
+                            <p class="text-gray-500 text-sm mt-2">Compared to traditional multi-layer consulting models.</p>
+                        </div>
+                        <div class="flip-card-back">
+                            <div class="stat-number" style="color: #22c55e; font-size: 2rem;">30-50%</div>
+                            <p class="text-white back-title mb-2">Global Senior Expertise Without Tier-1 Overhead</p>
+                            <p class="text-gray-300 back-desc mb-2">Access to a curated global network of specialized Data &amp; AI architects and practitioners.</p>
+                            <ul class="text-gray-400 text-left w-full" style="font-size: 0.8rem; line-height: 1.5;">
+                                <li class="flex items-start gap-1.5 mb-1"><span style="color: #22c55e;">&#8226;</span>Senior Data &amp; AI experts across regions and industries</li>
+                                <li class="flex items-start gap-1.5 mb-1"><span style="color: #22c55e;">&#8226;</span>15-20+ years average senior experience per engagement</li>
+                                <li class="flex items-start gap-1.5"><span style="color: #22c55e;">&#8226;</span>Transparent professional presence and industry visibility</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="flip-card flip-card-emerald" data-reveal="up" data-delay="150">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <div class="stat-number" style="color: #10b981; font-size: 3.5rem;">40-60%</div>
+                            <p class="text-gray-300 stat-title mt-2">Faster Solution Design</p>
+                            <p class="text-gray-500 text-sm mt-2">Faster solution design and architecture approval cycles.</p>
+                        </div>
+                        <div class="flip-card-back">
+                            <div class="stat-number" style="color: #10b981; font-size: 2rem;">40-60%</div>
+                            <p class="text-white back-title mb-2">Faster Solution Design Through Specialization</p>
+                            <p class="text-gray-300 back-desc mb-2">Because we focus exclusively on Data &amp; AI, our solution design cycles are structurally leaner than general IT consultancies.</p>
+                            <ul class="text-gray-400 text-left w-full" style="font-size: 0.8rem; line-height: 1.5;">
+                                <li class="flex items-start gap-1.5 mb-1"><span style="color: #10b981;">&#8226;</span>Reusable architectural patterns and modeling accelerators</li>
+                                <li class="flex items-start gap-1.5 mb-1"><span style="color: #10b981;">&#8226;</span>Structured decision frameworks before delivery</li>
+                                <li class="flex items-start gap-1.5"><span style="color: #10b981;">&#8226;</span>Focused pre-sales and solutioning expertise</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="flip-card flip-card-blue" data-reveal="up" data-delay="250">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <div class="stat-number" style="color: #3b82f6; font-size: 3.5rem;">30-50%</div>
+                            <p class="text-gray-300 stat-title mt-2">Effort Reduction</p>
+                            <p class="text-gray-500 text-sm mt-2">Reduction in development effort through agent-accelerated engineering.</p>
+                        </div>
+                        <div class="flip-card-back">
+                            <div class="stat-number" style="color: #3b82f6; font-size: 2rem;">30-50%</div>
+                            <p class="text-white back-title mb-2">Agent-Accelerated Delivery</p>
+                            <p class="text-gray-300 back-desc mb-2">Controlled use of AI agents and structured automation embedded into engineering workflows.</p>
+                            <ul class="text-gray-400 text-left w-full" style="font-size: 0.8rem; line-height: 1.5;">
+                                <li class="flex items-start gap-1.5 mb-1"><span style="color: #3b82f6;">&#8226;</span>Automated documentation and scaffolding</li>
+                                <li class="flex items-start gap-1.5 mb-1"><span style="color: #3b82f6;">&#8226;</span>Accelerated schema and pipeline generation</li>
+                                <li class="flex items-start gap-1.5"><span style="color: #3b82f6;">&#8226;</span>Reduced repetitive engineering overhead</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="flip-card flip-card-purple" data-reveal="up" data-delay="350">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <div class="stat-number" style="color: #a855f7; font-size: 3.5rem;">90%+</div>
+                            <p class="text-gray-300 stat-title mt-2">Governance Alignment</p>
+                            <p class="text-gray-500 text-sm mt-2">Governance alignment at approval stage.</p>
+                        </div>
+                        <div class="flip-card-back">
+                            <div class="stat-number" style="color: #a855f7; font-size: 2rem;">90%+</div>
+                            <p class="text-white back-title mb-2">Governance &amp; Value Discipline Built In</p>
+                            <p class="text-gray-300 back-desc mb-2">Every initiative is structured around ownership, measurable value, and decision accountability before execution begins.</p>
+                            <ul class="text-gray-400 text-left w-full" style="font-size: 0.8rem; line-height: 1.5;">
+                                <li class="flex items-start gap-1.5 mb-1"><span style="color: #a855f7;">&#8226;</span>Explicit KPIs and accountable business stakeholders</li>
+                                <li class="flex items-start gap-1.5 mb-1"><span style="color: #a855f7;">&#8226;</span>Built-in quality and compliance controls</li>
+                                <li class="flex items-start gap-1.5"><span style="color: #a855f7;">&#8226;</span>Reduced downstream rework and audit exposure</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Problem Statement Section -->
+        <section class="mb-16" data-reveal="up">
+            <div class="flex items-center justify-center gap-4 mb-4">
+                <div class="number-badge" style="background: linear-gradient(135deg, #22c55e, #10b981);">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                </div>
+                <h2 class="text-3xl font-bold" style="background: linear-gradient(to right, #22c55e, #10b981); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Problem Statement</h2>
+            </div>
+            <p class="text-xl text-gray-300 text-center max-w-2xl mx-auto mb-2">The Data Foundation Gap</p>
+            <p class="text-gray-500 text-center max-w-3xl mx-auto mb-10">Why Data &amp; AI Investments Underperform</p>
+
+            <!-- Core Problem Statement -->
+            <div class="backdrop-blur-sm p-8 md:p-12 rounded-3xl shadow-2xl border mb-10 relative overflow-hidden" style="background: linear-gradient(135deg, rgba(34, 197, 94, 0.12) 0%, rgba(20, 30, 45, 0.95) 30%, rgba(20, 30, 45, 0.95) 70%, rgba(16, 185, 129, 0.08) 100%); border-color: rgba(34, 197, 94, 0.3);">
+                <div class="absolute top-0 right-0 w-64 h-64 bg-green-500/5 rounded-full blur-3xl"></div>
+                <div class="relative grid md:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <p class="text-white text-2xl font-semibold mb-4">Organizations don't fail at Data &amp; AI because they lack tools.</p>
+                        <p class="text-2xl font-bold" style="color: #22c55e;">They fail because they lack decision discipline, architectural clarity, and governance embedded from day one.</p>
+                    </div>
+                    <div class="space-y-4">
+                        <p class="text-gray-300">Across enterprises, the same pattern repeats: platforms are purchased before use cases are clearly framed, data is accumulated without clear ownership, AI initiatives begin before foundational architecture is ready, and governance is introduced only after risk surfaces. The result is predictable: data environments that are <span class="text-white font-semibold">expensive to maintain</span>, politically difficult to challenge, <span class="text-white font-semibold">slow to deliver measurable value</span>, and ultimately difficult for <span class="font-semibold" style="color: #22c55e;">leadership to trust</span>.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Problem Detail Cards -->
+            <div class="grid md:grid-cols-2 gap-6 mb-10">
+                <div class="bg-gray-800/50 backdrop-blur-sm p-6 rounded-2xl" style="border: 1px solid rgba(239, 68, 68, 0.3);" data-reveal="up" data-delay="100">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background: rgba(239, 68, 68, 0.2);">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" style="color: #ef4444;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                        </div>
+                        <span class="font-semibold" style="color: #ef4444;">Overpriced Advisory Layers</span>
+                    </div>
+                    <p class="text-gray-300 text-sm mb-3">Multiple consulting tiers before real experts engage:</p>
+                    <ul class="space-y-2 text-gray-400 text-sm">
+                        <li class="flex items-start gap-2"><span style="color: #ef4444;" class="mt-1">&#8226;</span>Senior architects diluted by managerial overhead</li>
+                        <li class="flex items-start gap-2"><span style="color: #ef4444;" class="mt-1">&#8226;</span>Long strategy decks before actionable direction</li>
+                    </ul>
+                    <p class="font-semibold text-sm mt-4" style="color: #ef4444;">Impact: High advisory cost with slow momentum and diluted expertise.</p>
+                </div>
+
+                <div class="bg-gray-800/50 backdrop-blur-sm p-6 rounded-2xl" style="border: 1px solid rgba(34, 197, 94, 0.3);" data-reveal="up" data-delay="200">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background: rgba(34, 197, 94, 0.2);">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" style="color: #22c55e;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                        </div>
+                        <span class="font-semibold" style="color: #22c55e;">Slow Architecture &amp; Decision Cycles</span>
+                    </div>
+                    <p class="text-gray-300 text-sm mb-3">Weeks of workshops before clarity emerges:</p>
+                    <ul class="space-y-2 text-gray-400 text-sm">
+                        <li class="flex items-start gap-2"><span style="color: #22c55e;" class="mt-1">&#8226;</span>Solution designs rewritten multiple times</li>
+                        <li class="flex items-start gap-2"><span style="color: #22c55e;" class="mt-1">&#8226;</span>Approval cycles delayed due to vague value narratives</li>
+                    </ul>
+                    <p class="font-semibold text-sm mt-4" style="color: #22c55e;">Impact: Delayed time-to-value and decision fatigue at leadership level.</p>
+                </div>
+
+                <div class="bg-gray-800/50 backdrop-blur-sm p-6 rounded-2xl" style="border: 1px solid rgba(59, 130, 246, 0.3);" data-reveal="up" data-delay="300">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background: rgba(59, 130, 246, 0.2);">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" style="color: #3b82f6;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                        </div>
+                        <span class="font-semibold" style="color: #3b82f6;">Manual &amp; Fragmented Development</span>
+                    </div>
+                    <p class="text-gray-300 text-sm mb-3">Repetitive engineering work slowing delivery:</p>
+                    <ul class="space-y-2 text-gray-400 text-sm">
+                        <li class="flex items-start gap-2"><span style="color: #3b82f6;" class="mt-1">&#8226;</span>Reinvented pipelines and documentation</li>
+                        <li class="flex items-start gap-2"><span style="color: #3b82f6;" class="mt-1">&#8226;</span>Low automation in design and implementation</li>
+                    </ul>
+                    <p class="font-semibold text-sm mt-4" style="color: #3b82f6;">Impact: Inflated development cost and slower iteration cycles.</p>
+                </div>
+
+                <div class="bg-gray-800/50 backdrop-blur-sm p-6 rounded-2xl" style="border: 1px solid rgba(168, 85, 247, 0.3);" data-reveal="up" data-delay="400">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background: rgba(168, 85, 247, 0.2);">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" style="color: #a855f7;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                        </div>
+                        <span class="font-semibold" style="color: #a855f7;">Governance After the Fact</span>
+                    </div>
+                    <p class="text-gray-300 text-sm mb-3">Controls introduced too late in the process:</p>
+                    <ul class="space-y-2 text-gray-400 text-sm">
+                        <li class="flex items-start gap-2"><span style="color: #a855f7;" class="mt-1">&#8226;</span>KPIs defined late, ownership unclear at project start</li>
+                        <li class="flex items-start gap-2"><span style="color: #a855f7;" class="mt-1">&#8226;</span>Compliance checks added reactively</li>
+                    </ul>
+                    <p class="font-semibold text-sm mt-4" style="color: #a855f7;">Impact: Rework, audit exposure, and declining executive confidence.</p>
+                </div>
+            </div>
+
+            <!-- The Real Cost -->
+            <div class="backdrop-blur-sm p-6 md:p-8 rounded-2xl border relative overflow-hidden" style="background: linear-gradient(135deg, rgba(239, 68, 68, 0.08) 0%, rgba(20, 30, 45, 0.95) 50%, rgba(168, 85, 247, 0.06) 100%); border-color: rgba(239, 68, 68, 0.2);">
+                <h3 class="text-xl font-bold text-white mb-3">The Real Cost</h3>
+                <p class="text-gray-300">When delivery models are inefficient, advisory overhead compounds, design cycles stretch unnecessarily, development effort inflates, and governance gaps surface too late to prevent rework and risk. Over time, confidence in Data &amp; AI investments erodes. Not because organizations lack tools, but because they lack <span class="text-white font-semibold">structural efficiency</span> and <span class="font-semibold" style="color: #22c55e;">disciplined decision-making</span>. That structural gap is precisely where we operate.</p>
+            </div>
+        </section>
+
+        <!-- Services Grid -->
+        <section class="mb-16" data-reveal="up">
+            <h2 class="text-3xl font-bold text-center mb-4 text-gradient from-green-400 to-emerald-400">Our Services</h2>
+            <p class="text-gray-400 text-center max-w-2xl mx-auto mb-12">
+                Expert consultancy across the full spectrum of data and AI capabilities
+            </p>
+
+            <div class="grid md:grid-cols-2 gap-8">
+
+                <!-- Data & AI Solutioning -->
+                <div class="inner-glow backdrop-blur-sm p-8 rounded-2xl shadow-xl gradient-border card-glow" data-reveal="up" data-delay="0">
+                    <div class="flex items-start gap-4 mb-4">
+                        <div class="w-14 h-14 bg-green-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-green-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-white">Data & AI Solutioning</h3>
+                            <p class="text-green-400 text-sm font-medium">End-to-End Architecture & Design</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 mb-4">Comprehensive solution design and architecture for your data and AI initiatives, from initial concept through implementation and optimization.</p>
+                    <ul class="space-y-2 text-gray-400 text-sm">
+                        <li class="flex items-start gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-green-400 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-8.64"/><path d="M22 4L12 14.01l-3-3"/></svg>
+                            <span>Requirements analysis and solution scoping</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-green-400 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-8.64"/><path d="M22 4L12 14.01l-3-3"/></svg>
+                            <span>Technical architecture and design patterns</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-green-400 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-8.64"/><path d="M22 4L12 14.01l-3-3"/></svg>
+                            <span>Proof of concept and pilot development</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-green-400 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-8.64"/><path d="M22 4L12 14.01l-3-3"/></svg>
+                            <span>Technology selection and vendor evaluation</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Value Discovery Canvas Practice -->
+                <div class="inner-glow backdrop-blur-sm p-8 rounded-2xl shadow-xl gradient-border card-glow" data-reveal="up" data-delay="50">
+                    <div class="flex items-start gap-4 mb-4">
+                        <div class="w-14 h-14 bg-cyan-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-cyan-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-white">Value Discovery Canvas Practice</h3>
+                            <p class="text-cyan-400 text-sm font-medium">Four 4s Formula Implementation</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 mb-4">Apply our proprietary framework to systematically identify, shape, and deliver Data & AI initiatives with measurable business impact and clear ROI.</p>
+                    <ul class="space-y-2 text-gray-400 text-sm">
+                        <li class="flex items-start gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-cyan-400 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-8.64"/><path d="M22 4L12 14.01l-3-3"/></svg>
+                            <span>Business value identification and prioritization</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-cyan-400 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-8.64"/><path d="M22 4L12 14.01l-3-3"/></svg>
+                            <span>Stakeholder alignment and requirements capture</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-cyan-400 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-8.64"/><path d="M22 4L12 14.01l-3-3"/></svg>
+                            <span>Initiative filtering and go/no-go decisions</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-cyan-400 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-8.64"/><path d="M22 4L12 14.01l-3-3"/></svg>
+                            <span>Value realization tracking and governance</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Data & AI Strategy -->
+                <div class="inner-glow backdrop-blur-sm p-8 rounded-2xl shadow-xl gradient-border card-glow" data-reveal="up" data-delay="100">
+                    <div class="flex items-start gap-4 mb-4">
+                        <div class="w-14 h-14 bg-blue-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-white">Data & AI Strategy</h3>
+                            <p class="text-blue-400 text-sm font-medium">Vision, Roadmap & Operating Model</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 mb-4">Define your organization's data vision, strategic roadmap, and operating model aligned with business objectives and industry best practices.</p>
+                    <ul class="space-y-2 text-gray-400 text-sm">
+                        <li class="flex items-start gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-blue-400 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-8.64"/><path d="M22 4L12 14.01l-3-3"/></svg>
+                            <span>Current state assessment and maturity analysis</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-blue-400 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-8.64"/><path d="M22 4L12 14.01l-3-3"/></svg>
+                            <span>Target state definition and gap analysis</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-blue-400 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-8.64"/><path d="M22 4L12 14.01l-3-3"/></svg>
+                            <span>Multi-year roadmap and investment planning</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-blue-400 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-8.64"/><path d="M22 4L12 14.01l-3-3"/></svg>
+                            <span>Organization design and capability building</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Data Governance Framework -->
+                <div class="inner-glow backdrop-blur-sm p-8 rounded-2xl shadow-xl gradient-border card-glow" data-reveal="up" data-delay="150">
+                    <div class="flex items-start gap-4 mb-4">
+                        <div class="w-14 h-14 bg-emerald-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-white">Data Governance Framework</h3>
+                            <p class="text-emerald-400 text-sm font-medium">Policies, Standards & Compliance</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 mb-4">Establish robust governance frameworks ensuring data security, quality, compliance, and accountability across your entire organization.</p>
+                    <ul class="space-y-2 text-gray-400 text-sm">
+                        <li class="flex items-start gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-8.64"/><path d="M22 4L12 14.01l-3-3"/></svg>
+                            <span>Data policies, standards, and procedures</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-8.64"/><path d="M22 4L12 14.01l-3-3"/></svg>
+                            <span>Roles, responsibilities, and stewardship models</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-8.64"/><path d="M22 4L12 14.01l-3-3"/></svg>
+                            <span>Data quality management and monitoring</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-8.64"/><path d="M22 4L12 14.01l-3-3"/></svg>
+                            <span>Regulatory compliance (GDPR, CCPA, HIPAA)</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Metadata Management -->
+                <div class="inner-glow backdrop-blur-sm p-8 rounded-2xl shadow-xl gradient-border card-glow" data-reveal="up" data-delay="200">
+                    <div class="flex items-start gap-4 mb-4">
+                        <div class="w-14 h-14 bg-teal-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-teal-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-white">Metadata Management</h3>
+                            <p class="text-teal-400 text-sm font-medium">Catalogs, Glossaries & Lineage</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 mb-4">Enable enterprise-wide data discovery and understanding through comprehensive metadata management, catalogs, and lineage tracking.</p>
+                    <ul class="space-y-2 text-gray-400 text-sm">
+                        <li class="flex items-start gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-teal-400 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-8.64"/><path d="M22 4L12 14.01l-3-3"/></svg>
+                            <span>Enterprise data catalog implementation</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-teal-400 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-8.64"/><path d="M22 4L12 14.01l-3-3"/></svg>
+                            <span>Business glossary and terminology management</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-teal-400 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-8.64"/><path d="M22 4L12 14.01l-3-3"/></svg>
+                            <span>Data lineage and impact analysis</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-teal-400 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-8.64"/><path d="M22 4L12 14.01l-3-3"/></svg>
+                            <span>Data contracts and API documentation</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Data Warehouse -->
+                <div class="inner-glow backdrop-blur-sm p-8 rounded-2xl shadow-xl gradient-border card-glow" data-reveal="up" data-delay="250">
+                    <div class="flex items-start gap-4 mb-4">
+                        <div class="w-14 h-14 bg-indigo-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-indigo-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-white">Data Warehouse</h3>
+                            <p class="text-indigo-400 text-sm font-medium">Cloud DWH Design & Optimization</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 mb-4">Design, implement, and optimize cloud data warehouses with leading platforms including Snowflake, BigQuery, Redshift, and Synapse.</p>
+                    <ul class="space-y-2 text-gray-400 text-sm">
+                        <li class="flex items-start gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-indigo-400 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-8.64"/><path d="M22 4L12 14.01l-3-3"/></svg>
+                            <span>Cloud DWH architecture and design</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-indigo-400 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-8.64"/><path d="M22 4L12 14.01l-3-3"/></svg>
+                            <span>Dimensional modeling and star schema design</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-indigo-400 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-8.64"/><path d="M22 4L12 14.01l-3-3"/></svg>
+                            <span>Performance tuning and query optimization</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-indigo-400 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-8.64"/><path d="M22 4L12 14.01l-3-3"/></svg>
+                            <span>Migration from legacy on-premise systems</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Data Lakehouse -->
+                <div class="inner-glow backdrop-blur-sm p-8 rounded-2xl shadow-xl gradient-border card-glow" data-reveal="up" data-delay="300">
+                    <div class="flex items-start gap-4 mb-4">
+                        <div class="w-14 h-14 bg-purple-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-purple-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-white">Data Lakehouse</h3>
+                            <p class="text-purple-400 text-sm font-medium">Modern Unified Data Platform</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 mb-4">Build modern lakehouse architectures combining the best of data lakes and warehouses with Delta Lake, Iceberg, and Hudi technologies.</p>
+                    <ul class="space-y-2 text-gray-400 text-sm">
+                        <li class="flex items-start gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-purple-400 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-8.64"/><path d="M22 4L12 14.01l-3-3"/></svg>
+                            <span>Medallion architecture (Bronze, Silver, Gold)</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-purple-400 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-8.64"/><path d="M22 4L12 14.01l-3-3"/></svg>
+                            <span>ACID transactions and time travel</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-purple-400 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-8.64"/><path d="M22 4L12 14.01l-3-3"/></svg>
+                            <span>Unified batch and streaming processing</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-purple-400 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-8.64"/><path d="M22 4L12 14.01l-3-3"/></svg>
+                            <span>Schema evolution and data versioning</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Business Intelligence -->
+                <div class="inner-glow backdrop-blur-sm p-8 rounded-2xl shadow-xl gradient-border card-glow" data-reveal="up" data-delay="350">
+                    <div class="flex items-start gap-4 mb-4">
+                        <div class="w-14 h-14 bg-amber-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-amber-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-white">Business Intelligence</h3>
+                            <p class="text-amber-400 text-sm font-medium">Dashboards, Reports & Analytics</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 mb-4">Transform data into actionable insights with interactive dashboards, automated reports, and self-service analytics using leading BI platforms.</p>
+                    <ul class="space-y-2 text-gray-400 text-sm">
+                        <li class="flex items-start gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-amber-400 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-8.64"/><path d="M22 4L12 14.01l-3-3"/></svg>
+                            <span>Power BI, Tableau, Looker, Qlik implementation</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-amber-400 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-8.64"/><path d="M22 4L12 14.01l-3-3"/></svg>
+                            <span>Executive dashboards and KPI tracking</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-amber-400 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-8.64"/><path d="M22 4L12 14.01l-3-3"/></svg>
+                            <span>Self-service analytics enablement</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-amber-400 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-8.64"/><path d="M22 4L12 14.01l-3-3"/></svg>
+                            <span>Automated reporting and alerting</span>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Data Modeling Approaches -->
+        <section class="mb-16 inner-glow backdrop-blur-sm p-8 md:p-12 rounded-3xl shadow-2xl gradient-border" data-reveal="up">
+            <h2 class="text-3xl font-bold text-center mb-4 text-gradient from-green-400 to-emerald-400">Data Modeling Approaches</h2>
+            <p class="text-gray-400 text-center max-w-2xl mx-auto mb-10">
+                Specialized expertise in multiple data modeling methodologies to fit your specific needs
+            </p>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                <!-- Unified Star Schema -->
+                <div class="bg-gray-800/60 p-6 rounded-xl border border-green-500/20 hover:border-green-500/40 transition-all" data-reveal="up" data-delay="0">
+                    <h3 class="text-lg font-semibold text-green-400 mb-1">Unified Star Schema</h3>
+                    <p class="text-green-400/70 text-xs font-medium mb-3">Puppini Bridge Modelling</p>
+                    <p class="text-gray-400 text-sm mb-3">Innovative approach that unifies multiple star schemas through bridge tables, enabling flexible, performant dimensional models with reduced redundancy.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-green-500/10 text-green-400 text-xs px-2 py-1 rounded">Dimensional</span>
+                        <span class="bg-green-500/10 text-green-400 text-xs px-2 py-1 rounded">Performance</span>
+                    </div>
+                </div>
+
+                <!-- Hooks Modelling -->
+                <div class="bg-gray-800/60 p-6 rounded-xl border border-green-500/20 hover:border-green-500/40 transition-all" data-reveal="up" data-delay="50">
+                    <h3 class="text-lg font-semibold text-green-400 mb-1">Hooks Modelling</h3>
+                    <p class="text-green-400/70 text-xs font-medium mb-3">Lightweight Integration Pattern</p>
+                    <p class="text-gray-400 text-sm mb-3">Minimalist integration layer connecting data sources while preserving source system semantics, enabling rapid integration with full traceability.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-green-500/10 text-green-400 text-xs px-2 py-1 rounded">Integration</span>
+                        <span class="bg-green-500/10 text-green-400 text-xs px-2 py-1 rounded">Agile</span>
+                    </div>
+                </div>
+
+                <!-- Data Vault Modelling -->
+                <div class="bg-gray-800/60 p-6 rounded-xl border border-green-500/20 hover:border-green-500/40 transition-all" data-reveal="up" data-delay="100">
+                    <h3 class="text-lg font-semibold text-green-400 mb-1">Data Vault Modelling</h3>
+                    <p class="text-green-400/70 text-xs font-medium mb-3">Hub, Link & Satellite Architecture</p>
+                    <p class="text-gray-400 text-sm mb-3">Industry-standard methodology for building scalable, auditable enterprise data warehouses with full historical tracking and parallel loading.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-green-500/10 text-green-400 text-xs px-2 py-1 rounded">Scalable</span>
+                        <span class="bg-green-500/10 text-green-400 text-xs px-2 py-1 rounded">Auditable</span>
+                    </div>
+                </div>
+
+                <!-- Focal Point Modelling -->
+                <div class="bg-gray-800/60 p-6 rounded-xl border border-green-500/20 hover:border-green-500/40 transition-all" data-reveal="up" data-delay="150">
+                    <h3 class="text-lg font-semibold text-green-400 mb-1">Focal Point Modelling</h3>
+                    <p class="text-green-400/70 text-xs font-medium mb-3">Business-Centric Organization</p>
+                    <p class="text-gray-400 text-sm mb-3">Structures data around key business focal points and their relationships, creating intuitive models that align with business thinking and processes.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-green-500/10 text-green-400 text-xs px-2 py-1 rounded">Business-Aligned</span>
+                        <span class="bg-green-500/10 text-green-400 text-xs px-2 py-1 rounded">Intuitive</span>
+                    </div>
+                </div>
+
+                <!-- Anchor Modelling -->
+                <div class="bg-gray-800/60 p-6 rounded-xl border border-green-500/20 hover:border-green-500/40 transition-all" data-reveal="up" data-delay="200">
+                    <h3 class="text-lg font-semibold text-green-400 mb-1">Anchor Modelling</h3>
+                    <p class="text-green-400/70 text-xs font-medium mb-3">6th Normal Form Design</p>
+                    <p class="text-gray-400 text-sm mb-3">Highly normalized approach using anchors, attributes, ties, and knots for maximum schema flexibility and comprehensive temporal tracking.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-green-500/10 text-green-400 text-xs px-2 py-1 rounded">Temporal</span>
+                        <span class="bg-green-500/10 text-green-400 text-xs px-2 py-1 rounded">Flexible</span>
+                    </div>
+                </div>
+
+                <!-- FCO-IM Modelling -->
+                <div class="bg-gray-800/60 p-6 rounded-xl border border-green-500/20 hover:border-green-500/40 transition-all" data-reveal="up" data-delay="250">
+                    <h3 class="text-lg font-semibold text-green-400 mb-1">FCO-IM Modelling</h3>
+                    <p class="text-green-400/70 text-xs font-medium mb-3">Fact-Oriented Conceptual Modeling</p>
+                    <p class="text-gray-400 text-sm mb-3">Fully Communication-Oriented Information Modeling creates precise conceptual models that bridge business requirements and technical implementation.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-green-500/10 text-green-400 text-xs px-2 py-1 rounded">Conceptual</span>
+                        <span class="bg-green-500/10 text-green-400 text-xs px-2 py-1 rounded">Precise</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="text-center" data-reveal="up">
+            <div class="inner-glow backdrop-blur-sm p-8 md:p-12 rounded-3xl shadow-2xl gradient-border">
+                <h3 class="text-2xl font-bold mb-4 text-white">Ready to Transform Your Data Ecosystem?</h3>
+                <p class="text-gray-400 max-w-2xl mx-auto mb-6">
+                    Let's discuss how our Data & AI Services can help you build a robust, scalable, and intelligent data foundation for your organization.
+                </p>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <a href="../contact.html" class="bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white font-semibold py-3 px-6 rounded-full transition duration-300 transform hover:scale-105 inline-block">
+                        Schedule a Consultation
+                    </a>
+                    <a href="../services.html" class="bg-transparent border-2 border-green-500 hover:border-green-400 text-green-400 hover:text-green-300 font-semibold py-3 px-6 rounded-full transition duration-300 transform hover:scale-105 inline-block">
+                        View All Services
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FAQ Section -->
+    <div id="faq-section"></div>
+
+    <!-- Footer -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Main Script (minified) -->
+    <script src="../js/main.min.js" defer></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        renderBreadcrumbs([
+            { name: 'Home', url: '../index.html' },
+            { name: 'Execution &amp; Capabilities', url: '../services.html' },
+            { name: 'Data &amp; AI Services' }
+        ]);
+    });
+    </script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        renderFAQ({
+            color: 'green',
+            faqs: [
+                { q: 'What makes YPT\'s Data &amp; AI delivery approach unique?', a: 'Unlike traditional vendors, YPT combines <a href="../strategic-advisory.html" style="color:#4ade80;text-decoration:underline;">strategic advisory</a> with hands-on execution. We assess, architect, and build data solutions while maintaining complete vendor neutrality, so technology choices are driven by your business needs, not vendor partnerships.' },
+                { q: 'Can YPT help with cloud data platform migration?', a: 'Yes, we specialize in data platform modernization and migration across all major cloud providers including AWS, Azure, Google Cloud, and Oracle Cloud. We assess your current state, design the target architecture, and execute the migration with minimal business disruption.' },
+                { q: 'What is YPT\'s approach to data governance?', a: 'We implement practical, adoption-friendly data governance frameworks that balance control with agility. This includes data cataloging, quality rules, lineage tracking, access policies, and stewardship models, all tailored to your organization\'s regulatory requirements and maturity level.' },
+                { q: 'Does YPT build custom AI and ML solutions?', a: 'Yes, we develop custom AI/ML solutions from ideation through production deployment. For organizations exploring autonomous workflows, we also offer specialized <a href="agentic-ai.html" style="color:#4ade80;text-decoration:underline;">Agentic AI services</a>. Our approach ensures solutions deliver measurable business value.' },
+                { q: 'How does YPT handle data strategy development?', a: 'Our data strategy engagements start with a comprehensive assessment using frameworks like the <a href="value-discovery-canvas.html" style="color:#4ade80;text-decoration:underline;">Value Discovery Canvas</a>. We develop a prioritized roadmap with clear milestones, investment requirements, and expected outcomes aligned to your strategic goals.' },
+                { q: 'What data platforms and technologies does YPT work with?', a: 'As a vendor-neutral firm, we work across the full spectrum: Snowflake, Databricks, Microsoft Fabric, BigQuery, Oracle, AWS data services, and more. See our independent evaluations on <a href="ltad2.html" style="color:#4ade80;text-decoration:underline;">LTAD 2.0</a> for unbiased platform assessments.' }
+            ]
+        });
+    });
+    </script>
+    <!-- Page Load & Scroll Reveal -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.body.classList.add('page-loaded');
+        var els = document.querySelectorAll('[data-reveal]');
+        var observer = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    var delay = parseInt(entry.target.getAttribute('data-delay') || '0', 10);
+                    setTimeout(function() { entry.target.classList.add('revealed'); }, delay);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.12 });
+        els.forEach(function(el) { observer.observe(el); });
+    });
+    </script>
+</body>
+</html>
