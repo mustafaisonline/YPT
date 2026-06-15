@@ -1,4 +1,16 @@
 User-agent: *
 Allow: /
+Disallow: /404.html
+Disallow: /genai.html
+Disallow: /four4s.html
+Disallow: /ltad.html
+Disallow: /ltad2.html
+Disallow: /data-ai-consultancy.html
+Disallow: /team.html
+Disallow: /contact/index.html
+Disallow: /services/index.html
+Disallow: /partners/
+Disallow: /author/
+Disallow: /testimonials/
 
 Sitemap: https://yourpartnertechnologies.com/sitemap.xml

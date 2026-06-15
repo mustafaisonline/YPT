@@ -63,6 +63,7 @@ function loadHeader() {
                             <a href="${prefix}services.html" class="view-all">View All &rarr;</a>
                         </div>
                     </div>
+                    <a href="${prefix}ai-powered-solutions.html" class="nav-link ${activeClass('ai-powered-solutions.html')}">AI Powered Solutions</a>
                     <a href="${prefix}trainings.html" class="nav-link ${activeClass('trainings.html')}">Trainings</a>
                     <a href="${prefix}case-studies.html" class="nav-link ${activeClass('case-studies.html')}">Case Studies</a>
                     <a href="${prefix}blog/" class="nav-link ${isBlogPage ? 'active' : ''}">Blog</a>
@@ -102,6 +103,7 @@ function loadHeader() {
                             <a href="${prefix}services.html">View All</a>
                         </div>
                     </div>
+                    <a href="${prefix}ai-powered-solutions.html" class="block py-2 px-4 ${mobileActiveClass('ai-powered-solutions.html')} transition">AI Powered Solutions</a>
                     <a href="${prefix}trainings.html" class="block py-2 px-4 ${mobileActiveClass('trainings.html')} transition">Trainings</a>
                     <a href="${prefix}case-studies.html" class="block py-2 px-4 ${mobileActiveClass('case-studies.html')} transition">Case Studies</a>
                     <a href="${prefix}blog/" class="block py-2 px-4 ${isBlogPage ? 'text-cyan-400' : 'text-gray-300 hover:text-cyan-400'} transition">Blog</a>
@@ -161,6 +163,7 @@ function loadFooter() {
                 <ul class="space-y-2 text-gray-400 text-sm">
                     <li><a href="${prefix}strategic-advisory.html" class="hover:text-cyan-400 transition">Strategic Advisory</a></li>
                     <li><a href="${prefix}services.html" class="hover:text-cyan-400 transition">Execution & Capabilities</a></li>
+                    <li><a href="${prefix}ai-powered-solutions.html" class="hover:text-amber-400 transition">AI Powered Solutions</a></li>
                     <li><a href="${prefix}trainings.html" class="hover:text-cyan-400 transition">Trainings</a></li>
                     <li><a href="${prefix}case-studies.html" class="hover:text-cyan-400 transition">Case Studies</a></li>
                     <li><a href="${prefix}about.html" class="hover:text-cyan-400 transition">Why YPT!</a></li>
@@ -467,12 +470,15 @@ function renderBreadcrumbs(items) {
 
     // Inject BreadcrumbList JSON-LD schema
     var schemaItems = items.map(function(item, i) {
-        return {
+        var entry = {
             '@type': 'ListItem',
             'position': i + 1,
-            'name': item.name,
-            'item': i < items.length - 1 ? 'https://yourpartnertechnologies.com/' + item.url.replace(/^\.\.\//, '') : undefined
+            'name': item.name
         };
+        if (i < items.length - 1) {
+            entry.item = 'https://yourpartnertechnologies.com/' + item.url.replace(/^\.\.\//, '');
+        }
+        return entry;
     });
     var schema = {
         '@context': 'https://schema.org',
@@ -564,6 +570,207 @@ function renderFAQ(config) {
     script.type = 'application/ld+json';
     script.textContent = JSON.stringify(schema);
     document.head.appendChild(script);
+}
+
+// Training Investment Pricing Component
+var TRAINING_INVESTMENT_DATA = {
+    courses: [
+        { id: 'data-ai-essentials', name: 'Data & AI Essentials', url: 'data-ai-essentials.html' },
+        { id: 'data-blueprint', name: 'The Data Blueprint', url: 'data-blueprint.html' },
+        { id: 'enterprise-data-modelling', name: 'Enterprise Data Modelling', url: 'enterprise-data-modelling.html' },
+        { id: 'enterprise-data-architecture', name: 'Enterprise Data Architecture', url: 'enterprise-data-architecture.html' },
+        { id: 'agentic-ai-strategy-adoption', name: 'Agentic AI Strategy & Adoption', url: 'agentic-ai-strategy-adoption.html' },
+        { id: 'ai-powered-product-development', name: 'AI-Powered Product Development', url: 'ai-powered-product-development.html', bonuses: ['PromptOS Starter Edition (RM 1,500+)', 'Data Blueprint Foundations Module (RM 1,499)', 'Product Development Templates &amp; Frameworks', 'Prompt Engineering Library', 'Capstone Project Assets', 'Certificate of Participation'] }
+    ],
+    regions: {
+        malaysia: {
+            key: 'malaysia',
+            tabLabel: '🇲🇾 Malaysia',
+            title: '🇲🇾 Malaysia',
+            subtitle: "Founder's Launch Offer",
+            badge: '🔥 Save Up To 50%',
+            discountLabel: 'Discount',
+            prices: {
+                'data-ai-essentials': { original: 'RM 1,398', discount: '50% OFF', save: 'RM 699', today: 'RM 699' },
+                'data-blueprint': { original: 'RM 2,998', discount: '50% OFF', save: 'RM 1,499', today: 'RM 1,499' },
+                'enterprise-data-modelling': { original: 'RM 4,998', discount: '50% OFF', save: 'RM 2,499', today: 'RM 2,499' },
+                'enterprise-data-architecture': { original: 'RM 5,998', discount: '50% OFF', save: 'RM 2,999', today: 'RM 2,999' },
+                'agentic-ai-strategy-adoption': { original: 'RM 3,998', discount: '50% OFF', save: 'RM 1,999', today: 'RM 1,999' },
+                'ai-powered-product-development': { original: 'RM 4,998', discount: '50% OFF', save: 'RM 2,499', today: 'RM 2,499' }
+            }
+        },
+        pakistan: {
+            key: 'pakistan',
+            tabLabel: '🇵🇰 Pakistan',
+            title: '🇵🇰 Pakistan',
+            subtitle: 'Regional Scholarship Program',
+            badge: '🎓 Regional Scholarship – Save 70%',
+            discountLabel: 'Scholarship',
+            prices: {
+                'data-ai-essentials': { original: 'Rs. 95,983.00', discount: '70% OFF', save: 'Rs. 67,188.10', today: 'Rs. 28,794.90' },
+                'data-blueprint': { original: 'Rs. 205,528.84', discount: '70% OFF', save: 'Rs. 143,870.19', today: 'Rs. 61,658.65' },
+                'enterprise-data-modelling': { original: 'Rs. 342,799.53', discount: '70% OFF', save: 'Rs. 239,959.67', today: 'Rs. 102,839.86' },
+                'enterprise-data-architecture': { original: 'Rs. 411,165.42', discount: '70% OFF', save: 'Rs. 287,815.79', today: 'Rs. 123,349.63' },
+                'agentic-ai-strategy-adoption': { original: 'Rs. 274,434.11', discount: '70% OFF', save: 'Rs. 192,103.88', today: 'Rs. 82,330.23' },
+                'ai-powered-product-development': { original: 'Rs. 342,799.53', discount: '70% OFF', save: 'Rs. 239,959.67', today: 'Rs. 102,839.86' }
+            }
+        },
+        international: {
+            key: 'international',
+            tabLabel: '🌍 International',
+            title: '🌍 International',
+            subtitle: 'Global Professional Pricing',
+            badge: '🌎 Global Launch Offer – Save 10%',
+            discountLabel: 'Discount',
+            prices: {
+                'data-ai-essentials': { original: 'USD 874', discount: '10% OFF', save: 'USD 88', today: 'USD 786' },
+                'data-blueprint': { original: 'USD 1,874', discount: '10% OFF', save: 'USD 188', today: 'USD 1,686' },
+                'enterprise-data-modelling': { original: 'USD 3,124', discount: '10% OFF', save: 'USD 313', today: 'USD 2,811' },
+                'enterprise-data-architecture': { original: 'USD 3,749', discount: '10% OFF', save: 'USD 375', today: 'USD 3,374' },
+                'agentic-ai-strategy-adoption': { original: 'USD 2,499', discount: '10% OFF', save: 'USD 250', today: 'USD 2,249' },
+                'ai-powered-product-development': { original: 'USD 3,124', discount: '10% OFF', save: 'USD 313', today: 'USD 2,811' }
+            }
+        }
+    }
+};
+
+function renderTrainingInvestment(config) {
+    var container = document.getElementById('training-investment-section');
+    if (!container || !config) return;
+
+    var colorMap = {
+        cyan:   { accent: '#22d3ee', accentRgb: '34,211,238', border: 'rgba(34,211,238,0.25)', bg: 'rgba(34,211,238,0.08)', gradient: 'linear-gradient(to right, #06b6d4, #22d3ee)' },
+        blue:   { accent: '#60a5fa', accentRgb: '96,165,250', border: 'rgba(96,165,250,0.25)', bg: 'rgba(96,165,250,0.08)', gradient: 'linear-gradient(to right, #3b82f6, #60a5fa)' },
+        purple: { accent: '#c084fc', accentRgb: '192,132,252', border: 'rgba(192,132,252,0.25)', bg: 'rgba(192,132,252,0.08)', gradient: 'linear-gradient(to right, #a855f7, #c084fc)' },
+        green:  { accent: '#4ade80', accentRgb: '74,222,128', border: 'rgba(74,222,128,0.25)', bg: 'rgba(74,222,128,0.08)', gradient: 'linear-gradient(to right, #22c55e, #4ade80)' },
+        pink:   { accent: '#f472b6', accentRgb: '244,114,182', border: 'rgba(244,114,182,0.25)', bg: 'rgba(244,114,182,0.08)', gradient: 'linear-gradient(to right, #ec4899, #f472b6)' },
+        orange: { accent: '#fb923c', accentRgb: '251,146,60', border: 'rgba(251,146,60,0.25)', bg: 'rgba(251,146,60,0.08)', gradient: 'linear-gradient(to right, #f97316, #fb923c)' }
+    };
+
+    var theme = colorMap[config.color] || colorMap.cyan;
+    var data = TRAINING_INVESTMENT_DATA;
+    var currentCourse = config.course || null;
+    var cssVars = '--ti-accent:' + theme.accent + ';--ti-accent-rgb:' + theme.accentRgb + ';--ti-border:' + theme.border + ';--ti-bg:' + theme.bg + ';--ti-gradient:' + theme.gradient + ';';
+
+    function buildRows(region) {
+        var rowsHtml = '';
+        data.courses.forEach(function(course) {
+            var price = region.prices[course.id];
+            if (!price) return;
+            var isCurrent = course.id === currentCourse;
+            var rowClass = 'ti-row' + (isCurrent ? ' ti-row-current' : '');
+            var badge = isCurrent ? '<span class="ti-viewing-badge">⭐ You\'re Viewing This Course</span>' : '';
+            var nameCell = isCurrent
+                ? '<span class="ti-program-name">' + course.name + '</span>' + badge
+                : '<a href="' + course.url + '" class="ti-program-link">' + course.name + '</a>';
+            if (course.bonuses && course.bonuses.length) {
+                nameCell += '<div class="ti-included-bonuses"><span class="ti-included-label">Included FREE</span><ul class="ti-included-list">';
+                course.bonuses.forEach(function(item) {
+                    nameCell += '<li>' + item + '</li>';
+                });
+                nameCell += '</ul></div>';
+            }
+
+            rowsHtml += '<tr class="' + rowClass + '" data-course="' + course.id + '">';
+            rowsHtml += '<td class="ti-cell-program" data-label="Training Program">' + nameCell + '</td>';
+            rowsHtml += '<td class="ti-cell-original" data-label="Original Price"><span class="ti-original">' + price.original + '</span></td>';
+            rowsHtml += '<td class="ti-cell-discount" data-label="' + region.discountLabel + '"><span class="ti-discount-badge">' + price.discount + '</span></td>';
+            rowsHtml += '<td class="ti-cell-save" data-label="You Save"><span class="ti-save">' + price.save + '</span></td>';
+            rowsHtml += '<td class="ti-cell-today" data-label="Today"><span class="ti-today">' + price.today + '</span></td>';
+            rowsHtml += '</tr>';
+        });
+        return rowsHtml;
+    }
+
+    function buildPanel(region, isActive) {
+        var panelId = 'ti-panel-' + region.key;
+        var hidden = isActive ? '' : ' hidden';
+        var html = '<div id="' + panelId + '" class="ti-panel" role="tabpanel" aria-labelledby="ti-tab-' + region.key + '"' + hidden + '>';
+        html += '<div class="ti-region-header">';
+        html += '<div><h3 class="ti-region-title">' + region.title + '</h3>';
+        html += '<p class="ti-region-subtitle">' + region.subtitle + '</p></div>';
+        html += '<span class="ti-region-badge">' + region.badge + '</span>';
+        html += '</div>';
+        html += '<div class="ti-table-wrap"><table class="ti-table"><thead><tr>';
+        html += '<th scope="col">Training Program</th>';
+        html += '<th scope="col">Original Price</th>';
+        html += '<th scope="col">' + region.discountLabel + '</th>';
+        html += '<th scope="col">You Save</th>';
+        html += '<th scope="col">Today</th>';
+        html += '</tr></thead><tbody>' + buildRows(region) + '</tbody></table></div>';
+        html += '</div>';
+        return html;
+    }
+
+    var isSidebar = config.layout === 'sidebar';
+    var sectionClass = 'training-investment-section' + (isSidebar ? ' training-investment-section--sidebar' : ' mb-16');
+    var headingSize = isSidebar ? 'text-2xl' : 'text-3xl';
+    var introMargin = isSidebar ? 'mb-6' : 'mb-8';
+
+    var regionKeys = ['malaysia', 'pakistan', 'international'];
+    var html = '<section class="' + sectionClass + '" style="' + cssVars + '" data-reveal="up">';
+    html += '<div class="ti-inner inner-glow backdrop-blur-sm p-6 md:p-10 rounded-3xl shadow-2xl gradient-border">';
+    html += '<h2 class="' + headingSize + ' font-bold text-center mb-3 text-gradient from-blue-400 to-cyan-400">Training Investment</h2>';
+    if (!isSidebar) {
+        html += '<p class="text-gray-400 text-center max-w-3xl mx-auto mb-2">Invest in practical Data &amp; AI skills delivered by industry practitioners with real-world enterprise experience.</p>';
+        html += '<p class="text-gray-500 text-center text-sm max-w-2xl mx-auto ' + introMargin + '">Choose the pricing option that best fits your location and learning needs.</p>';
+    } else {
+        html += '<p class="text-gray-400 text-center text-sm mb-2">Practical Data &amp; AI skills from industry practitioners.</p>';
+        html += '<p class="text-gray-500 text-center text-xs mb-6">Choose your region to view pricing.</p>';
+    }
+
+    html += '<div class="ti-tabs" role="tablist" aria-label="Training pricing by region">';
+    regionKeys.forEach(function(key, i) {
+        var region = data.regions[key];
+        var active = i === 0 ? ' ti-tab-active' : '';
+        var selected = i === 0 ? 'true' : 'false';
+        html += '<button type="button" class="ti-tab' + active + '" id="ti-tab-' + key + '" role="tab" aria-selected="' + selected + '" aria-controls="ti-panel-' + key + '" data-region="' + key + '">' + region.tabLabel + '</button>';
+    });
+    html += '</div>';
+
+    html += '<div class="ti-panels">';
+    regionKeys.forEach(function(key, i) {
+        html += buildPanel(data.regions[key], i === 0);
+    });
+    html += '</div>';
+
+    html += '<div class="ti-corporate' + (isSidebar ? ' ti-corporate--compact' : '') + '">';
+    html += '<h3 class="ti-corporate-title">Corporate Training Pricing</h3>';
+    html += '<p class="ti-corporate-intro">Customized pricing is available for:</p>';
+    html += '<ul class="ti-corporate-list">';
+    ['Corporate Workshops', 'Private Team Training', 'Executive Leadership Sessions', 'Government Programs', 'University Programs', 'Graduate Development Programs'].forEach(function(item) {
+        html += '<li>' + item + '</li>';
+    });
+    html += '</ul>';
+    html += '<p class="ti-corporate-note">Pricing depends on number of participants, delivery mode, duration, customization requirements, and location.</p>';
+    html += '<div class="ti-corporate-cta-wrap"><a href="contact.html" class="ti-corporate-cta" style="background: var(--ti-gradient);">Request Corporate Training Proposal</a></div>';
+    html += '</div>';
+
+    html += '<div class="ti-trust' + (isSidebar ? ' ti-trust--compact' : '') + '">';
+    ['Certificate of Participation', 'Real-World Industry Examples', 'Delivered by Industry Practitioners', 'Onsite, Virtual &amp; Hybrid Delivery', 'Corporate &amp; Public Programs Available'].forEach(function(item) {
+        html += '<div class="ti-trust-item"><svg xmlns="http://www.w3.org/2000/svg" class="ti-trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-8.64"/><path d="M22 4L12 14.01l-3-3"/></svg><span>' + item + '</span></div>';
+    });
+    html += '</div>';
+
+    html += '</div></section>';
+    container.innerHTML = html;
+
+    var tabs = container.querySelectorAll('.ti-tab');
+    var panels = container.querySelectorAll('.ti-panel');
+    tabs.forEach(function(tab) {
+        tab.addEventListener('click', function() {
+            var region = tab.getAttribute('data-region');
+            tabs.forEach(function(t) {
+                t.classList.remove('ti-tab-active');
+                t.setAttribute('aria-selected', 'false');
+            });
+            panels.forEach(function(p) { p.hidden = true; });
+            tab.classList.add('ti-tab-active');
+            tab.setAttribute('aria-selected', 'true');
+            var panel = container.querySelector('#ti-panel-' + region);
+            if (panel) panel.hidden = false;
+        });
+    });
 }
 
 // Initialize all functionality on DOM load

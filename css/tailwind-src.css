@@ -30,4 +30,8 @@
   .text-gradient.from-pink-400.to-purple-400 {
     background-image: linear-gradient(to right, #f472b6, #c084fc);
   }
+
+  .text-gradient.from-amber-400.to-cyan-400 {
+    background-image: linear-gradient(to right, #fbbf24, #22d3ee);
+  }
 }
