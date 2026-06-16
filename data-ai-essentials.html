@@ -206,6 +206,8 @@
 
     <main id="main-content" class="container mx-auto px-4 pt-16 pb-4 relative z-10">
 
+        <div id="wiify-section"></div>
+
         <!-- Course Information Summary -->
         <section class="mb-16" data-reveal="up">
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
@@ -599,6 +601,7 @@
     <div id="faq-section"></div>
     <div id="footer-placeholder"></div>
 
+    <script src="js/wiify-data.min.js" defer></script>
     <script src="js/main.min.js" defer></script>
     <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -607,6 +610,11 @@
             { name: 'Training Programs', url: 'trainings.html' },
             { name: 'Data &amp; AI Essentials' }
         ]);
+    });
+    </script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        renderWiifySection({ course: 'data-ai-essentials' });
     });
     </script>
     <script>

@@ -773,6 +773,87 @@ function renderTrainingInvestment(config) {
     });
 }
 
+// What's In It For You — premium transformation section
+function wiifyIcon(name) {
+    return (typeof WIIFY_ICONS !== 'undefined' && WIIFY_ICONS[name]) ? WIIFY_ICONS[name] : WIIFY_ICONS.check;
+}
+
+function renderWiifySection(config) {
+    var container = document.getElementById('wiify-section');
+    if (!container || !config || !config.course) return;
+    if (typeof WIIFY_DATA === 'undefined' || !WIIFY_DATA[config.course]) return;
+
+    var data = WIIFY_DATA[config.course];
+    var pathColors = WIIFY_PATH_COLORS || ['cyan', 'blue', 'purple', 'green'];
+    var outcomeColors = WIIFY_OUTCOME_COLORS || ['cyan', 'purple', 'green', 'blue'];
+
+    function buildPath(pathSteps) {
+        var html = '';
+        pathSteps.forEach(function(step, i) {
+            if (i > 0) html += '<div class="wiify-path-arrow" aria-hidden="true">&#8595;</div>';
+            var color = pathColors[i % pathColors.length];
+            html += '<div class="wiify-path-step">';
+            html += '<div class="wiify-path-icon wiify-path-icon--' + color + '" aria-hidden="true">' + wiifyIcon(step.icon) + '</div>';
+            html += '<span class="wiify-path-label">' + step.label + '</span></div>';
+        });
+        return html;
+    }
+
+    function buildOutcomes(outcomes) {
+        var html = '';
+        outcomes.forEach(function(o, i) {
+            var color = o.iconColor || outcomeColors[i % outcomeColors.length];
+            html += '<div class="wiify-outcome-row">';
+            html += '<div class="wiify-outcome-icon wiify-outcome-icon--' + color + '" aria-hidden="true">' + wiifyIcon(o.icon) + '</div>';
+            html += '<div class="wiify-outcome-copy"><h3>' + o.title + '</h3><p>' + o.description + '</p>';
+            if (o.example) html += '<p class="wiify-card-example"><strong>Example:</strong> ' + o.example + '</p>';
+            html += '</div><div class="wiify-outcome-accent" aria-hidden="true"><span></span></div></div>';
+        });
+        return html;
+    }
+
+    var tabsHtml = '';
+    var panelsHtml = '';
+    data.tabs.forEach(function(tab, i) {
+        var active = i === 0 ? ' wiify-tab-active' : '';
+        var selected = i === 0 ? 'true' : 'false';
+        var hidden = i === 0 ? '' : ' hidden';
+        tabsHtml += '<button type="button" class="wiify-tab' + active + '" id="wiify-tab-' + tab.id + '" role="tab" aria-selected="' + selected + '" aria-controls="wiify-panel-' + tab.id + '" data-audience="' + tab.id + '">' + wiifyIcon(tab.tabIcon) + '<span>' + tab.label + '</span></button>';
+        panelsHtml += '<div id="wiify-panel-' + tab.id + '" class="wiify-panel" role="tabpanel" aria-labelledby="wiify-tab-' + tab.id + '"' + hidden + '>';
+        panelsHtml += '<div class="wiify-panel-body"><div class="wiify-path-col">';
+        panelsHtml += '<div class="wiify-path-header"><span class="wiify-path-line"></span><span>Your Transformation</span><span class="wiify-path-line"></span></div>';
+        panelsHtml += '<div class="wiify-path">' + buildPath(tab.path) + '</div></div>';
+        panelsHtml += '<div class="wiify-outcomes-col"><p class="wiify-outcomes-heading">' + tab.heading + '</p>';
+        panelsHtml += '<div class="wiify-outcome-list">' + buildOutcomes(tab.outcomes) + '</div></div></div></div>';
+    });
+
+    container.innerHTML = '<section class="mb-16 wiify-section" id="whats-in-it-for-you" data-reveal="up">' +
+        '<div class="inner-glow backdrop-blur-sm p-8 md:p-12 rounded-3xl shadow-2xl gradient-border max-w-6xl mx-auto">' +
+        '<h2 class="text-3xl font-bold text-center mb-3 text-gradient from-blue-400 to-cyan-400">What\'s In It For You?</h2>' +
+        '<p class="text-gray-400 text-center max-w-3xl mx-auto mb-8 text-sm md:text-base leading-relaxed">' + data.subtitle + '</p>' +
+        '<div class="wiify-tabs" role="tablist" aria-label="Audience benefits">' + tabsHtml + '</div>' +
+        panelsHtml + '</div></section>';
+
+    var section = container.querySelector('.wiify-section');
+    if (!section) return;
+    var tabs = section.querySelectorAll('.wiify-tab');
+    var panels = section.querySelectorAll('.wiify-panel');
+    tabs.forEach(function(tab) {
+        tab.addEventListener('click', function() {
+            var audience = tab.getAttribute('data-audience');
+            tabs.forEach(function(t) {
+                t.classList.remove('wiify-tab-active');
+                t.setAttribute('aria-selected', 'false');
+            });
+            panels.forEach(function(p) { p.hidden = true; });
+            tab.classList.add('wiify-tab-active');
+            tab.setAttribute('aria-selected', 'true');
+            var panel = section.querySelector('#wiify-panel-' + audience);
+            if (panel) panel.hidden = false;
+        });
+    });
+}
+
 // Initialize all functionality on DOM load
 document.addEventListener('DOMContentLoaded', () => {
     loadHeader();

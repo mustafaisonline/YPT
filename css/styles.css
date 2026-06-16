@@ -1239,3 +1239,54 @@ body {
 .breadcrumbs-current {
     color: #9ca3af;
 }
+
+/* What's In It For You — premium transformation section */
+.wiify-section .wiify-tabs { display: flex; flex-wrap: nowrap; gap: 0.5rem; overflow-x: auto; padding-bottom: 0.5rem; margin-bottom: 1.75rem; -webkit-overflow-scrolling: touch; scrollbar-width: thin; justify-content: flex-start; }
+@media (min-width: 1024px) { .wiify-section .wiify-tabs { justify-content: center; } }
+.wiify-section .wiify-tabs::-webkit-scrollbar { height: 4px; }
+.wiify-section .wiify-tabs::-webkit-scrollbar-thumb { background: rgba(34, 211, 238, 0.35); border-radius: 4px; }
+.wiify-tab { flex-shrink: 0; display: inline-flex; align-items: center; gap: 0.45rem; padding: 0.6rem 1rem; border-radius: 9999px; font-size: 0.78rem; font-weight: 600; color: #9ca3af; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); cursor: pointer; transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease; white-space: nowrap; }
+.wiify-tab svg { width: 0.95rem; height: 0.95rem; flex-shrink: 0; opacity: 0.85; }
+.wiify-tab:hover { color: #e5e7eb; border-color: rgba(34, 211, 238, 0.35); }
+.wiify-tab-active { color: #fff; background: rgba(34, 211, 238, 0.1); border-color: rgba(34, 211, 238, 0.6); box-shadow: 0 0 24px rgba(34, 211, 238, 0.22), inset 0 0 20px rgba(34, 211, 238, 0.06); }
+.wiify-tab-active svg { color: #67e8f9; opacity: 1; }
+.wiify-panel { animation: wiify-fade 0.35s ease; }
+.wiify-panel[hidden] { display: none; }
+@keyframes wiify-fade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+.wiify-panel-body { display: grid; grid-template-columns: 1fr; gap: 1.75rem; background: rgba(10, 18, 32, 0.55); border: 1px solid rgba(34, 211, 238, 0.15); border-radius: 1.25rem; padding: 1.5rem; position: relative; overflow: hidden; }
+@media (min-width: 900px) { .wiify-panel-body { grid-template-columns: 220px 1fr; gap: 2rem; padding: 2rem; } }
+.wiify-panel-body::before { content: ''; position: absolute; width: 280px; height: 280px; border-radius: 50%; background: radial-gradient(circle, rgba(34, 211, 238, 0.08) 0%, transparent 70%); left: -80px; top: 50%; transform: translateY(-50%); pointer-events: none; }
+.wiify-path-col { position: relative; z-index: 1; }
+.wiify-path-header { display: flex; align-items: center; gap: 0.65rem; margin-bottom: 1.25rem; }
+.wiify-path-header span:not(.wiify-path-line) { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #67e8f9; white-space: nowrap; }
+.wiify-path-line { flex: 1; height: 1px; background: linear-gradient(90deg, transparent, rgba(34, 211, 238, 0.35), transparent); }
+.wiify-path { display: flex; flex-direction: column; align-items: center; gap: 0.15rem; }
+.wiify-path-step { display: flex; flex-direction: column; align-items: center; gap: 0.4rem; }
+.wiify-path-icon { width: 3.25rem; height: 3.25rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 2px solid; background: rgba(15, 23, 42, 0.8); box-shadow: 0 0 20px rgba(34, 211, 238, 0.12); }
+.wiify-path-icon svg { width: 1.35rem; height: 1.35rem; }
+.wiify-path-icon--cyan { border-color: rgba(34, 211, 238, 0.5); color: #22d3ee; }
+.wiify-path-icon--blue { border-color: rgba(96, 165, 250, 0.5); color: #60a5fa; }
+.wiify-path-icon--purple { border-color: rgba(192, 132, 252, 0.5); color: #c084fc; }
+.wiify-path-icon--green { border-color: rgba(74, 222, 128, 0.5); color: #4ade80; }
+.wiify-path-label { font-size: 0.78rem; font-weight: 600; color: #e5e7eb; text-align: center; line-height: 1.3; max-width: 7rem; }
+.wiify-path-arrow { color: #22d3ee; font-size: 0.85rem; line-height: 1; padding: 0.15rem 0; opacity: 0.8; }
+.wiify-outcomes-col { position: relative; z-index: 1; min-width: 0; }
+.wiify-outcomes-heading { font-size: 1.05rem; font-weight: 600; color: #d1d5db; margin-bottom: 1.25rem; line-height: 1.4; }
+.wiify-outcomes-heading strong { color: #67e8f9; font-weight: 700; }
+.wiify-outcome-list { display: flex; flex-direction: column; gap: 0.85rem; }
+.wiify-outcome-row { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 0.85rem; padding: 1rem 1.1rem; border-radius: 0.875rem; background: rgba(15, 23, 42, 0.55); border: 1px solid rgba(255, 255, 255, 0.07); transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease; }
+.wiify-outcome-row:hover { border-color: rgba(34, 211, 238, 0.28); transform: translateX(3px); box-shadow: 0 4px 20px rgba(34, 211, 238, 0.06); }
+.wiify-outcome-icon { width: 2.5rem; height: 2.5rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; border: 1.5px solid; }
+.wiify-outcome-icon svg { width: 1.1rem; height: 1.1rem; }
+.wiify-outcome-icon--cyan { border-color: rgba(34, 211, 238, 0.45); color: #22d3ee; background: rgba(34, 211, 238, 0.1); }
+.wiify-outcome-icon--purple { border-color: rgba(192, 132, 252, 0.45); color: #c084fc; background: rgba(192, 132, 252, 0.1); }
+.wiify-outcome-icon--green { border-color: rgba(74, 222, 128, 0.45); color: #4ade80; background: rgba(74, 222, 128, 0.1); }
+.wiify-outcome-icon--blue { border-color: rgba(96, 165, 250, 0.45); color: #60a5fa; background: rgba(96, 165, 250, 0.1); }
+.wiify-outcome-copy h3 { font-size: 0.9rem; font-weight: 700; color: #fff; margin-bottom: 0.3rem; line-height: 1.35; }
+.wiify-outcome-copy p { font-size: 0.78rem; color: #9ca3af; line-height: 1.55; margin: 0; }
+.wiify-outcome-copy .wiify-card-example { margin-top: 0.45rem; font-size: 0.72rem; color: #6b7280; line-height: 1.5; }
+.wiify-outcome-copy .wiify-card-example strong { color: #93c5fd; }
+.wiify-outcome-accent { display: flex; align-items: center; gap: 0.35rem; width: 2.5rem; flex-shrink: 0; }
+.wiify-outcome-accent::before { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, rgba(34, 211, 238, 0.35), rgba(34, 211, 238, 0.05)); }
+.wiify-outcome-accent span { width: 7px; height: 7px; border-radius: 50%; background: #22d3ee; box-shadow: 0 0 8px rgba(34, 211, 238, 0.7); flex-shrink: 0; }
+@media (max-width: 640px) { .wiify-outcome-accent { display: none; } .wiify-outcome-row { grid-template-columns: auto 1fr; } }
