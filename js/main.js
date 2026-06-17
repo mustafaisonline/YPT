@@ -40,7 +40,7 @@ function loadHeader() {
                     <a href="${prefix}strategic-advisory.html" class="nav-link ${activeClass('strategic-advisory.html')}">Strategic Advisory</a>
                     <div class="services-dropdown">
                         <a href="${prefix}services.html" class="nav-link dropdown-toggle ${activeClass('services.html')}">
-                            Executive Service
+                            Executive Services
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
                         </a>
                         <div class="dropdown-menu">
@@ -89,7 +89,7 @@ function loadHeader() {
                     <a href="${prefix}strategic-advisory.html" class="block py-2 px-4 ${mobileActiveClass('strategic-advisory.html')} transition">Strategic Advisory</a>
                     <div class="mobile-services-dropdown">
                         <div class="block py-2 px-4 ${mobileActiveClass('services.html')} transition mobile-dropdown-toggle cursor-pointer">
-                            Executive Service
+                            Executive Services
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 inline ml-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
                         </div>
                         <div class="mobile-dropdown-menu">
@@ -158,7 +158,7 @@ function loadFooter() {
                 <h5 class="text-white font-semibold mb-4">Quick Links</h5>
                 <ul class="space-y-2 text-gray-400 text-sm">
                     <li><a href="${prefix}strategic-advisory.html" class="hover:text-cyan-400 transition">Strategic Advisory</a></li>
-                    <li><a href="${prefix}services.html" class="hover:text-cyan-400 transition">Executive Service</a></li>
+                    <li><a href="${prefix}services.html" class="hover:text-cyan-400 transition">Executive Services</a></li>
                     <li><a href="${prefix}ai-powered-consulting.html" class="hover:text-amber-400 transition">AI Powered Consulting</a></li>
                     <li><a href="${prefix}trainings.html" class="hover:text-cyan-400 transition">Trainings</a></li>
                     <li><a href="${prefix}case-studies.html" class="hover:text-cyan-400 transition">Case Studies</a></li>
@@ -167,7 +167,7 @@ function loadFooter() {
                 </ul>
             </div>
             <div>
-                <h5 class="text-white font-semibold mb-4">Executive Service</h5>
+                <h5 class="text-white font-semibold mb-4">Executive Services</h5>
                 <ul class="space-y-2 text-gray-400 text-sm">
                     <li><a href="${svcPrefix}value-discovery-canvas.html" class="hover:text-cyan-400 transition">Value Discovery Canvas</a></li>
                     <li><a href="${svcPrefix}agentic-ai.html" class="hover:text-cyan-400 transition">Agentic AI</a></li>
