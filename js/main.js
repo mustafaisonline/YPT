@@ -9,7 +9,7 @@ function loadHeader() {
         // Check if we're in a subdirectory
         const isServicePage = window.location.pathname.includes('/services/');
         const isBlogPage = window.location.pathname.includes('/blog/');
-        const isSubpage = window.location.pathname.includes('/team/') || window.location.pathname.includes('/case-studies/');
+        const isSubpage = window.location.pathname.includes('/team/') || window.location.pathname.includes('/case-studies/') || window.location.pathname.includes('/partnerships/');
         const prefix = (isSubpage || isServicePage || isBlogPage) ? '../' : '';
         const svcPrefix = isServicePage ? '' : (isSubpage || isBlogPage ? '../services/' : 'services/');
 
@@ -18,6 +18,7 @@ function loadHeader() {
             if (page === 'services.html' && (currentPage === 'value-discovery-canvas.html' || currentPage === 'agentic-ai.html' || currentPage === 'data-ai-services.html' || currentPage === 'ltad2.html' || currentPage === 'ltad.html')) return true;
             if (page === 'about.html' && window.location.pathname.includes('/team/')) return true;
             if (page === 'case-studies.html' && (currentPage === 'case-studies.html' || window.location.pathname.includes('/case-studies/'))) return true;
+            if (page === 'partnerships.html' && (currentPage === 'partnerships.html' || window.location.pathname.includes('/partnerships/'))) return true;
             return false;
         };
 
@@ -65,6 +66,7 @@ function loadHeader() {
                     </div>
                     <a href="${prefix}ai-powered-consulting.html" class="nav-link ${activeClass('ai-powered-consulting.html')}">AI Powered Consulting</a>
                     <a href="${prefix}trainings.html" class="nav-link ${activeClass('trainings.html')}">Trainings</a>
+                    <a href="${prefix}partnerships.html" class="nav-link ${activeClass('partnerships.html')}">Partnerships</a>
                     <a href="${prefix}about.html" class="nav-link ${activeClass('about.html')}">Why YPT!</a>
                     <a href="https://wa.me/601123209594" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-white text-sm font-semibold transition" style="background:#25D366;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'" aria-label="Chat on WhatsApp">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
@@ -103,6 +105,7 @@ function loadHeader() {
                     </div>
                     <a href="${prefix}ai-powered-consulting.html" class="block py-2 px-4 ${mobileActiveClass('ai-powered-consulting.html')} transition">AI Powered Consulting</a>
                     <a href="${prefix}trainings.html" class="block py-2 px-4 ${mobileActiveClass('trainings.html')} transition">Trainings</a>
+                    <a href="${prefix}partnerships.html" class="block py-2 px-4 ${mobileActiveClass('partnerships.html')} transition">Partnerships</a>
                     <a href="${prefix}about.html" class="block py-2 px-4 ${mobileActiveClass('about.html')} transition">Why YPT!</a>
                     <a href="https://wa.me/601123209594" target="_blank" rel="noopener noreferrer" class="block py-2 px-4 hover:text-green-300 transition" style="color:#25D366;">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 inline mr-1" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
@@ -142,7 +145,7 @@ function loadFooter() {
         // Determine if we're in a subdirectory
         const isServicePage = window.location.pathname.includes('/services/');
         const isBlogPage = window.location.pathname.includes('/blog/');
-        const isSubpage = window.location.pathname.includes('/team/') || window.location.pathname.includes('/case-studies/');
+        const isSubpage = window.location.pathname.includes('/team/') || window.location.pathname.includes('/case-studies/') || window.location.pathname.includes('/partnerships/');
         const prefix = (isSubpage || isServicePage || isBlogPage) ? '../' : '';
         const svcPrefix = isServicePage ? '' : (isSubpage || isBlogPage ? '../services/' : 'services/');
 
@@ -161,6 +164,7 @@ function loadFooter() {
                     <li><a href="${prefix}services.html" class="hover:text-cyan-400 transition">Executive Services</a></li>
                     <li><a href="${prefix}ai-powered-consulting.html" class="hover:text-amber-400 transition">AI Powered Consulting</a></li>
                     <li><a href="${prefix}trainings.html" class="hover:text-cyan-400 transition">Trainings</a></li>
+                    <li><a href="${prefix}partnerships.html" class="hover:text-cyan-400 transition">Partnerships</a></li>
                     <li><a href="${prefix}case-studies.html" class="hover:text-cyan-400 transition">Case Studies</a></li>
                     <li><a href="${prefix}about.html" class="hover:text-cyan-400 transition">Why YPT!</a></li>
                     <li><a href="${prefix}contact.html" class="hover:text-cyan-400 transition">Contact</a></li>
