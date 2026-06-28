@@ -1070,6 +1070,205 @@ body {
     color: #4ade80;
     flex-shrink: 0;
 }
+.ti-packages-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.25rem;
+    margin-bottom: 1.5rem;
+}
+.ti-package-card {
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.03);
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+.ti-package-card--featured {
+    border-color: var(--ti-border);
+    background: rgba(var(--ti-accent-rgb), 0.08);
+    box-shadow: 0 0 24px rgba(var(--ti-accent-rgb), 0.12);
+}
+.ti-package-badge {
+    display: inline-flex;
+    align-items: center;
+    align-self: flex-start;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+.ti-package-badge--default {
+    color: var(--ti-accent);
+    background: rgba(var(--ti-accent-rgb), 0.15);
+    border: 1px solid var(--ti-border);
+}
+.ti-package-badge--featured {
+    color: var(--ti-accent);
+    background: rgba(var(--ti-accent-rgb), 0.15);
+    border: 1px solid var(--ti-border);
+}
+.ti-package-badge--executive {
+    color: #c084fc;
+    background: rgba(192, 132, 252, 0.15);
+    border: 1px solid rgba(192, 132, 252, 0.3);
+}
+.ti-package-name {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 1rem;
+}
+.ti-package-meta {
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+.ti-package-pricing {
+    margin-bottom: 1rem;
+    padding: 1rem;
+    border-radius: 0.75rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+}
+.ti-package-pricing-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin-bottom: 0.5rem;
+}
+.ti-package-pricing-row:last-child {
+    margin-bottom: 0;
+}
+.ti-package-pricing-row--today {
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+.ti-package-pricing-row--today .ti-today {
+    font-size: 1.25rem;
+}
+.ti-panel .ti-packages-grid {
+    margin-top: 1.5rem;
+}
+.ti-package-meta-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin-bottom: 0.5rem;
+}
+.ti-package-meta-row:last-child {
+    margin-bottom: 0;
+}
+.ti-package-meta-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #9ca3af;
+}
+.ti-package-price {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--ti-accent);
+}
+.ti-package-meta-value {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #e5e7eb;
+    text-align: right;
+}
+.ti-package-ideal {
+    font-size: 0.8rem;
+    line-height: 1.5;
+    color: #9ca3af;
+    margin-bottom: 1rem;
+}
+.ti-package-ideal-label {
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #9ca3af;
+    margin-bottom: 0.35rem;
+}
+.ti-package-includes {
+    flex-grow: 1;
+    margin-bottom: 1.25rem;
+}
+.ti-package-includes-label {
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #9ca3af;
+    margin-bottom: 0.5rem;
+}
+.ti-package-includes-lead {
+    font-size: 0.8rem;
+    color: #d1d5db;
+    margin-bottom: 0.5rem;
+}
+.ti-package-includes-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.ti-package-includes-list li {
+    font-size: 0.8rem;
+    line-height: 1.45;
+    color: #d1d5db;
+    padding-left: 1rem;
+    position: relative;
+    margin-bottom: 0.35rem;
+}
+.ti-package-includes-list li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: var(--ti-accent);
+}
+.ti-package-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border-radius: 9999px;
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-align: center;
+    text-decoration: none;
+    transition: transform 0.25s ease, opacity 0.25s ease;
+    margin-top: auto;
+}
+.ti-package-cta:hover {
+    transform: scale(1.03);
+    opacity: 0.92;
+}
+.ti-package-footnote {
+    text-align: center;
+    font-size: 0.875rem;
+    font-style: italic;
+    color: #9ca3af;
+    max-width: 42rem;
+    margin: 0 auto 0.5rem;
+}
+@media (max-width: 1024px) {
+    .ti-packages-grid {
+        grid-template-columns: 1fr;
+        max-width: 28rem;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
 @media (max-width: 768px) {
     .ti-table {
         min-width: 0;

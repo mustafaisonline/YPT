@@ -580,7 +580,8 @@ var TRAINING_INVESTMENT_DATA = {
         { id: 'enterprise-data-modelling', name: 'Enterprise Data Modelling', url: 'enterprise-data-modelling.html' },
         { id: 'enterprise-data-architecture', name: 'Enterprise Data Architecture', url: 'enterprise-data-architecture.html' },
         { id: 'agentic-ai-strategy-adoption', name: 'Agentic AI Strategy & Adoption', url: 'agentic-ai-strategy-adoption.html' },
-        { id: 'ai-powered-product-development', name: 'AI-Powered Product Development', url: 'ai-powered-product-development.html', bonuses: ['PromptOS Starter Edition (RM 1,500+)', 'Data Blueprint Foundations Module (RM 1,499)', 'Product Development Templates &amp; Frameworks', 'Prompt Engineering Library', 'Capstone Project Assets', 'Certificate of Participation'] }
+        { id: 'ai-powered-product-development', name: 'AI-Powered Product Development', url: 'ai-powered-product-development.html', bonuses: ['PromptOS Starter Edition (RM 1,500+)', 'Data Blueprint Foundations Module (RM 1,499)', 'Product Development Templates &amp; Frameworks', 'Prompt Engineering Library', 'Capstone Project Assets', 'Certificate of Participation'] },
+        { id: 'data-ai-career-mentorship-program', name: 'Data &amp; AI Career Mentorship Program', url: 'data-ai-career-mentorship-program.html', isMentorshipProgram: true }
     ],
     regions: {
         malaysia: {
@@ -634,6 +635,157 @@ var TRAINING_INVESTMENT_DATA = {
     }
 };
 
+var MENTORSHIP_INVESTMENT_PACKAGES = [
+    {
+        id: 'career-assessment',
+        badge: 'Start Here',
+        badgeClass: 'ti-package-badge--default',
+        name: 'Career Assessment',
+        duration: '90–120 Minutes',
+        idealFor: 'Professionals who want expert career guidance before committing to a longer mentorship programme.',
+        includes: [
+            'Career discussion',
+            'Skills assessment',
+            'Resume review',
+            'LinkedIn review',
+            'Career recommendations',
+            'Personalized roadmap discussion'
+        ],
+        cta: 'Book Career Assessment',
+        ctaUrl: 'contact.html',
+        featured: false
+    },
+    {
+        id: 'professional-mentorship',
+        badge: 'Most Popular',
+        badgeClass: 'ti-package-badge--featured',
+        name: 'Professional Mentorship',
+        duration: '3 Months',
+        idealFor: 'Professionals looking to transition, accelerate or reposition their careers.',
+        includes: [
+            'Monthly one-on-one mentoring',
+            'Personalized career roadmap',
+            'Technical guidance',
+            'Resume review',
+            'LinkedIn guidance',
+            'Interview preparation',
+            'Progress reviews',
+            'Email support between sessions'
+        ],
+        cta: 'Apply for Professional Mentorship',
+        ctaUrl: 'contact.html',
+        featured: true
+    },
+    {
+        id: 'executive-mentorship',
+        badge: 'Executive',
+        badgeClass: 'ti-package-badge--executive',
+        name: 'Executive Mentorship',
+        duration: '6 Months',
+        idealFor: 'Senior professionals, architects, managers and aspiring technology leaders.',
+        includesLead: 'Everything in Professional Mentorship plus:',
+        includes: [
+            'Leadership mentoring',
+            'Executive career planning',
+            'Strategic decision guidance',
+            'Personal branding',
+            'Long-term accountability',
+            'Priority scheduling'
+        ],
+        cta: 'Apply for Executive Mentorship',
+        ctaUrl: 'contact.html',
+        featured: false
+    }
+];
+
+function buildMentorshipInvestmentRegions() {
+    var usdOriginalByPackage = {
+        'career-assessment': 250,
+        'professional-mentorship': 1000,
+        'executive-mentorship': 2500
+    };
+    var myUsdRate = 4.3;
+    var pkUsdRate = 300;
+
+    function formatUsd(n) {
+        return 'USD ' + Math.round(n).toLocaleString('en-US');
+    }
+    function formatMy(n) {
+        return 'RM ' + Math.round(n).toLocaleString('en-US');
+    }
+    function formatPk(n) {
+        var fixed = Number.isInteger(n) ? n.toFixed(0) : n.toFixed(2);
+        var parts = fixed.split('.');
+        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        return 'Rs. ' + (parts[1] ? parts.join('.') : parts[0]);
+    }
+    function buildFromOriginal(original, discountPct, formatFn) {
+        var today = original * (1 - discountPct / 100);
+        var save = original - today;
+        return {
+            original: formatFn(original),
+            discount: discountPct + '% OFF',
+            save: formatFn(save),
+            today: formatFn(today)
+        };
+    }
+
+    var myPrices = {};
+    var pkPrices = {};
+    var intlPrices = {};
+    Object.keys(usdOriginalByPackage).forEach(function(id) {
+        var usdOriginal = usdOriginalByPackage[id];
+        intlPrices[id] = buildFromOriginal(usdOriginal, 10, formatUsd);
+        myPrices[id] = buildFromOriginal(usdOriginal * myUsdRate, 20, formatMy);
+        pkPrices[id] = buildFromOriginal(usdOriginal * pkUsdRate, 30, formatPk);
+    });
+
+    return {
+        malaysia: {
+            key: 'malaysia',
+            tabLabel: '🇲🇾 Malaysia',
+            title: '🇲🇾 Malaysia',
+            subtitle: "Founder's Launch Offer",
+            badge: '🔥 Save Up To 20%',
+            discountLabel: 'Discount',
+            prices: myPrices
+        },
+        pakistan: {
+            key: 'pakistan',
+            tabLabel: '🇵🇰 Pakistan',
+            title: '🇵🇰 Pakistan',
+            subtitle: 'Regional Scholarship Program',
+            badge: '🎓 Regional Scholarship – Save 30%',
+            discountLabel: 'Scholarship',
+            prices: pkPrices
+        },
+        international: {
+            key: 'international',
+            tabLabel: '🌍 International',
+            title: '🌍 International',
+            subtitle: 'Global Professional Pricing',
+            badge: '🌎 Global Launch Offer – Save 10%',
+            discountLabel: 'Discount',
+            prices: intlPrices
+        }
+    };
+}
+
+var MENTORSHIP_INVESTMENT_REGIONS = buildMentorshipInvestmentRegions();
+
+function getMentorshipTableRowPrice(regionKey) {
+    var region = MENTORSHIP_INVESTMENT_REGIONS[regionKey];
+    if (!region) return null;
+    var entry = region.prices['career-assessment'];
+    if (!entry) return null;
+    return {
+        original: 'From ' + entry.original,
+        discount: entry.discount,
+        save: 'From ' + entry.save,
+        today: 'From ' + entry.today
+    };
+}
+
 function renderTrainingInvestment(config) {
     var container = document.getElementById('training-investment-section');
     if (!container || !config) return;
@@ -652,10 +804,17 @@ function renderTrainingInvestment(config) {
     var currentCourse = config.course || null;
     var cssVars = '--ti-accent:' + theme.accent + ';--ti-accent-rgb:' + theme.accentRgb + ';--ti-border:' + theme.border + ';--ti-bg:' + theme.bg + ';--ti-gradient:' + theme.gradient + ';';
 
+    if (config.mode === 'packages') {
+        renderTrainingInvestmentPackages(container, config, theme, cssVars);
+        return;
+    }
+
     function buildRows(region) {
         var rowsHtml = '';
         data.courses.forEach(function(course) {
-            var price = region.prices[course.id];
+            var price = course.isMentorshipProgram
+                ? getMentorshipTableRowPrice(region.key)
+                : region.prices[course.id];
             if (!price) return;
             var isCurrent = course.id === currentCourse;
             var rowClass = 'ti-row' + (isCurrent ? ' ti-row-current' : '');
@@ -667,6 +826,14 @@ function renderTrainingInvestment(config) {
                 nameCell += '<div class="ti-included-bonuses"><span class="ti-included-label">Included FREE</span><ul class="ti-included-list">';
                 course.bonuses.forEach(function(item) {
                     nameCell += '<li>' + item + '</li>';
+                });
+                nameCell += '</ul></div>';
+            }
+            if (course.isMentorshipProgram) {
+                nameCell += '<div class="ti-included-bonuses"><span class="ti-included-label">Mentorship Packages</span><ul class="ti-included-list">';
+                MENTORSHIP_INVESTMENT_PACKAGES.forEach(function(pkg) {
+                    var pkgPrice = region.key && MENTORSHIP_INVESTMENT_REGIONS[region.key].prices[pkg.id];
+                    nameCell += '<li>' + pkg.name + (pkgPrice ? ' — ' + pkgPrice.today : '') + '</li>';
                 });
                 nameCell += '</ul></div>';
             }
@@ -748,6 +915,137 @@ function renderTrainingInvestment(config) {
 
     html += '<div class="ti-trust' + (isSidebar ? ' ti-trust--compact' : '') + '">';
     ['Certificate of Participation', 'Real-World Industry Examples', 'Delivered by Industry Practitioners', 'Onsite, Virtual &amp; Hybrid Delivery', 'Corporate &amp; Public Programs Available'].forEach(function(item) {
+        html += '<div class="ti-trust-item"><svg xmlns="http://www.w3.org/2000/svg" class="ti-trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-8.64"/><path d="M22 4L12 14.01l-3-3"/></svg><span>' + item + '</span></div>';
+    });
+    html += '</div>';
+
+    html += '</div></section>';
+    container.innerHTML = html;
+
+    var tabs = container.querySelectorAll('.ti-tab');
+    var panels = container.querySelectorAll('.ti-panel');
+    tabs.forEach(function(tab) {
+        tab.addEventListener('click', function() {
+            var region = tab.getAttribute('data-region');
+            tabs.forEach(function(t) {
+                t.classList.remove('ti-tab-active');
+                t.setAttribute('aria-selected', 'false');
+            });
+            panels.forEach(function(p) { p.hidden = true; });
+            tab.classList.add('ti-tab-active');
+            tab.setAttribute('aria-selected', 'true');
+            var panel = container.querySelector('#ti-panel-' + region);
+            if (panel) panel.hidden = false;
+        });
+    });
+}
+
+function renderTrainingInvestmentPackages(container, config, theme, cssVars) {
+    var packages = MENTORSHIP_INVESTMENT_PACKAGES;
+    var regions = MENTORSHIP_INVESTMENT_REGIONS;
+    var isSidebar = config.layout === 'sidebar';
+    var sectionClass = 'training-investment-section' + (isSidebar ? ' training-investment-section--sidebar' : ' mb-16');
+    var headingSize = isSidebar ? 'text-2xl' : 'text-3xl';
+    var introMargin = isSidebar ? 'mb-6' : 'mb-8';
+    var intro = config.intro || 'Personalized career mentorship engagements designed for different career stages and ambitions.';
+    var introSub = config.introSub || 'Choose the pricing option that best fits your location and career goals.';
+    var regionKeys = ['malaysia', 'pakistan', 'international'];
+
+    function buildMentorshipRows(region) {
+        var rowsHtml = '';
+        packages.forEach(function(pkg) {
+            var price = region.prices[pkg.id];
+            if (!price) return;
+            rowsHtml += '<tr class="ti-row" data-package="' + pkg.id + '">';
+            rowsHtml += '<td class="ti-cell-program" data-label="Mentorship Program"><span class="ti-program-name">' + pkg.name + '</span></td>';
+            rowsHtml += '<td class="ti-cell-original" data-label="Original Price"><span class="ti-original">' + price.original + '</span></td>';
+            rowsHtml += '<td class="ti-cell-discount" data-label="' + region.discountLabel + '"><span class="ti-discount-badge">' + price.discount + '</span></td>';
+            rowsHtml += '<td class="ti-cell-save" data-label="You Save"><span class="ti-save">' + price.save + '</span></td>';
+            rowsHtml += '<td class="ti-cell-today" data-label="Today"><span class="ti-today">' + price.today + '</span></td>';
+            rowsHtml += '</tr>';
+        });
+        return rowsHtml;
+    }
+
+    function buildMentorshipPackageCards(region) {
+        var cardsHtml = '<div class="ti-packages-grid">';
+        packages.forEach(function(pkg, i) {
+            var price = region.prices[pkg.id];
+            var cardClass = 'ti-package-card' + (pkg.featured ? ' ti-package-card--featured' : '');
+            cardsHtml += '<div class="' + cardClass + '">';
+            cardsHtml += '<span class="ti-package-badge ' + pkg.badgeClass + '">' + pkg.badge + '</span>';
+            cardsHtml += '<h3 class="ti-package-name">' + pkg.name + '</h3>';
+            cardsHtml += '<div class="ti-package-pricing">';
+            cardsHtml += '<div class="ti-package-pricing-row"><span class="ti-package-meta-label">Original</span><span class="ti-original">' + price.original + '</span></div>';
+            cardsHtml += '<div class="ti-package-pricing-row"><span class="ti-package-meta-label">' + region.discountLabel + '</span><span class="ti-discount-badge">' + price.discount + '</span></div>';
+            cardsHtml += '<div class="ti-package-pricing-row"><span class="ti-package-meta-label">You Save</span><span class="ti-save">' + price.save + '</span></div>';
+            cardsHtml += '<div class="ti-package-pricing-row ti-package-pricing-row--today"><span class="ti-package-meta-label">Today\'s Investment</span><span class="ti-today">' + price.today + '</span></div>';
+            cardsHtml += '</div>';
+            cardsHtml += '<div class="ti-package-meta-row"><span class="ti-package-meta-label">Duration</span><span class="ti-package-meta-value">' + pkg.duration + '</span></div>';
+            cardsHtml += '<p class="ti-package-ideal"><span class="ti-package-ideal-label">Ideal For</span>' + pkg.idealFor + '</p>';
+            cardsHtml += '<div class="ti-package-includes">';
+            cardsHtml += '<span class="ti-package-includes-label">Includes</span>';
+            if (pkg.includesLead) {
+                cardsHtml += '<p class="ti-package-includes-lead">' + pkg.includesLead + '</p>';
+            }
+            cardsHtml += '<ul class="ti-package-includes-list">';
+            pkg.includes.forEach(function(item) {
+                cardsHtml += '<li>' + item + '</li>';
+            });
+            cardsHtml += '</ul></div>';
+            cardsHtml += '<a href="' + pkg.ctaUrl + '" class="ti-package-cta" style="background: var(--ti-gradient);">' + pkg.cta + '</a>';
+            cardsHtml += '</div>';
+        });
+        cardsHtml += '</div>';
+        return cardsHtml;
+    }
+
+    function buildMentorshipPanel(region, isActive) {
+        var panelId = 'ti-panel-' + region.key;
+        var hidden = isActive ? '' : ' hidden';
+        var html = '<div id="' + panelId + '" class="ti-panel" role="tabpanel" aria-labelledby="ti-tab-' + region.key + '"' + hidden + '>';
+        html += '<div class="ti-region-header">';
+        html += '<div><h3 class="ti-region-title">' + region.title + '</h3>';
+        html += '<p class="ti-region-subtitle">' + region.subtitle + '</p></div>';
+        html += '<span class="ti-region-badge">' + region.badge + '</span>';
+        html += '</div>';
+        html += '<div class="ti-table-wrap"><table class="ti-table"><thead><tr>';
+        html += '<th scope="col">Mentorship Program</th>';
+        html += '<th scope="col">Original Price</th>';
+        html += '<th scope="col">' + region.discountLabel + '</th>';
+        html += '<th scope="col">You Save</th>';
+        html += '<th scope="col">Today</th>';
+        html += '</tr></thead><tbody>' + buildMentorshipRows(region) + '</tbody></table></div>';
+        html += buildMentorshipPackageCards(region);
+        html += '</div>';
+        return html;
+    }
+
+    var html = '<section class="' + sectionClass + '" style="' + cssVars + '" data-reveal="up">';
+    html += '<div class="ti-inner inner-glow backdrop-blur-sm p-6 md:p-10 rounded-3xl shadow-2xl gradient-border">';
+    html += '<h2 class="' + headingSize + ' font-bold text-center mb-3 text-gradient from-blue-400 to-cyan-400">Training Investment</h2>';
+    html += '<p class="text-gray-400 text-center max-w-3xl mx-auto mb-2">' + intro + '</p>';
+    html += '<p class="text-gray-500 text-center text-sm max-w-2xl mx-auto ' + introMargin + '">' + introSub + '</p>';
+
+    html += '<div class="ti-tabs" role="tablist" aria-label="Mentorship pricing by region">';
+    regionKeys.forEach(function(key, i) {
+        var region = regions[key];
+        var active = i === 0 ? ' ti-tab-active' : '';
+        var selected = i === 0 ? 'true' : 'false';
+        html += '<button type="button" class="ti-tab' + active + '" id="ti-tab-' + key + '" role="tab" aria-selected="' + selected + '" aria-controls="ti-panel-' + key + '" data-region="' + key + '">' + region.tabLabel + '</button>';
+    });
+    html += '</div>';
+
+    html += '<div class="ti-panels">';
+    regionKeys.forEach(function(key, i) {
+        html += buildMentorshipPanel(regions[key], i === 0);
+    });
+    html += '</div>';
+
+    html += '<p class="ti-package-footnote">Every mentorship engagement begins with a Career Assessment to ensure the program is tailored to your goals and aspirations.</p>';
+
+    html += '<div class="ti-trust' + (isSidebar ? ' ti-trust--compact' : '') + '">';
+    ['Personalized Career Guidance', 'Practitioner-Led Mentorship', 'Resume &amp; LinkedIn Support', 'Virtual Delivery Worldwide', 'Honest Industry Feedback'].forEach(function(item) {
         html += '<div class="ti-trust-item"><svg xmlns="http://www.w3.org/2000/svg" class="ti-trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-8.64"/><path d="M22 4L12 14.01l-3-3"/></svg><span>' + item + '</span></div>';
     });
     html += '</div>';
