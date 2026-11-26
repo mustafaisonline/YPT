@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="/js/site-mode.js"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5MRNP3KJ8B"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-5MRNP3KJ8B');</script>
+    <title>What is an Entity in Data Modelling? Types &amp; Examples</title>
+    <meta name="description" content="Learn what an entity means in data modelling, including entity types, attributes, and real-world examples for data professionals.">
+    <meta name="robots" content="noindex, follow">
+    <meta name="keywords" content="what is an entity in data modelling, entity type, entity instance, entity attribute, data modelling, relational database, database design, entity relationship diagram, data architecture">
+    <meta name="author" content="Mustafa Qizilbash">
+    <meta property="og:title" content="What is an Entity in Data Modelling? Types &amp; Examples">
+    <meta property="og:description" content="Learn what an entity means in data modelling, including entity types, attributes, and real-world examples for data professionals.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://yourpartnertechnologies.com/blog/what-is-an-entity-in-data-modelling.html">
+    <meta property="og:image" content="https://yourpartnertechnologies.com/assets/images/Blogs_YPT/Blog02/Hero%20Banner.webp">
+    <meta property="og:site_name" content="Your Partner Technologies">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="What is an Entity in Data Modelling? Types &amp; Examples">
+    <meta name="twitter:description" content="Learn what an entity means in data modelling, including entity types, attributes, and real-world examples for data professionals.">
+    <meta name="twitter:image" content="https://yourpartnertechnologies.com/assets/images/Blogs_YPT/Blog02/Hero%20Banner.webp">
+    <link rel="canonical" href="https://yourpartnertechnologies.com/blog/what-is-an-entity-in-data-modelling.html">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="../assets/images/ypt-logo-320.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/agentic.css">
+    <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "What is an Entity in Data Modelling? Types & Examples",
+    "description": "Understand the concept of an entity in data modelling, including entity types, attributes, and instances. A practical guide for data professionals, developers, and business analysts.",
+    "author": {
+      "@type": "Person",
+      "name": "Mustafa Qizilbash"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Your Partner Technologies",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://objectstorage.us-sanjose-1.oraclecloud.com/n/axtx9ohfletb/b/ypt/o/Logo-128.png"
+      }
+    },
+    "datePublished": "2025-10-03",
+    "dateModified": "2025-10-03",
+    "mainEntityOfPage": "https://yourpartnertechnologies.com/blog/what-is-an-entity-in-data-modelling.html",
+    "image": "https://yourpartnertechnologies.com/assets/images/Blogs_YPT/Blog02/Hero%20Banner.webp",
+    "keywords": "what is an entity in data modelling"
+  }
+  </script>
+    <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is an entity in a database?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "An entity is anything that can be uniquely identified and described, such as a customer, product, or transaction. In relational databases, entities are represented as tables."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the difference between entity type and entity instance?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "An entity type is the blueprint or template (like a blank form), while an entity instance is a specific record with actual data (like a completed form). Entity types map to tables; instances map to rows."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What are entity attributes?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Attributes are the properties that describe an entity, such as Name, Price, or Date of Birth. They map to columns in a database table and can be simple, composite, derived, or multi-valued."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do entities relate to tables, columns, and rows?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "An entity type = table, an entity attribute = column, and an entity instance = row. This mapping is the foundation of relational database design."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why is understanding entities important for data strategy?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Correct entity modelling prevents data redundancy, supports database normalisation, enables clean integration across systems, and is a prerequisite for effective master data management."
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+<body class="has-promo">
+
+<header class="nav">
+    <a class="promo" href="../contact.html" aria-label="Limited-time offer: any solution for $100 for our first 500 customers. Claim your spot.">
+        <span class="promo-bg" aria-hidden="true"></span>
+        <span class="promo-joy" aria-hidden="true"><span class="promo-ag" data-ag="joy"></span><span class="joy-arm"><b></b></span><i></i><i></i><i></i><i></i></span>
+        <span class="promo-tag mono">Limited-time offer</span>
+        <strong>Any solution for <span class="promo-price">$100</span></strong>
+        <span class="promo-rest">for our <span class="promo-500">first <span class="promo-n">500</span> customers</span></span>
+        <span class="promo-go">Claim your spot <span class="arr">→</span></span>
+    </a>
+    <div class="wrap nav-in">
+        <a class="brand" href="../index.html" aria-label="Your Partner Technologies">
+            <span class="brand-logo"><img src="../assets/images/ypt-logo-320.png" alt="Your Partner Technologies"></span>
+        </a>
+        <nav class="nav-links" id="nav-links" aria-label="Main">
+            <a href="../strategic-advisory.html"><span data-ag="atlas" data-v="head"></span>Strategic Advisory</a>
+            <div class="nav-dd">
+                <a href="../services.html" aria-haspopup="true"><span data-ag="forge" data-v="head"></span>Executive Services<svg class="nav-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></a>
+                <div class="nav-dd-menu">
+                    <a href="../services/data-ai-services.html">Data &amp; AI Services</a>
+                    <a href="../services/agentic-ai.html">Agentic AI</a>
+                    <a href="../services/value-discovery-canvas.html">Value Discovery Canvas</a>
+                    <a href="../services/ltad.html">Let's Talk About Data!</a>
+                    <a href="../services/ltad2.html">LTAD 2.0</a>
+                    <a class="view-all" href="../services.html">View All &rarr;</a>
+                </div>
+            </div>
+            <a href="../ai-powered-consulting.html"><span data-ag="spark" data-v="head"></span>AI Powered Consulting</a>
+            <a href="../trainings.html"><span data-ag="sage" data-v="head"></span>Trainings</a>
+            <a href="../partnerships.html"><span data-ag="orca" data-v="head"></span>Partnerships</a>
+            <a href="../about.html"><span data-ag="vera" data-v="head"></span>Why YPT!</a>
+            <a href="../agents.html"><span data-ag="guide" data-v="head"></span>Agents</a>
+        </nav>
+        <div style="display:flex;gap:10px;align-items:center">
+            <a class="btn btn--solid" href="../contact.html">Talk to us <span class="arr">→</span></a>
+            <button class="fs-btn" id="fs-btn" type="button" aria-label="Enter full screen" title="Full screen" hidden>
+                <svg class="fs-in" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>
+                <svg class="fs-out" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+            </button>
+            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+        </div>
+    </div>
+</header>
+
+<main id="main-content">
+
+    <section class="page-head pg-head" data-guide="Lin is hosting this page.">
+        <div class="wrap sec-top">
+            <div class="sec-head">
+                <p class="eyebrow"><i></i><span class="mono">Learning library · Article</span></p>
+                <h1 class="h1">What is an Entity in Data Modelling? Types &amp; Examples</h1>
+                <p class="lede">Data Modelling Database Design Data Fundamentals Data Architecture</p><p class="lede">Mustafa Qizilbash October 3, 2025 5 min read</p><p class="lede">If you are building a database, designing a data model, or studying for a data or software engineering certification, one concept sits at the foundation of everything: the entity. Misunderstand this, and every downstream design decision becomes compromised. Get it right, and you have the bedrock for scalable, reliable <a href="what-is-data.html">data</a> systems. This is why <a href="../services/data-ai-services.html">data modelling expertise</a> is central to every well-designed architecture.</p>
+                
+            </div>
+            <div class="sec-aside"><div class="say-bub">I'm Lin, the enablement agent. This article is part of our Data &amp; AI learning library.</div><span data-ag="sage"></span></div>
+        </div>
+    </section>
+
+    <section class="sec sec--tint" data-guide="Now: What Is an Entity in Data and Databases?">
+        <div class="wrap">
+            <div class="sec-head rv"><div class="pg-svc-top"><span class="pg-who"><b class="pg-n">7</b><span data-ag="sage" data-v="head"></span><span class="pg-who-t"><b>Lin</b><small>Enablement</small></span></span></div><h2 class="h2">What Is an Entity in Data and Databases?</h2></div>
+            <div class="pg-flow rv"><p>An entity is anything that can be uniquely identified and described within a data system. In data modelling, entities typically represent real-world objects, people, concepts, or events, such as a Customer, Product, Invoice, or Transaction.</p><p>Entities are structured around three concepts:</p><ol class="pg-ul"><li><strong>Entity Type</strong>: the blueprint or schema</li><li><strong>Entity Attribute</strong>: the properties or fields</li><li><strong>Entity Instance</strong>: the actual data record</li></ol><figure class="pg-fig"><img src="../assets/images/Blogs_YPT/Blog02/After%20Introduction.webp" alt="Entity Type, Attributes, and Instance diagram showing book examples" loading="lazy"></figure></div>
+        </div>
+    </section>
+
+    <section class="sec " data-guide="Now: Entity Type: The Blueprint">
+        <div class="wrap">
+            <div class="sec-head rv"><div class="pg-svc-top"><span class="pg-who"><b class="pg-n">7</b><span data-ag="sage" data-v="head"></span><span class="pg-who-t"><b>Lin</b><small>Enablement</small></span></span></div><h2 class="h2">Entity Type: The Blueprint</h2></div>
+            <div class="pg-flow rv"><p>An Entity Type is a template that defines the structure of a category of entities. Think of it as the design of a form before anyone has filled it in.</p><p>Key characteristics:</p><ul class="pg-ul"><li>Represents a general class (e.g., Customer, Employee, Product)</li><li>Defines the attributes applicable to all records</li><li>Maps directly to a <a href="tables-columns-rows-database-explained.html">table</a> in a relational database</li></ul><p><strong>Example, Library System:</strong> The Book Entity Type defines: Title, Author, ISBN, Publication Year.</p></div>
+        </div>
+    </section>
+
+    <section class="sec sec--tint" data-guide="Now: Entity Attribute: The Properties">
+        <div class="wrap">
+            <div class="sec-head rv"><div class="pg-svc-top"><span class="pg-who"><b class="pg-n">7</b><span data-ag="sage" data-v="head"></span><span class="pg-who-t"><b>Lin</b><small>Enablement</small></span></span></div><h2 class="h2">Entity Attribute: The Properties</h2></div>
+            <div class="pg-flow rv"><p>An Entity Attribute is a property that describes an entity.</p><figure class="pg-fig"><img src="../assets/images/Blogs_YPT/Blog02/Before%20Attribute%20Types%20Table.webp" alt="Entity attribute types diagram" loading="lazy"></figure><p>Key characteristics:</p><ul class="pg-ul"><li>Defines a specific property (e.g., Name, Age, Price)</li><li>Maps to a <a href="tables-columns-rows-database-explained.html">column</a> in a database table</li></ul><h4 class="pg-h">Types of Attributes in Data Modelling</h4><div class="pg-table"><table>
+<thead>
+<tr>
+<th>Attribute Type</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Simple</td>
+<td>Indivisible</td>
+<td>Age</td>
+</tr>
+<tr>
+<td>Composite</td>
+<td>Can be split into sub-attributes</td>
+<td>Full Name (First + Last)</td>
+</tr>
+<tr>
+<td>Single-valued</td>
+<td>One value per entity</td>
+<td>Date of Birth</td>
+</tr>
+<tr>
+<td>Multi-valued</td>
+<td>Multiple values per entity</td>
+<td>Phone Numbers</td>
+</tr>
+<tr>
+<td>Derived</td>
+<td>Calculated from other data</td>
+<td>Age (from Date of Birth)</td>
+</tr>
+<tr>
+<td>Key</td>
+<td>Uniquely identifies the entity</td>
+<td>ISBN, Employee ID</td>
+</tr>
+</tbody>
+</table></div></div>
+        </div>
+    </section>
+
+    <section class="sec " data-guide="Now: Entity Instance: The Real Record">
+        <div class="wrap">
+            <div class="sec-head rv"><div class="pg-svc-top"><span class="pg-who"><b class="pg-n">7</b><span data-ag="sage" data-v="head"></span><span class="pg-who-t"><b>Lin</b><small>Enablement</small></span></span></div><h2 class="h2">Entity Instance: The Real Record</h2></div>
+            <div class="pg-flow rv"><p>An Entity Instance is a specific, individual realisation of an entity type. It is where real data lives. Maps to a <a href="tables-columns-rows-database-explained.html">row</a> in a relational database table.</p></div>
+        </div>
+    </section>
+
+    <section class="sec sec--tint" data-guide="Now: The Mental Model: How It All Connects">
+        <div class="wrap">
+            <div class="sec-head rv"><div class="pg-svc-top"><span class="pg-who"><b class="pg-n">7</b><span data-ag="sage" data-v="head"></span><span class="pg-who-t"><b>Lin</b><small>Enablement</small></span></span></div><h2 class="h2">The Mental Model: How It All Connects</h2></div>
+            <div class="pg-flow rv"><div class="pg-table"><table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Database Term</th>
+<th>Real-World Analogy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Entity Type</td>
+<td>Table</td>
+<td>Blank application form template</td>
+</tr>
+<tr>
+<td>Entity Attribute</td>
+<td>Column / Field</td>
+<td>A labelled field on the form</td>
+</tr>
+<tr>
+<td>Entity Instance</td>
+<td>Row / Record</td>
+<td>One completed application</td>
+</tr>
+</tbody>
+</table></div><blockquote class="pg-quote">Entity Type is the design. Entity Instance is the real-world data built from that design.</blockquote></div>
+        </div>
+    </section>
+
+    <section class="sec " data-guide="Now: Why This Matters for Database and System Design">
+        <div class="wrap">
+            <div class="sec-head rv"><div class="pg-svc-top"><span class="pg-who"><b class="pg-n">7</b><span data-ag="sage" data-v="head"></span><span class="pg-who-t"><b>Lin</b><small>Enablement</small></span></span></div><h2 class="h2">Why This Matters for Database and System Design</h2></div>
+            <div class="pg-flow rv"><ul class="pg-ul"><li><strong>Schema design</strong>: correctly structured entity types prevent data redundancy</li><li><strong>Database normalisation</strong>: prerequisite to applying 1NF, 2NF, 3NF</li><li><strong>Scalability</strong>: well-designed entity types grow cleanly</li><li><strong>Data integration</strong>: consistent definitions reduce <a href="master-data-management-reference-data-explained.html">MDM</a> complexity</li><li><strong>AI and ML readiness</strong>: clean entity data improves model quality</li><li><strong>Professional development</strong>: mastering entity modelling is covered in <a href="../trainings.html">Data Vault, FCO-IM, and data foundations training</a></li></ul><p>Key Takeaway</p><p>Entity, Entity Type, Attribute, and Instance are not abstract academic concepts. They are the grammar of every database ever built. Whether designing a CRM, data warehouse, or microservice API, these definitions determine how clean, consistent, and scalable your data system will be.</p><figure class="pg-fig"><img src="../assets/images/Blogs_YPT/Blog02/ConclusionCTA.webp" alt="Data architect working on entity-relationship diagrams" loading="lazy"></figure></div>
+        </div>
+    </section>
+
+    <section class="sec sec--tint" data-guide="Now: Frequently Asked Questions">
+        <div class="wrap">
+            <div class="sec-head rv"><div class="pg-svc-top"><span class="pg-who"><b class="pg-n">7</b><span data-ag="sage" data-v="head"></span><span class="pg-who-t"><b>Lin</b><small>Enablement</small></span></span></div><h2 class="h2">Frequently Asked Questions</h2></div>
+            <div class="pg-flow rv"><h4 class="pg-h">Need expert help with data modelling and architecture?</h4><p>Your Partner Technologies delivers data modelling, architecture, and governance expertise tailored to your business.</p><p><a href="../services.html">Explore Our Services →</a></p></div>
+        </div>
+    </section>
+<section class="cta" data-guide="You Might Also Like"><div class="wrap"><h2 class="h2 rv">You Might Also Like</h2><div class="rv pg-cta-text"><figure class="pg-fig"><img src="../assets/images/Blogs_YPT/Blog01/Hero%20Banner.webp" alt="What is Data? Definition, Types &amp; Business Value" loading="lazy"></figure><h4 class="pg-h">What is Data? Definition, Types &amp; Business Value</h4><figure class="pg-fig"><img src="../assets/images/Blogs_YPT/Blog04/Hero%20Banner.webp" alt="Tables, Columns &amp; Rows Explained" loading="lazy"></figure><h4 class="pg-h">Tables, Columns &amp; Rows Explained</h4><figure class="pg-fig"><img src="../assets/images/Blogs_YPT/Blog05/Hero%20Banner.webp" alt="Primary Key vs Foreign Key Explained" loading="lazy"></figure><h4 class="pg-h">Primary Key vs Foreign Key Explained</h4></div><div class="hero-cta rv"><a class="btn btn--solid" href="what-is-data.html">Read more <span class="arr">→</span></a><a class="btn btn--solid" href="tables-columns-rows-database-explained.html">Read more <span class="arr">→</span></a><a class="btn btn--solid" href="primary-key-foreign-key-explained.html">Read more <span class="arr">→</span></a></div></div></section>
+<section class="sec sec--plain" id="faq"><div class="wrap"><div class="sec-head rv"><p class="mono">FAQ</p><h2 class="h2">Frequently asked questions</h2></div><div class="pg-faq rv"><details class="pg-q"><summary>What is an entity in a database?</summary><div>An entity is anything that can be uniquely identified and described, such as a customer, product, or transaction. In relational databases, entities are represented as <a href="tables-columns-rows-database-explained.html">tables</a>.</div></details><details class="pg-q"><summary>What is the difference between entity type and entity instance?</summary><div>An entity type is the blueprint or template (like a blank form), while an entity instance is a specific record with actual data (like a completed form). Entity types map to tables; instances map to rows.</div></details><details class="pg-q"><summary>What are entity attributes?</summary><div>Attributes are the properties that describe an entity, such as Name, Price, or Date of Birth. They map to columns in a database table and can be simple, composite, derived, or multi-valued.</div></details><details class="pg-q"><summary>How do entities relate to tables, columns, and rows?</summary><div>An entity type = table, an entity attribute = column, and an entity instance = row. This mapping is the foundation of relational database design. Read more about <a href="tables-columns-rows-database-explained.html">tables, columns, and rows</a>.</div></details><details class="pg-q"><summary>Why is understanding entities important for data strategy?</summary><div>Correct entity modelling prevents data redundancy, supports database normalisation, enables clean integration across systems, and is a prerequisite for effective <a href="master-data-management-reference-data-explained.html">master data management</a>. It all starts with understanding <a href="what-is-data.html">what data is</a>.</div></details></div></div></section></main>
+
+<footer class="foot foot--full">
+    <div class="wrap">
+        <div class="foot-top">
+            <span class="foot-brand"><img src="../assets/images/ypt-logo-320.png" alt="Your Partner Technologies logo"><span><b>Your Partner Technologies</b><br>Elite Data &amp; AI Advisory. Independent strategic advisors for enterprise transformation.</span></span>
+        </div>
+        <div class="foot-cols">
+            <nav aria-label="Quick links"><h4>Quick Links</h4>
+                <a href="../strategic-advisory.html">Strategic Advisory</a><a href="../services.html">Executive Services</a><a href="../ai-powered-consulting.html">AI Powered Consulting</a><a href="../trainings.html">Trainings</a><a href="../partnerships.html">Partnerships</a><a href="../case-studies.html">Case Studies</a><a href="../about.html">Why YPT!</a><a href="../contact.html">Contact</a></nav>
+            <nav aria-label="Executive services"><h4>Executive Services</h4>
+                <a href="../services/value-discovery-canvas.html">Value Discovery Canvas</a><a href="../services/agentic-ai.html">Agentic AI</a><a href="../services/data-ai-services.html">Data &amp; AI Services</a><a href="../services/ltad2.html">LTAD 2.0</a><a href="../services/ltad.html">Let's Talk About Data!</a><a href="https://www.youtube.com/@letstalkaboutdata?sub_confirmation=1" target="_blank" rel="noopener noreferrer">Subscribe to Let's Talk About Data!</a></nav>
+        </div>
+        <p class="foot-copy">&copy; 2026 Your Partner Technologies. All Rights Reserved.</p>
+    </div>
+</footer>
+
+<div class="guide" id="guide">
+    <div class="guide-say" role="status"><span id="guide-text"></span><button id="guide-close" aria-label="Hide guide messages">×</button></div>
+    <button class="guide-ag" aria-label="YPT guide: jump to the agents" data-ag="guide"></button>
+</div>
+
+<script src="../js/agentic.js"></script>
+<script type="module" src="../js/agents3d.js"></script>
+</body>
+</html>

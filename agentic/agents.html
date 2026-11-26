@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="/js/site-mode.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Design review page for the agentic AI revamp. Not linked from the live site and kept out of search. -->
+    <meta name="robots" content="noindex, follow">
+    <title>The YPT Agents | Character Design</title>
+    <link rel="icon" type="image/png" href="assets/images/ypt-logo-320.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/agentic.css">
+</head>
+<body class="has-promo">
+
+<header class="nav">
+    <a class="promo" href="contact.html" aria-label="Limited-time offer: any solution for $100 for our first 500 customers. Claim your spot.">
+        <span class="promo-bg" aria-hidden="true"></span>
+        <span class="promo-joy" aria-hidden="true"><span class="promo-ag" data-ag="joy"></span><span class="joy-arm"><b></b></span><i></i><i></i><i></i><i></i></span>
+        <span class="promo-tag mono">Limited-time offer</span>
+        <strong>Any solution for <span class="promo-price">$100</span></strong>
+        <span class="promo-rest">for our <span class="promo-500">first <span class="promo-n">500</span> customers</span></span>
+        <span class="promo-go">Claim your spot <span class="arr">→</span></span>
+    </a>
+    <div class="wrap nav-in">
+        <a class="brand" href="index.html" aria-label="Your Partner Technologies">
+            <span class="brand-logo"><img src="assets/images/ypt-logo-320.png" alt="Your Partner Technologies"></span>
+        </a>
+        <nav class="nav-links" id="nav-links" aria-label="Main">
+            <a href="strategic-advisory.html"><span data-ag="atlas" data-v="head"></span>Strategic Advisory</a>
+            <div class="nav-dd">
+                <a href="services.html" aria-haspopup="true"><span data-ag="forge" data-v="head"></span>Executive Services<svg class="nav-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></a>
+                <div class="nav-dd-menu">
+                    <a href="services/data-ai-services.html">Data &amp; AI Services</a>
+                    <a href="services/agentic-ai.html">Agentic AI</a>
+                    <a href="services/value-discovery-canvas.html">Value Discovery Canvas</a>
+                    <a href="services/ltad.html">Let's Talk About Data!</a>
+                    <a href="services/ltad2.html">LTAD 2.0</a>
+                    <a class="view-all" href="services.html">View All &rarr;</a>
+                </div>
+            </div>
+            <a href="ai-powered-consulting.html"><span data-ag="spark" data-v="head"></span>AI Powered Consulting</a>
+            <a href="trainings.html"><span data-ag="sage" data-v="head"></span>Trainings</a>
+            <a href="partnerships.html"><span data-ag="orca" data-v="head"></span>Partnerships</a>
+            <a href="about.html"><span data-ag="vera" data-v="head"></span>Why YPT!</a>
+            <a href="agents.html" class="on"><span data-ag="guide" data-v="head"></span>Agents</a>
+        </nav>
+        <div style="display:flex;gap:10px;align-items:center">
+            <a class="btn btn--solid" href="index.html">See them on the homepage <span class="arr">→</span></a>
+            <button class="fs-btn" id="fs-btn" type="button" aria-label="Enter full screen" title="Full screen" hidden>
+                <svg class="fs-in" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>
+                <svg class="fs-out" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+            </button>
+            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+        </div>
+    </div>
+</header>
+
+<main>
+    <section class="page-head">
+        <div class="wrap">
+            <p class="mono eyebrow"><i></i>Character design · for review</p>
+            <h1 class="h1">Meet the <span class="hl">agents.</span></h1>
+            <p class="lede">Seven characters, one per YPT service. They share one body so they read as a team, and each has its own colour, headgear and tool so you can tell who does what at a glance. Move your mouse: they watch you. Hover one: it smiles.</p>
+        </div>
+    </section>
+
+    <section class="sec" style="padding-top:72px">
+        <div class="wrap">
+            <div class="cast-grid" id="cast-grid"></div>
+        </div>
+    </section>
+
+    <section class="sec sec--plain">
+        <div class="wrap">
+            <div class="sec-head rv">
+                <p class="mono">Expressions and sizes</p>
+                <h2 class="h2">One character, <span class="hl">many uses.</span></h2>
+                <p class="lede">The same drawing works as a large hero figure, a card illustration, and a small chat avatar. Expressions change with what the agent is doing.</p>
+            </div>
+            <div class="states rv">
+                <div class="state"><span data-ag="orca" style="width:150px"></span><span class="mono">Idle · watching</span></div>
+                <div class="state"><span data-ag="orca" data-mood="happy" style="width:150px"></span><span class="mono">Happy · on hover</span></div>
+                <div class="state"><span data-ag="orca" data-mood="wink" style="width:150px"></span><span class="mono">Wink · task done</span></div>
+                <div class="state"><span data-ag="orca" style="width:90px"></span><span class="mono">Card size</span></div>
+                <div class="state"><span data-ag="orca" data-v="head" style="width:64px"></span><span class="mono">Avatar</span></div>
+                <div class="state"><span data-ag="orca" data-v="head" style="width:38px"></span><span class="mono">Chat</span></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="sec" id="made">
+        <div class="wrap">
+            <div class="sec-head rv">
+                <p class="mono">How they're made</p>
+                <h2 class="h2">Drawn for YPT, <span class="hl">owned by YPT.</span></h2>
+                <p class="lede">These are original vector characters drawn in code for this site. They are not downloaded from a library, so there is no licence to check, no attribution to show, and no other company with the same mascots.</p>
+            </div>
+            <div class="made">
+                <div class="rv"><h3>Original artwork</h3><p>Each agent is built from the same parts: a shared body, plus its own colour, headgear and tool. New agents can be added in minutes.</p></div>
+                <div class="rv"><h3>Alive, not animated GIFs</h3><p>They float, blink, wave their tool, follow the cursor with their eyes, and smile when you hover.</p></div>
+                <div class="rv"><h3>Tiny and sharp</h3><p>Pure vector, a few kilobytes for the whole cast. Crisp on any screen, at any size, with no image files to load.</p></div>
+                <div class="rv"><h3>Still a static site</h3><p>No backend and no external service. Everything runs in the visitor's browser from the same static files.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="sec sec--plain" id="options">
+        <div class="wrap">
+            <div class="sec-head rv">
+                <p class="mono">Options compared</p>
+                <h2 class="h2">Why not a <span class="hl">free library?</span></h2>
+                <p class="lede">I looked at the well-known free character sources. They are good, but each has a drawback for a company whose brand is its agents.</p>
+            </div>
+            <div class="cmp-scroll rv">
+                <table class="cmp">
+                    <thead><tr><th>Option</th><th>Sample</th><th>Strengths</th><th>Drawbacks for YPT</th></tr></thead>
+                    <tbody>
+                        <tr class="pick">
+                            <td>Custom YPT cast<br><span class="badge">Recommended</span></td>
+                            <td><div class="samples" id="cmp-mine"></div></td>
+                            <td>Unique to YPT. Each agent's role is visible in its design. Fully animated and interactive. Nothing to license.</td>
+                            <td>Any new pose or agent has to be drawn by us (quick, but not instant).</td>
+                        </tr>
+                        <tr>
+                            <td>DiceBear "Bottts"<br><span style="font-weight:400;color:var(--faint);font-size:.85em">free robot avatar library</span></td>
+                            <td><div class="samples">
+                                <img src="https://api.dicebear.com/9.x/bottts/svg?seed=Vera" alt="DiceBear sample robot" loading="lazy">
+                                <img src="https://api.dicebear.com/9.x/bottts/svg?seed=Atlas" alt="DiceBear sample robot" loading="lazy">
+                                <img src="https://api.dicebear.com/9.x/bottts/svg?seed=Forge" alt="DiceBear sample robot" loading="lazy">
+                                <img src="https://api.dicebear.com/9.x/bottts/svg?seed=Orca" alt="DiceBear sample robot" loading="lazy">
+                            </div></td>
+                            <td>Free, instant, endless variations.</td>
+                            <td>Randomly generated, so a design says nothing about the agent's job. Used on many other websites. Static: no expressions or movement.</td>
+                        </tr>
+                        <tr>
+                            <td>Lottie animations<br><span style="font-weight:400;color:var(--faint);font-size:.85em">free animated files from LottieFiles</span></td>
+                            <td style="color:var(--faint)">Not embedded</td>
+                            <td>Smooth, film-quality motion made by professional animators.</td>
+                            <td>Each character comes from a different artist, so a matching set of seven is unlikely. Hard to recolour, cannot react to the visitor, and adds a player library to every page.</td>
+                        </tr>
+                        <tr>
+                            <td>3D characters<br><span style="font-weight:400;color:var(--faint);font-size:.85em">free 3D models in the browser</span></td>
+                            <td style="color:var(--faint)">Not embedded</td>
+                            <td>Most impressive at first glance.</td>
+                            <td>Heavy to load, slow on phones, and a matching licensed set of seven is hard to find for free.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="mono note">Library licences should be confirmed on each library's own site before any use. The DiceBear samples above load live from its public service for comparison only.</p>
+        </div>
+    </section>
+</main>
+
+<footer class="foot" style="padding-bottom:44px">
+    <div class="wrap foot-in">
+        <span class="foot-brand"><img src="assets/images/ypt-logo-320.png" alt="Your Partner Technologies logo">© 2026 Your Partner Technologies. Design review page.</span>
+        <nav aria-label="Footer"><a href="index.html">Homepage</a></nav>
+    </div>
+</footer>
+
+<script src="js/agentic.js"></script>
+<script type="module" src="js/agents3d.js"></script>
+</body>
+</html>
