@@ -104,7 +104,8 @@
 
     function ready() {
         css(); box();
-        if (!mode && !inAgentic && !isBot) setTimeout(popup, 900);
+        var isHome = path === '/' || path === '/index.html';
+        if (!mode && !inAgentic && !isBot && isHome) setTimeout(popup, 900);
     }
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', ready); else ready();
 })();
