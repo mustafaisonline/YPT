@@ -401,14 +401,14 @@
             '</svg>';
         html += '<div class="core"><div class="core-who"><span class="core-av" aria-hidden="true">' + ARMAN + '</span>' +
             '<span class="core-name"><b>Sam</b><small>Forward Deployed Engineer (FDE)</small></span></div>' +
-            '<span class="core-sub">I\u2019m your human lead. I sit with your team and direct all seven agents, from discovery to launch.</span>' +
+            '<span class="core-sub">I\u2019m your HUMAN Lead</span>' +
             '<strong>YOUR SOLUTION</strong>' +
             '<span class="core-ask"><span id="core-type"></span><i class="caret"></i>' +
             '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></span></div>';
         AGENTS.forEach(function (a, i) {
             html += '<div class="fly" data-depth="' + (1 + (i % 3) * 0.5) + '" style="left:' + POS[a.id][0] + '%;top:' + POS[a.id][1] + '%">' +
                 '<button class="fly-ag" data-spot="' + a.id + '" aria-label="Meet ' + a.name + ', the ' + a.role + '">' +
-                '<span class="can">' + a.can + '</span>' + agentEl(a) +
+                agentEl(a) +
                 '<span class="tag"><i class="stg">' + (i + 1) + '</i>' + a.name + ' <b>· ' + a.role.replace(' Agent', '') + '</b></span></button></div>';
         });
         field.innerHTML = html;
@@ -424,10 +424,6 @@
         })(0, 0);
         var flyers = $$('.fly-ag', field), turn = 0;
         if (!REDUCED) {
-            setInterval(function () {
-                flyers.forEach(function (f) { f.classList.remove('say'); });
-                flyers[turn % flyers.length].classList.add('say'); turn++;
-            }, 2600);
             // ...and now and then one of them shows off with a flip.
             setInterval(function () {
                 var f = flyers[Math.floor(Math.random() * flyers.length)].querySelector('.ag');
