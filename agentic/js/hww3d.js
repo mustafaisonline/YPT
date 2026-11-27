@@ -247,8 +247,9 @@ async function boot() {
     // a gold star floats at the front corner of the floor you are on, so you always know which floor that is
     const STAR = (() => {
         const sh = new THREE.Shape(); for (let i = 0; i < 10; i++) { const r = i % 2 ? 0.42 : 1, a = Math.PI / 2 + i * Math.PI / 5; i ? sh.lineTo(Math.cos(a) * r, Math.sin(a) * r) : sh.moveTo(Math.cos(a) * r, Math.sin(a) * r); }
-        const m = new THREE.Mesh(new THREE.ExtrudeGeometry(sh, { depth: 0.3, bevelEnabled: true, bevelSize: 0.06, bevelThickness: 0.06, bevelSegments: 2 }), new THREE.MeshBasicMaterial({ color: 0xffc928 }));
-        m.geometry.translate(0, 0, -0.15); m.scale.setScalar(0.85); m.visible = false; tower.add(m); return m;
+        const m = new THREE.Mesh(new THREE.ExtrudeGeometry(sh, { depth: 0.3, bevelEnabled: true, bevelSize: 0.06, bevelThickness: 0.06, bevelSegments: 2 }), new THREE.MeshBasicMaterial({ color: 0xffc928, transparent: true, depthTest: false }));
+        m.renderOrder = 10;
+        m.geometry.translate(0, 0, -0.15); m.scale.setScalar(0.35); m.visible = false; tower.add(m); return m;
     })();
     function room(id, f, x, span, zw) {
         ROOM[id] = { id, f, x, span };
@@ -495,7 +496,7 @@ async function boot() {
         world.rotation.y = rig.turn * Math.sin(t * 0.22) * 0.25;
         if (disco) { DISCO.ball.rotation.y = t * 1.2; DISCO.beams.forEach((b, i) => { b.rotation.z = Math.sin(t * 1.7 + i * 1.6) * 0.5; b.rotation.x = Math.cos(t * 1.3 + i) * 0.35; }); DISCO.tiles.forEach(tl => { tl.material = glow([0xff5f9e, 0x5eead4, 0xffd36a, 0x7aa2ff][(tl.userData.tile + Math.floor(t * 2.5)) % 4]); }); }
         const af = mode === 'overview' ? -1 : mode === 'free' ? floorAtView() : mode === 'ride' ? Math.max(0, Math.min(FLOORS - 1, Math.round(A.y / FH))) : destF;
-        STAR.visible = af >= 0; if (af >= 0) { const P = PLAN[af]; const hw = Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)) * camera.aspect * rig.dist * user.zoom; STAR.position.set(Math.max(-P.w / 2 + 2, Math.min(P.w / 2 - 2, rig.tx + hw * 0.62)), af * FH + FH - 1.0 + (REDUCED ? 0 : Math.sin(t * 2) * 0.12), P.d / 2 - 0.8); STAR.rotation.y = REDUCED ? 0 : Math.sin(t * 1.3) * 0.5; }
+        STAR.visible = af >= 0; if (af >= 0) { const P = PLAN[af]; const hw = Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)) * camera.aspect * rig.dist * user.zoom; STAR.position.set(Math.max(-P.w / 2 + 2, Math.min(P.w / 2 - 2, rig.tx + hw * 0.74)), af * FH + FH - 0.5, P.d / 2 - 0.8); STAR.rotation.y = 0; STAR.material.opacity = REDUCED ? 1 : 0.15 + 0.85 * Math.max(0, Math.sin(t * 5)); }
         if (FLAME.m) FLAME.m.scale.y = 1 + Math.sin(t * 25) * 0.25;
         apply(rig); renderer.render(scene, camera);
         bubble();
