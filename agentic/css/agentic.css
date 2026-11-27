@@ -1126,4 +1126,4 @@ code { font-family: var(--mono); font-size: 0.9em; background: var(--p-blue); pa
 @media (max-width: 640px) { .pg-card .btn, .pg-flow .btn, .pg-intro .btn, .btn { max-width: 100%; white-space: normal; text-align: left; } }
 
 /* Redesign in progress: header shows only "Agents". Delete this block to bring the full menu back. */
-.nav-links > a:not([href$="agents.html"]), .nav-links > .nav-dd { display: none; }
+.nav-links > a:not([href$="agents.html"]):not([href$="how-we-work.html"]), .nav-links > .nav-dd { display: none; }
