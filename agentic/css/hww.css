@@ -13,18 +13,19 @@
 .hww-page .nav { background: none; border-bottom: 0; pointer-events: none; }
 .hww-page .nav .promo, .hww-page .nav .brand { pointer-events: auto; }
 .hww-page .nav-in > :not(.brand), .hww-page .nav-links, .hww-page .nav-in .btn { display: none !important; }
-/* Tour keys: small glossy 3D keys in the agents' colours, each with a tiny label. */
-.hww-ctl { position: absolute; z-index: 41; bottom: 12px; left: 12px; display: flex; align-items: flex-start; gap: 4px; padding: 7px 9px 5px; border-radius: 18px; background: rgba(15, 23, 48, 0.8); box-shadow: 0 10px 24px -10px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.12); backdrop-filter: blur(8px); }
-.hww-ctl .sep { width: 1px; align-self: stretch; margin: 2px 4px; background: rgba(255, 255, 255, 0.16); }
-.hww-ctl .k { --k: #2457f5; --kd: #1a3fd0; display: flex; flex-direction: column; align-items: center; gap: 4px; width: 54px; color: #fff; background: none; cursor: pointer; }
+/* Tour keys: a column on the left that mirrors the floor picker on the right. Icons in the agents' colours; hover opens a label. */
+.hww-ctl { position: absolute; z-index: 41; left: 14px; top: 184px; display: flex; flex-direction: column; align-items: flex-start; gap: 5px; }
+.hww-ctl .sep { height: 7px; width: 1px; }
+.hww-ctl .k { --k: #2457f5; --kd: #1a3fd0; display: flex; flex-direction: row; align-items: center; gap: 0; height: 34px; padding: 0 5px; border-radius: 999px; background: rgba(15, 23, 48, 0.8); color: #fff; cursor: pointer; backdrop-filter: blur(6px); transition: background 0.2s; }
 .hww-ctl .k-floor { --k: #f28a1e; --kd: #b9680c; } .hww-ctl .k-rec { --k: #e0467f; --kd: #a82f5c; } .hww-ctl .k-zoom { --k: #14b8a6; --kd: #0b8678; } .hww-ctl .k-misc { --k: #7a4cf0; --kd: #5a35c0; }
-.hww-ctl .k i { width: 32px; height: 32px; border-radius: 10px; display: grid; place-items: center; background: linear-gradient(165deg, rgba(255, 255, 255, 0.38), rgba(255, 255, 255, 0) 55%), var(--k); box-shadow: 0 3px 0 var(--kd), 0 6px 8px -3px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.5); transition: transform 0.12s, box-shadow 0.12s, filter 0.2s; }
-.hww-ctl .k svg { width: 17px; height: 17px; filter: drop-shadow(0 1px 0 rgba(0, 0, 0, 0.25)); }
-.hww-ctl .k span { font: 600 9.5px/1.1 var(--sans); letter-spacing: 0.01em; opacity: 0.88; text-align: center; }
-.hww-ctl .k:hover i { transform: translateY(-2px); filter: brightness(1.12); box-shadow: 0 5px 0 var(--kd), 0 9px 10px -3px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.5); }
-.hww-ctl .k:active i { transform: translateY(2px); box-shadow: 0 1px 0 var(--kd), inset 0 1px 0 rgba(255, 255, 255, 0.4); }
-.hww-ctl .k[aria-pressed="true"] i { filter: brightness(1.2); box-shadow: 0 3px 0 var(--kd), 0 0 0 2px #ffd08a, 0 0 14px 2px rgba(255, 208, 138, 0.7); }
-.hww-ctl .k:focus-visible i { outline: 2px solid #fff; outline-offset: 2px; }
+.hww-ctl .k i { flex: none; width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center; background: linear-gradient(165deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0) 55%), var(--k); box-shadow: 0 2px 0 var(--kd), inset 0 1px 0 rgba(255, 255, 255, 0.5); transition: transform 0.12s, box-shadow 0.12s; }
+.hww-ctl .k svg { width: 14px; height: 14px; filter: drop-shadow(0 1px 0 rgba(0, 0, 0, 0.25)); }
+.hww-ctl .k span { display: none; font: 600 12px/1 var(--sans); white-space: nowrap; padding: 0 8px 0 8px; }
+.hww-ctl .k:hover, .hww-ctl .k:focus-visible { background: #2457f5; padding-right: 3px; }
+.hww-ctl .k:hover span, .hww-ctl .k:focus-visible span { display: inline; }
+.hww-ctl .k:active i { transform: translateY(1px); box-shadow: 0 1px 0 var(--kd); }
+.hww-ctl .k[aria-pressed="true"] { background: #f28a1e; }
+.hww-ctl .k:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
 /* Dialogue, controls, floor picker */
 /* Alya's speech bubble: floats over her head (positioned by hww3d.js); choices live in a tray at the bottom. */
 .hww-say { position: absolute; z-index: 40; left: 0; top: 0; width: min(310px, calc(100% - 20px)); padding: 10px 13px 11px; background: rgba(255, 255, 255, 0.97); border: 1.5px solid #c3cdea; border-radius: 18px; box-shadow: 0 4px 0 #c3cdea, 0 18px 30px -14px rgba(15, 23, 48, 0.5); color: var(--ink); will-change: transform; pointer-events: none; }
@@ -37,7 +38,7 @@
 .hww-chip { font: 600 11px/1 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--primary-strong); }
 .hww-say p { font-size: 14.5px; line-height: 1.4; min-height: 2.8em; }
 .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-.hww-choices { position: absolute; z-index: 41; left: 50%; bottom: 86px; transform: translateX(-50%); width: max-content; max-width: calc(100% - 24px); display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+.hww-choices { position: absolute; z-index: 41; left: 50%; bottom: 20px; transform: translateX(-50%); width: max-content; max-width: calc(100% - 24px); display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
 .hww-choices:empty { display: none; }
 .hww-choices a, .hww-choices button { display: inline-flex; align-items: center; gap: 6px; padding: 10px 15px; border-radius: 999px; font: 700 14px/1.1 var(--sans); background: var(--primary); color: #fff; border: 1.5px solid var(--primary); box-shadow: 0 3px 0 #1a3fd0; cursor: pointer; }
 .hww-choices .ghost { background: #fff; color: var(--ink); border-color: #c3cdea; box-shadow: 0 3px 0 #c3cdea; }
@@ -50,7 +51,7 @@
 .hww-floors button:hover { background: #2457f5; }
 .hww-floors button.on { background: #f28a1e; padding-left: 12px; }
 .hww-floors button.on b { background: rgba(255, 255, 255, 0.3); }
-.hww-step { position: absolute; z-index: 41; left: 50%; transform: translateX(-50%); bottom: 14px; display: flex; gap: 6px; padding: 7px 10px; border-radius: 999px; background: rgba(15, 23, 48, 0.7); }
+.hww-step { display: none !important; position: absolute; z-index: 41; left: 50%; transform: translateX(-50%); bottom: 14px; display: flex; gap: 6px; padding: 7px 10px; border-radius: 999px; background: rgba(15, 23, 48, 0.7); }
 .hww-step i { width: 8px; height: 8px; border-radius: 50%; background: rgba(255, 255, 255, 0.3); transition: background 0.3s, transform 0.3s; }
 .hww-step i.done { background: #5eead4; }
 .hww-step i.on { background: #f28a1e; transform: scale(1.5); }
@@ -58,8 +59,8 @@
 .hww-list .hww-listbox { max-width: 860px; }
 
 @media (max-width: 900px) {
-    .hww-ctl { top: auto; bottom: 8px; right: 8px; left: 8px; justify-content: center; flex-wrap: wrap; gap: 3px; padding: 6px; }
-    .hww-ctl .k { width: 36px; } .hww-ctl .k span { display: none; } .hww-ctl .k i { width: 30px; height: 30px; } .hww-ctl .sep { display: none; }
+    .hww-ctl { top: auto; bottom: 8px; right: 8px; left: 8px; flex-direction: row; justify-content: center; flex-wrap: wrap; gap: 3px; padding: 5px; border-radius: 22px; background: rgba(15, 23, 48, 0.82); }
+    .hww-ctl .k { width: 32px; height: 32px; padding: 0; justify-content: center; background: none; } .hww-ctl .k span, .hww-ctl .k:hover span { display: none; } .hww-ctl .sep { display: none; }
     .hww-floors { top: 50%; transform: translateY(-50%); right: 8px; gap: 4px; }
     .hww-floors button { height: 30px; padding: 0 3px; }
     .hww-floors button span { display: none; }
