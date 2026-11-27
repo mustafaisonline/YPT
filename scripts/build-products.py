@@ -35,8 +35,8 @@ ICONS = {
     'ecard': '<rect x="7" y="12" width="34" height="24" rx="4"/><circle cx="18" cy="22" r="4"/><path d="M26 20h10M26 26h8M12 31h24"/>',
     'nexus': '<path d="M24 10l18 8-18 8-18-8z"/><path d="M14 23v8c4 4 16 4 20 0v-8M42 18v10"/>',
 }
-CATS = [('standard', 'Standard products', 'Ready to use today. Open one to see what it does, then ask for a demo.'),
-        ('agentic', 'Agentic AI products', 'Designed, built and checked by the YPT agent team. Each one has its own builder agent.')]
+CATS = [('agentic', 'Agentic AI Products', 'Designed, built and checked by the YPT agent team. Each one has its own builder agent.'),
+        ('standard', 'Standard Products', 'Ready to use today. Open one to see what it does, then ask for a demo.')]
 CATLABEL = {'standard': 'Standard product', 'agentic': 'Agentic AI product'}
 P = [
     dict(id='ecard', cat='standard', short='eCardForever', n='S1', name='eCardForever', tag='Your permanent digital identity', ag='', who='', role='', c='#e0467f', cd='#b02a5f', soft='#fde6f0',
@@ -48,14 +48,14 @@ P = [
     dict(id='wholesale', cat='agentic', short='Wholesale &amp; Retail', n='01', name='Online Wholesale &amp; Retail Management System', tag='Sell wholesale and retail goods online, and run the orders behind them', ag='forge', who='Jun', role='Builder', c='#f28a1e', cd='#b9680c', soft='#fdf0d9',
          say='I built the storefront and the admin behind it, so a business can sell online from day one.', feats=['Online catalogue', 'Wholesale pricing', 'Orders and stock'], full=True,
          art='<rect x="14" y="14" width="212" height="12" rx="6" fill="#fff" opacity=".9"/><circle cx="22" cy="20" r="3" fill="#f28a1e"/>' + ''.join(f'<g transform="translate({14 + i * 54} 36)"><rect width="46" height="62" rx="9" fill="#fff"/><rect x="11" y="8" width="24" height="24" rx="7" fill="{col}"/><rect x="8" y="38" width="30" height="4" rx="2" fill="#c9d1ea"/><rect x="8" y="46" width="18" height="8" rx="4" fill="#f28a1e"/></g>' for i, col in enumerate(['#e0a24a', '#d35c3a', '#7ba05b', '#e8c45a']))),
-    dict(id='world', cat='agentic', short='Supply the World', n='02', name='Supply the World', tag='Import and export, run end to end', ag='atlas', who='Wei', role='Architect', c='#2457f5', cd='#1a3fd0', soft='#e6ecff',
+    dict(id='world', soon=True, cat='agentic', short='Supply the World', n='02', name='Supply the World', tag='Import and export, run end to end', ag='atlas', who='Wei', role='Architect', c='#2457f5', cd='#1a3fd0', soft='#e6ecff',
          say='I mapped the whole chain, from supplier to port to customer, so every shipment has a place and an owner.', feats=['Shipments and routes', 'Trade documents', 'Supplier and buyer records'],
          draft=['Shipment and route tracking', 'Import and export documents in one place', 'Supplier and buyer records', 'Customs and compliance checklist', 'Status updates at every step', 'Reports across all shipments'],
          art='<circle cx="120" cy="64" r="46" fill="#fff" opacity=".92"/><path d="M74 64h92M120 18c-20 14-20 74 0 92M120 18c20 14 20 74 0 92M82 40h76M82 88h76" stroke="#9db6ff" stroke-width="2" fill="none"/><path d="M40 98C70 40 150 30 206 40" stroke="#2457f5" stroke-width="3" stroke-dasharray="2 7" stroke-linecap="round" fill="none"/><circle cx="40" cy="98" r="7" fill="#f28a1e"/><circle cx="206" cy="40" r="7" fill="#14b8a6"/><rect x="126" y="28" width="22" height="12" rx="3" fill="#2457f5"/><rect x="130" y="22" width="6" height="6" rx="1" fill="#1a3fd0"/>'),
     dict(id='ims', cat='agentic', short='Invoice Management', n='03', name='Invoice Management System', tag='Invoices handled, not chased', ag='aegis', who='Mei', role='Governance', c='#14b8a6', cd='#0b8678', soft='#dff6f1',
          say='I keep every invoice numbered, every payment matched and every change on record. Nothing slips through.', feats=['Invoices and receipts', 'Ageing and statements', 'Audit trail'], full=True,
          art=''.join(f'<g transform="translate({22 + i * 10} {16 + i * 10}) "><rect width="150" height="84" rx="10" fill="#fff" opacity="{.55 + i * .2}"/></g>' for i in range(3)) + '<rect x="52" y="46" width="60" height="6" rx="3" fill="#c9d1ea"/><rect x="52" y="60" width="96" height="5" rx="2.5" fill="#dde3f4"/><rect x="52" y="72" width="80" height="5" rx="2.5" fill="#dde3f4"/><rect x="52" y="84" width="40" height="5" rx="2.5" fill="#dde3f4"/><g transform="translate(150 70)"><circle r="22" fill="#14b8a6"/><path d="M-9 0l6 7 12-14" stroke="#fff" stroke-width="4.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g>'),
-    dict(id='staff', cat='agentic', short='Staff Transfer', n='04', name='Staff Transfer Management', tag='Move people between teams and sites without the paperwork', ag='sage', who='Lin', role='Enablement', c='#7a4cf0', cd='#5a35c0', soft='#eee8fe',
+    dict(id='staff', soon=True, cat='agentic', short='Staff Transfer', n='04', name='Staff Transfer Management', tag='Move people between teams and sites without the paperwork', ag='sage', who='Lin', role='Enablement', c='#7a4cf0', cd='#5a35c0', soft='#eee8fe',
          say='I walk each move through, from the request to the first day, so no one is left wondering what comes next.', feats=['Transfer requests', 'Manager approvals', 'Handover checklist'],
          draft=['Transfer requests with reasons', 'Manager and HR approvals', 'Handover checklist', 'Transfer history per person', 'Notifications to everyone involved', 'Reports by team and site'],
          art='<rect x="16" y="24" width="64" height="84" rx="12" fill="#fff" opacity=".92"/><rect x="160" y="24" width="64" height="84" rx="12" fill="#fff" opacity=".92"/>' + ''.join(f'<rect x="{x}" y="{y}" width="12" height="12" rx="3" fill="#c9bdf7"/>' for x in (26, 44, 62) for y in (36, 56)) + ''.join(f'<rect x="{x}" y="{y}" width="12" height="12" rx="3" fill="#c9bdf7"/>' for x in (170, 188, 206) for y in (36, 56)) + '<path d="M86 66h68" stroke="#7a4cf0" stroke-width="4" stroke-linecap="round"/><path d="M146 56l12 10-12 10" stroke="#7a4cf0" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/><g class="mv"><circle cx="120" cy="50" r="11" fill="#f28a1e"/><rect x="109" y="64" width="22" height="22" rx="9" fill="#f28a1e"/></g>'),
@@ -438,13 +438,13 @@ tilehtml = {c: '' for c, _, _ in CATS}
 for p in P:
     badge = f'<span class="pt-ag"><span data-ag="{p["ag"]}" data-v="head"></span></span>' if p['ag'] else ''
     tilehtml[p['cat']] += f'''
-                <button type="button" class="pt" id="{p['id']}" data-open="{p['id']}" aria-haspopup="dialog" data-name="{p['name']}" data-who="{p['who']}" style="--c:{p['c']};--cd:{p['cd']};--soft:{p['soft']}">
+                <button type="button" class="pt{' pt-soon' if p.get('soon') else ''}" id="{p['id']}"{' disabled' if p.get('soon') else ' data-open="' + p['id'] + '" aria-haspopup="dialog"'} data-name="{p['name']}" data-who="{p['who']}" style="--c:{p['c']};--cd:{p['cd']};--soft:{p['soft']}">
                     <span class="pt-ic"><svg viewBox="0 0 48 48" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">{ICONS[p['id']]}</svg>{badge}</span>
                     <b>{p['short']}</b>
                     <span class="pt-tag">{p['tag']}</span>
-                    <span class="pt-go">Open <i aria-hidden="true">→</i></span>
+                    {'<span class="pt-go pt-go-soon">Coming soon</span>' if p.get('soon') else '<span class="pt-go">Open <i aria-hidden="true">→</i></span>'}
                 </button>'''
-    sheets += sheet(p)
+    if not p.get('soon'): sheets += sheet(p)
 
 main = f'''<main>
     <section class="page-head prod-head">
@@ -464,7 +464,7 @@ main = f'''<main>
 
     <section class="sec" id="products" style="padding-top:36px">
         <div class="wrap">
-            {''.join(f'<div class="pt-cat"><div class="pt-cathead"><h2>{t}</h2><p>{d}</p></div><div class="pt-grid">{tilehtml[c]}</div></div>' for c, t, d in CATS)}
+            <div class="pt-cats">{''.join(f'<div class="pt-cat pt-cat-{c}"><div class="pt-cathead"><h2>{t}</h2><p>{d}</p></div><div class="pt-grid">{tilehtml[c]}</div></div>' for c, t, d in CATS)}</div>
         </div>
     </section>
 

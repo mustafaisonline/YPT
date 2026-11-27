@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script src="/js/site-mode.js?v=202611271617"></script>
+    <script src="/js/site-mode.js?v=202611271619"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Products page: the four YPT products. Kept out of search until launch. -->
@@ -11,8 +11,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/agentic.css?v=202611271617">
-    <link rel="stylesheet" href="css/products.css?v=202611271617">
+    <link rel="stylesheet" href="css/agentic.css?v=202611271619">
+    <link rel="stylesheet" href="css/products.css?v=202611271619">
 </head>
 <body class="has-promo">
 
@@ -79,7 +79,31 @@
 
     <section class="sec" id="products" style="padding-top:36px">
         <div class="wrap">
-            <div class="pt-cat"><div class="pt-cathead"><h2>Standard products</h2><p>Ready to use today. Open one to see what it does, then ask for a demo.</p></div><div class="pt-grid">
+            <div class="pt-cats"><div class="pt-cat pt-cat-agentic"><div class="pt-cathead"><h2>Agentic AI Products</h2><p>Designed, built and checked by the YPT agent team. Each one has its own builder agent.</p></div><div class="pt-grid">
+                <button type="button" class="pt" id="wholesale" data-open="wholesale" aria-haspopup="dialog" data-name="Online Wholesale &amp; Retail Management System" data-who="Jun" style="--c:#f28a1e;--cd:#b9680c;--soft:#fdf0d9">
+                    <span class="pt-ic"><svg viewBox="0 0 48 48" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 18h24l-2 20H14z"/><path d="M18 18v-4a6 6 0 0 1 12 0v4"/></svg><span class="pt-ag"><span data-ag="forge" data-v="head"></span></span></span>
+                    <b>Wholesale &amp; Retail</b>
+                    <span class="pt-tag">Sell wholesale and retail goods online, and run the orders behind them</span>
+                    <span class="pt-go">Open <i aria-hidden="true">→</i></span>
+                </button>
+                <button type="button" class="pt pt-soon" id="world" disabled data-name="Supply the World" data-who="Wei" style="--c:#2457f5;--cd:#1a3fd0;--soft:#e6ecff">
+                    <span class="pt-ic"><svg viewBox="0 0 48 48" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="24" cy="24" r="15"/><path d="M9 24h30M24 9c-8 8-8 22 0 30M24 9c8 8 8 22 0 30"/></svg><span class="pt-ag"><span data-ag="atlas" data-v="head"></span></span></span>
+                    <b>Supply the World</b>
+                    <span class="pt-tag">Import and export, run end to end</span>
+                    <span class="pt-go pt-go-soon">Coming soon</span>
+                </button>
+                <button type="button" class="pt" id="ims" data-open="ims" aria-haspopup="dialog" data-name="Invoice Management System" data-who="Mei" style="--c:#14b8a6;--cd:#0b8678;--soft:#dff6f1">
+                    <span class="pt-ic"><svg viewBox="0 0 48 48" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 8h16l6 6v26H14z"/><path d="M30 8v6h6"/><path d="M19 29l4 4 8-9"/></svg><span class="pt-ag"><span data-ag="aegis" data-v="head"></span></span></span>
+                    <b>Invoice Management</b>
+                    <span class="pt-tag">Invoices handled, not chased</span>
+                    <span class="pt-go">Open <i aria-hidden="true">→</i></span>
+                </button>
+                <button type="button" class="pt pt-soon" id="staff" disabled data-name="Staff Transfer Management" data-who="Lin" style="--c:#7a4cf0;--cd:#5a35c0;--soft:#eee8fe">
+                    <span class="pt-ic"><svg viewBox="0 0 48 48" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 14h13v20H7zM28 14h13v20H28z"/><path d="M22 24h4M25 21l3 3-3 3"/></svg><span class="pt-ag"><span data-ag="sage" data-v="head"></span></span></span>
+                    <b>Staff Transfer</b>
+                    <span class="pt-tag">Move people between teams and sites without the paperwork</span>
+                    <span class="pt-go pt-go-soon">Coming soon</span>
+                </button></div></div><div class="pt-cat pt-cat-standard"><div class="pt-cathead"><h2>Standard Products</h2><p>Ready to use today. Open one to see what it does, then ask for a demo.</p></div><div class="pt-grid">
                 <button type="button" class="pt" id="ecard" data-open="ecard" aria-haspopup="dialog" data-name="eCardForever" data-who="" style="--c:#e0467f;--cd:#b02a5f;--soft:#fde6f0">
                     <span class="pt-ic"><svg viewBox="0 0 48 48" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="12" width="34" height="24" rx="4"/><circle cx="18" cy="22" r="4"/><path d="M26 20h10M26 26h8M12 31h24"/></svg></span>
                     <b>eCardForever</b>
@@ -91,31 +115,7 @@
                     <b>Data AI Nexus</b>
                     <span class="pt-tag">Learn, practise and get certified in data and AI</span>
                     <span class="pt-go">Open <i aria-hidden="true">→</i></span>
-                </button></div></div><div class="pt-cat"><div class="pt-cathead"><h2>Agentic AI products</h2><p>Designed, built and checked by the YPT agent team. Each one has its own builder agent.</p></div><div class="pt-grid">
-                <button type="button" class="pt" id="wholesale" data-open="wholesale" aria-haspopup="dialog" data-name="Online Wholesale &amp; Retail Management System" data-who="Jun" style="--c:#f28a1e;--cd:#b9680c;--soft:#fdf0d9">
-                    <span class="pt-ic"><svg viewBox="0 0 48 48" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 18h24l-2 20H14z"/><path d="M18 18v-4a6 6 0 0 1 12 0v4"/></svg><span class="pt-ag"><span data-ag="forge" data-v="head"></span></span></span>
-                    <b>Wholesale &amp; Retail</b>
-                    <span class="pt-tag">Sell wholesale and retail goods online, and run the orders behind them</span>
-                    <span class="pt-go">Open <i aria-hidden="true">→</i></span>
-                </button>
-                <button type="button" class="pt" id="world" data-open="world" aria-haspopup="dialog" data-name="Supply the World" data-who="Wei" style="--c:#2457f5;--cd:#1a3fd0;--soft:#e6ecff">
-                    <span class="pt-ic"><svg viewBox="0 0 48 48" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="24" cy="24" r="15"/><path d="M9 24h30M24 9c-8 8-8 22 0 30M24 9c8 8 8 22 0 30"/></svg><span class="pt-ag"><span data-ag="atlas" data-v="head"></span></span></span>
-                    <b>Supply the World</b>
-                    <span class="pt-tag">Import and export, run end to end</span>
-                    <span class="pt-go">Open <i aria-hidden="true">→</i></span>
-                </button>
-                <button type="button" class="pt" id="ims" data-open="ims" aria-haspopup="dialog" data-name="Invoice Management System" data-who="Mei" style="--c:#14b8a6;--cd:#0b8678;--soft:#dff6f1">
-                    <span class="pt-ic"><svg viewBox="0 0 48 48" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 8h16l6 6v26H14z"/><path d="M30 8v6h6"/><path d="M19 29l4 4 8-9"/></svg><span class="pt-ag"><span data-ag="aegis" data-v="head"></span></span></span>
-                    <b>Invoice Management</b>
-                    <span class="pt-tag">Invoices handled, not chased</span>
-                    <span class="pt-go">Open <i aria-hidden="true">→</i></span>
-                </button>
-                <button type="button" class="pt" id="staff" data-open="staff" aria-haspopup="dialog" data-name="Staff Transfer Management" data-who="Lin" style="--c:#7a4cf0;--cd:#5a35c0;--soft:#eee8fe">
-                    <span class="pt-ic"><svg viewBox="0 0 48 48" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 14h13v20H7zM28 14h13v20H28z"/><path d="M22 24h4M25 21l3 3-3 3"/></svg><span class="pt-ag"><span data-ag="sage" data-v="head"></span></span></span>
-                    <b>Staff Transfer</b>
-                    <span class="pt-tag">Move people between teams and sites without the paperwork</span>
-                    <span class="pt-go">Open <i aria-hidden="true">→</i></span>
-                </button></div></div>
+                </button></div></div></div>
         </div>
     </section>
 
@@ -183,19 +183,6 @@
     <div class="ps-lb" hidden role="dialog" aria-modal="true" aria-label="Screenshot viewer"><button type="button" class="ps-lb-x" data-lbclose aria-label="Close viewer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button><button type="button" class="ps-lb-n ps-lb-prev" data-lbprev aria-label="Previous screenshot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button><figure class="ps-lb-fig"><img class="ps-lb-img" alt=""><figcaption><b></b><span></span><em></em></figcaption></figure><button type="button" class="ps-lb-n ps-lb-next" data-lbnext aria-label="Next screenshot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button></div>
   </div>
 </div>
-<div class="ps" id="ps-world" role="dialog" aria-modal="true" aria-labelledby="ps-world-title" hidden style="--c:#2457f5;--cd:#1a3fd0;--soft:#e6ecff">
-  <div class="ps-sheet">
-    <header class="ps-head">
-      <span class="ps-agent"><span data-ag="atlas" data-v="head"></span></span>
-      <div class="ps-ht"><p class="mono">Agentic AI product · Built with Wei, Architect</p><h2 id="ps-world-title">Supply the World</h2><p class="ps-tag">Import and export, run end to end</p></div>
-      <a class="btn ps-demo" href="contact.html">Ask for a demo <span class="arr">→</span></a>
-      <button type="button" class="ps-x" data-close aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
-    </header>
-    <div class="ps-tabs" role="tablist" aria-label="Sections"><button type="button" role="tab" id="ps-world-t-overview" aria-controls="ps-world-p-overview" aria-selected="true" tabindex="0" data-tab="overview">Overview</button><button type="button" role="tab" id="ps-world-t-features" aria-controls="ps-world-p-features" aria-selected="false" tabindex="-1" data-tab="features">Features</button></div>
-    <div class="ps-body"><div class="ps-panel" role="tabpanel" id="ps-world-p-overview" aria-labelledby="ps-world-t-overview" data-tab="overview" tabindex="0"><p class="ps-lead">Import and export, run end to end.</p><p class="ps-note"><b>Draft.</b> The full overview, modules, concept map and dashboards for this product are being prepared. Meanwhile, <a href="contact.html">ask for a demo</a> and we will walk you through it.</p></div><div class="ps-panel" role="tabpanel" id="ps-world-p-features" aria-labelledby="ps-world-t-features" data-tab="features" hidden tabindex="0"><p class="ps-note"><b>Draft.</b> The full feature list for this product is being prepared.</p><ul class="ps-fgrid"><li class="ps-fi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><div><b>Shipment and route tracking</b></div></li><li class="ps-fi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><div><b>Import and export documents in one place</b></div></li><li class="ps-fi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><div><b>Supplier and buyer records</b></div></li><li class="ps-fi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><div><b>Customs and compliance checklist</b></div></li><li class="ps-fi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><div><b>Status updates at every step</b></div></li><li class="ps-fi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><div><b>Reports across all shipments</b></div></li></ul></div></div>
-    
-  </div>
-</div>
 <div class="ps" id="ps-ims" role="dialog" aria-modal="true" aria-labelledby="ps-ims-title" hidden style="--c:#14b8a6;--cd:#0b8678;--soft:#dff6f1">
   <div class="ps-sheet">
     <header class="ps-head">
@@ -216,19 +203,6 @@
     <div class="ps-lb" hidden role="dialog" aria-modal="true" aria-label="Screenshot viewer"><button type="button" class="ps-lb-x" data-lbclose aria-label="Close viewer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button><button type="button" class="ps-lb-n ps-lb-prev" data-lbprev aria-label="Previous screenshot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button><figure class="ps-lb-fig"><img class="ps-lb-img" alt=""><figcaption><b></b><span></span><em></em></figcaption></figure><button type="button" class="ps-lb-n ps-lb-next" data-lbnext aria-label="Next screenshot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button></div>
   </div>
 </div>
-<div class="ps" id="ps-staff" role="dialog" aria-modal="true" aria-labelledby="ps-staff-title" hidden style="--c:#7a4cf0;--cd:#5a35c0;--soft:#eee8fe">
-  <div class="ps-sheet">
-    <header class="ps-head">
-      <span class="ps-agent"><span data-ag="sage" data-v="head"></span></span>
-      <div class="ps-ht"><p class="mono">Agentic AI product · Built with Lin, Enablement</p><h2 id="ps-staff-title">Staff Transfer Management</h2><p class="ps-tag">Move people between teams and sites without the paperwork</p></div>
-      <a class="btn ps-demo" href="contact.html">Ask for a demo <span class="arr">→</span></a>
-      <button type="button" class="ps-x" data-close aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
-    </header>
-    <div class="ps-tabs" role="tablist" aria-label="Sections"><button type="button" role="tab" id="ps-staff-t-overview" aria-controls="ps-staff-p-overview" aria-selected="true" tabindex="0" data-tab="overview">Overview</button><button type="button" role="tab" id="ps-staff-t-features" aria-controls="ps-staff-p-features" aria-selected="false" tabindex="-1" data-tab="features">Features</button></div>
-    <div class="ps-body"><div class="ps-panel" role="tabpanel" id="ps-staff-p-overview" aria-labelledby="ps-staff-t-overview" data-tab="overview" tabindex="0"><p class="ps-lead">Move people between teams and sites without the paperwork.</p><p class="ps-note"><b>Draft.</b> The full overview, modules, concept map and dashboards for this product are being prepared. Meanwhile, <a href="contact.html">ask for a demo</a> and we will walk you through it.</p></div><div class="ps-panel" role="tabpanel" id="ps-staff-p-features" aria-labelledby="ps-staff-t-features" data-tab="features" hidden tabindex="0"><p class="ps-note"><b>Draft.</b> The full feature list for this product is being prepared.</p><ul class="ps-fgrid"><li class="ps-fi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><div><b>Transfer requests with reasons</b></div></li><li class="ps-fi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><div><b>Manager and HR approvals</b></div></li><li class="ps-fi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><div><b>Handover checklist</b></div></li><li class="ps-fi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><div><b>Transfer history per person</b></div></li><li class="ps-fi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><div><b>Notifications to everyone involved</b></div></li><li class="ps-fi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><div><b>Reports by team and site</b></div></li></ul></div></div>
-    
-  </div>
-</div>
 
 <footer class="foot foot--full">
     <div class="wrap">
@@ -245,8 +219,8 @@
     </div>
 </footer>
 
-<script src="js/agentic.js?v=202611271617"></script>
-<script src="js/products.js?v=202611271617" defer></script>
-<script type="module" src="js/agents3d.js?v=202611271617"></script>
+<script src="js/agentic.js?v=202611271619"></script>
+<script src="js/products.js?v=202611271619" defer></script>
+<script type="module" src="js/agents3d.js?v=202611271619"></script>
 </body>
 </html>
