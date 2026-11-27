@@ -369,14 +369,14 @@
     if (field) {
         /* Wide screens: SAM sits high, the seven agents fan out in one calm smile-shaped arc below him (stage 1 to 7, left to right),
            and only a few quiet labels float in the gaps. Small screens keep the compact ring. */
-        var WIDE = window.matchMedia('(min-width: 1021px)').matches, CY = WIDE ? 23 : 50;
-        var POS = WIDE ? { vera: [20, 60], atlas: [40, 76], spark: [60, 76] }
+        var WIDE = window.matchMedia('(min-width: 1021px)').matches, CY = WIDE ? 17 : 50, CX = WIDE ? 41 : 50, TX = 84, TY = 44;
+        var POS = WIDE ? { vera: [7, 53], atlas: [29, 65], spark: [60, 65] }
                        : { vera: [50, 10], atlas: [83, 24], spark: [91, 69], forge: [73, 91], aegis: [31, 91], orca: [7, 68], sage: [17, 23] };
-        var CHIPS = WIDE ? [['Requirements interview', 19, 22], ['Data model', 81, 22], ['Guardrails', 50, 56]] : [['Requirements interview', 24, 38], ['Data model', 78, 41], ['Guardrails', 40, 77], ['Human-in-the-loop', 68, 5]];
+        var CHIPS = WIDE ? [['Requirements interview', 6, 27], ['Data model', 78, 17], ['Guardrails', 47, 46]] : [['Requirements interview', 24, 38], ['Data model', 78, 41], ['Guardrails', 40, 77], ['Human-in-the-loop', 68, 5]];
         field.style.setProperty('--cy', CY + '%');
         var html = '<svg class="links" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">';
-        AGENTS.forEach(function (a) { if (!POS[a.id]) return; html += '<line x1="50" y1="' + CY + '" x2="' + POS[a.id][0] + '" y2="' + POS[a.id][1] + '"/>'; });
-        if (WIDE) html += '<line x1="50" y1="' + CY + '" x2="81" y2="60"/>';
+        AGENTS.forEach(function (a) { if (!POS[a.id]) return; html += '<line x1="' + CX + '" y1="' + CY + '" x2="' + POS[a.id][0] + '" y2="' + POS[a.id][1] + '"/>'; });
+        if (WIDE) html += '<line x1="' + CX + '" y1="' + CY + '" x2="' + TX + '" y2="' + TY + '"/>';
         html += '</svg>';
         CHIPS.forEach(function (c, i) {
             html += '<div class="fly" data-depth="' + (0.5 + (i % 3) * 0.3) + '" style="left:' + c[1] + '%;top:' + c[2] + '%">' +
@@ -388,13 +388,20 @@
             shield: '<path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/>',
             flow: '<circle cx="5" cy="6" r="2"/><circle cx="19" cy="6" r="2"/><circle cx="12" cy="18" r="2"/><path d="M7 6h10M6 8l5 8M18 8l-5 8"/>',
             chart: '<path d="M4 20V4M4 20h16M8 16v-4M12 16V8M16 16v-6"/>',
-            code: '<path d="M8 8l-4 4 4 4M16 8l4 4-4 4M13 6l-2 12"/>'
+            code: '<path d="M8 8l-4 4 4 4M16 8l4 4-4 4M13 6l-2 12"/>',
+            mic: '<rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/>',
+            doc: '<path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4M9 12h6M9 16h6"/>',
+            spark: '<path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/><path d="M18 16l.8 2.2L21 19l-2.2.8L18 22l-.8-2.2L15 19l2.2-.8z"/>',
+            rocket: '<path d="M12 3c3 2 5 5 5 9l-2 3H9l-2-3c0-4 2-7 5-9z"/><circle cx="12" cy="10" r="1.6"/><path d="M9 15l-2 4 3-1M15 15l2 4-3-1"/>',
+            lock: '<rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>'
         };
-        (WIDE ? [['code', 10, 11, '#fde6f0', '#cf2f76'], ['chat', 31, 3, '#fdf0d9', '#d9820b'], ['db', 66, 3, '#dff6f1', '#0b8f80'], ['shield', 79, 4, '#eee8fe', '#6537d6'], ['flow', 93, 21, '#e6ecff', '#1a3fd0'], ['chart', 24, 40, '#fde5df', '#d94a31']]
+        (WIDE ? [['code', 12, 8, '#fde6f0', '#cf2f76', ''], ['mic', 25, 2, '#e6ecff', '#1a3fd0', 'sm'], ['spark', 63, 6, '#fdf0d9', '#d9820b', 'sm'], ['shield', 87, 10, '#eee8fe', '#6537d6', ''],
+                 ['doc', 98, 27, '#dff6f1', '#0b8f80', 'sm'], ['chart', 21, 37, '#fde5df', '#d94a31', ''], ['chat', 3, 80, '#fdf0d9', '#d9820b', ''], ['flow', 30, 92, '#e6ecff', '#1a3fd0', 'lg'],
+                 ['rocket', 50, 87, '#fde6f0', '#cf2f76', ''], ['lock', 73, 93, '#eee8fe', '#6537d6', 'sm'], ['db', 92, 82, '#dff6f1', '#0b8f80', '']]
          : [['chat', 36, 25, '#fdf0d9', '#d9820b'], ['db', 64, 28, '#dff6f1', '#0b8f80'], ['shield', 68, 72, '#eee8fe', '#6537d6'],
          ['flow', 97, 38, '#e6ecff', '#1a3fd0'], ['chart', 3, 82, '#fde5df', '#d94a31'], ['code', 99, 88, '#fde6f0', '#cf2f76']]).forEach(function (t, i) {
             html += '<div class="fly" data-depth="' + (0.7 + (i % 3) * 0.4) + '" style="left:' + t[1] + '%;top:' + t[2] + '%">' +
-                '<div class="tool" style="background:' + t[3] + ';color:' + t[4] + ';--dur:' + (7 + i * 1.1) + 's;--delay:-' + (i * 1.3) + 's">' +
+                '<div class="tool' + (t[5] ? ' ' + t[5] : '') + '" style="background:' + t[3] + ';color:' + t[4] + ';--dur:' + (7 + i * 1.1) + 's;--delay:-' + (i * 1.3) + 's">' +
                 '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + ICONS[t[0]] + '</svg></div></div>';
         });
         /* Sam: a flat, head-and-shoulders portrait. To use a designer's artwork instead, swap this string for '<img src="..." alt="">'. */
@@ -409,7 +416,7 @@
             '<circle cx="27" cy="26.500" r="1.700" fill="#1f1512"/><circle cx="37" cy="26.500" r="1.700" fill="#1f1512"/>' +
             '<path d="M29 35.500q3 2 6 0" fill="none" stroke="#f0bd96" stroke-width="1.400" stroke-linecap="round"/>' +
             '</svg>';
-        html += '<div class="fly core-fly" data-depth="0.35" style="left:50%;top:' + CY + '%"><div class="core"><div class="core-who"><span class="core-av" aria-hidden="true">' + ARMAN + '</span>' +
+        html += '<div class="fly core-fly" data-depth="0.35" style="left:' + CX + '%;top:' + CY + '%"><div class="core"><div class="core-who"><span class="core-av" aria-hidden="true">' + ARMAN + '</span>' +
             '<span class="core-name"><b>SAM (FDE)</b><small>Forward Deployed Engineer</small></span></div>' +
             '<span class="core-sub">I\u2019m your HUMAN Lead</span>' +
             '<span class="core-ask"><span id="core-type"></span><i class="caret"></i>' +
@@ -421,7 +428,7 @@
                 agentEl(a) +
                 '<span class="tag"><i class="stg">' + (i + 1) + '</i>' + a.name + ' <b>· ' + a.role.replace(' Agent', '') + '</b></span></button></div>';
         });
-        if (WIDE) html += '<div class="fly" data-depth="1.2" style="left:81%;top:60%"><a class="team" href="agents.html" aria-label="Meet the rest of the team: Jun, Mei, Farid and Lin">' +
+        if (WIDE) html += '<div class="fly" data-depth="1.2" style="left:' + TX + '%;top:' + TY + '%"><a class="team" href="agents.html" aria-label="Meet the rest of the team: Jun, Mei, Farid and Lin">' +
             '<span class="team-heads">' + AGENTS.slice(3).map(function (b) { return agentEl(b, { head: true }); }).join('') + '</span>' +
             '<span class="team-t"><i class="stg">4</i>More team members</span><span class="team-s">Build \u00b7 Govern \u00b7 Launch \u00b7 Enable</span></a></div>';
         field.innerHTML = html;
@@ -495,7 +502,7 @@
             wrap._ox = ox; wrap._oy = oy; placeFly(wrap);
             var fr = field.getBoundingClientRect();
             if (wrap._core) { // SAM moved: every line starts from wherever he is now
-                lines.forEach(function (l) { l.setAttribute('x1', (50 + ox / fr.width * 100).toFixed(2)); l.setAttribute('y1', (CY + oy / fr.height * 100).toFixed(2)); });
+                lines.forEach(function (l) { l.setAttribute('x1', (CX + ox / fr.width * 100).toFixed(2)); l.setAttribute('y1', (CY + oy / fr.height * 100).toFixed(2)); });
                 return;
             }
             if (!wrap._line) return;
