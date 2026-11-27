@@ -46,7 +46,7 @@
 
     function closeSheet() {
         if (!open) return;
-        var s = open; open = null;
+        var s = open; open = null; if (s._lb && s._lb.isOpen()) $('.ps-lb', s).hidden = true;
         function done() { s.hidden = true; s.classList.remove('closing', 'anim', 'from'); backdrop.hidden = true; document.body.classList.remove('ps-lock'); setInert(false); if (trigger && trigger.focus) trigger.focus({ preventScroll: true }); }
         if (REDUCED) { done(); return; }
         s.classList.add('closing'); setTimeout(done, 240);
@@ -64,9 +64,11 @@
     });
     document.addEventListener('keydown', function (e) {
         if (!open) return;
-        if (e.key === 'Escape') { e.preventDefault(); closeSheet(); }
+        var L = open._lb && open._lb.isOpen() ? open._lb : null;
+        if (L && (e.key === 'ArrowRight' || e.key === 'ArrowLeft')) { e.preventDefault(); L.step(e.key === 'ArrowRight' ? 1 : -1); return; }
+        if (e.key === 'Escape') { e.preventDefault(); if (L) L.close(); else closeSheet(); return; }
         if (e.key === 'Tab') {   // keep focus inside the sheet
-            var f = $$('button:not([disabled]), a[href], [tabindex="0"]', open).filter(function (el) { return el.offsetParent !== null && !el.closest('[hidden]'); });
+            var f = $$('button:not([disabled]), a[href], [tabindex="0"]', L ? $('.ps-lb', open) : open).filter(function (el) { return el.offsetParent !== null && !el.closest('[hidden]'); });
             if (!f.length) return;
             var first = f[0], last = f[f.length - 1];
             if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
@@ -100,6 +102,32 @@
                 var det = $('.ps-moddet:not([hidden])', s), body = $('.ps-body', s); if (window.innerWidth < 721) { if (det) det.scrollIntoView({ block: 'nearest' }); } else if (body) body.scrollTo({ top: Math.max(0, $('.ps-modules', s).offsetTop - 12), behavior: REDUCED ? 'auto' : 'smooth' });
             });
         });
+
+
+        // screenshots: thumbnails open a large viewer inside the sheet, with previous / next
+        var lb = $('.ps-lb', s), shots = $$('.ps-shot', s), cur = 0;
+        if (lb && shots.length) {
+            var im = $('.ps-lb-img', lb), cb = $('figcaption b', lb), cs = $('figcaption span', lb), cn = $('figcaption em', lb);
+            var show = function (i) {
+                cur = i; var t = shots[i], src = $('img', t);
+                im.src = src.getAttribute('src'); im.alt = src.getAttribute('alt');
+                cb.textContent = $('b', t).textContent; cs.textContent = $$('span', t)[1].textContent; cn.textContent = (i + 1) + ' of ' + shots.length;
+            };
+            s._lb = {
+                open: function (i) { show(i); lb.hidden = false; $('.ps-lb-x', lb).focus({ preventScroll: true }); },
+                close: function () { lb.hidden = true; if (shots[cur]) shots[cur].focus({ preventScroll: true }); },
+                step: function (d) { show((cur + d + shots.length) % shots.length); },
+                isOpen: function () { return !lb.hidden; }
+            };
+            shots.forEach(function (t, i) { t.addEventListener('click', function () { s._lb.open(i); }); });
+            $('[data-lbprev]', lb).addEventListener('click', function () { s._lb.step(-1); });
+            $('[data-lbnext]', lb).addEventListener('click', function () { s._lb.step(1); });
+            $('[data-lbclose]', lb).addEventListener('click', function () { s._lb.close(); });
+            lb.addEventListener('click', function (e) { if (e.target === lb) s._lb.close(); });
+            var tx = null;
+            lb.addEventListener('touchstart', function (e) { tx = e.touches[0].clientX; }, { passive: true });
+            lb.addEventListener('touchend', function (e) { if (tx === null) return; var dx = e.changedTouches[0].clientX - tx; tx = null; if (Math.abs(dx) > 50) s._lb.step(dx < 0 ? 1 : -1); });
+        }
 
         // concept map: select a box, light up what it connects to, explain it
         var svg = $('.ps-onto', s); if (!svg) return;

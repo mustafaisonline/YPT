@@ -336,11 +336,35 @@ def overview_draft(p):
             f'Meanwhile, <a href="contact.html">ask for a demo</a> and we will walk you through it.</p>')
 
 
+SHOTS = [
+    ('01-home', 'The public shop', 'Search, categories, offers, and the delivery and payment promises, on the first screen a buyer sees.'),
+    ('02-product', 'A product page', "Pack sizes, the signed-in buyer's own price, the minimum order and the quantity breaks."),
+    ('03-cart', 'The cart', 'Totals, the delivery fee for the zone, and how far the buyer is from free delivery.'),
+    ('04-admin', 'Owner overview', 'Six numbers and the charts behind them: sales, orders to process, payments to verify, low stock.'),
+    ('05-orders', 'The order desk', 'Every order with its status and payment, searchable and filterable by status.'),
+]
+
+
+def shots_panel():
+    th = ''.join(f'<button type="button" class="ps-shot" data-i="{i}" aria-label="Open screenshot {i + 1} of {len(SHOTS)}: {t}"><span class="ps-shot-img"><img src="img/products/wholesale/{f}.jpg" alt="{t}" loading="lazy" width="1440" height="813"></span><b>{t}</b><span>{d}</span></button>' for i, (f, t, d) in enumerate(SHOTS))
+    return f'<p class="ps-lead">Real screens from the working product. Open any one to see it large. The shop shown is a sample store with sample records.</p><div class="ps-shots">{th}</div>'
+
+
+def lightbox():
+    x = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
+    return ('<div class="ps-lb" hidden role="dialog" aria-modal="true" aria-label="Screenshot viewer">'
+            f'<button type="button" class="ps-lb-x" data-lbclose aria-label="Close viewer">{x}<path d="M6 6l12 12M18 6L6 18"/></svg></button>'
+            f'<button type="button" class="ps-lb-n ps-lb-prev" data-lbprev aria-label="Previous screenshot">{x}<path d="M15 5l-7 7 7 7"/></svg></button>'
+            '<figure class="ps-lb-fig"><img class="ps-lb-img" alt=""><figcaption><b></b><span></span><em></em></figcaption></figure>'
+            f'<button type="button" class="ps-lb-n ps-lb-next" data-lbnext aria-label="Next screenshot">{x}<path d="M9 5l7 7-7 7"/></svg></button>'
+            '</div>')
+
+
 def sheet(p):
     tabs = [('overview', 'Overview'), ('features', 'Features')]
-    if p.get('full'): tabs += [('modules', 'Modules'), ('ontology', 'Concept map'), ('dash', 'Dashboards and reports')]
+    if p.get('full'): tabs += [('modules', 'Modules'), ('ontology', 'Concept map'), ('dash', 'Dashboards and reports'), ('shots', 'Screenshots')]
     panels = {'overview': overview_panel() if p.get('full') else overview_draft(p), 'features': features_panel(p)}
-    if p.get('full'): panels.update({'modules': modules_panel(), 'ontology': onto_panel(), 'dash': dashboard_panel()})
+    if p.get('full'): panels.update({'modules': modules_panel(), 'ontology': onto_panel(), 'dash': dashboard_panel(), 'shots': shots_panel()})
     tb = ''.join(f'<button type="button" role="tab" id="ps-{p["id"]}-t-{k}" aria-controls="ps-{p["id"]}-p-{k}" aria-selected="{"true" if i == 0 else "false"}" tabindex="{0 if i == 0 else -1}" data-tab="{k}">{lab}</button>' for i, (k, lab) in enumerate(tabs))
     pn = ''.join(f'<div class="ps-panel" role="tabpanel" id="ps-{p["id"]}-p-{k}" aria-labelledby="ps-{p["id"]}-t-{k}" data-tab="{k}"{"" if i == 0 else " hidden"} tabindex="0">{panels[k]}</div>' for i, (k, _) in enumerate(tabs))
     return f'''
@@ -354,6 +378,7 @@ def sheet(p):
     </header>
     <div class="ps-tabs" role="tablist" aria-label="Sections">{tb}</div>
     <div class="ps-body">{pn}</div>
+    {lightbox() if p.get('full') else ''}
   </div>
 </div>'''
 
