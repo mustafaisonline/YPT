@@ -320,20 +320,19 @@ def build():
     </div>
     <div class="hww-choices" id="hww-choices"></div>
     <div class="hww-ctl" id="hww-ctl" role="toolbar" aria-label="Tour controls">
-      <button type="button" data-a="prev" aria-label="Previous stop" title="Previous stop">◀</button>
-      <button type="button" data-a="next" aria-label="Next stop" title="Next stop">▶</button>
+      <button type="button" class="k k-tour" data-a="prev" aria-label="Previous stop" title="Previous stop"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></i><span>Previous</span></button>
+      <button type="button" class="k k-tour" data-a="next" aria-label="Next stop" title="Next stop"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></i><span>Next</span></button>
       <span class="sep"></span>
-      <button type="button" data-a="up" aria-label="Lift up" title="Lift up">▲</button>
-      <button type="button" data-a="down" aria-label="Lift down" title="Lift down">▼</button>
+      <button type="button" class="k k-floor" data-a="up" aria-label="Go to the next floor (up)" title="Go to the next floor (up)"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V6M6 11l6-6 6 6"/></svg></i><span>Next floor</span></button>
+      <button type="button" class="k k-floor" data-a="down" aria-label="Go to the previous floor (down)" title="Go to the previous floor (down)"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v13M6 13l6 6 6-6"/></svg></i><span>Previous floor</span></button>
+      <button type="button" class="k k-rec" data-a="lobby" aria-label="Go to reception" title="Go to reception"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19h16M6 19v-3a6 6 0 0 1 12 0v3M12 8V6M10 6h4"/></svg></i><span>Reception</span></button>
       <span class="sep"></span>
-      <button type="button" data-a="left" aria-label="Look left" title="Look left">←</button>
-      <button type="button" data-a="right" aria-label="Look right" title="Look right">→</button>
-      <button type="button" data-a="zin" aria-label="Zoom in" title="Zoom in">＋</button>
-      <button type="button" data-a="zout" aria-label="Zoom out" title="Zoom out">－</button>
+      <button type="button" class="k k-zoom" data-a="zin" aria-label="Zoom in" title="Zoom in"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 4a7 7 0 1 0 0 14 7 7 0 0 0 0-14zM21 21l-4.5-4.5M8.5 11h5M11 8.5v5"/></svg></i><span>Zoom in</span></button>
+      <button type="button" class="k k-zoom" data-a="zout" aria-label="Zoom out" title="Zoom out"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 4a7 7 0 1 0 0 14 7 7 0 0 0 0-14zM21 21l-4.5-4.5M8.5 11h5"/></svg></i><span>Zoom out</span></button>
       <span class="sep"></span>
-      <button type="button" data-a="light" aria-label="Lights on or off" title="Lights on or off" aria-pressed="false">☀</button>
-      <button type="button" data-a="restart" aria-label="Restart the tour" title="Restart the tour">⟲</button>
-      <button type="button" data-a="skip" class="txt" title="Skip to the last stop">Skip</button>
+      <button type="button" class="k k-misc" data-a="light" aria-label="Lights on or off" title="Lights on or off" aria-pressed="false"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5L19 19M5 19l1.5-1.5M17.5 6.5L19 5"/></svg></i><span>Lights</span></button>
+      <button type="button" class="k k-misc" data-a="restart" aria-label="Restart the tour" title="Restart the tour"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12a8 8 0 1 0 3-6.2M4 4v4h4"/></svg></i><span>Restart</span></button>
+      <button type="button" class="k k-misc" data-a="skip" aria-label="Skip to the last stop" title="Skip to the last stop"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 5l8 7-8 7zM17 5v14"/></svg></i><span>Skip</span></button>
     </div>
     <div class="hww-floors" id="hww-floors" role="group" aria-label="Floors">{picker}</div>
     <div class="hww-step" id="hww-step" aria-hidden="true"></div>

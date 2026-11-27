@@ -106,6 +106,7 @@
         zin: function () { H && H.zoom(1 / 1.22); },
         zout: function () { H && H.zoom(1.22); },
         light: function (b) { st.night = !st.night; H && H.setNight(st.night); ROOT.classList.toggle('night', st.night); b.setAttribute('aria-pressed', st.night ? 'true' : 'false'); },
+        lobby: function () { go(0); },
         restart: function () { go(0); },
         skip: function () { go(STOPS.length - 1); }
     };
@@ -139,6 +140,7 @@
     function begin() {
         H = window.HWW3D; if (!H || st.began) return; st.began = true;
         H.onRoom = function (id) { goRoom(id); };
+        H.onFloor = function (n) { goFloor(n); };
         if (m) { go(+m[1], true); return; }
         H.enter(); CHIP.textContent = 'Your Partner Technologies'; TXT.textContent = 'Our building, floor by floor. Let me show you around.';
         H.overview(2800).then(function () { go(0); });

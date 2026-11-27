@@ -394,16 +394,18 @@ async function boot() {
     // ------------------------------------------------------------------ the tour API used by hww.js
     let tok = 0;
     const wait = ms => new Promise(r => setTimeout(r, REDUCED ? 0 : ms));
+    let holdNext = false, destF = 0;
     async function to(id) {
-        const R = ROOM[id]; if (!R) return false; const my = ++tok; mode = 'room'; user.yaw = 0; A.ride = false; const tgtY = R.f * FH;
+        const R = ROOM[id]; if (!R) return false; const my = ++tok; mode = 'room'; user.yaw = 0; A.ride = false; const tgtY = R.f * FH; destF = R.f;
+        const hold = holdNext; holdNext = false; if (hold) { shotRoom(R); shot.tx = R.x; }   // the visitor dragged the view here: the camera stays on this floor and Alya comes to it
         if (Math.abs(A.y - tgtY) > 0.05) {                                   // a different floor: walk to the glass lift and ride it
             const cur = Math.max(0, Math.min(FLOORS - 1, Math.round(A.y / FH))), here = Object.values(ROOM).find(r => r.f === cur);
-            if (Math.abs(A.x - LIFTX) > 0.05) { if (here) shotRoom(here); shot.tx = Math.min(PLAN[cur].w / 2 - 8, 14); if (!await walkTo(LIFTX, A.y, AISLE, 9) || my !== tok) return false; }
-            A.ride = true; mode = 'ride'; shotRide();
-            const tick = setInterval(() => { shot.ty = A.y + 3; }, 40);
+            if (Math.abs(A.x - LIFTX) > 0.05) { if (!hold) { if (here) shotRoom(here); shot.tx = Math.min(PLAN[cur].w / 2 - 8, 14); } if (!await walkTo(LIFTX, A.y, AISLE, 9) || my !== tok) return false; }
+            A.ride = true; mode = 'ride'; if (!hold) shotRide();
+            const tick = hold ? 0 : setInterval(() => { shot.ty = A.y + 3; }, 40);
             const ok = await walkTo(LIFTX, tgtY, AISLE, Math.max(9, Math.abs(tgtY - A.y) / 2.4)); clearInterval(tick);
             if (!ok || my !== tok) return false;
-            A.ride = false; A.f = R.f; mode = 'room'; shotRoom(R); shot.tx = LIFTX - 7; await wait(400); if (my !== tok) return false;
+            A.ride = false; A.f = R.f; mode = 'room'; shotRoom(R); shot.tx = hold ? R.x : LIFTX - 7; await wait(400); if (my !== tok) return false;
         }
         shotRoom(R); following = true;
         const ok = await walkTo(R.x, tgtY, AISLE, 9); following = false;
@@ -420,12 +422,45 @@ async function boot() {
     // clicking a room on the model asks the tour to go there; a click is told from a drag by distance
     let down = null;
     canvas.addEventListener('pointerdown', e => { down = [e.clientX, e.clientY, e.clientX, e.clientY]; });
-    canvas.addEventListener('pointermove', e => { if (!down || e.buttons !== 1 || e.pointerType !== 'mouse') return; user.yaw = Math.max(-1.2, Math.min(1.2, user.yaw - (e.clientX - down[2]) * 0.003)); down[2] = e.clientX; down[3] = e.clientY; });
+    // dragging with the mouse: sideways turns the view, up and down moves through the floors; let go on a different floor and Alya comes to it
+    let dragT = 0;
+    const floorAtView = () => Math.max(0, Math.min(FLOORS - 1, Math.round((shot.ty - 1.9) / FH)));
+    function summon() { clearTimeout(dragT); const f = floorAtView(); if (f === destF || !window.HWW3D || !window.HWW3D.onFloor) { if (f === destF) shotFloorSnap(f); return; } holdNext = true; window.HWW3D.onFloor(f); }
+    function shotFloorSnap(f) { const R = Object.values(ROOM).find(r => r.f === f && r.id !== 'launchpad'); if (R && mode === 'free') { mode = 'room'; shotRoom(R); } }
+    canvas.addEventListener('pointermove', e => {
+        if (!down || e.buttons !== 1 || e.pointerType !== 'mouse') return;
+        const dx = e.clientX - down[2], dy = e.clientY - down[3]; down[2] = e.clientX; down[3] = e.clientY;
+        user.yaw = Math.max(-1.2, Math.min(1.2, user.yaw - dx * 0.003));
+        if (Math.hypot(e.clientX - down[0], e.clientY - down[1]) < 6 && mode !== 'free') return;
+        if (mode !== 'free') { if (mode === 'overview' || mode === 'ride') { Object.assign(shot, { tx: Math.max(-20, Math.min(20, A.x)), ty: A.y + 1.9, dist: 34, yaw: 0.2, pitch: 0.1, turn: 0, rate: 2.2 }); } mode = 'free'; following = false; }
+        const upp = 2 * Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)) * shot.dist * user.zoom / stage.clientHeight;
+        shot.ty = Math.max(1.9, Math.min((FLOORS - 1) * FH + 1.9, shot.ty + dy * upp));
+        clearTimeout(dragT); dragT = setTimeout(() => { if (down) summon(); }, 450);
+    });
     canvas.addEventListener('pointerup', e => {
-        if (!down || Math.hypot(e.clientX - down[0], e.clientY - down[1]) > 6) { down = null; return; } down = null;
+        if (!down || Math.hypot(e.clientX - down[0], e.clientY - down[1]) > 6) { const was = down; down = null; if (was && mode === 'free') summon(); return; } down = null;
         const r = canvas.getBoundingClientRect(), v = new THREE.Vector2((e.clientX - r.left) / r.width * 2 - 1, -(e.clientY - r.top) / r.height * 2 + 1), rc = new THREE.Raycaster(); rc.setFromCamera(v, camera);
         const h = rc.intersectObjects(hits, false)[0]; if (h && window.HWW3D && window.HWW3D.onRoom) window.HWW3D.onRoom(h.object.userData.room);
     });
+
+    // trackpad: two fingers up and down change the floor; open or close the fingers (pinch) to zoom
+    const noWheel = '.hww-say, .hww-choices, .hww-ctl, .hww-floors';
+    let wAcc = 0, wCool = 0, wLast = 0;
+    stage.addEventListener('wheel', e => {
+        if (e.target.closest && e.target.closest(noWheel)) return;
+        if (e.ctrlKey) { e.preventDefault(); zoom(Math.exp(e.deltaY * 0.012)); return; }          // pinch arrives as a ctrl-wheel in Chrome and Edge
+        if (window.scrollY > 4 || Math.abs(e.deltaY) < Math.abs(e.deltaX)) return;                // the page below is being read, or this is a sideways swipe
+        const dir = e.deltaY > 0 ? -1 : 1, nf = destF + dir;
+        if (nf < 0 || nf > FLOORS - 1) return;                                                   // ground floor and scrolling down: let the page scroll on
+        e.preventDefault();
+        const now = performance.now(); if (now - wLast > 250) wAcc = 0; wLast = now;
+        wAcc += e.deltaY; if (Math.abs(wAcc) < 50 || now < wCool) return;
+        wAcc = 0; wCool = now + 1100; clearTimeout(dragT);
+        if (window.HWW3D && window.HWW3D.onFloor) { holdNext = true; window.HWW3D.onFloor(nf); }
+    }, { passive: false });
+    let pz = 1;                                                                                    // Safari pinch
+    stage.addEventListener('gesturestart', e => { e.preventDefault(); pz = user.zoom; });
+    stage.addEventListener('gesturechange', e => { e.preventDefault(); user.zoom = Math.max(0.45, Math.min(1.9, pz / e.scale)); });
 
     // ------------------------------------------------------------------ render loop
     let last = performance.now();
@@ -444,7 +479,7 @@ async function boot() {
     }
     // Alya's speech bubble floats over her head: project her head to the screen each frame, keep the bubble inside the stage,
     // flip it below her if she is near the top edge, and aim its tail at her.
-    const sayEl = document.getElementById('hww-say'), hv = new THREE.Vector3();
+    const sayEl = document.getElementById('hww-say'), textEl = document.getElementById('hww-text'), hv = new THREE.Vector3();
     function bubble() {
         if (!sayEl) return;
         const W = stage.clientWidth, Hh = stage.clientHeight, bw = sayEl.offsetWidth, bh = sayEl.offsetHeight;
@@ -456,7 +491,7 @@ async function boot() {
         top = Math.min(top, Hh - bh - 70);
         sayEl.style.transform = 'translate(' + left.toFixed(1) + 'px,' + top.toFixed(1) + 'px)';
         sayEl.style.setProperty('--tx', Math.max(22, Math.min(bw - 22, x - left)).toFixed(1) + 'px');
-        sayEl.classList.toggle('below', below);
+        sayEl.classList.toggle('below', below); sayEl.classList.toggle('idle', !textEl.textContent);
     }
     Object.assign(rig, shot);
     requestAnimationFrame(frame);
