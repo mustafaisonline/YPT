@@ -1171,3 +1171,5 @@ a.pg-card--link:hover, a.pg-card--link:focus-visible { transform: translateY(-3p
 .sc-card strong { line-height: 1.18; }
 .sc-card strong b { display: inline-block; line-height: 1.12; margin-top: 6px; }
 @media (max-width: 640px) { .sc-card .promo-tag, .sc-card .promo-go { display: inline-flex; } .sc-card .promo-tag { align-self: flex-start; } }
+/* phones: the helper agent rides above the fixed site selector instead of sitting on it */
+@media (max-width: 640px) { .guide { bottom: 60px; right: 10px; max-width: calc(100vw - 20px); } .guide-say { max-width: calc(100vw - 110px); } }

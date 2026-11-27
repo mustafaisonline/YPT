@@ -252,3 +252,5 @@ body.ps-lock .sm-box { z-index: 5 !important; }
 .pt-logo img { width: 74px; height: 74px; object-fit: contain; display: block; }
 .ps-agent > img { width: 100%; height: auto; display: block; border-radius: 16px; background: #fff; }
 @media (max-width: 720px) { .pt-logo img { width: 64px; height: 64px; } }
+/* phones: the close button no longer covers the sheet's eyebrow line */
+@media (max-width: 640px) { .ps-head { padding-top: 54px; } .ps-x { top: 8px; } }
