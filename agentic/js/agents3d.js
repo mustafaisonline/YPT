@@ -50,15 +50,17 @@ function start() {
     }
 
     // ---------------------------------------------------------------- shared geometry and materials
-    const geo = {}, G = (k, make) => geo[k] || (geo[k] = make());
-    const sphere = () => G('sphere', () => new THREE.SphereGeometry(1, 36, 24));
-    const cyl = () => G('cyl', () => new THREE.CylinderGeometry(1, 1, 1, 28));
-    const capsule = (r, len) => G('cap' + r + '_' + len, () => new THREE.CapsuleGeometry(r, len, 10, 24));
-    const torus = (r, tube, arc) => G('tor' + r + '_' + tube + '_' + arc, () => new THREE.TorusGeometry(r, tube, 12, 40, arc));
+    // D = 1 builds the full-detail models used by the page's agents; D = 0 builds light ones for crowds (see YPT_AG3D below).
+    let D = 1;
+    const geo = {}, G = (k, make) => { k = D + k; return geo[k] || (geo[k] = make()); };
+    const sphere = () => G('sphere', () => new THREE.SphereGeometry(1, D ? 36 : 14, D ? 24 : 9));
+    const cyl = () => G('cyl', () => new THREE.CylinderGeometry(1, 1, 1, D ? 28 : 10));
+    const capsule = (r, len) => G('cap' + r + '_' + len, () => new THREE.CapsuleGeometry(r, len, D ? 10 : 3, D ? 24 : 10));
+    const torus = (r, tube, arc) => G('tor' + r + '_' + tube + '_' + arc, () => new THREE.TorusGeometry(r, tube, D ? 12 : 6, D ? 40 : 14, arc));
     const box = () => G('box', () => new THREE.BoxGeometry(1, 1, 1));
     const octa = () => G('octa', () => new THREE.OctahedronGeometry(1));
-    const cone = (open) => G('cone' + open, () => new THREE.ConeGeometry(1, 1, 28, 1, !!open));
-    const dome = () => G('dome', () => new THREE.SphereGeometry(1, 36, 18, 0, Math.PI * 2, 0, Math.PI / 2));
+    const cone = (open) => G('cone' + open, () => new THREE.ConeGeometry(1, 1, D ? 28 : 10, 1, !!open));
+    const dome = () => G('dome', () => new THREE.SphereGeometry(1, D ? 36 : 14, D ? 18 : 7, 0, Math.PI * 2, 0, Math.PI / 2));
 
     const phong = (color, shininess, extra) => new THREE.MeshPhongMaterial(Object.assign({ color, shininess, specular: 0x555b6e }, extra));
     const M = {
@@ -529,4 +531,13 @@ function start() {
         }
     }
     requestAnimationFrame(loop);
+
+    // For other 3D scenes on the site (How We Work): build the same agent models, light or full, and a hook to
+    // read what a built model offers. The caller owns the animation and the rendering.
+    window.YPT_AG3D = {
+        THREE,
+        build(def, variant, light) { D = light ? 0 : 1; try { return build(def, variant || 'full'); } finally { D = 1; } },
+        HEAD, ARM
+    };
+    document.dispatchEvent(new Event('ypt:ag3d'));
 }

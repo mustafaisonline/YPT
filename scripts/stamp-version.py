@@ -7,7 +7,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 args = [a for a in sys.argv[1:] if a != '--all']
 ALL = '--all' in sys.argv  # --all also re-stamps the standard pages (needed only when js/site-mode.js changes)
 stamp = args[0] if args else time.strftime('%Y%m%d%H%M')
-pat = re.compile(r'((?:agentic\.css|agentic\.js|agents3d\.js|hww\.css|hww\.js|site-mode\.js))(\?v=[0-9A-Za-z]+)?(")')
+pat = re.compile(r'((?:agentic\.css|agentic\.js|agents3d\.js|hww\.css|hww\.js|hww3d\.js|site-mode\.js))(\?v=[0-9A-Za-z]+)?(")')
 n = 0
 for d, _, fs in os.walk(ROOT):
     if any(x in d for x in ('/.git', '/node_modules', '/scripts', '/change-requests')): continue

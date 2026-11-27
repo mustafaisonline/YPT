@@ -133,11 +133,11 @@ THEME = {  # wall top, wall bottom, carpet, accent
 LABEL = {7: '7', 6: '6', 5: '5', 4: '4', 3: '3', 2: '2', 1: '1', 0: 'G'}
 NAMES = {7: 'Board & C-suite', 6: 'Business', 5: 'Discover', 4: 'Pilot', 3: 'Build', 2: 'Govern', 1: 'Launch', 0: 'Ground'}
 
-ROOMS = []  # filled below: id, floor, x, name, lead, text
+ROOMS = [{"id": "board","f": 7,"name": "Boardroom","text": "The Board of Directors and its Chair sit here. Every project answers to these chairs: strategy, money, risk and people."},{"id": "csuite","f": 7,"name": "C-suite offices","text": "CEO, COO, CTO, CFO, CPO, CISO, CMO and CHRO each have an office on this floor."},{"id": "directors","f": 6,"name": "Directors (C-1)","text": "The VPs and directors: Engineering, Product, Delivery and Sales."},{"id": "sales","f": 6,"name": "Sales and Marketing","text": "Account executives, pre-sales and marketing teams. Your first conversation with us usually starts here."},{"id": "procure","f": 6,"name": "Procurement and Finance","text": "Procurement and vendor management, finance and billing."},{"id": "legalhr","f": 6,"name": "Legal and HR","text": "Legal and contracts, HR and talent."},{"id": "sam","f": 5,"name": "SAM, your single point of contact","text": "SAM is our Forward Deployed Engineer and your single point of contact. He runs the whole journey with you."},{"id": "discovery","f": 5,"name": "Discovery studio","text": "Siti leads Discovery with business analysts, solution consultants, UX researchers and data analysts."},{"id": "architect","f": 5,"name": "Architecture room","text": "Wei leads Architecture with solution, data, security and integration architects."},{"id": "pilotbay","f": 4,"name": "Pilot bay","text": "Aiman leads the Pilot with product owners, project and programme managers, scrum masters and UX/UI designers."},{"id": "meet","f": 4,"name": "Meeting rooms","text": "Glass meeting rooms for customer demos and workshops."},{"id": "engineering","f": 3,"name": "Engineering floor","text": "Jun leads Build with front-end, back-end, mobile, AI/ML, data and integration engineers."},{"id": "testlab","f": 3,"name": "Test lab","text": "QA and test automation, with a wall of real devices."},{"id": "checks","f": 2,"name": "Checklists","text": "Security, compliance and risk checklists."},{"id": "governance","f": 2,"name": "Governance office","text": "Mei leads Governance: security, compliance and risk, internal audit, responsible-AI review and data protection."},{"id": "audit","f": 2,"name": "Audit and review","text": "Internal audit, responsible-AI review and data protection."},{"id": "mission","f": 1,"name": "Mission control","text": "Farid leads Launch with DevOps, site reliability, cloud and infrastructure, release and change managers."},{"id": "lobby","f": 0,"name": "Lobby","text": "Reception. This is where every visit starts."},{"id": "academy","f": 0,"name": "Academy and support","text": "Lin leads Enablement with trainers, customer success, the support desk and documentation."},{"id": "launchpad","f": 1,"name": "Launch pad","text": "Where finished work lifts off. Farid launches it and keeps watching it after launch."},{"id": "hall","f": 0,"name": "The Hall","text": "Where launches are celebrated."}]  # the 3D positions live in js/hww3d.js
 
 
 def room(rid, f, x0, x1, name, text, stop_x=None):
-    ROOMS.append({'id': rid, 'f': f, 'x': stop_x or (x0 + x1) // 2, 'name': name, 'text': text})
+    pass
     return hit(x0, x1, rid, name)
 
 
@@ -295,7 +295,6 @@ LIST = [
 
 
 def build():
-    floors = ''.join(floor_html(n) for n in (7, 6, 5, 4, 3, 2, 1, 0))
     sprite = '''<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
 <linearGradient id="scr" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2d6cff"/><stop offset="1" stop-color="#5eead4"/></linearGradient>
 <symbol id="ah" viewBox="0 -4 60 76"><rect x="15" y="44" width="30" height="26" rx="9" fill="var(--c)" opacity=".82"/><rect x="22" y="40" width="16" height="8" rx="3" fill="#8a96b8"/>
@@ -314,10 +313,7 @@ def build():
 {sprite}
 <section class="hww" id="hww" aria-label="How We Work: a tour of our building">
   <div class="hww-stage" id="hww-stage">
-    <div class="hww-bldg" id="hww-bldg">
-      {floors}
-      <div class="alya" id="alya" aria-hidden="true"><div class="alya-in"><span data-ag="alya"></span></div></div>
-    </div>
+    <p class="no3d-note">Your browser cannot show the 3D tower. The tour text still works, and every floor is listed below.</p>
     <div class="hww-say" id="hww-say">
       <div class="hww-who"><span class="hww-name">Alya</span><span class="hww-chip" id="hww-chip"></span></div>
       <p id="hww-text" aria-hidden="true"></p><span class="sr" id="hww-sr" role="status"></span>
@@ -343,6 +339,7 @@ def build():
     <div class="hww-step" id="hww-step" aria-hidden="true"></div>
   </div>
   <script type="application/json" id="hww-data">{stops_json}</script>
+  <script type="text/plain" id="sam-svg"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">{SAM}</svg></script>
 </section>
 <section class="sec sec--plain hww-list"><div class="wrap">
   <div class="sec-head"><p class="mono">Prefer to read it?</p><h2 class="h2">Every floor, in one list</h2></div>
@@ -356,6 +353,8 @@ def build():
     if 'css/hww.css' not in t:
         t = t.replace('</head>', '    <link rel="stylesheet" href="css/hww.css">\n</head>', 1)
     t = t.replace('<body class="has-promo">', '<body class="has-promo hww-page" data-generic>', 1)
+    if 'js/hww3d.js' not in t:
+        t = t.replace('<script type="module" src="js/agents3d.js', '<script type="module" src="js/hww3d.js"></script>\n<script type="module" src="js/agents3d.js', 1)
     if 'js/hww.js' not in t:
         t = t.replace('<script src="js/agentic.js', '<script src="js/hww.js" defer></script>\n<script src="js/agentic.js', 1)
     open(PAGE, 'w', encoding='utf8').write(t)

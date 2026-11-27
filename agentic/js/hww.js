@@ -6,66 +6,17 @@
     var $ = function (s, r) { return (r || document).querySelector(s); };
     var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
     var DATA = JSON.parse(document.getElementById('hww-data').textContent), STOPS = DATA.stops, ROOMS = DATA.rooms;
-    var ROOT = document.getElementById('hww'), B = document.getElementById('hww-bldg'), A = document.getElementById('alya');
+    var ROOT = document.getElementById('hww');
     var TXT = document.getElementById('hww-text'), SR = document.getElementById('hww-sr'), CHIP = document.getElementById('hww-chip'), CH = document.getElementById('hww-choices');
     var STEP = document.getElementById('hww-step');
     var REDUCED = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var W = 1600, FH = 640, FLOOR = 560, LIFT_X = 134, SPEED = 0.34; // world units per ms
-    var st = { af: 0, ax: -80, step: -1, zoom: 1, pan: 0, tok: 0, typeT: 0 };
-
-    // ----- camera
-    function scale() { return Math.max(0.4, Math.min(1.7, S.clientHeight / FH * st.zoom)); }
-    function cam(f, x, ms, linear) {
-        var z = scale(), vw = S.clientWidth / z, cx;
-        if (vw >= W) cx = -(vw - W) / 2; else cx = Math.max(0, Math.min(W - vw, x - vw / 2 + st.pan));
-        B.style.transitionDuration = (REDUCED ? 0 : ms) + 'ms';
-        B.style.transitionTimingFunction = linear ? 'linear' : '';
-        B.style.transform = 'translate(' + (-cx * z).toFixed(1) + 'px,' + (-(7 - f) * FH * z).toFixed(1) + 'px) scale(' + z.toFixed(4) + ')';
-    }
-    function place(f, x, ms) {
-        A.style.transitionDuration = (REDUCED ? 0 : ms) + 'ms';
-        A.style.transform = 'translate(' + (x - 75) + 'px,' + ((7 - f) * FH + FLOOR - 146) + 'px)';
-    }
-
-    // ----- walking and the lift
-    function walk(x, done, my) {
-        var d = Math.abs(x - st.ax), ms = d < 4 ? 0 : Math.max(380, d / SPEED);
-        if (!ms) { done && done(); return; }
-        A.classList.toggle('face-l', x < st.ax); A.classList.add('walking');
-        place(st.af, x, ms); cam(st.af, x, ms, true); st.pan = 0;
-        st.ax = x;
-        setTimeout(function () { if (my !== st.tok) return; A.classList.remove('walking', 'face-l'); done && done(); }, REDUCED ? 0 : ms + 30);
-    }
-    function lift(f, open) { var l = $('.fl[data-f="' + f + '"] .lift'); if (l) l.classList.toggle('open', open); }
-    function moveTo(f, x, done) {
-        var my = ++st.tok;
-        if (f === st.af) { walk(x, done, my); return; }
-        walk(LIFT_X, function () {
-            if (my !== st.tok) return;
-            var from = st.af;
-            lift(from, true);
-            setTimeout(function () {
-                if (my !== st.tok) return;
-                A.classList.add('hidden');
-                setTimeout(function () {
-                    if (my !== st.tok) return;
-                    lift(from, false);
-                    st.af = f; st.pan = 0;
-                    cam(f, LIFT_X, 1100);
-                    setTimeout(function () {
-                        if (my !== st.tok) return;
-                        A.style.transition = 'none'; place(f, LIFT_X, 0); void A.offsetWidth;
-                        lift(f, true);
-                        A.classList.remove('hidden');
-                        setTimeout(function () {
-                            if (my !== st.tok) return;
-                            walk(x, function () { lift(f, false); done && done(); }, my);
-                        }, REDUCED ? 0 : 450);
-                    }, REDUCED ? 0 : 1150);
-                }, REDUCED ? 0 : 450);
-            }, REDUCED ? 0 : 500);
-        }, my);
-        paintFloor(f);
+    var st = { af: 0, step: -1, typeT: 0, tok: 0, night: false };
+    var H = null; // the 3D module (window.HWW3D), once it is ready
+    function floorOf(id) { var r = ROOMS.filter(function (x) { return x.id === id; })[0]; return r ? r.f : 0; }
+    function moveTo(id, done) {
+        var my = ++st.tok, f = floorOf(id); st.af = f; paintFloor(f);
+        if (!H) { setTimeout(function () { if (my === st.tok) done(); }, 250); return; }
+        H.to(id).then(function (ok) { if (ok && my === st.tok) done(); });
     }
 
     // ----- dialogue
@@ -104,13 +55,13 @@
         i = Math.max(0, Math.min(STOPS.length - 1, i));
         st.step = i; paintSteps();
         var s = STOPS[i];
-        ROOT.classList.toggle('hall-on', s.id === 'hall');
+        if (H) H.setDisco(s.id === 'hall');
+        clearTimeout(st.finT);
         if (st.skipType) st.skipType();
         CH.innerHTML = ''; TXT.textContent = ''; CHIP.textContent = s.chip;
-        var arrive = function () { speak(s.say, s.chip, choicesFor(i)); };
-        if (instant) { st.tok++; st.af = s.f; st.ax = s.x; place(s.f, s.x, 0); cam(s.f, s.x, 0); paintFloor(s.f); arrive(); return; }
-        paintFloor(s.f);
-        moveTo(s.f, s.x, arrive);
+        var arrive = function () { speak(s.say, s.chip, choicesFor(i)); if (s.id === 'hall' && H) st.finT = setTimeout(function () { H.overview(1); }, 5200); };
+        if (instant) { st.tok++; st.af = s.f; if (H) H.place(s.id); paintFloor(s.f); arrive(); return; }
+        moveTo(s.id, arrive);
     }
     function choicesFor(i) {
         var s = STOPS[i], c = [];
@@ -131,11 +82,11 @@
         var r = ROOMS.filter(function (x) { return x.id === id; })[0];
         if (!r) return;
         if (st.skipType) st.skipType();
-        ROOT.classList.remove('hall-on'); if (id === 'hall') ROOT.classList.add('hall-on');
+        if (H) H.setDisco(id === 'hall');
+        clearTimeout(st.finT);
         var back = Math.max(st.step, 0);
         CH.innerHTML = ''; TXT.textContent = ''; CHIP.textContent = 'Explore';
-        paintFloor(r.f);
-        moveTo(r.f, r.x, function () {
+        moveTo(r.id, function () {
             speak(r.name + '. ' + r.text, 'Explore', [{ label: 'Back to the tour &rarr;', fn: function () { go(back); } }]);
         });
     }
@@ -150,11 +101,11 @@
         next: function () { go(st.step + 1); },
         up: function () { goFloor(st.af + 1); },
         down: function () { goFloor(st.af - 1); },
-        left: function () { st.pan -= 320; cam(st.af, st.ax, 600); },
-        right: function () { st.pan += 320; cam(st.af, st.ax, 600); },
-        zin: function () { st.zoom = Math.min(2, st.zoom * 1.2); cam(st.af, st.ax, 400); },
-        zout: function () { st.zoom = Math.max(0.6, st.zoom / 1.2); cam(st.af, st.ax, 400); },
-        light: function (b) { var on = ROOT.classList.toggle('night'); b.setAttribute('aria-pressed', on ? 'true' : 'false'); },
+        left: function () { H && H.look(-0.28); },
+        right: function () { H && H.look(0.28); },
+        zin: function () { H && H.zoom(1 / 1.22); },
+        zout: function () { H && H.zoom(1.22); },
+        light: function (b) { st.night = !st.night; H && H.setNight(st.night); ROOT.classList.toggle('night', st.night); b.setAttribute('aria-pressed', st.night ? 'true' : 'false'); },
         restart: function () { go(0); },
         skip: function () { go(STOPS.length - 1); }
     };
@@ -164,9 +115,6 @@
     });
     $('#hww-floors').addEventListener('click', function (e) {
         var b = e.target.closest('button[data-floor]'); if (b) goFloor(+b.getAttribute('data-floor'));
-    });
-    B.addEventListener('click', function (e) {
-        var h = e.target.closest('.hit'); if (h) goRoom(h.getAttribute('data-room'));
     });
     document.addEventListener('keydown', function (e) {
         if (/input|textarea|select/i.test((e.target.tagName || '')) || e.metaKey || e.ctrlKey || e.altKey) return;
@@ -184,13 +132,20 @@
         var dx = e.changedTouches[0].clientX - tx; tx = null;
         if (Math.abs(dx) > 60) (dx < 0 ? ACTIONS.next : ACTIONS.prev)();
     }, { passive: true });
-    if (window.ResizeObserver) new ResizeObserver(function () { cam(st.af, st.ax, 0); }).observe(S);
-    else window.addEventListener('resize', function () { cam(st.af, st.ax, 0); });
 
-    // ----- start: Alya comes in through the front door and welcomes the visitor (or jump to #step=N)
+    // ----- start: wide shot of the whole tower, then Alya walks in through the front door (or jump to #step=N)
     paintSteps(); paintFloor(0);
     var m = /step=(\d+)/.exec(location.hash);
-    if (m) { A.classList.remove('hidden'); go(+m[1], true); return; }
-    st.af = 0; st.ax = 70; place(0, 70, 0); cam(0, 70, 0);
-    setTimeout(function () { go(0); }, REDUCED ? 0 : 900);
+    function begin() {
+        H = window.HWW3D; if (!H || st.began) return; st.began = true;
+        H.onRoom = function (id) { goRoom(id); };
+        if (m) { go(+m[1], true); return; }
+        H.enter(); CHIP.textContent = 'Your Partner Technologies'; TXT.textContent = 'Our building, floor by floor. Let me show you around.';
+        H.overview(2800).then(function () { go(0); });
+    }
+    if (window.HWW3D && window.HWW3D.ready) begin();
+    else {
+        document.addEventListener('ypt:hww3d', begin, { once: true });
+        document.addEventListener('ypt:hww3d-fail', function () { S.classList.add('no3d'); go(0, true); }, { once: true });
+    }
 })();
