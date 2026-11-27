@@ -185,7 +185,7 @@ async function boot() {
     }
 
     // ------------------------------------------------------------------ the tower shell
-    const floors = [], glass = new THREE.MeshPhongMaterial({ color: 0xcfe0ff, transparent: true, opacity: 0.16, shininess: 120, specular: 0xffffff, depthWrite: false });
+    const floors = [], shells = [], glass = new THREE.MeshPhongMaterial({ color: 0xcfe0ff, transparent: true, opacity: 0.16, shininess: 120, specular: 0xffffff, depthWrite: false });
     const strips = [];
     function shade(hex, f) { const c = new THREE.Color(hex); c.multiplyScalar(1 + f); return '#' + c.getHexString(); }
     function backWall(P) {
@@ -212,7 +212,7 @@ async function boot() {
         for (let k = 0; k < Math.round(P.w / 6); k++) strips.push(box(g, 3.2, 0.05, 0.35, 0.02, glow(0xfff4c8), -P.w / 2 + 3 + k * 6, FH - 0.28, 0));
         const gap = LIFTX - P.w / 2;
         if (gap > 0.1) { box(g, gap + 0.4, 0.3, 2.8, 0.06, mat(0xf4f6fd), P.w / 2 + gap / 2, -0.15, AISLE); box(g, gap + 0.4, 0.05, 2.8, 0.02, mat(P.c), P.w / 2 + gap / 2, 0.02, AISLE); const rl = new THREE.Mesh(new THREE.BoxGeometry(gap + 0.4, 1.1, 0.04), glass); rl.position.set(P.w / 2 + gap / 2, 0.55, AISLE + 1.4); g.add(rl); box(g, gap + 0.4, 0.07, 0.07, 0.02, frame, P.w / 2 + gap / 2, 1.1, AISLE + 1.4); }
-        const gr = new THREE.Group(); g.add(gr); floors[i] = { g: gr, P, y: i * FH };
+        const gr = new THREE.Group(); g.add(gr); floors[i] = { g: gr, P, y: i * FH }; shells[i] = g;
     }
     for (let i = 0; i < FLOORS; i++) makeFloor(i);
 
@@ -341,9 +341,11 @@ async function boot() {
         // ---------- 0 Ground
         { const f = 0, g = floors[f].g, P = PLAN[f];
             room('lobby', f, -12.4, 11, 11); room('academy', f, -1.2, 11, 11); room('hall', f, 12.4, 13, 13);
-            rug(g, -12.4, 0, 9, 7, 0xffe2bd); wallSign(f, -12.4, 'WELCOME', 'Reception');
-            box(g, 4.4, 1.05, 1.1, 0.2, mat(C.white), -12.4, 0.52, -2.2); box(g, 4.6, 0.1, 1.3, 0.05, mat(C.walnut), -12.4, 1.08, -2.2); box(g, 4.4, 0.3, 0.06, 0.03, glow(C.orange), -12.4, 0.8, -1.64); blob(g, -12.4, -2.2, 6, 2.6); agent(g, -12.4, -3.0, { scale: 1.0, hover: 0.6 });
-            sofa(g, -16.2, -0.8, 3.0, C.teal, 0.5); sofa(g, -8.4, -0.6, 2.6, C.blue, -0.5); table(g, -12.4, 0.2, 1.2, 0.8, C.wood, 0.4); plant(g, -17.6, -3.6, 1.6); plant(g, -7.2, -3.6, 1.4);
+            // the placeholder lobby: it stays as the fallback and is hidden once the real reception (js/hww-reception.js) has loaded
+            lobbyOld = new THREE.Group(); g.add(lobbyOld); const lob = lobbyOld;
+            rug(lob, -12.4, 0, 9, 7, 0xffe2bd); sign(lob, -12.4, 3.0, -P.d / 2 + 0.2, 4.6, 'WELCOME', '#0f1730', '#fff', 'Reception');
+            box(lob, 4.4, 1.05, 1.1, 0.2, mat(C.white), -12.4, 0.52, -2.2); box(lob, 4.6, 0.1, 1.3, 0.05, mat(C.walnut), -12.4, 1.08, -2.2); box(lob, 4.4, 0.3, 0.06, 0.03, glow(C.orange), -12.4, 0.8, -1.64); blob(lob, -12.4, -2.2, 6, 2.6); recepAgent = agent(g, -12.4, -3.0, { scale: 1.0, hover: 0.6 });
+            sofa(lob, -16.2, -0.8, 3.0, C.teal, 0.5); sofa(lob, -8.4, -0.6, 2.6, C.blue, -0.5); table(lob, -12.4, 0.2, 1.2, 0.8, C.wood, 0.4); plant(lob, -17.6, -3.6, 1.6); plant(lob, -7.2, -3.6, 1.4);
             wallSign(f, -1.2, 'ACADEMY', 'Stage 7 · Lin'); board(g, -1.2, 1.5, -P.d / 2 + 0.2, 5.4, 2.0, 'deck'); rug(g, -1.2, 0.1, 9.6, 6.2, 0xd8e5ff);
             agent(g, -3.6, -3.0, { def: LEAD('sage'), scale: 1.25, full: true, hover: 0.1, face: 0.2 });
             for (let r = 0; r < 2; r++) for (let k = 0; k < 4; k++) { const x = -4.6 + k * 2.4, z = -1.0 + r * 1.9; desk(g, x, z, 1.5); agent(g, x, z - 0.8, { scale: 0.85, hover: 0.55, extra: r === 1 && k % 2 === 1 }); }
@@ -358,7 +360,14 @@ async function boot() {
             plant(g, -P.w / 2 + 1, 4.0, 1.2); plant(g, P.w / 2 - 1, -P.d / 2 + 1, 1.4); }
     }
     const FLAME = { m: null };
+    let lobbyOld = null, recepAgent = null, RECEP = null;
     furnish();
+    // the real reception: loaded after the scene is up; the placeholder lobby above stays until it is ready (and if it fails)
+    setTimeout(() => import('./hww-reception.js').then(m => m.buildReception({ scene, renderer, parent: floors[0].g, LOWQ, FH, shadowMat })).then(R => {
+        RECEP = R; lobbyOld.visible = false;
+        if (recepAgent) { const dy = recepAgent.g.position.y - recepAgent.base; const f = 1.75; recepAgent.st.root.scale.multiplyScalar(f); recepAgent.base = 68 * SC * f + 0.02; recepAgent.g.position.set(-12.4, recepAgent.base + dy, -3.85); recepAgent.bl.position.set(-12.4, 0.02, -3.85); }
+        document.dispatchEvent(new Event('ypt:reception'));
+    }).catch(e => console.warn('reception did not load, keeping the simple lobby', e)), 400);
 
     // ------------------------------------------------------------------ Alya, the escort (no visitor character: the camera is the visitor)
     const A = { x: 2, y: 0, z: 20, f: 0, goal: null, walking: false, yaw: 0, ride: false };
@@ -403,12 +412,78 @@ async function boot() {
     function resize() { const w = stage.clientWidth, h = stage.clientHeight; if (!w || !h) return; renderer.setSize(w, h, false); camera.aspect = w / h; camera.updateProjectionMatrix(); if (mode === 'overview') shotOverview(); }
     new ResizeObserver(resize).observe(stage); resize();
 
+
+    // ------------------------------------------------------------------ stepping inside the reception (first person: stand, look all round, zoom with the field of view)
+    const IN = { on: false, spot: 0, yaw: 0, pitch: 0, fov: 68, fly: null };
+    const tmpE = new THREE.Euler(0, 0, 0, 'YXZ'), qA = new THREE.Quaternion(), vA = new THREE.Vector3();
+    const inPanel = (() => {
+        const d = document.createElement('div'); d.className = 'hww-in'; d.hidden = true;
+        d.innerHTML = '<div class="hww-in-bar"><button type="button" data-i="prev" aria-label="Previous spot">‹</button><span><b id="hww-in-name">Entrance</b><small>Drag to look around · scroll or pinch to zoom</small></span><button type="button" data-i="next" aria-label="Next spot">›</button></div><button type="button" class="hww-in-out" data-i="out">Back to the building</button>';
+        stage.appendChild(d); return d;
+    })();
+    const spots = () => (RECEP ? RECEP.spots : []);
+    function spotPose(i) { const sp = spots()[i]; return { pos: new THREE.Vector3(sp.x, sp.y, sp.z), yaw: sp.yaw, pitch: sp.pitch }; }
+    function poseQuat(yaw, pitch) { tmpE.set(pitch, yaw, 0); return new THREE.Quaternion().setFromEuler(tmpE); }
+    const ease = t => t * t * (3 - 2 * t);
+    function showShell(inside) { alyaA.g.visible = !inside; alyaA.bl.visible = !inside; for (let i = 2; i < FLOORS; i++) if (shells[i]) shells[i].visible = !inside; if (floors[1]) floors[1].g.visible = !inside; if (RECEP) RECEP.inside.visible = inside; }
+    function goSpot(i, fast) {
+        const n = spots().length; if (!n) return; IN.spot = (i + n) % n; const P = spotPose(IN.spot);
+        document.getElementById('hww-in-name').textContent = spots()[IN.spot].name + ' · ' + (IN.spot + 1) + ' of ' + n;
+        IN.fly = { t: 0, dur: fast ? 0.01 : 1.1, from: { pos: camera.position.clone(), q: camera.quaternion.clone(), fov: camera.fov }, to: { pos: P.pos, q: poseQuat(P.yaw, P.pitch), fov: IN.fov }, arriveYaw: P.yaw, arrivePitch: P.pitch };
+        IN.yaw = P.yaw; IN.pitch = P.pitch;
+    }
+    function enterInside(i) {
+        if (!RECEP || IN.on) return false;
+        ++tok; if (walkRes) { walkRes(false); walkRes = null; A.goal = null; }
+        IN.on = true; IN.fov = 68; mode = 'inside'; following = false; camera.near = 0.1; camera.updateProjectionMatrix();
+        stage.classList.add('inside'); stage.style.touchAction = 'none'; inPanel.hidden = false;
+        goSpot(i || 0); return true;
+    }
+    function leaveInside(fast) {
+        if (!IN.on) return; const wasFly = IN.fly;
+        showShell(false);
+        const from = { pos: camera.position.clone(), q: camera.quaternion.clone(), fov: camera.fov };
+        mode = 'room'; destF = 0; user.yaw = 0; user.pitch = 0; user.zoom = Math.min(user.zoom, 1.0); const R = ROOM.lobby; if (R) shotRoom(R); Object.assign(rig, shot);
+        const keepFov = camera.fov; camera.fov = 30; camera.near = 0.5; camera.updateProjectionMatrix(); apply(rig);
+        const to = { pos: camera.position.clone(), q: camera.quaternion.clone(), fov: 30 };
+        camera.position.copy(from.pos); camera.quaternion.copy(from.q); camera.fov = keepFov; camera.updateProjectionMatrix();
+        stage.classList.remove('inside'); stage.style.touchAction = ''; inPanel.hidden = true;
+        if (fast) { IN.on = false; IN.fly = null; camera.fov = 30; camera.near = 0.5; camera.updateProjectionMatrix(); return; }
+        IN.fly = { t: 0, dur: 1.0, from, to, leaving: true };
+    }
+    function stepInside(dt) {
+        const F = IN.fly;
+        if (F) {
+            F.t += dt / F.dur; const k = ease(Math.min(1, F.t));
+            camera.position.lerpVectors(F.from.pos, F.to.pos, k); camera.quaternion.slerpQuaternions(F.from.q, F.to.q, k);
+            camera.fov = F.from.fov + (F.to.fov - F.from.fov) * k; camera.updateProjectionMatrix();
+            if (F.t >= 1) {
+                IN.fly = null;
+                if (F.leaving) { IN.on = false; camera.fov = 30; camera.near = 0.5; camera.updateProjectionMatrix(); }
+                else showShell(true);
+            }
+            return;
+        }
+        const sp = spots()[IN.spot]; if (!sp) return;
+        camera.position.set(sp.x, sp.y, sp.z); camera.quaternion.copy(poseQuat(IN.yaw, IN.pitch));
+        if (Math.abs(camera.fov - IN.fov) > 0.01) { camera.fov = IN.fov; camera.updateProjectionMatrix(); }
+    }
+    function lookInside(dx, dy) { const k = (camera.fov / 68) * 0.0042; IN.yaw -= dx * k; IN.pitch = Math.max(-1.3, Math.min(1.3, IN.pitch - dy * k)); }
+    function zoomInside(f) { IN.fov = Math.max(24, Math.min(88, IN.fov * f)); }
+    inPanel.addEventListener('click', e => { const b = e.target.closest('[data-i]'); if (!b) return; const a = b.dataset.i; if (a === 'out') leaveInside(); else if (a === 'next') goSpot(IN.spot + 1); else goSpot(IN.spot - 1); });
+    window.addEventListener('keydown', e => {
+        if (!IN.on) return;
+        const k = e.key; if (k === 'Escape') { leaveInside(); return; }
+        if (k === 'ArrowLeft') lookInside(-30, 0); else if (k === 'ArrowRight') lookInside(30, 0); else if (k === 'ArrowUp') lookInside(0, -24); else if (k === 'ArrowDown') lookInside(0, 24); else if (k === '+' || k === '=') zoomInside(0.9); else if (k === '-') zoomInside(1.1); else return;
+        e.preventDefault();
+    });
+
     // ------------------------------------------------------------------ the tour API used by hww.js
     let tok = 0;
     const wait = ms => new Promise(r => setTimeout(r, REDUCED ? 0 : ms));
     let holdNext = false, destF = 0;
     async function to(id) {
-        const R = ROOM[id]; if (!R) return false; const my = ++tok; user.yaw = 0; user.pitch = 0; A.ride = false; const tgtY = R.f * FH; destF = R.f;
+        const R = ROOM[id]; if (!R) return false; if (IN.on) leaveInside(true); const my = ++tok; user.yaw = 0; user.pitch = 0; A.ride = false; const tgtY = R.f * FH; destF = R.f;
         // The visitor moved the view themselves (drag or scroll): the camera stays exactly where they left it. Alya walks to the lift
         // in front of them, rides, and comes out on the floor they are looking at.
         const hold = holdNext; holdNext = false; mode = hold ? 'free' : 'room'; if (hold) following = false;
@@ -428,18 +503,23 @@ async function boot() {
         if (!ok || my !== tok) return false;
         shot.tx = R.x; await wait(500); return my === tok;
     }
-    function overview(ms) { ++tok; mode = 'overview'; user.yaw = 0; user.pitch = 0; user.zoom = 1; shotOverview(); if (walkRes) { walkRes(false); walkRes = null; A.goal = null; } return wait(ms || 2200); }
-    function place(id) { const R = ROOM[id]; ++tok; if (walkRes) { walkRes(false); walkRes = null; } A.goal = null; A.f = R.f; A.x = R.x; A.y = R.f * FH; A.z = AISLE; mode = 'room'; shotRoom(R); Object.assign(rig, shot); user.yaw = 0; cab.position.y = A.y; }
+    function overview(ms) { if (IN.on) leaveInside(true); ++tok; mode = 'overview'; user.yaw = 0; user.pitch = 0; user.zoom = 1; shotOverview(); if (walkRes) { walkRes(false); walkRes = null; A.goal = null; } return wait(ms || 2200); }
+    function place(id) { const R = ROOM[id]; if (IN.on) leaveInside(true); ++tok; if (walkRes) { walkRes(false); walkRes = null; } A.goal = null; A.f = R.f; A.x = R.x; A.y = R.f * FH; A.z = AISLE; mode = 'room'; shotRoom(R); Object.assign(rig, shot); user.yaw = 0; cab.position.y = A.y; }
     function enter() { A.f = 0; A.x = 2; A.y = 0; A.z = 20; A.goal = null; cab.position.y = 0; }
     // the double-arrow buttons turn the view all the way round (left and right) or tip it up and down
     function look(d) { user.yaw = (user.yaw + d) % (Math.PI * 2); }
     function tilt(d) { user.pitch = Math.max(-0.5, Math.min(1.2, user.pitch + d)); }
-    function zoom(k) { user.zoom = Math.max(0.45, Math.min(zmax(), user.zoom * k)); }
+    function zoom(k) {
+        if (IN.on) { zoomInside(k); return; }
+        if (k < 1 && user.zoom <= 0.47 && RECEP && mode !== 'overview' && mode !== 'ride' && floorAtView() === 0 && Math.abs(rig.tx - (-12.4)) < 9) { enterInside(0); return; }   // zoomed in as far as it goes: step into the reception
+        user.zoom = Math.max(0.45, Math.min(zmax(), user.zoom * k));
+    }
     function relight() { const on = nightOn || disco; scene.background = on ? NIGHT : DAY; scene.fog.color.set(on ? 0x14183d : 0xf1f0fb); hemi.intensity = nightOn ? 1.0 : disco ? 1.5 : 1.9; key.intensity = nightOn ? 1.1 : disco ? 1.7 : 2.3; rim.intensity = on ? 0.5 : 1.1; strips.forEach(s => s.scale.set(1, on ? 2.2 : 1, on ? 3 : 1)); }
     function setNight(on) { nightOn = on; relight(); }
     // clicking a room on the model asks the tour to go there; a click is told from a drag by distance
     let down = null;
-    canvas.addEventListener('pointerdown', e => { down = [e.clientX, e.clientY, e.clientX, e.clientY]; });
+    const pts = new Map(); let pinch0 = 0, fov0 = 68;
+    canvas.addEventListener('pointerdown', e => { down = [e.clientX, e.clientY, e.clientX, e.clientY]; if (IN.on) { pts.set(e.pointerId, [e.clientX, e.clientY]); try { canvas.setPointerCapture(e.pointerId); } catch (x) {} if (pts.size === 2) { const [a, b] = [...pts.values()]; pinch0 = Math.hypot(a[0] - b[0], a[1] - b[1]); fov0 = IN.fov; } } });
     // dragging with one finger or the mouse: sideways moves along the floor, up and down moves through the floors (the double-arrow buttons rotate the view); let go on a different floor and Alya comes to it
     let dragT = 0;
     const floorAtView = () => Math.max(0, Math.min(FLOORS - 1, Math.round((shot.ty - 1.9) / FH)));
@@ -447,6 +527,11 @@ async function boot() {
     // settling on the same floor: straighten the height only, so the place you slid to along the floor stays
     function shotFloorSnap(f) { if (mode === 'free') shot.ty = f * FH + 1.9; }
     canvas.addEventListener('pointermove', e => {
+        if (IN.on) {
+            const prev = pts.get(e.pointerId); if (!prev) return; pts.set(e.pointerId, [e.clientX, e.clientY]);
+            if (pts.size >= 2) { const [a, b] = [...pts.values()]; const d = Math.hypot(a[0] - b[0], a[1] - b[1]); if (pinch0 > 10) IN.fov = Math.max(24, Math.min(88, fov0 * pinch0 / d)); return; }
+            if (!IN.fly) lookInside(e.clientX - prev[0], e.clientY - prev[1]); return;
+        }
         if (!down || (e.pointerType === 'mouse' && e.buttons !== 1)) return;
         const dx = e.clientX - down[2], dy = e.clientY - down[3]; down[2] = e.clientX; down[3] = e.clientY;
         if (Math.hypot(e.clientX - down[0], e.clientY - down[1]) < 6 && mode !== 'free') return;
@@ -458,8 +543,9 @@ async function boot() {
         if (e.pointerType !== 'touch') shot.ty = Math.max(1.9, Math.min((FLOORS - 1) * FH + 1.9, shot.ty + dy * upp));   // on a touch screen up and down scrolls the page
         clearTimeout(dragT); dragT = setTimeout(() => { if (down) summon(); }, 450);
     });
-    canvas.addEventListener('pointercancel', () => { down = null; });
+    canvas.addEventListener('pointercancel', e => { down = null; pts.delete(e.pointerId); });
     canvas.addEventListener('pointerup', e => {
+        if (IN.on) { pts.delete(e.pointerId); down = null; return; }
         if (!down || Math.hypot(e.clientX - down[0], e.clientY - down[1]) > 6) { const was = down; down = null; if (was && mode === 'free') summon(); return; } down = null;
         const r = canvas.getBoundingClientRect(), v = new THREE.Vector2((e.clientX - r.left) / r.width * 2 - 1, -(e.clientY - r.top) / r.height * 2 + 1), rc = new THREE.Raycaster(); rc.setFromCamera(v, camera);
         const h = rc.intersectObjects(hits, false)[0]; if (h && window.HWW3D && window.HWW3D.onRoom) window.HWW3D.onRoom(h.object.userData.room);
@@ -470,6 +556,7 @@ async function boot() {
     let wAcc = 0, wCool = 0, wLast = 0;
     stage.addEventListener('wheel', e => {
         if (e.target.closest && e.target.closest(noWheel)) return;
+        if (IN.on) { e.preventDefault(); zoomInside(Math.exp(e.deltaY * (e.ctrlKey ? 0.012 : 0.0012))); return; }
         if (e.ctrlKey) { e.preventDefault(); zoom(Math.exp(e.deltaY * 0.012)); return; }          // pinch arrives as a ctrl-wheel in Chrome and Edge
         if (window.scrollY > 4 || Math.abs(e.deltaY) < Math.abs(e.deltaX)) return;                // the page below is being read, or this is a sideways swipe
         const dir = e.deltaY > 0 ? -1 : 1, nf = destF + dir;
@@ -481,31 +568,32 @@ async function boot() {
         if (window.HWW3D && window.HWW3D.onFloor) { holdNext = true; window.HWW3D.onFloor(nf); }
     }, { passive: false });
     let pz = 1;                                                                                    // Safari pinch
-    stage.addEventListener('gesturestart', e => { e.preventDefault(); pz = user.zoom; });
-    stage.addEventListener('gesturechange', e => { e.preventDefault(); user.zoom = Math.max(0.45, Math.min(zmax(), pz / e.scale)); });
+    stage.addEventListener('gesturestart', e => { e.preventDefault(); pz = IN.on ? IN.fov : user.zoom; });
+    stage.addEventListener('gesturechange', e => { e.preventDefault(); if (IN.on) { IN.fov = Math.max(24, Math.min(88, pz / e.scale)); return; } user.zoom = Math.max(0.45, Math.min(zmax(), pz / e.scale)); });
 
     // ------------------------------------------------------------------ render loop
     let last = performance.now();
     function frame(now) {
         requestAnimationFrame(frame);
         const dt = Math.min(0.25, (now - last) / 1000); last = now; const t = now / 1000;
-        stepAlya(dt, t); animate(t, dt);
+        stepAlya(dt, t); animate(t, dt); if (RECEP) RECEP.tick(dt);
         if (following) shot.tx = Math.max(-20, Math.min(20, A.x * 0.5 + shot.tx * 0.5));
         const k = 1 - Math.exp(-dt * shot.rate);
         for (const p of ['tx', 'ty', 'tz', 'dist', 'yaw', 'pitch', 'turn']) rig[p] += (shot[p] - rig[p]) * k;
-        world.rotation.y = rig.turn * Math.sin(t * 0.22) * 0.25;
+        world.rotation.y = IN.on ? 0 : rig.turn * Math.sin(t * 0.22) * 0.25;
         if (disco) { DISCO.ball.rotation.y = t * 1.2; DISCO.beams.forEach((b, i) => { b.rotation.z = Math.sin(t * 1.7 + i * 1.6) * 0.5; b.rotation.x = Math.cos(t * 1.3 + i) * 0.35; }); DISCO.tiles.forEach(tl => { tl.material = glow([0xff5f9e, 0x5eead4, 0xffd36a, 0x7aa2ff][(tl.userData.tile + Math.floor(t * 2.5)) % 4]); }); }
         const af = mode === 'overview' ? -1 : mode === 'free' ? floorAtView() : mode === 'ride' ? Math.max(0, Math.min(FLOORS - 1, Math.round(A.y / FH))) : destF;
-        STAR.visible = af >= 0; if (af >= 0) { const P = PLAN[af]; const hw = Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)) * camera.aspect * rig.dist * user.zoom; STAR.position.set(Math.max(-P.w / 2 + 2, Math.min(P.w / 2 - 2, rig.tx + hw * 0.74)), af * FH + FH - 0.5, P.d / 2 - 0.8); STAR.rotation.y = 0; STAR.material.opacity = REDUCED ? 1 : 0.15 + 0.85 * Math.max(0, Math.sin(t * 5)); }
+        STAR.visible = af >= 0 && !IN.on; if (af >= 0) { const P = PLAN[af]; const hw = Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)) * camera.aspect * rig.dist * user.zoom; STAR.position.set(Math.max(-P.w / 2 + 2, Math.min(P.w / 2 - 2, rig.tx + hw * 0.74)), af * FH + FH - 0.5, P.d / 2 - 0.8); STAR.rotation.y = 0; STAR.material.opacity = REDUCED ? 1 : 0.15 + 0.85 * Math.max(0, Math.sin(t * 5)); }
         if (FLAME.m) FLAME.m.scale.y = 1 + Math.sin(t * 25) * 0.25;
-        apply(rig); renderer.render(scene, camera);
+        if (IN.on) stepInside(dt); else apply(rig);
+        renderer.render(scene, camera);
         bubble();
     }
     // Alya's speech bubble floats over her head: project her head to the screen each frame, keep the bubble inside the stage,
     // flip it below her if she is near the top edge, and aim its tail at her.
     const sayEl = document.getElementById('hww-say'), textEl = document.getElementById('hww-text'), hv = new THREE.Vector3();
     function bubble() {
-        if (!sayEl) return;
+        if (!sayEl || IN.on) return;
         const W = stage.clientWidth, Hh = stage.clientHeight, bw = sayEl.offsetWidth, bh = sayEl.offsetHeight;
         hv.setFromMatrixPosition(alyaA.g.matrixWorld); hv.y += 1.0; hv.project(camera);
         const x = Math.max(24, Math.min(W - 24, (hv.x * 0.5 + 0.5) * W)), y = Math.max(0, Math.min(Hh, (-hv.y * 0.5 + 0.5) * Hh));
@@ -519,7 +607,7 @@ async function boot() {
     }
     Object.assign(rig, shot);
     requestAnimationFrame(frame);
-    window.HWW3D = { A, renderer, to, overview, place, enter, look, tilt, zoom, setNight, setDisco, rooms: ROOM, onRoom: null, live, rig, ready: true };
+    window.HWW3D = { scene, camera, enterReception: enterInside, exitReception: leaveInside, A, renderer, to, overview, place, enter, look, tilt, zoom, setNight, setDisco, rooms: ROOM, onRoom: null, live, rig, ready: true };
     document.documentElement.setAttribute('data-hww3d', 'ready');
     document.dispatchEvent(new Event('ypt:hww3d'));
 }

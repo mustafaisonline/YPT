@@ -103,6 +103,7 @@
         down: function () { goFloor(st.af - 1); },
         left: function () { H && H.look(-0.28); },
         right: function () { H && H.look(0.28); },
+        inside: function () { H && H.enterReception && H.enterReception(0); },
         rotl: function () { H && H.look(-0.4); },
         rotr: function () { H && H.look(0.4); },
         rotu: function () { H && H.tilt(0.18); },
