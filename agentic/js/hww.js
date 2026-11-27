@@ -103,6 +103,10 @@
         down: function () { goFloor(st.af - 1); },
         left: function () { H && H.look(-0.28); },
         right: function () { H && H.look(0.28); },
+        rotl: function () { H && H.look(-0.4); },
+        rotr: function () { H && H.look(0.4); },
+        rotu: function () { H && H.tilt(0.18); },
+        rotd: function () { H && H.tilt(-0.18); },
         zin: function () { H && H.zoom(1 / 1.22); },
         zout: function () { H && H.zoom(1.22); },
         light: function (b) { st.night = !st.night; H && H.setNight(st.night); ROOT.classList.toggle('night', st.night); b.setAttribute('aria-pressed', st.night ? 'true' : 'false'); },
@@ -125,14 +129,7 @@
         else if (k === 'ArrowUp') { e.preventDefault(); ACTIONS.up(); }
         else if (k === 'ArrowDown') { e.preventDefault(); ACTIONS.down(); }
     });
-    // swipe on touch: left = next, right = previous
-    var tx = null;
-    S.addEventListener('touchstart', function (e) { tx = e.touches.length === 1 ? e.touches[0].clientX : null; }, { passive: true });
-    S.addEventListener('touchend', function (e) {
-        if (tx == null || e.target.closest('.hww-say, .hww-choices, .hww-ctl, .hww-floors')) { tx = null; return; }
-        var dx = e.changedTouches[0].clientX - tx; tx = null;
-        if (Math.abs(dx) > 60) (dx < 0 ? ACTIONS.next : ACTIONS.prev)();
-    }, { passive: true });
+    // (a sideways drag of one finger now slides the view along the floor; the Previous and Next buttons move the tour)
 
     // ----- start: wide shot of the whole tower, then Alya walks in through the front door (or jump to #step=N)
     paintSteps(); paintFloor(0);

@@ -69,3 +69,5 @@
     .hww-say p { font-size: 14px; min-height: 0; }
     .hww-step { display: none; }
 }
+
+.hww-ctl .k-rot { --k: #0ea5e9; --kd: #0b78a8; }

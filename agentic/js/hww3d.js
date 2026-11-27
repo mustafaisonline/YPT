@@ -376,7 +376,7 @@ async function boot() {
     // ------------------------------------------------------------------ the directed camera
     const rig = { tx: 0, ty: 14.5, tz: 0, dist: 90, yaw: 0.42, pitch: 0.2, turn: 1 };
     const shot = { tx: 0, ty: 14.5, tz: 0, dist: 90, yaw: 0.42, pitch: 0.2, turn: 1, rate: 1.4 };
-    const user = { yaw: 0, zoom: 1 };
+    const user = { yaw: 0, pitch: 0, zoom: 1 };
     let following = false, mode = 'overview', yawSign = 1;
     const fitDist = (span) => { const v = THREE.MathUtils.degToRad(camera.fov / 2), h = Math.tan(v) * Math.max(0.45, camera.aspect); return Math.min(75, (span / 2) / h); };
     // the director's shot list: a camera angle per room, so no two stops look alike
@@ -389,7 +389,7 @@ async function boot() {
     const zmax = () => Math.max(1.9, overviewDist() / Math.max(8, rig.dist));
     function apply(r) {
         const zm = zmax(), w = zm > 1 ? Math.max(0, Math.min(1, (user.zoom - 1) / (zm - 1))) : 0, e = w * w * (3 - 2 * w);
-        const tx = r.tx + (5 - r.tx) * e, ty = r.ty + (17 - r.ty) * e, tz = r.tz * (1 - e), ya = r.yaw + (0.42 - r.yaw) * e, pi = r.pitch + (0.2 - r.pitch) * e;
+        const tx = r.tx + (5 - r.tx) * e, ty = r.ty + (17 - r.ty) * e, tz = r.tz * (1 - e), ya = r.yaw + (0.42 - r.yaw) * e, pi = Math.max(-0.2, Math.min(1.35, r.pitch + (0.2 - r.pitch) * e + user.pitch));
         const yaw = ya + user.yaw, cp = Math.cos(pi), sp = Math.sin(pi), d = r.dist * user.zoom;
         camera.position.set(tx + Math.sin(yaw) * cp * d, ty + sp * d, tz + Math.cos(yaw) * cp * d); camera.lookAt(tx, ty, tz);
     }
@@ -401,7 +401,7 @@ async function boot() {
     const wait = ms => new Promise(r => setTimeout(r, REDUCED ? 0 : ms));
     let holdNext = false, destF = 0;
     async function to(id) {
-        const R = ROOM[id]; if (!R) return false; const my = ++tok; user.yaw = 0; A.ride = false; const tgtY = R.f * FH; destF = R.f;
+        const R = ROOM[id]; if (!R) return false; const my = ++tok; user.yaw = 0; user.pitch = 0; A.ride = false; const tgtY = R.f * FH; destF = R.f;
         // The visitor moved the view themselves (drag or scroll): the camera stays exactly where they left it. Alya walks to the lift
         // in front of them, rides, and comes out on the floor they are looking at.
         const hold = holdNext; holdNext = false; mode = hold ? 'free' : 'room'; if (hold) following = false;
@@ -421,31 +421,37 @@ async function boot() {
         if (!ok || my !== tok) return false;
         shot.tx = R.x; await wait(500); return my === tok;
     }
-    function overview(ms) { ++tok; mode = 'overview'; user.yaw = 0; user.zoom = 1; shotOverview(); if (walkRes) { walkRes(false); walkRes = null; A.goal = null; } return wait(ms || 2200); }
+    function overview(ms) { ++tok; mode = 'overview'; user.yaw = 0; user.pitch = 0; user.zoom = 1; shotOverview(); if (walkRes) { walkRes(false); walkRes = null; A.goal = null; } return wait(ms || 2200); }
     function place(id) { const R = ROOM[id]; ++tok; if (walkRes) { walkRes(false); walkRes = null; } A.goal = null; A.f = R.f; A.x = R.x; A.y = R.f * FH; A.z = AISLE; mode = 'room'; shotRoom(R); Object.assign(rig, shot); user.yaw = 0; cab.position.y = A.y; }
     function enter() { A.f = 0; A.x = 2; A.y = 0; A.z = 20; A.goal = null; cab.position.y = 0; }
-    function look(d) { user.yaw = Math.max(-1.2, Math.min(1.2, user.yaw + d)); }
+    // the double-arrow buttons turn the view all the way round (left and right) or tip it up and down
+    function look(d) { user.yaw = (user.yaw + d) % (Math.PI * 2); }
+    function tilt(d) { user.pitch = Math.max(-0.5, Math.min(1.2, user.pitch + d)); }
     function zoom(k) { user.zoom = Math.max(0.45, Math.min(zmax(), user.zoom * k)); }
     function relight() { const on = nightOn || disco; scene.background = on ? NIGHT : DAY; scene.fog.color.set(on ? 0x14183d : 0xf1f0fb); hemi.intensity = nightOn ? 1.0 : disco ? 1.5 : 1.9; key.intensity = nightOn ? 1.1 : disco ? 1.7 : 2.3; rim.intensity = on ? 0.5 : 1.1; strips.forEach(s => s.scale.set(1, on ? 2.2 : 1, on ? 3 : 1)); }
     function setNight(on) { nightOn = on; relight(); }
     // clicking a room on the model asks the tour to go there; a click is told from a drag by distance
     let down = null;
     canvas.addEventListener('pointerdown', e => { down = [e.clientX, e.clientY, e.clientX, e.clientY]; });
-    // dragging with the mouse: sideways turns the view, up and down moves through the floors; let go on a different floor and Alya comes to it
+    // dragging with one finger or the mouse: sideways moves along the floor, up and down moves through the floors (the double-arrow buttons rotate the view); let go on a different floor and Alya comes to it
     let dragT = 0;
     const floorAtView = () => Math.max(0, Math.min(FLOORS - 1, Math.round((shot.ty - 1.9) / FH)));
     function summon() { clearTimeout(dragT); const f = floorAtView(); if (f === destF || !window.HWW3D || !window.HWW3D.onFloor) { if (f === destF) shotFloorSnap(f); return; } holdNext = true; window.HWW3D.onFloor(f); }
-    function shotFloorSnap(f) { const R = Object.values(ROOM).find(r => r.f === f && r.id !== 'launchpad'); if (R && mode === 'free') { mode = 'room'; shotRoom(R); } }
+    // settling on the same floor: straighten the height only, so the place you slid to along the floor stays
+    function shotFloorSnap(f) { if (mode === 'free') shot.ty = f * FH + 1.9; }
     canvas.addEventListener('pointermove', e => {
-        if (!down || e.buttons !== 1 || e.pointerType !== 'mouse') return;
+        if (!down || (e.pointerType === 'mouse' && e.buttons !== 1)) return;
         const dx = e.clientX - down[2], dy = e.clientY - down[3]; down[2] = e.clientX; down[3] = e.clientY;
-        user.yaw = Math.max(-1.2, Math.min(1.2, user.yaw - dx * 0.003));
         if (Math.hypot(e.clientX - down[0], e.clientY - down[1]) < 6 && mode !== 'free') return;
         if (mode !== 'free') { if (mode === 'overview' || mode === 'ride') { Object.assign(shot, { tx: Math.max(-20, Math.min(20, A.x)), ty: A.y + 1.9, dist: 34, yaw: 0.2, pitch: 0.1, turn: 0, rate: 2.2 }); } mode = 'free'; following = false; }
         const upp = 2 * Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)) * shot.dist * user.zoom / stage.clientHeight;
-        shot.ty = Math.max(1.9, Math.min((FLOORS - 1) * FH + 1.9, shot.ty + dy * upp));
+        const ya = rig.yaw + user.yaw;                                                              // sideways follows the way the view is turned
+        shot.tx = Math.max(-30, Math.min(40, shot.tx - dx * upp * Math.cos(ya)));
+        shot.tz = Math.max(-25, Math.min(25, shot.tz + dx * upp * Math.sin(ya)));
+        if (e.pointerType !== 'touch') shot.ty = Math.max(1.9, Math.min((FLOORS - 1) * FH + 1.9, shot.ty + dy * upp));   // on a touch screen up and down scrolls the page
         clearTimeout(dragT); dragT = setTimeout(() => { if (down) summon(); }, 450);
     });
+    canvas.addEventListener('pointercancel', () => { down = null; });
     canvas.addEventListener('pointerup', e => {
         if (!down || Math.hypot(e.clientX - down[0], e.clientY - down[1]) > 6) { const was = down; down = null; if (was && mode === 'free') summon(); return; } down = null;
         const r = canvas.getBoundingClientRect(), v = new THREE.Vector2((e.clientX - r.left) / r.width * 2 - 1, -(e.clientY - r.top) / r.height * 2 + 1), rc = new THREE.Raycaster(); rc.setFromCamera(v, camera);
@@ -504,7 +510,7 @@ async function boot() {
     }
     Object.assign(rig, shot);
     requestAnimationFrame(frame);
-    window.HWW3D = { A, renderer, to, overview, place, enter, look, zoom, setNight, setDisco, rooms: ROOM, onRoom: null, live, rig, ready: true };
+    window.HWW3D = { A, renderer, to, overview, place, enter, look, tilt, zoom, setNight, setDisco, rooms: ROOM, onRoom: null, live, rig, ready: true };
     document.documentElement.setAttribute('data-hww3d', 'ready');
     document.dispatchEvent(new Event('ypt:hww3d'));
 }
