@@ -64,8 +64,8 @@
 body.ps-lock { overflow: hidden; }
 .ps-backdrop { position: fixed; inset: 0; z-index: 900; background: rgba(15, 23, 48, 0.55); backdrop-filter: blur(3px); }
 .ps-backdrop[hidden], .ps[hidden] { display: none; }
-.ps { position: fixed; inset: 0; z-index: 901; display: flex; justify-content: center; padding: 5vh 6vw max(5vh, 96px); perspective: 2000px; pointer-events: none; }
-.ps-sheet { pointer-events: auto; width: min(1500px, 100%); height: 100%; display: flex; flex-direction: column; overflow: hidden; background: #fff; border: 1.5px solid #c3cdea; border-radius: 26px; box-shadow: 0 8px 0 #c3cdea, 0 40px 70px -20px rgba(15, 23, 48, 0.6); transform-origin: 0 0; }
+.ps { position: fixed; inset: 0; z-index: 901; display: flex; justify-content: center; padding: 4.5vh; perspective: 2000px; pointer-events: none; }
+.ps-sheet { pointer-events: auto; width: 100%; height: 100%; display: flex; flex-direction: column; overflow: hidden; background: #fff; border: 1.5px solid #c3cdea; border-radius: 26px; box-shadow: 0 8px 0 #c3cdea, 0 40px 70px -20px rgba(15, 23, 48, 0.6); transform-origin: 0 0; }
 .ps.anim .ps-sheet { transition: transform 0.75s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.4s; }
 .ps.from .ps-sheet { transform: translate(var(--dx), var(--dy)) scale(var(--sx), var(--sy)) rotateY(-95deg); opacity: 0; }
 .ps.closing .ps-sheet { transform: scale(0.97); opacity: 0; transition: transform 0.22s, opacity 0.22s; }
@@ -108,7 +108,7 @@ body.ps-lock { overflow: hidden; }
 .ps-fi b { display: block; font-size: 15px; line-height: 1.3; } .ps-fi span { display: block; margin-top: 3px; font-size: 13.5px; line-height: 1.4; color: var(--muted, #52607f); }
 
 .ps-modules { display: grid; grid-template-columns: 290px 1fr; gap: 20px; margin-top: 16px; align-items: start; }
-.ps-modnav { display: flex; flex-direction: column; gap: 6px; position: sticky; top: 0; max-height: calc(100dvh - 5vh - max(5vh, 96px) - 330px); overflow-y: auto; padding: 2px 4px 8px 2px; overscroll-behavior: contain; }
+.ps-modnav { display: flex; flex-direction: column; gap: 6px; position: sticky; top: 0; max-height: calc(100dvh - 9vh - 330px); overflow-y: auto; padding: 2px 4px 8px 2px; overscroll-behavior: contain; }
 .ps-mod { display: flex; flex-direction: column; gap: 2px; text-align: left; padding: 10px 14px; border-radius: 14px; border: 1.5px solid #e3e8f6; background: #fff; cursor: pointer; transition: all 0.18s; }
 .ps-mod b { font-size: 14.5px; } .ps-mod span { font-size: 12.5px; color: var(--muted, #52607f); }
 .ps-mod:hover { border-color: var(--c); } .ps-mod.on { background: var(--soft); border-color: var(--c); box-shadow: 0 3px 0 var(--c); }
