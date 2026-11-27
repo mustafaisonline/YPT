@@ -97,7 +97,7 @@
                 var i = m.getAttribute('data-m');
                 $$('.ps-mod', s).forEach(function (x) { x.classList.toggle('on', x === m); });
                 $$('.ps-moddet', s).forEach(function (d) { d.hidden = d.getAttribute('data-m') !== i; });
-                var det = $('.ps-moddet:not([hidden])', s); if (det && window.innerWidth < 721) det.scrollIntoView({ block: 'nearest' });
+                var det = $('.ps-moddet:not([hidden])', s), body = $('.ps-body', s); if (window.innerWidth < 721) { if (det) det.scrollIntoView({ block: 'nearest' }); } else if (body) body.scrollTo({ top: Math.max(0, $('.ps-modules', s).offsetTop - 12), behavior: REDUCED ? 'auto' : 'smooth' });
             });
         });
 
