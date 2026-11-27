@@ -365,9 +365,9 @@ async function boot() {
     // the real reception: loaded after the scene is up; the placeholder lobby above stays until it is ready (and if it fails)
     setTimeout(() => import('./hww-reception.js').then(m => m.buildReception({ scene, renderer, parent: floors[0].g, LOWQ, FH, shadowMat })).then(R => {
         RECEP = R; lobbyOld.visible = false;
-        if (recepAgent) { const dy = recepAgent.g.position.y - recepAgent.base; const f = 1.75; recepAgent.st.root.scale.multiplyScalar(f); recepAgent.base = 68 * SC * f + 0.02; recepAgent.g.position.set(-12.4, recepAgent.base + dy, -3.85); recepAgent.bl.position.set(-12.4, 0.02, -3.85); }
+        if (recepAgent) { const dy = recepAgent.g.position.y - recepAgent.base; const f = 1.5; recepAgent.st.root.scale.multiplyScalar(f); recepAgent.base = 68 * SC * f + 0.02; recepAgent.g.position.set(-12.4, recepAgent.base + dy, -3.85); recepAgent.bl.position.set(-12.4, 0.02, -3.85); }
         document.dispatchEvent(new Event('ypt:reception'));
-    }).catch(e => console.warn('reception did not load, keeping the simple lobby', e)), 400);
+    }).catch(e => console.error('reception did not load, keeping the simple lobby', e)), 400);
 
     // ------------------------------------------------------------------ Alya, the escort (no visitor character: the camera is the visitor)
     const A = { x: 2, y: 0, z: 20, f: 0, goal: null, walking: false, yaw: 0, ride: false };
@@ -414,13 +414,25 @@ async function boot() {
 
 
     // ------------------------------------------------------------------ stepping inside the reception (first person: stand, look all round, zoom with the field of view)
-    const IN = { on: false, spot: 0, yaw: 0, pitch: 0, fov: 68, fly: null };
+    const IN = { on: false, spot: 0, yaw: 0, pitch: 0, fov: 68, fly: null, px: 0, pz: 0, py: 1.6, mv: { f: 0, b: 0, l: 0, r: 0 }, bob: 0 };
     const tmpE = new THREE.Euler(0, 0, 0, 'YXZ'), qA = new THREE.Quaternion(), vA = new THREE.Vector3();
     const inPanel = (() => {
         const d = document.createElement('div'); d.className = 'hww-in'; d.hidden = true;
-        d.innerHTML = '<div class="hww-in-bar"><button type="button" data-i="prev" aria-label="Previous spot">‹</button><span><b id="hww-in-name">Entrance</b><small>Drag to look around · scroll or pinch to zoom</small></span><button type="button" data-i="next" aria-label="Next spot">›</button></div><button type="button" class="hww-in-out" data-i="out">Back to the building</button>';
+        d.innerHTML = '<div class="hww-in-bar"><button type="button" data-i="prev" aria-label="Previous spot">‹</button><span><b id="hww-in-name">Entrance</b><small>Drag to look · arrows or W A S D to walk · scroll to zoom</small></span><button type="button" data-i="next" aria-label="Next spot">›</button></div><button type="button" class="hww-in-out" data-i="out">Back to the building</button>';
         stage.appendChild(d); return d;
     })();
+    const pad = (() => {
+        const d = document.createElement('div'); d.className = 'hww-pad'; d.hidden = true; d.setAttribute('aria-label', 'Walk');
+        d.innerHTML = '<button type="button" data-m="f" aria-label="Walk forward">▲</button><button type="button" data-m="l" aria-label="Step left">◀</button><button type="button" data-m="b" aria-label="Walk back">▼</button><button type="button" data-m="r" aria-label="Step right">▶</button>';
+        stage.appendChild(d);
+        const set = (b, v) => { if (b && b.dataset.m) { IN.mv[b.dataset.m] = v; b.classList.toggle('on', !!v); } };
+        d.addEventListener('pointerdown', e => { const b = e.target.closest('[data-m]'); if (!b) return; e.preventDefault(); try { b.setPointerCapture(e.pointerId); } catch (_) {} set(b, 1); });
+        const up = e => { const b = e.target.closest && e.target.closest('[data-m]'); set(b, 0); };
+        d.addEventListener('pointerup', up); d.addEventListener('pointercancel', up); d.addEventListener('lostpointercapture', up);
+        d.addEventListener('contextmenu', e => e.preventDefault());
+        return d;
+    })();
+    const clearMv = () => { IN.mv.f = IN.mv.b = IN.mv.l = IN.mv.r = 0; pad.querySelectorAll('.on').forEach(b => b.classList.remove('on')); };
     const spots = () => (RECEP ? RECEP.spots : []);
     function spotPose(i) { const sp = spots()[i]; return { pos: new THREE.Vector3(sp.x, sp.y, sp.z), yaw: sp.yaw, pitch: sp.pitch }; }
     function poseQuat(yaw, pitch) { tmpE.set(pitch, yaw, 0); return new THREE.Quaternion().setFromEuler(tmpE); }
@@ -430,13 +442,13 @@ async function boot() {
         const n = spots().length; if (!n) return; IN.spot = (i + n) % n; const P = spotPose(IN.spot);
         document.getElementById('hww-in-name').textContent = spots()[IN.spot].name + ' · ' + (IN.spot + 1) + ' of ' + n;
         IN.fly = { t: 0, dur: fast ? 0.01 : 1.1, from: { pos: camera.position.clone(), q: camera.quaternion.clone(), fov: camera.fov }, to: { pos: P.pos, q: poseQuat(P.yaw, P.pitch), fov: IN.fov }, arriveYaw: P.yaw, arrivePitch: P.pitch };
-        IN.yaw = P.yaw; IN.pitch = P.pitch;
+        IN.yaw = P.yaw; IN.pitch = P.pitch; clearMv();
     }
     function enterInside(i) {
         if (!RECEP || IN.on) return false;
         ++tok; if (walkRes) { walkRes(false); walkRes = null; A.goal = null; }
         IN.on = true; IN.fov = 68; mode = 'inside'; following = false; camera.near = 0.1; camera.updateProjectionMatrix();
-        stage.classList.add('inside'); stage.style.touchAction = 'none'; inPanel.hidden = false;
+        stage.classList.add('inside'); stage.style.touchAction = 'none'; inPanel.hidden = false; pad.hidden = false; RECEP.wake && RECEP.wake();
         goSpot(i || 0); return true;
     }
     function leaveInside(fast) {
@@ -447,7 +459,7 @@ async function boot() {
         const keepFov = camera.fov; camera.fov = 30; camera.near = 0.5; camera.updateProjectionMatrix(); apply(rig);
         const to = { pos: camera.position.clone(), q: camera.quaternion.clone(), fov: 30 };
         camera.position.copy(from.pos); camera.quaternion.copy(from.q); camera.fov = keepFov; camera.updateProjectionMatrix();
-        stage.classList.remove('inside'); stage.style.touchAction = ''; inPanel.hidden = true;
+        stage.classList.remove('inside'); stage.style.touchAction = ''; inPanel.hidden = true; pad.hidden = true; clearMv();
         if (fast) { IN.on = false; IN.fly = null; camera.fov = 30; camera.near = 0.5; camera.updateProjectionMatrix(); return; }
         IN.fly = { t: 0, dur: 1.0, from, to, leaving: true };
     }
@@ -460,20 +472,31 @@ async function boot() {
             if (F.t >= 1) {
                 IN.fly = null;
                 if (F.leaving) { IN.on = false; camera.fov = 30; camera.near = 0.5; camera.updateProjectionMatrix(); }
-                else showShell(true);
+                else { showShell(true); IN.px = F.to.pos.x; IN.pz = F.to.pos.z; IN.py = F.to.pos.y; }
             }
             return;
         }
-        const sp = spots()[IN.spot]; if (!sp) return;
-        camera.position.set(sp.x, sp.y, sp.z); camera.quaternion.copy(poseQuat(IN.yaw, IN.pitch));
+        const m = IN.mv, fw = m.f - m.b, sd = m.r - m.l;
+        if (fw || sd) {   // walk: forward is where you look (flat), strafe is across it; the room keeps you out of the furniture
+            const v = (keyShift ? 3.2 : 1.8) * dt, sy = Math.sin(IN.yaw), cy = Math.cos(IN.yaw), n = Math.hypot(fw, sd) || 1;
+            const nx = IN.px + ((-sy * fw + cy * sd) / n) * v, nz = IN.pz + ((-cy * fw - sy * sd) / n) * v;
+            const q = RECEP.clamp ? RECEP.clamp(nx, nz) : [nx, nz]; IN.px = q[0]; IN.pz = q[1]; IN.bob += dt * 8;
+        }
+        camera.position.set(IN.px, IN.py + (fw || sd ? Math.sin(IN.bob) * 0.018 : 0), IN.pz); camera.quaternion.copy(poseQuat(IN.yaw, IN.pitch));
         if (Math.abs(camera.fov - IN.fov) > 0.01) { camera.fov = IN.fov; camera.updateProjectionMatrix(); }
     }
     function lookInside(dx, dy) { const k = (camera.fov / 68) * 0.0042; IN.yaw -= dx * k; IN.pitch = Math.max(-1.3, Math.min(1.3, IN.pitch - dy * k)); }
     function zoomInside(f) { IN.fov = Math.max(24, Math.min(88, IN.fov * f)); }
     inPanel.addEventListener('click', e => { const b = e.target.closest('[data-i]'); if (!b) return; const a = b.dataset.i; if (a === 'out') leaveInside(); else if (a === 'next') goSpot(IN.spot + 1); else goSpot(IN.spot - 1); });
+    let keyShift = false;
+    window.addEventListener('keyup', e => { if (e.key === 'Shift') keyShift = false; const wk = { w: 'f', s: 'b', a: 'l', d: 'r', W: 'f', S: 'b', A: 'l', D: 'r' }[e.key]; if (wk) IN.mv[wk] = 0; });
+    window.addEventListener('blur', () => { clearMv(); keyShift = false; });
     window.addEventListener('keydown', e => {
         if (!IN.on) return;
         const k = e.key; if (k === 'Escape') { leaveInside(); return; }
+        if (e.ctrlKey || e.metaKey || e.altKey) return;
+        if (k === 'Shift') keyShift = true;
+        const wk = { w: 'f', s: 'b', a: 'l', d: 'r', W: 'f', S: 'b', A: 'l', D: 'r' }[k]; if (wk) { IN.mv[wk] = 1; e.preventDefault(); return; }
         if (k === 'ArrowLeft') lookInside(-30, 0); else if (k === 'ArrowRight') lookInside(30, 0); else if (k === 'ArrowUp') lookInside(0, -24); else if (k === 'ArrowDown') lookInside(0, 24); else if (k === '+' || k === '=') zoomInside(0.9); else if (k === '-') zoomInside(1.1); else return;
         e.preventDefault();
     });

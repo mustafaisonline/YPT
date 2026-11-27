@@ -85,3 +85,12 @@
 .hww-in-bar button { width: 40px; height: 40px; border-radius: 50%; background: #2457f5; color: #fff; font-size: 24px; line-height: 1; box-shadow: 0 3px 0 #1a3fd0; cursor: pointer; }
 .hww-in-out { padding: 11px 20px; border-radius: 999px; background: #fff; color: #0f1730; font: 700 14px/1 var(--sans); box-shadow: 0 4px 0 rgba(15, 23, 48, 0.25); cursor: pointer; }
 @media (max-width: 640px) { .hww-in { bottom: 62px; } .hww-in-bar span { min-width: 140px; } .hww-in-bar small { display: none; } }
+
+/* walking arrows, above the site selector (bottom right) */
+.hww-pad{position:fixed;right:14px;bottom:66px;z-index:40;display:grid;grid-template-columns:repeat(3,46px);grid-template-rows:repeat(2,46px);gap:6px;touch-action:none;user-select:none;-webkit-user-select:none}
+.hww-pad[hidden]{display:none}
+.hww-pad button{width:46px;height:46px;border-radius:14px;border:1px solid rgba(255,255,255,.35);background:rgba(15,20,44,.78);color:#fff;font-size:17px;line-height:1;cursor:pointer;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);box-shadow:0 6px 18px rgba(0,0,0,.28);touch-action:none;-webkit-tap-highlight-color:transparent;padding:0}
+.hww-pad button.on,.hww-pad button:active{background:#2457f5;transform:scale(.95)}
+.hww-pad [data-m=f]{grid-column:2;grid-row:1}.hww-pad [data-m=l]{grid-column:1;grid-row:2}.hww-pad [data-m=b]{grid-column:2;grid-row:2}.hww-pad [data-m=r]{grid-column:3;grid-row:2}
+@media (max-width:560px){.hww-pad{right:10px;bottom:62px;grid-template-columns:repeat(3,42px);grid-template-rows:repeat(2,42px);gap:5px}.hww-pad button{width:42px;height:42px}}
+@media (max-width:640px){.hww-in{bottom:158px}}
