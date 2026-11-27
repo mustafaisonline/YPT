@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script src="/js/site-mode.js?v=202611271657"></script>
+    <script src="/js/site-mode.js?v=202611271927"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Products page: the four YPT products. Kept out of search until launch. -->
@@ -11,8 +11,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/agentic.css?v=202611271657">
-    <link rel="stylesheet" href="css/products.css?v=202611271657">
+    <link rel="stylesheet" href="css/agentic.css?v=202611271927">
+    <link rel="stylesheet" href="css/products.css?v=202611271927">
 </head>
 <body class="has-promo">
 
@@ -49,6 +49,7 @@
             <a href="about.html"><span data-ag="vera" data-v="head"></span>Why YPT!</a>
             <a href="how-we-work.html"><span data-ag="atlas" data-v="head"></span>How We Work</a>
             <a href="products.html" class="on"><span data-ag="forge" data-v="head"></span>Products</a>
+            <a href="services.html" data-n="services-nav"><span data-ag="spark" data-v="head"></span>Services</a>
             <a href="agents.html"><span data-ag="guide" data-v="head"></span>Agents</a>
         </nav>
         <div style="display:flex;gap:10px;align-items:center">
@@ -144,7 +145,7 @@
     <header class="ps-head">
       <span class="ps-agent"><img src="img/products/ecard/logo.png" alt="" width="66" height="66"></span>
       <div class="ps-ht"><p class="mono">Standard</p><h2 id="ps-ecard-title">eCardForever</h2><p class="ps-tag">Your permanent digital identity</p></div>
-      <span class="ps-ready"><i></i>Ready to use online</span>
+      <a class="ps-ready" href="https://ecardforever.com" target="_blank" rel="noopener"><i></i>Ready to use online <span class="arr">↗</span></a>
       <button type="button" class="ps-x" data-close aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
     </header>
     <div class="ps-tabs" role="tablist" aria-label="Sections"><button type="button" role="tab" id="ps-ecard-t-overview" aria-controls="ps-ecard-p-overview" aria-selected="true" tabindex="0" data-tab="overview">Overview</button><button type="button" role="tab" id="ps-ecard-t-features" aria-controls="ps-ecard-p-features" aria-selected="false" tabindex="-1" data-tab="features">Features</button><button type="button" role="tab" id="ps-ecard-t-modules" aria-controls="ps-ecard-p-modules" aria-selected="false" tabindex="-1" data-tab="modules">Modules</button><button type="button" role="tab" id="ps-ecard-t-ontology" aria-controls="ps-ecard-p-ontology" aria-selected="false" tabindex="-1" data-tab="ontology">Concept map</button><button type="button" role="tab" id="ps-ecard-t-dash" aria-controls="ps-ecard-p-dash" aria-selected="false" tabindex="-1" data-tab="dash">Admin dashboard</button><button type="button" role="tab" id="ps-ecard-t-shots" aria-controls="ps-ecard-p-shots" aria-selected="false" tabindex="-1" data-tab="shots">Screenshots</button></div>
@@ -163,7 +164,7 @@
     <header class="ps-head">
       <span class="ps-agent"><img src="img/products/nexus/logo.png" alt="" width="66" height="66"></span>
       <div class="ps-ht"><p class="mono">Standard</p><h2 id="ps-nexus-title">Data &amp; AI Nexus</h2><p class="ps-tag">Learn, practise and get certified in data and AI</p></div>
-      <span class="ps-ready"><i></i>Ready to use online</span>
+      <a class="ps-ready" href="https://dataainexus.com" target="_blank" rel="noopener"><i></i>Ready to use online <span class="arr">↗</span></a>
       <button type="button" class="ps-x" data-close aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
     </header>
     <div class="ps-tabs" role="tablist" aria-label="Sections"><button type="button" role="tab" id="ps-nexus-t-overview" aria-controls="ps-nexus-p-overview" aria-selected="true" tabindex="0" data-tab="overview">Overview</button><button type="button" role="tab" id="ps-nexus-t-features" aria-controls="ps-nexus-p-features" aria-selected="false" tabindex="-1" data-tab="features">Features</button><button type="button" role="tab" id="ps-nexus-t-modules" aria-controls="ps-nexus-p-modules" aria-selected="false" tabindex="-1" data-tab="modules">Modules</button><button type="button" role="tab" id="ps-nexus-t-ontology" aria-controls="ps-nexus-p-ontology" aria-selected="false" tabindex="-1" data-tab="ontology">Concept map</button><button type="button" role="tab" id="ps-nexus-t-dash" aria-controls="ps-nexus-p-dash" aria-selected="false" tabindex="-1" data-tab="dash">Admin board</button><button type="button" role="tab" id="ps-nexus-t-shots" aria-controls="ps-nexus-p-shots" aria-selected="false" tabindex="-1" data-tab="shots">Screenshots</button></div>
@@ -232,8 +233,8 @@
     </div>
 </footer>
 
-<script src="js/agentic.js?v=202611271657"></script>
-<script src="js/products.js?v=202611271657" defer></script>
-<script type="module" src="js/agents3d.js?v=202611271657"></script>
+<script src="js/agentic.js?v=202611271927"></script>
+<script src="js/products.js?v=202611271927" defer></script>
+<script type="module" src="js/agents3d.js?v=202611271927"></script>
 </body>
 </html>

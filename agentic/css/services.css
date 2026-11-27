@@ -1,0 +1,83 @@
+/* Services page. Reuses products.css (sheet, tabs, modules); everything here is prefixed sv-. */
+.sv-offerline { display: inline-flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; margin-top: 16px; padding: 10px 18px; border-radius: 999px; color: #fff; background: linear-gradient(90deg, #f28a1e, #ec4f93 38%, #8257f0 72%, #2457f5); box-shadow: 0 4px 0 rgba(15, 23, 48, 0.3); font-size: 16px; }
+.sv-offerline b { font-size: 1.15em; letter-spacing: -0.02em; } .sv-offerline span { opacity: 0.95; font-weight: 600; }
+
+/* the two service cards */
+.sv-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; }
+.sv-card { position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: 12px; text-align: left; padding: 30px 30px 26px; border-radius: 32px; background: #fff; border: 1.5px solid #dfe5f6; box-shadow: 0 8px 0 var(--soft), 0 30px 50px -30px rgba(15, 23, 48, 0.4); cursor: pointer; overflow: hidden; transition: transform 0.18s, box-shadow 0.18s, border-color 0.18s; }
+.sv-card::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 150px; background: linear-gradient(160deg, color-mix(in srgb, var(--c) 82%, #fff), var(--c)); }
+.sv-card:hover, .sv-card:focus-visible { transform: translateY(-5px); border-color: var(--c); box-shadow: 0 13px 0 var(--soft), 0 36px 54px -26px var(--c); }
+.sv-card > * { position: relative; }
+.sv-badge { align-self: flex-start; padding: 6px 12px; border-radius: 999px; background: rgba(255, 255, 255, 0.95); color: var(--cd); font: 700 11.5px/1 var(--mono, monospace); letter-spacing: 0.06em; text-transform: uppercase; }
+.sv-cag { width: 104px; height: 104px; margin-top: 4px; padding: 6px; border-radius: 28px; background: #fff; box-shadow: 0 5px 0 rgba(15, 23, 48, 0.18); display: grid; place-items: center; }
+.sv-cag > span { display: block; width: 92px; height: 92px; }
+.sv-ct { margin-top: 8px; font-size: 27px; line-height: 1.12; letter-spacing: -0.025em; color: var(--ink); }
+.sv-cp { font-size: 16px; line-height: 1.5; color: var(--muted, #52607f); }
+.sv-chips { display: flex; flex-wrap: wrap; gap: 8px; } .sv-chips span { padding: 6px 12px; border-radius: 999px; background: var(--soft); color: var(--cd); font: 700 12.5px/1 var(--sans); }
+.sv-price { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; margin-top: 4px; } .sv-price b { font-size: 26px; letter-spacing: -0.03em; color: var(--cd); } .sv-price span { font-size: 14px; color: var(--muted, #52607f); font-weight: 600; }
+.sv-go { margin-top: 6px; padding: 12px 20px; border-radius: 999px; background: var(--ink); color: #fff; font: 700 14.5px/1 var(--sans); box-shadow: 0 4px 0 #05070f; }
+.sv-go i { font-style: normal; display: inline-block; transition: transform 0.18s; } .sv-card:hover .sv-go i { transform: translateX(5px); }
+
+/* "whatever you have seen" tiles */
+.sv-tiles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 8px; }
+.sv-tile { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; text-align: left; padding: 18px 18px 16px; border-radius: 22px; background: #fff; border: 1.5px solid #e3e8f6; box-shadow: 0 5px 0 #e3e8f6; cursor: pointer; transition: transform 0.15s, border-color 0.15s, box-shadow 0.15s; }
+.sv-tile:hover, .sv-tile:focus-visible { transform: translateY(-4px); border-color: #2457f5; box-shadow: 0 9px 0 #e6ecff, 0 18px 30px -18px #2457f5; }
+.sv-tile b { font-size: 16px; line-height: 1.25; letter-spacing: -0.01em; }
+.sv-like { font-size: 13px; color: var(--muted, #52607f); }
+.sv-kic { display: grid; place-items: center; width: 56px; height: 56px; flex: none; border-radius: 16px; color: #fff; background: linear-gradient(145deg, #2457f5, #1a3fd0); box-shadow: 0 3px 0 #1a3fd0; }
+.sv-kic svg { width: 32px; height: 32px; }
+.sv-fine { margin-top: 14px; font-size: 13px; color: var(--muted, #52607f); }
+.sv-every { margin-top: 34px; padding: 24px 26px; border-radius: 26px; background: linear-gradient(120deg, #e6ecff, #fdf0d9); border: 1.5px solid #c3cdea; box-shadow: 0 5px 0 #c3cdea; }
+.sv-every h3 { font-size: 20px; margin-bottom: 14px; }
+.sv-every ul { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px 22px; margin: 0; padding: 0; list-style: none; }
+.sv-every li { display: grid; grid-template-columns: 26px 1fr; column-gap: 10px; align-items: start; }
+.sv-every li svg { grid-row: span 2; width: 26px; height: 26px; padding: 5px; border-radius: 50%; color: #fff; background: #2457f5; }
+.sv-every li b { font-size: 15px; } .sv-every li span { font-size: 13.5px; color: var(--muted, #52607f); line-height: 1.4; }
+
+.sv-pillars { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.sv-pillar { padding: 20px 20px 18px; border-radius: 22px; background: #fff; border: 1.5px solid #e3e8f6; box-shadow: 0 5px 0 #e3e8f6; }
+.sv-pn { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: var(--ink); color: #fff; font: 700 14px/1 var(--mono, monospace); margin-bottom: 12px; }
+.sv-pillar h3 { font-size: 18px; line-height: 1.25; margin-bottom: 6px; } .sv-pillar p { font-size: 14.5px; line-height: 1.5; color: var(--muted, #52607f); }
+
+.sv-talent { display: grid; grid-template-columns: 1.4fr 1fr; gap: 30px; align-items: center; margin-bottom: 36px; }
+.sv-pills { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0 22px; } .sv-pills span { padding: 8px 14px; border-radius: 999px; background: #d9f6f2; color: #0b7a6e; font: 700 13.5px/1 var(--sans); }
+.sv-talent-ag { justify-self: center; width: min(240px, 60%); }
+
+/* inside the sheets */
+.sv-kinds { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-top: 14px; }
+.sv-kind { display: flex; gap: 14px; align-items: flex-start; padding: 16px; border-radius: 18px; border: 1.5px solid #e3e8f6; background: #fff; }
+.sv-kind h5 { font-size: 16.5px; letter-spacing: -0.01em; margin-bottom: 2px; }
+.sv-kind .sv-like b { color: var(--cd); font-weight: 700; }
+.sv-kind p { font-size: 14px; line-height: 1.45; margin-top: 4px; color: var(--muted, #52607f); }
+.sv-kind ul { margin: 8px 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 4px; }
+.sv-kind li { position: relative; padding-left: 15px; font-size: 13.5px; line-height: 1.4; } .sv-kind li::before { content: ""; position: absolute; left: 0; top: 0.55em; width: 7px; height: 7px; border-radius: 50%; background: var(--c); }
+.sv-note { margin-top: 18px; }
+.sv-offerbox { padding: 26px 28px; border-radius: 24px; color: #fff; background: linear-gradient(90deg, #f28a1e, #ec4f93 38%, #8257f0 72%, #2457f5); box-shadow: 0 7px 0 rgba(15, 23, 48, 0.3); display: flex; flex-direction: column; align-items: flex-start; gap: 8px; margin-bottom: 8px; }
+.sv-offerbox .mono { background: #fff; color: #cf2f76; padding: 6px 11px; border-radius: 999px; font-size: 10.5px; }
+.sv-offerbox h3 { font-size: clamp(28px, 4.4vw, 46px); line-height: 1.05; letter-spacing: -0.035em; }
+.sv-offer-sub { font-weight: 700; font-size: 18px; } .sv-offerbox p { max-width: 54ch; }
+.sv-offerbox .btn--solid { background: var(--ink); color: #fff; margin-top: 6px; }
+.sv-fams { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 4px; }
+.sv-fam { padding: 8px 14px; border-radius: 999px; border: 1.5px solid #cfe9e5; background: #fff; color: #0b7a6e; font: 700 13px/1 var(--sans); cursor: pointer; transition: all 0.15s; }
+.sv-fam:hover { border-color: var(--c); } .sv-fam.on { background: var(--c); border-color: var(--c); color: #fff; }
+.sv-famgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 12px; }
+.sv-famcard h5 { font-size: 15.5px; margin-bottom: 4px; color: var(--cd); } .sv-famcard p { font-size: 13.5px; line-height: 1.45; color: var(--muted, #52607f); }
+.sv-jdcta { margin-top: 18px; }
+.sv-tpl { margin-top: 20px; } .sv-tpl h5 { font-size: 17px; margin-bottom: 8px; color: var(--cd); }
+.sv-tpl ol { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 6px; } .sv-tpl li { font-size: 14.5px; line-height: 1.45; } .sv-tpl li b { margin-right: 6px; }
+.sv-roles .ps-modnav { max-height: calc(100dvh - 9vh - 400px); }
+
+@media (max-width: 1020px) {
+    .sv-cards { grid-template-columns: 1fr; } .sv-tiles { grid-template-columns: repeat(3, 1fr); } .sv-every ul { grid-template-columns: repeat(2, 1fr); }
+    .sv-pillars { grid-template-columns: repeat(2, 1fr); } .sv-talent { grid-template-columns: 1fr; } .sv-talent-ag { display: none; }
+}
+@media (max-width: 720px) {
+    .sv-card { padding: 24px 20px 22px; border-radius: 26px; } .sv-ct { font-size: 23px; }
+    .sv-tiles { grid-template-columns: repeat(2, 1fr); gap: 12px; } .sv-tile { padding: 14px 12px; } .sv-tile b { font-size: 14.5px; } .sv-kic { width: 48px; height: 48px; } .sv-kic svg { width: 28px; height: 28px; }
+    .sv-every ul { grid-template-columns: 1fr; } .sv-pillars { grid-template-columns: 1fr; }
+    .sv-kinds { grid-template-columns: 1fr; } .sv-offerbox { padding: 20px 18px; }
+    .sv-roles .ps-modnav { max-height: none; }
+    .sv-offerline { border-radius: 22px; }
+}
+@media (prefers-reduced-motion: reduce) { .sv-card, .sv-tile, .sv-go i { transition: none; } }
+.ps-mod[hidden] { display: none; }
