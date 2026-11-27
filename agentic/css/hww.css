@@ -14,13 +14,16 @@
 .hww-page .nav .promo, .hww-page .nav .brand { pointer-events: auto; }
 .hww-page .nav-in > :not(.brand), .hww-page .nav-links, .hww-page .nav-in .btn { display: none !important; }
 /* Dialogue, controls, floor picker */
-.hww-say { position: absolute; z-index: 40; top: 14px; left: 200px; width: min(540px, calc(100% - 326px)); padding: 14px 16px 14px; background: rgba(255, 255, 255, 0.96); border: 1.5px solid #c3cdea; border-radius: 18px; box-shadow: 0 6px 0 #c3cdea, 0 24px 40px -18px rgba(15, 23, 48, 0.55); color: var(--ink); backdrop-filter: blur(8px); }
+/* Alya's speech bubble: floats over her head (positioned by hww3d.js); choices live in a tray at the bottom. */
+.hww-say { position: absolute; z-index: 40; left: 0; top: 0; width: min(310px, calc(100% - 20px)); padding: 10px 13px 11px; background: rgba(255, 255, 255, 0.97); border: 1.5px solid #c3cdea; border-radius: 18px; box-shadow: 0 4px 0 #c3cdea, 0 18px 30px -14px rgba(15, 23, 48, 0.5); color: var(--ink); will-change: transform; pointer-events: none; }
+.hww-say::after { content: ""; position: absolute; left: var(--tx, 50%); bottom: -9px; width: 16px; height: 16px; margin-left: -8px; background: rgba(255, 255, 255, 0.97); border-right: 1.5px solid #c3cdea; border-bottom: 1.5px solid #c3cdea; transform: rotate(45deg); border-radius: 0 0 4px 0; }
+.hww-say.below::after { bottom: auto; top: -9px; transform: rotate(225deg); }
 .hww-who { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; flex-wrap: wrap; }
 .hww-name { font: 700 13px/1 var(--sans); background: #14b8a6; color: #fff; padding: 5px 10px; border-radius: 999px; }
 .hww-chip { font: 600 11px/1 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--primary-strong); }
-.hww-say p { font-size: 16.5px; line-height: 1.45; min-height: 3.2em; }
+.hww-say p { font-size: 14.5px; line-height: 1.4; min-height: 2.8em; }
 .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-.hww-choices { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.hww-choices { position: absolute; z-index: 41; left: 50%; bottom: 68px; transform: translateX(-50%); width: max-content; max-width: calc(100% - 24px); display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
 .hww-choices:empty { display: none; }
 .hww-choices a, .hww-choices button { display: inline-flex; align-items: center; gap: 6px; padding: 10px 15px; border-radius: 999px; font: 700 14px/1.1 var(--sans); background: var(--primary); color: #fff; border: 1.5px solid var(--primary); box-shadow: 0 3px 0 #1a3fd0; cursor: pointer; }
 .hww-choices .ghost { background: #fff; color: var(--ink); border-color: #c3cdea; box-shadow: 0 3px 0 #c3cdea; }
@@ -53,7 +56,8 @@
     .hww-floors { top: 50%; transform: translateY(-50%); right: 8px; gap: 4px; }
     .hww-floors button { height: 30px; padding: 0 3px; }
     .hww-floors button span { display: none; }
-    .hww-say { top: 96px; left: 8px; width: calc(100% - 16px); padding: 11px 13px; }
-    .hww-say p { font-size: 15px; min-height: 0; }
+    .hww-say { width: min(280px, calc(100% - 20px)); padding: 9px 11px; }
+    .hww-choices { bottom: 66px; }
+    .hww-say p { font-size: 14px; min-height: 0; }
     .hww-step { display: none; }
 }

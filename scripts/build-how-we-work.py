@@ -317,8 +317,8 @@ def build():
     <div class="hww-say" id="hww-say">
       <div class="hww-who"><span class="hww-name">Alya</span><span class="hww-chip" id="hww-chip"></span></div>
       <p id="hww-text" aria-hidden="true"></p><span class="sr" id="hww-sr" role="status"></span>
-      <div class="hww-choices" id="hww-choices"></div>
     </div>
+    <div class="hww-choices" id="hww-choices"></div>
     <div class="hww-ctl" id="hww-ctl" role="toolbar" aria-label="Tour controls">
       <button type="button" data-a="prev" aria-label="Previous stop" title="Previous stop">◀</button>
       <button type="button" data-a="next" aria-label="Next stop" title="Next stop">▶</button>

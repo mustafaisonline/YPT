@@ -128,7 +128,7 @@
     var tx = null;
     S.addEventListener('touchstart', function (e) { tx = e.touches.length === 1 ? e.touches[0].clientX : null; }, { passive: true });
     S.addEventListener('touchend', function (e) {
-        if (tx == null || e.target.closest('.hww-say, .hww-ctl, .hww-floors')) { tx = null; return; }
+        if (tx == null || e.target.closest('.hww-say, .hww-choices, .hww-ctl, .hww-floors')) { tx = null; return; }
         var dx = e.changedTouches[0].clientX - tx; tx = null;
         if (Math.abs(dx) > 60) (dx < 0 ? ACTIONS.next : ACTIONS.prev)();
     }, { passive: true });

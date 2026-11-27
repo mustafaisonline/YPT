@@ -440,6 +440,23 @@ async function boot() {
         if (disco) { DISCO.ball.rotation.y = t * 1.2; DISCO.beams.forEach((b, i) => { b.rotation.z = Math.sin(t * 1.7 + i * 1.6) * 0.5; b.rotation.x = Math.cos(t * 1.3 + i) * 0.35; }); DISCO.tiles.forEach(tl => { tl.material = glow([0xff5f9e, 0x5eead4, 0xffd36a, 0x7aa2ff][(tl.userData.tile + Math.floor(t * 2.5)) % 4]); }); }
         if (FLAME.m) FLAME.m.scale.y = 1 + Math.sin(t * 25) * 0.25;
         apply(rig); renderer.render(scene, camera);
+        bubble();
+    }
+    // Alya's speech bubble floats over her head: project her head to the screen each frame, keep the bubble inside the stage,
+    // flip it below her if she is near the top edge, and aim its tail at her.
+    const sayEl = document.getElementById('hww-say'), hv = new THREE.Vector3();
+    function bubble() {
+        if (!sayEl) return;
+        const W = stage.clientWidth, Hh = stage.clientHeight, bw = sayEl.offsetWidth, bh = sayEl.offsetHeight;
+        hv.setFromMatrixPosition(alyaA.g.matrixWorld); hv.y += 1.0; hv.project(camera);
+        const x = Math.max(24, Math.min(W - 24, (hv.x * 0.5 + 0.5) * W)), y = Math.max(0, Math.min(Hh, (-hv.y * 0.5 + 0.5) * Hh));
+        const maxL = W - bw - (W > 900 ? 84 : 10), left = Math.max(10, Math.min(maxL, x - bw / 2));
+        let top = y - bh - 16, below = false;
+        if (top < 8) { top = y + 100; below = true; }
+        top = Math.min(top, Hh - bh - 70);
+        sayEl.style.transform = 'translate(' + left.toFixed(1) + 'px,' + top.toFixed(1) + 'px)';
+        sayEl.style.setProperty('--tx', Math.max(22, Math.min(bw - 22, x - left)).toFixed(1) + 'px');
+        sayEl.classList.toggle('below', below);
     }
     Object.assign(rig, shot);
     requestAnimationFrame(frame);
