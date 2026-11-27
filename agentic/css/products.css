@@ -237,3 +237,18 @@ body.ps-lock .sm-box { z-index: 5 !important; }
 .pt-soon { cursor: not-allowed; filter: grayscale(1); opacity: 0.55; box-shadow: 0 5px 0 #e7e9ef; background: #f4f5f8; }
 .pt-soon:hover { transform: none; border-color: #e3e8f6; box-shadow: 0 5px 0 #e7e9ef; }
 .pt-go-soon { color: #6b7694; font-weight: 700; }
+
+/* equal category boxes; standard products have no demo button */
+.pt-cats { grid-template-columns: 1fr 1fr; align-items: stretch; }
+.pt-cat { display: flex; flex-direction: column; }
+.pt-grid { grid-template-columns: repeat(2, 1fr); }
+.ps-ready { display: inline-flex; align-items: center; gap: 8px; padding: 12px 18px; border-radius: 99px; background: #fff; color: var(--cd); font: 700 14px/1 var(--sans); box-shadow: 0 3px 0 rgba(0, 0, 0, 0.14); white-space: nowrap; }
+.ps-ready i { width: 9px; height: 9px; border-radius: 50%; background: #1fbf6a; box-shadow: 0 0 0 4px rgba(31, 191, 106, 0.25); }
+.ps-ready-note { background: var(--soft); border-color: var(--c); font-size: 15.5px; }
+@media (max-width: 1020px) { .pt-cats { grid-template-columns: 1fr; } }
+
+/* real 3D logos for standard products */
+.pt-ic.pt-logo { background: none; border-radius: 0; }
+.pt-logo img { width: 74px; height: 74px; object-fit: contain; display: block; }
+.ps-agent > img { width: 100%; height: auto; display: block; border-radius: 16px; background: #fff; }
+@media (max-width: 720px) { .pt-logo img { width: 64px; height: 64px; } }

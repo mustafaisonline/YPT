@@ -35,14 +35,14 @@ ICONS = {
     'ecard': '<rect x="7" y="12" width="34" height="24" rx="4"/><circle cx="18" cy="22" r="4"/><path d="M26 20h10M26 26h8M12 31h24"/>',
     'nexus': '<path d="M24 10l18 8-18 8-18-8z"/><path d="M14 23v8c4 4 16 4 20 0v-8M42 18v10"/>',
 }
-CATS = [('agentic', 'Agentic AI Products', 'Designed, built and checked by the YPT agent team. Each one has its own builder agent.'),
-        ('standard', 'Standard Products', 'Ready to use today. Open one to see what it does, then ask for a demo.')]
-CATLABEL = {'standard': 'Standard product', 'agentic': 'Agentic AI product'}
+CATS = [('agentic', 'Agentic AI', 'Designed, built and checked by the YPT agent team. Each one has its own builder agent.'),
+        ('standard', 'Standard', 'Live online and ready for everyone to use. Open one to see what it does.')]
+CATLABEL = {'standard': 'Standard', 'agentic': 'Agentic AI'}
 P = [
-    dict(id='ecard', cat='standard', short='eCardForever', n='S1', name='eCardForever', tag='Your permanent digital identity', ag='', who='', role='', c='#e0467f', cd='#b02a5f', soft='#fde6f0',
+    dict(id='ecard', cat='standard', short='eCardForever', logo='img/products/ecard/logo.png', full=True, n='S1', name='eCardForever', tag='Your permanent digital identity', ag='', who='', role='', c='#e0467f', cd='#b02a5f', soft='#fde6f0',
          say='', feats=['Digital profile', 'Themes and editor', 'Shareable link'],
          draft=['A cloud profile page for you or your business', 'A card editor with themes', 'Contact details and action buttons', 'A permanent public link to share', 'Installable as an app on a phone', 'Search-friendly public profiles'], art=''),
-    dict(id='nexus', cat='standard', short='Data AI Nexus', n='S2', name='Data AI Nexus', tag='Learn, practise and get certified in data and AI', ag='', who='', role='', c='#2e9b5f', cd='#1e7a45', soft='#e1f5e9',
+    dict(id='nexus', cat='standard', short='Data &amp; AI Nexus', logo='img/products/nexus/logo.png', full=True, n='S2', name='Data &amp; AI Nexus', tag='Learn, practise and get certified in data and AI', ag='', who='', role='', c='#2e9b5f', cd='#1e7a45', soft='#e1f5e9',
          say='', feats=['Knowledge hub', 'Training programs', 'Certificates'],
          draft=['A knowledge hub of data and AI topics', 'Training programs for learners and teams', 'Sign-up by role: learner, trainer, administrator', 'Role tests and interviews', 'Certificates as PDFs', 'Installable as an app on a phone'], art=''),
     dict(id='wholesale', cat='agentic', short='Wholesale &amp; Retail', n='01', name='Online Wholesale &amp; Retail Management System', tag='Sell wholesale and retail goods online, and run the orders behind them', ag='forge', who='Jun', role='Builder', c='#f28a1e', cd='#b9680c', soft='#fdf0d9',
@@ -362,7 +362,7 @@ def features_panel(p):
 
 def overview_draft(p):
     return (f'<p class="ps-lead">{E(p["tag"])}.</p><p class="ps-note"><b>Draft.</b> The full overview, modules, concept map and dashboards for this product are being prepared. '
-            f'Meanwhile, <a href="contact.html">ask for a demo</a> and we will walk you through it.</p>')
+            f'Meanwhile, <a href="contact.html">talk to us</a> and we will walk you through it.</p>')
 
 
 SHOTS = [
@@ -395,6 +395,7 @@ def use(pid):
 
 
 def agent_or_icon(p):
+    if p.get('logo'): return f'<img src="{p["logo"]}" alt="" width="66" height="66">'
     if p['ag']: return f'<span data-ag="{p["ag"]}" data-v="head"></span>'
     return f'<svg viewBox="0 0 48 48" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">{ICONS[p["id"]]}</svg>'
 
@@ -406,6 +407,7 @@ def sheet(p):
     panels = {'overview': overview_panel() if p.get('full') else overview_draft(p), 'features': features_panel(p)}
     if p.get('full'): panels.update({'modules': modules_panel(), 'ontology': onto_panel(), 'dash': DASH(), 'shots': shots_panel()})
     tb = ''.join(f'<button type="button" role="tab" id="ps-{p["id"]}-t-{k}" aria-controls="ps-{p["id"]}-p-{k}" aria-selected="{"true" if i == 0 else "false"}" tabindex="{0 if i == 0 else -1}" data-tab="{k}">{lab}</button>' for i, (k, lab) in enumerate(tabs))
+    if p['cat'] == 'standard': panels['overview'] = f'<p class="ps-note ps-ready-note"><b>Ready to use.</b> {p["short"]} is online now and ready to be used by everyone. There is nothing to book and no demo to wait for.</p>' + panels['overview']
     pn = ''.join(f'<div class="ps-panel" role="tabpanel" id="ps-{p["id"]}-p-{k}" aria-labelledby="ps-{p["id"]}-t-{k}" data-tab="{k}"{"" if i == 0 else " hidden"} tabindex="0">{panels[k]}</div>' for i, (k, _) in enumerate(tabs))
     return f'''
 <div class="ps" id="ps-{p['id']}" role="dialog" aria-modal="true" aria-labelledby="ps-{p['id']}-title" hidden style="--c:{p['c']};--cd:{p['cd']};--soft:{p['soft']}">
@@ -413,7 +415,7 @@ def sheet(p):
     <header class="ps-head">
       <span class="ps-agent">{agent_or_icon(p)}</span>
       <div class="ps-ht"><p class="mono">{CATLABEL[p['cat']]}{(' · Built with ' + p['who'] + ', ' + p['role']) if p['who'] else ''}</p><h2 id="ps-{p['id']}-title">{p['name']}</h2><p class="ps-tag">{p['tag']}</p></div>
-      <a class="btn ps-demo" href="contact.html">Ask for a demo <span class="arr">→</span></a>
+      {('<span class="ps-ready"><i></i>Ready to use online</span>' if p['cat'] == 'standard' else '<a class="btn ps-demo" href="contact.html">Ask for a demo <span class="arr">→</span></a>')}
       <button type="button" class="ps-x" data-close aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
     </header>
     <div class="ps-tabs" role="tablist" aria-label="Sections">{tb}</div>
@@ -430,7 +432,12 @@ import products_ims
 IMS = {k: getattr(products_ims, k) for k in list(WHOLESALE)}
 IMS['DASH'] = products_ims.DASH
 IMS['DASHTAB'] = 'Dashboard and statements'
-DATASETS = {'wholesale': WHOLESALE, 'ims': IMS}
+import products_ecard, products_nexus
+def _ds(m):
+    d = {k: getattr(m, k) for k in list(WHOLESALE)}
+    d['DASH'] = m.DASH
+    return d
+DATASETS = {'wholesale': WHOLESALE, 'ims': IMS, 'ecard': _ds(products_ecard), 'nexus': _ds(products_nexus)}
 
 cards = ''
 sheets = ''
@@ -439,7 +446,7 @@ for p in P:
     badge = f'<span class="pt-ag"><span data-ag="{p["ag"]}" data-v="head"></span></span>' if p['ag'] else ''
     tilehtml[p['cat']] += f'''
                 <button type="button" class="pt{' pt-soon' if p.get('soon') else ''}" id="{p['id']}"{' disabled' if p.get('soon') else ' data-open="' + p['id'] + '" aria-haspopup="dialog"'} data-name="{p['name']}" data-who="{p['who']}" style="--c:{p['c']};--cd:{p['cd']};--soft:{p['soft']}">
-                    <span class="pt-ic"><svg viewBox="0 0 48 48" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">{ICONS[p['id']]}</svg>{badge}</span>
+                    {('<span class="pt-ic pt-logo"><img src="' + p['logo'] + '" alt="" width="74" height="74"></span>') if p.get('logo') else '<span class="pt-ic"><svg viewBox="0 0 48 48" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + ICONS[p['id']] + '</svg>' + badge + '</span>'}
                     <b>{p['short']}</b>
                     <span class="pt-tag">{p['tag']}</span>
                     {'<span class="pt-go pt-go-soon">Coming soon</span>' if p.get('soon') else '<span class="pt-go">Open <i aria-hidden="true">→</i></span>'}
@@ -452,7 +459,7 @@ main = f'''<main>
             <div>
                 <p class="mono eyebrow"><i></i>Products</p>
                 <h1 class="h1">Products <span class="hl">built for you.</span></h1>
-                <p class="lede">Two ready-to-use products and four agentic AI products built by the YPT agent team. Pick an icon to open the product and see everything it does. The demo button is inside.</p>
+                <p class="lede">Two ready-to-use products and four agentic AI products built by the YPT agent team. Pick an icon to open the product and see everything it does.</p>
             </div>
             <div class="guide-bubble" id="guide-bubble">
                 <span class="gb-ag" data-ag="guide"></span>
