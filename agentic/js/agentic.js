@@ -112,6 +112,8 @@
     BY_ID.guide = GUIDE;
     // Joy fronts offers and announcements. She is not one of the seven service agents.
     BY_ID.joy = { id: 'joy', name: 'Hui', hue: '#ff5fa2', dark: '#e0357f', soft: '#ffe3ef', glow: '#ffd3e6', lash: true };
+    // Alya escorts visitors through the "How We Work" building. She is not one of the seven service agents and not Hui.
+    BY_ID.alya = { id: 'alya', name: 'Alya', hue: '#14b8a6', dark: '#0b8478', soft: '#d9f6f2', glow: '#a4f0e4', lash: true };
 
     // ------------------------------------------------------------------
     // Industry looks. The visitor picks an industry and every agent changes into that industry's work
@@ -148,7 +150,8 @@
     var KEY = 'ypt-industry', storedIndustry = '';
     try { storedIndustry = localStorage.getItem(KEY) || ''; } catch (e) {}
     window.YPT_INDUSTRIES = INDUSTRIES;
-    window.YPT_LOOK = LOOKS[storedIndustry] || LOOKS.general; // read by js/agents3d.js
+    var GENERIC = !!(document.body && document.body.hasAttribute('data-generic')); // pages like How We Work always use the standard look
+    window.YPT_LOOK = (GENERIC ? LOOKS.general : LOOKS[storedIndustry]) || LOOKS.general; // read by js/agents3d.js
 
     // ------------------------------------------------------------------
     // Character drawing. Every agent shares one body (so they read as a
@@ -1158,7 +1161,7 @@
         });
         requestAnimationFrame(function () { requestAnimationFrame(function () { m.classList.add('on'); var f = $('.ind-opt', m); if (f) f.focus({ preventScroll: true }); }); });
     }
-    if (!storedIndustry) setTimeout(openIndustryModal, 900);
+    if (!storedIndustry && !GENERIC) setTimeout(openIndustryModal, 900);
 
     // ------------------------------------------------------------------
     // The logo showcase: click the logo and it spins in from the corner, grows, and slows to a stop on the
