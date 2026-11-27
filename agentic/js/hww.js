@@ -92,6 +92,7 @@
     }
     function goFloor(n) {
         n = Math.max(0, Math.min(7, n));
+        if (H && H.isInside && H.isInside()) { H.goFloor(n); paintFloor(n); return; }
         for (var i = 0; i < STOPS.length; i++) if (STOPS[i].f === n) { go(i); return; }
     }
 
@@ -103,7 +104,7 @@
         down: function () { goFloor(st.af - 1); },
         left: function () { H && H.look(-0.28); },
         right: function () { H && H.look(0.28); },
-        inside: function () { H && H.enterReception && H.enterReception(0); },
+        inside: function () { H && (H.stepIn ? H.stepIn() : H.enterReception && H.enterReception(0)); },
         rotl: function () { H && H.look(-0.4); },
         rotr: function () { H && H.look(0.4); },
         rotu: function () { H && H.tilt(0.18); },

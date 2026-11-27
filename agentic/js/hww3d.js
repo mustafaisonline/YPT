@@ -2,6 +2,8 @@
 // page, built through window.YPT_AG3D from agents3d.js), furniture modelled in code, one WebGL scene, one directed camera.
 import * as THREE from './vendor/three.module.min.js';
 import { RoundedBoxGeometry } from './vendor/RoundedBoxGeometry.js';
+import { RoomEnvironment } from './vendor/RoomEnvironment.js';
+import { mergeGeometries } from './vendor/BufferGeometryUtils.js';
 
 const stage = document.getElementById('hww-stage');
 if (stage) boot().catch(e => { console.error('hww3d', e); stage.classList.add('no3d'); document.dispatchEvent(new Event('ypt:hww3d-fail')); });
@@ -35,6 +37,7 @@ async function boot() {
     const hemi = new THREE.HemisphereLight(0xffffff, 0xaeb9dc, 1.9); scene.add(hemi);
     const key = new THREE.DirectionalLight(0xffffff, 2.3); key.position.set(-40, 60, 80); scene.add(key);
     const rim = new THREE.DirectionalLight(0xc5d3ff, 1.1); rim.position.set(60, 20, -50); scene.add(rim);
+    { const pm = new THREE.PMREMGenerator(renderer); scene.environment = pm.fromScene(new RoomEnvironment(), 0.04).texture; pm.dispose(); }   // image-based light for the real (standard) materials
     const camera = new THREE.PerspectiveCamera(30, 1, 0.5, 600);
     const world = new THREE.Group(); scene.add(world);
     const tower = new THREE.Group(); world.add(tower);
@@ -62,6 +65,30 @@ async function boot() {
     function blob(parent, x, z, w, d, y) { const m = new THREE.Mesh(new THREE.PlaneGeometry(w, d), shadowMat); m.rotation.x = -Math.PI / 2; m.position.set(x, (y || 0) + 0.02, z); m.renderOrder = 1; parent.add(m); return m; }
     const C = { wood: 0xe6c9a3, walnut: 0x8a5a3a, white: 0xf6f8ff, dark: 0x2b3358, steel: 0xaab4cf, blue: 0x4f7cff, teal: 0x14b8a6, orange: 0xf28a1e, green: 0x2f9e66, purple: 0x8b5cf6, pink: 0xec4899, yellow: 0xffd36a };
     const WOOD = () => mat(C.wood), WHITE = () => mat(C.white), DARK = () => mat(C.dark), STEEL = () => mat(C.steel);
+
+    // ------------------------------------------------------------------ real materials (PBR texture sets from Poly Haven, CC0) shared by every floor
+    const PBRS = [];   // every standard material, so night mode can turn down what the environment light gives them
+    const tloader = new THREE.TextureLoader(), TX = {};
+    function ptex(n, tag, rep, srgb) { const k = n + tag + rep.join('x'); if (TX[k]) return TX[k]; const t = tloader.load('assets/hww/tex/' + n + '_' + tag + '.jpg'); t.wrapS = t.wrapT = THREE.RepeatWrapping; t.repeat.set(rep[0], rep[1]); t.anisotropy = 4; if (srgb) t.colorSpace = THREE.SRGBColorSpace; return (TX[k] = t); }
+    function sreg(m, env) { m.userData.env0 = m.envMapIntensity = env == null ? 0.5 : env; PBRS.push(m); return m; }
+    function pbr(n, rep, o, env) { return sreg(new THREE.MeshStandardMaterial(Object.assign({ map: ptex(n, 'diff', rep, true), roughnessMap: ptex(n, 'rough', rep), normalMap: ptex(n, 'nor', rep), roughness: 1, metalness: 0 }, o)), env); }
+    const SM = (color, o, env) => sreg(new THREE.MeshStandardMaterial(Object.assign({ color, roughness: 0.6, metalness: 0 }, o)), env);
+    const PM = {
+        ash: pbr('ash_veneer', [1, 1], { color: 0xe8dcc6, roughness: 0.8 }, 0.35), walnut: pbr('walnut_veneer', [1, 1], { color: 0xb8a998, roughness: 0.9 }, 0.35),
+        steel: SM(0xb9bfc9, { metalness: 1, roughness: 0.35 }, 1.0), charcoal: SM(0x23262f, { roughness: 0.55, metalness: 0.2 }, 0.5), white: SM(0xeceff4, { roughness: 0.5 }, 0.5),
+        brass: SM(0xd2a84e, { metalness: 1, roughness: 0.32 }, 1.1), vc: SM(0xffffff, { roughness: 0.78, vertexColors: true }, 0.4), screenFrame: SM(0x0b0d12, { roughness: 0.3, metalness: 0.5 }, 0.6),
+        glassFrame: SM(0x2a2e38, { metalness: 0.7, roughness: 0.4 }, 0.9), pot: SM(0xe8e2d6, { roughness: 0.35 }, 0.6), leather: pbr('fabric_leather_01', [1, 1], { color: 0xa89a8a, roughness: 0.8 }, 0.6)
+    };
+    const FAB = {}; const fab = (c) => FAB[c] || (FAB[c] = sreg(new THREE.MeshStandardMaterial({ color: c, roughness: 0.95, normalMap: ptex('rough_linen', 'nor', [3, 3]) }), 0.4));
+    // props are merged into one mesh each (vertex colours carry the parts' colours), so a floor full of furniture stays cheap to draw
+    const MERGE = {}; const _m4 = new THREE.Matrix4(), _q = new THREE.Quaternion(), _e = new THREE.Euler(), _s = new THREE.Vector3(1, 1, 1);
+    function part(geo, col, x, y, z, rx, ry, rz) { const g = geo.clone(); _e.set(rx || 0, ry || 0, rz || 0); _m4.compose(new THREE.Vector3(x, y, z), _q.setFromEuler(_e), _s); g.applyMatrix4(_m4); const c = new THREE.Color(col), n = g.attributes.position.count, a = new Float32Array(n * 3); for (let i = 0; i < n; i++) { a[i * 3] = c.r; a[i * 3 + 1] = c.g; a[i * 3 + 2] = c.b; } g.setAttribute('color', new THREE.BufferAttribute(a, 3)); if (g.index) return g.toNonIndexed(); return g; }
+    function mergedGeo(key, build) { if (!MERGE[key]) { const ps = build().map(g => { if (!g.attributes.uv) g.setAttribute('uv', new THREE.BufferAttribute(new Float32Array(g.attributes.position.count * 2), 2)); return g; }); MERGE[key] = mergeGeometries(ps, false); } return MERGE[key]; }
+    const BG = (w, h, d) => new THREE.BoxGeometry(w, h, d), CG = (rt, rb, h, n) => new THREE.CylinderGeometry(rt, rb, h, n || 12);
+    const BLK = [];   // furniture footprints per floor (x0, x1, z0, z1, floor-local) used to keep a walker out of the furniture
+    const fIdx = (p) => floors.findIndex(o => o && o.g === p);
+    function blk(p, x0, x1, z0, z1) { const f = fIdx(p); if (f >= 0) (BLK[f] || (BLK[f] = [])).push([x0, x1, z0, z1]); }
+    const PLANTS = [];   // plant spots; the real plant models replace the simple ones once loaded
 
     // ------------------------------------------------------------------ canvas art for screens and boards
     const art = {
@@ -102,46 +129,56 @@ async function boot() {
     // ------------------------------------------------------------------ props
     function sign(g, x, y, z, w, text, bg, fg, sub) {
         const h = sub ? w * .26 : w * .17;
-        const m = new THREE.Mesh(new THREE.PlaneGeometry(w, h), new THREE.MeshBasicMaterial({ map: label(text, w, h, bg || '#0f1730', fg || '#fff', sub), transparent: true })); m.position.set(x, y, z); g.add(m); return m;
+        const m = new THREE.Mesh(new THREE.PlaneGeometry(w, h), new THREE.MeshBasicMaterial({ map: label(text, w, h, bg || '#0f1730', fg || '#fff', sub), transparent: true })); m.position.set(x, y, z); g.add(m);
+        const f = new THREE.Mesh(mergedGeo('signframe' + w + '_' + h, () => [part(BG(w + 0.08, 0.03, 0.05), 0xd2a84e, 0, h / 2 + 0.01, -0.03), part(BG(w + 0.08, 0.03, 0.05), 0xd2a84e, 0, -h / 2 - 0.01, -0.03), part(BG(0.03, h + 0.08, 0.05), 0xd2a84e, -w / 2 - 0.02, 0, -0.03), part(BG(0.03, h + 0.08, 0.05), 0xd2a84e, w / 2 + 0.02, 0, -0.03)]), PM.vc); f.position.copy(m.position); g.add(f); return m;
     }
     function board(g, x, y, z, w, h, kind, ry) {
         h = Math.min(h, 2.0); y = Math.min(y, 1.5);
         const o = new THREE.Group(); o.position.set(x, y, z); o.rotation.y = ry || 0; g.add(o);
-        box(o, w + 0.18, h + 0.18, 0.1, 0.05, DARK(), 0, 0, 0);
-        const s = new THREE.Mesh(new THREE.PlaneGeometry(w, h), new THREE.MeshBasicMaterial({ map: ctex(512, Math.max(64, Math.round(512 * h / w)), art[kind]) })); s.position.z = 0.056; o.add(s); return o;
+        const fr = new THREE.Mesh(mergedGeo('bfr' + w + '_' + h, () => [part(BG(w + 0.14, h + 0.14, 0.07), 0x0b0d12, 0, 0, 0), part(BG(w + 0.17, 0.02, 0.09), 0xd2a84e, 0, h / 2 + 0.08, 0), part(BG(w + 0.17, 0.02, 0.09), 0xd2a84e, 0, -h / 2 - 0.08, 0), part(BG(0.02, h + 0.17, 0.09), 0xd2a84e, -w / 2 - 0.08, 0, 0), part(BG(0.02, h + 0.17, 0.09), 0xd2a84e, w / 2 + 0.08, 0, 0)]), PM.vc); o.add(fr);
+        const s = new THREE.Mesh(new THREE.PlaneGeometry(w, h), new THREE.MeshBasicMaterial({ map: ctex(512, Math.max(64, Math.round(512 * h / w)), art[kind]) })); s.position.z = 0.04; o.add(s); return o;
     }
     let _lap; const lapTex = () => _lap || (_lap = ctex(256, 164, art.code));
     function laptop(p, x, y, z, rot) {
         const g = new THREE.Group(); g.position.set(x, y, z); g.rotation.y = rot || 0; p.add(g);
-        box(g, 0.62, 0.025, 0.42, 0.01, STEEL(), 0, 0.012, 0);
-        const lid = box(g, 0.62, 0.42, 0.025, 0.01, STEEL(), 0, 0.23, -0.2); lid.rotation.x = -0.18;
-        const scr = new THREE.Mesh(new THREE.PlaneGeometry(0.56, 0.36), new THREE.MeshBasicMaterial({ map: lapTex() })); scr.position.set(0, 0.23, -0.185); scr.rotation.x = -0.18; scr.rotation.y = Math.PI; g.add(scr);
+        g.add(new THREE.Mesh(mergedGeo('laptop', () => [part(BG(0.6, 0.02, 0.4), 0xb9bfc9, 0, 0.01, 0), part(BG(0.6, 0.4, 0.015), 0x1a1c22, 0, 0.215, -0.19, -0.2)]), PM.vc));
+        const scr = new THREE.Mesh(new THREE.PlaneGeometry(0.56, 0.36), new THREE.MeshBasicMaterial({ map: lapTex() })); scr.position.set(0, 0.215, -0.18); scr.rotation.x = -0.2; scr.rotation.y = Math.PI; g.add(scr);
     }
-    function chair(p, x, z, col, rot) {
-        const g = new THREE.Group(); g.position.set(x, 0, z); g.rotation.y = rot || 0; p.add(g); const m = mat(col);
-        box(g, 0.55, 0.09, 0.52, 0.04, m, 0, 0.5, 0); box(g, 0.52, 0.55, 0.08, 0.04, m, 0, 0.82, -0.27);
-        cyl(g, 0.035, 0.035, 0.46, STEEL(), 0, 0.25, 0, 10); cyl(g, 0.28, 0.28, 0.04, DARK(), 0, 0.03, 0, 5);
+    function chair(p, x, z, col, rot) {   // a task chair: five-star base on casters, gas lift, upholstered seat, back and arms (one merged mesh)
+        const g = new THREE.Group(); g.position.set(x, 0, z); g.rotation.y = rot || 0; p.add(g);
+        g.add(new THREE.Mesh(mergedGeo('chair' + col, () => { const a = [part(BG(0.5, 0.07, 0.48), col, 0, 0.5, 0), part(BG(0.46, 0.5, 0.06), col, 0, 0.86, -0.25, -0.1), part(BG(0.38, 0.12, 0.05), col, 0, 1.2, -0.28, -0.1), part(CG(0.03, 0.03, 0.36, 8), 0x9aa1ad, 0, 0.29, 0), part(BG(0.04, 0.04, 0.26), 0x2b2f3a, -0.27, 0.66, -0.02), part(BG(0.04, 0.04, 0.26), 0x2b2f3a, 0.27, 0.66, -0.02), part(BG(0.03, 0.18, 0.03), 0x2b2f3a, -0.27, 0.59, 0.08), part(BG(0.03, 0.18, 0.03), 0x2b2f3a, 0.27, 0.59, 0.08)]; for (let k = 0; k < 5; k++) { const an = k * Math.PI * 2 / 5; a.push(part(BG(0.05, 0.035, 0.3), 0x23262f, Math.sin(an) * 0.15, 0.07, Math.cos(an) * 0.15, 0, an, 0)); a.push(part(CG(0.028, 0.028, 0.05, 8), 0x14161c, Math.sin(an) * 0.3, 0.025, Math.cos(an) * 0.3)); } return a; }), PM.vc));
     }
-    function desk(p, x, z, w) {
+    function desk(p, x, z, w) {   // a veneer desk on steel panel legs with a modesty panel and a drawer pedestal
         const g = new THREE.Group(); g.position.set(x, 0, z); p.add(g); w = w || 2.2;
-        box(g, w, 0.07, 0.95, 0.03, WOOD(), 0, 0.76, 0); box(g, 0.06, 0.72, 0.9, 0.02, WHITE(), -w / 2 + 0.1, 0.36, 0); box(g, 0.06, 0.72, 0.9, 0.02, WHITE(), w / 2 - 0.1, 0.36, 0); box(g, w - 0.2, 0.35, 0.04, 0.02, WHITE(), 0, 0.55, -0.4);
-        blob(g, 0, 0.05, w + 0.5, 1.8); return g;
+        const top = new THREE.Mesh(new THREE.BoxGeometry(w, 0.045, 0.9), PM.ash); top.position.y = 0.755; g.add(top);
+        g.add(new THREE.Mesh(mergedGeo('desk' + w, () => [part(BG(0.045, 0.73, 0.78), 0x2a2e38, -w / 2 + 0.12, 0.365, 0), part(BG(0.045, 0.73, 0.78), 0x2a2e38, w / 2 - 0.12, 0.365, 0), part(BG(w - 0.3, 0.42, 0.02), 0x2a2e38, 0, 0.52, -0.38), part(BG(0.42, 0.6, 0.66), 0xcfd4dc, w / 2 - 0.45, 0.4, 0.0), part(BG(0.38, 0.015, 0.02), 0x8d95a3, w / 2 - 0.45, 0.62, 0.34), part(BG(0.38, 0.015, 0.02), 0x8d95a3, w / 2 - 0.45, 0.42, 0.34), part(BG(0.38, 0.015, 0.02), 0x8d95a3, w / 2 - 0.45, 0.22, 0.34)]), PM.vc));
+        blob(g, 0, 0.05, w + 0.5, 1.8); blk(p, x - w / 2 - 0.05, x + w / 2 + 0.05, z - 0.5, z + 0.5); return g;
     }
-    function table(p, x, z, w, d, col, h) { const g = new THREE.Group(); g.position.set(x, 0, z); p.add(g); h = h || 0.76; box(g, w, 0.1, d, 0.05, mat(col || C.wood), 0, h, 0); cyl(g, 0.12, 0.2, h, STEEL(), -w / 2 + 0.5, h / 2, 0); cyl(g, 0.12, 0.2, h, STEEL(), w / 2 - 0.5, h / 2, 0); blob(g, 0, 0, w + 0.8, d + 0.8); return g; }
-    function roundTable(p, x, z, r, col, h) { const g = new THREE.Group(); g.position.set(x, 0, z); p.add(g); h = h || 0.76; cyl(g, r, r, 0.09, mat(col || C.white), 0, h, 0, 32); cyl(g, 0.09, 0.2, h, STEEL(), 0, h / 2, 0); cyl(g, 0.42, 0.42, 0.05, DARK(), 0, 0.03, 0); blob(g, 0, 0, r * 2.6, r * 2.6); return g; }
-    function plant(p, x, z, s) {
+    function table(p, x, z, w, d, col, h) { const g = new THREE.Group(); g.position.set(x, 0, z); p.add(g); h = h || 0.76; const t = new THREE.Mesh(new THREE.BoxGeometry(w, 0.05, d), PM.ash); t.position.y = h; g.add(t); g.add(new THREE.Mesh(mergedGeo('tab' + w + d + h, () => [part(BG(0.05, h - 0.03, d - 0.2), 0x2a2e38, -w / 2 + 0.3, h / 2 - 0.02, 0), part(BG(0.05, h - 0.03, d - 0.2), 0x2a2e38, w / 2 - 0.3, h / 2 - 0.02, 0), part(BG(w - 0.6, 0.04, 0.05), 0x2a2e38, 0, h - 0.12, 0)]), PM.vc)); blob(g, 0, 0, w + 0.8, d + 0.8); blk(p, x - w / 2 - 0.05, x + w / 2 + 0.05, z - d / 2 - 0.05, z + d / 2 + 0.05); return g; }
+    function roundTable(p, x, z, r, col, h) { const g = new THREE.Group(); g.position.set(x, 0, z); p.add(g); h = h || 0.76; const t = new THREE.Mesh(new THREE.CylinderGeometry(r, r, 0.05, 40), PM.white); t.position.y = h; g.add(t); g.add(new THREE.Mesh(mergedGeo('rt' + h, () => [part(CG(0.06, 0.07, h - 0.04, 16), 0xb9bfc9, 0, h / 2 - 0.02, 0), part(CG(0.4, 0.42, 0.04, 28), 0x23262f, 0, 0.02, 0)]), PM.vc)); blob(g, 0, 0, r * 2.6, r * 2.6); blk(p, x - r, x + r, z - r, z + r); return g; }
+    function plant(p, x, z, s) {   // a simple plant that the real model replaces once it has loaded
         s = s || 1; const g = new THREE.Group(); g.position.set(x, 0, z); g.scale.setScalar(s); p.add(g);
-        cyl(g, 0.3, 0.22, 0.5, mat(0xd98a5c), 0, 0.25, 0, 18); const leaf = [mat(0x2f9e66), mat(0x3fbf7f), mat(0x23824f)];
-        for (let i = 0; i < 7; i++) { const a = i / 7 * Math.PI * 2, l = new THREE.Mesh(new THREE.SphereGeometry(0.28, 12, 9), leaf[i % 3]); l.scale.set(0.5, 1.5, 0.35); l.position.set(Math.cos(a) * 0.17, 0.95 + (i % 2) * 0.18, Math.sin(a) * 0.17); l.rotation.set(Math.sin(a) * 0.5, a, -Math.cos(a) * 0.5); g.add(l); }
-        blob(g, 0, 0, 1.1, 1.1);
+        const simple = new THREE.Group(); g.add(simple); const pot = new THREE.Mesh(new THREE.CylinderGeometry(0.3, 0.22, 0.5, 18), PM.pot); pot.position.y = 0.25; simple.add(pot); const leaf = [SM(0x2f7d52, { roughness: 0.6 }), SM(0x3a9560, { roughness: 0.6 }), SM(0x276b45, { roughness: 0.6 })];
+        for (let i = 0; i < 7; i++) { const a = i / 7 * Math.PI * 2, l = new THREE.Mesh(new THREE.SphereGeometry(0.28, 12, 9), leaf[i % 3]); l.scale.set(0.5, 1.5, 0.35); l.position.set(Math.cos(a) * 0.17, 0.95 + (i % 2) * 0.18, Math.sin(a) * 0.17); l.rotation.set(Math.sin(a) * 0.5, a, -Math.cos(a) * 0.5); simple.add(l); }
+        blob(g, 0, 0, 1.1, 1.1); if (fIdx(p) >= 0) PLANTS.push({ g, simple, s }); blk(p, x - 0.35 * s, x + 0.35 * s, z - 0.35 * s, z + 0.35 * s);
     }
-    function rug(g, x, z, w, d, col) { box(g, w, 0.03, d, 0.1, mat(col), x, 0.05, z); }
+    function rug(g, x, z, w, d, col) {   // a woven rug with a border, drawn in code
+        const c = '#' + new THREE.Color(col).getHexString(), dk = '#' + new THREE.Color(col).multiplyScalar(0.55).getHexString();
+        const tx = ctex(256, Math.max(64, Math.round(256 * d / w)), (cx, W, H) => { cx.fillStyle = c; cx.fillRect(0, 0, W, H); cx.strokeStyle = dk; cx.lineWidth = 10; cx.strokeRect(10, 10, W - 20, H - 20); cx.lineWidth = 3; cx.strokeRect(26, 26, W - 52, H - 52); for (let i = 0; i < 2200; i++) { cx.fillStyle = 'rgba(' + (i % 2 ? '255,255,255' : '0,0,0') + ',' + (0.03 + (i * 37 % 6) / 100) + ')'; cx.fillRect((i * 97) % W, (i * 53) % H, 1.5, 3); } });
+        const m = new THREE.Mesh(new THREE.PlaneGeometry(w, d), sreg(new THREE.MeshStandardMaterial({ map: tx, roughness: 1, normalMap: ptex('rough_linen', 'nor', [w / 1.4, d / 1.4]) }), 0.2)); m.rotation.x = -Math.PI / 2; m.position.set(x, 0.06, z); m.renderOrder = 1; g.add(m);
+    }
     function sofa(g, x, z, w, col, ry) { const o = new THREE.Group(); o.position.set(x, 0, z); o.rotation.y = ry || 0; g.add(o); const m = mat(col); box(o, w, 0.42, 0.95, 0.18, m, 0, 0.32, 0); box(o, w, 0.55, 0.28, 0.14, m, 0, 0.66, -0.4); box(o, 0.3, 0.55, 0.95, 0.14, m, -w / 2 + 0.1, 0.5, 0); box(o, 0.3, 0.55, 0.95, 0.14, m, w / 2 - 0.1, 0.5, 0); blob(o, 0, 0, w + 0.6, 1.8); }
-    function shelf(g, x, z, w, h) { const o = new THREE.Group(); o.position.set(x, 0, z); g.add(o); box(o, w, h, 0.4, 0.04, mat(0xd9c3a0), 0, h / 2, 0); const cols = [0x4f7cff, 0xf28a1e, 0x14b8a6, 0xec4899, 0x8b5cf6, 0x22a06b]; for (let r = 0; r < Math.floor(h / 0.5); r++) for (let k = 0; k < Math.floor(w / 0.3); k++) box(o, 0.2, 0.34, 0.28, 0.03, mat(cols[(r * 3 + k) % 6]), -w / 2 + 0.25 + k * 0.3, 0.38 + r * 0.5, 0.06); }
-    function glassCube(g, x, z, w, d, accent) {
-        const o = new THREE.Group(); o.position.set(x, 0, z); g.add(o); const gl = mat(0xcfe0ff, { transparent: true, opacity: 0.2, depthWrite: false, shininess: 120, specular: 0xffffff });
-        [[w, 2.6, 0.04, 0, 1.3, d / 2], [w, 2.6, 0.04, 0, 1.3, -d / 2], [0.04, 2.6, d, -w / 2, 1.3, 0], [0.04, 2.6, d, w / 2, 1.3, 0]].forEach(a => { const m = new THREE.Mesh(new THREE.BoxGeometry(a[0], a[1], a[2]), gl); m.position.set(a[3], a[4], a[5]); o.add(m); });
-        const fm = mat(accent || 0xe9edfa); [[-1, -1], [1, -1], [-1, 1], [1, 1]].forEach(c => box(o, 0.09, 2.62, 0.09, 0.03, fm, c[0] * w / 2, 1.31, c[1] * d / 2)); return o;
+    function shelf(g, x, z, w, h) {   // an open bookcase: walnut carcass with books and objects on every shelf
+        const o = new THREE.Group(); o.position.set(x, 0, z); g.add(o); const rows = Math.max(2, Math.floor(h / 0.5));
+        o.add(new THREE.Mesh(mergedGeo('shelf' + w + h, () => { const a = [part(BG(0.04, h, 0.38), 0x6b4a33, -w / 2, h / 2, 0), part(BG(0.04, h, 0.38), 0x6b4a33, w / 2, h / 2, 0), part(BG(w, h, 0.02), 0x4a3426, 0, h / 2, -0.18)]; const cols = [0x1c3d8f, 0xd9d2c3, 0x0b7a6e, 0xc86b2a, 0x5b3a7a, 0x2a2e38, 0xb8873a]; for (let r = 0; r <= rows; r++) { const y = 0.04 + r * (h - 0.06) / rows; a.push(part(BG(w, 0.035, 0.38), 0x6b4a33, 0, y, 0)); if (r < rows) { let bx0 = -w / 2 + 0.1; let k = 0; while (bx0 < w / 2 - 0.12) { const bw = 0.04 + ((r * 7 + k * 5) % 4) * 0.015, bh = 0.24 + ((r * 3 + k * 11) % 5) * 0.03; a.push(part(BG(bw, bh, 0.26), cols[(r * 3 + k) % 7], bx0 + bw / 2, y + 0.018 + bh / 2, 0.02)); bx0 += bw + 0.006; k++; if ((k + r) % 9 === 0) bx0 += 0.18; } } } return a; }), PM.vc));
+        blk(g, x - w / 2, x + w / 2, z - 0.25, z + 0.25);
+    }
+    const ETCH = (() => { let t; return () => t || (t = ctex(512, 256, (c, W, H) => { c.clearRect(0, 0, W, H); c.fillStyle = 'rgba(255,255,255,.5)'; c.fillRect(0, H * 0.54, W, H * 0.18); c.fillStyle = 'rgba(255,255,255,.3)'; for (let i = 0; i < W; i += 8) c.fillRect(i, H * 0.54, 2, H * 0.18); c.fillStyle = 'rgba(255,255,255,.62)'; c.fillRect(0, H * 0.9, W, H * 0.1); for (let r = 0, y = H * 0.1; y < H * 0.5; r++, y += 22) for (let x = (r % 2) * 11; x < W; x += 22) { const k = (y - H * 0.1) / (H * 0.4), rad = 8 * (1 - k); if (rad > 0.8) { c.fillStyle = 'rgba(255,255,255,.7)'; c.beginPath(); c.arc(x, y, rad, 0, 7); c.fill(); } } })); })();
+    function glassCube(g, x, z, w, d, accent) {   // a glass room: tinted glass with a frosted pattern, dark metal frame and a brass header
+        const o = new THREE.Group(); o.position.set(x, 0, z); g.add(o); const gl = mat(0xcfe0ff, { transparent: true, opacity: 0.16, depthWrite: false, shininess: 140, specular: 0xffffff });
+        const et = new THREE.MeshBasicMaterial({ map: ETCH(), transparent: true, depthWrite: false, toneMapped: false, side: THREE.DoubleSide, opacity: 0.9 });
+        [[w, 2.6, 0.04, 0, 1.3, d / 2, 0], [w, 2.6, 0.04, 0, 1.3, -d / 2, 0], [0.04, 2.6, d, -w / 2, 1.3, 0, 1], [0.04, 2.6, d, w / 2, 1.3, 0, 1]].forEach(a => { const m = new THREE.Mesh(new THREE.BoxGeometry(a[0], a[1], a[2]), gl); m.position.set(a[3], a[4], a[5]); o.add(m); const e = new THREE.Mesh(new THREE.PlaneGeometry(a[6] ? d : w, 2.6), et); e.position.set(a[3], a[4], a[5]); if (a[6]) e.rotation.y = Math.PI / 2; o.add(e); });
+        o.add(new THREE.Mesh(mergedGeo('gc' + w + d, () => { const a = [part(BG(w + 0.1, 0.06, 0.08), 0x2a2e38, 0, 2.62, d / 2), part(BG(w + 0.1, 0.06, 0.08), 0x2a2e38, 0, 2.62, -d / 2), part(BG(0.08, 0.06, d + 0.1), 0x2a2e38, -w / 2, 2.62, 0), part(BG(0.08, 0.06, d + 0.1), 0x2a2e38, w / 2, 2.62, 0), part(BG(w + 0.12, 0.02, 0.1), 0xd2a84e, 0, 2.66, d / 2)]; [[-1, -1], [1, -1], [-1, 1], [1, 1]].forEach(c => a.push(part(BG(0.07, 2.62, 0.07), 0x2a2e38, c[0] * w / 2, 1.31, c[1] * d / 2))); return a; }), PM.vc)); blk(g, x - w / 2, x + w / 2, z - d / 2, z + d / 2); return o;
     }
     function rack(g, x, z, h) {
         const o = new THREE.Group(); o.position.set(x, 0, z); g.add(o); h = h || 2.2; box(o, 0.9, h, 0.8, 0.06, mat(0x1a2244), 0, h / 2, 0);
@@ -187,6 +224,7 @@ async function boot() {
     // ------------------------------------------------------------------ the tower shell
     const floors = [], shells = [], glass = new THREE.MeshPhongMaterial({ color: 0xcfe0ff, transparent: true, opacity: 0.16, shininess: 120, specular: 0xffffff, depthWrite: false });
     const strips = [];
+    const OLDX = []; let OUT = null;   // OLDX: the simple pastel exterior, hidden once the real one (js/hww-outdoor.js) has loaded; OUT: its handle (relight, dispose)
     function shade(hex, f) { const c = new THREE.Color(hex); c.multiplyScalar(1 + f); return '#' + c.getHexString(); }
     function backWall(P) {
         const tx = ctex(1024, 256, (x, w, h) => {
@@ -203,8 +241,8 @@ async function boot() {
     function makeFloor(i) {
         const P = PLAN[i], g = new THREE.Group(); g.position.y = i * FH; tower.add(g);
         box(g, P.w, 0.36, P.d, 0.1, mat(0xf4f6fd), 0, -0.18, 0);
-        box(g, P.w - 0.6, 0.04, P.d - 0.6, 0.02, mat(P.c), 0, 0.02, 0);
-        box(g, P.w + 0.05, 0.1, 0.1, 0.03, glow(P.acc), 0, -0.2, P.d / 2 + 0.02);
+        const keepT = box(g, P.w - 0.6, 0.04, P.d - 0.6, 0.02, mat(P.c), 0, 0.02, 0);
+        const keepA = box(g, P.w + 0.05, 0.1, 0.1, 0.03, glow(P.acc), 0, -0.2, P.d / 2 + 0.02);
         const bw = backWall(P); bw.position.set(0, FH / 2 - 0.1, -P.d / 2 + 0.06); g.add(bw);
         [-1, 1].forEach(s => { const sw = new THREE.Mesh(new THREE.PlaneGeometry(P.d, FH - 0.2), glass); sw.rotation.y = Math.PI / 2; sw.position.set(s * P.w / 2, FH / 2 - 0.1, 0); g.add(sw); });
         const frame = mat(0xe9edfa), n = Math.round(P.w / 6);
@@ -212,6 +250,7 @@ async function boot() {
         for (let k = 0; k < Math.round(P.w / 6); k++) strips.push(box(g, 3.2, 0.05, 0.35, 0.02, glow(0xfff4c8), -P.w / 2 + 3 + k * 6, FH - 0.28, 0));
         const gap = LIFTX - P.w / 2;
         if (gap > 0.1) { box(g, gap + 0.4, 0.3, 2.8, 0.06, mat(0xf4f6fd), P.w / 2 + gap / 2, -0.15, AISLE); box(g, gap + 0.4, 0.05, 2.8, 0.02, mat(P.c), P.w / 2 + gap / 2, 0.02, AISLE); const rl = new THREE.Mesh(new THREE.BoxGeometry(gap + 0.4, 1.1, 0.04), glass); rl.position.set(P.w / 2 + gap / 2, 0.55, AISLE + 1.4); g.add(rl); box(g, gap + 0.4, 0.07, 0.07, 0.02, frame, P.w / 2 + gap / 2, 1.1, AISLE + 1.4); }
+        g.children.forEach(c => { if (c !== keepT && c !== keepA && !strips.includes(c)) OLDX.push(c); });
         const gr = new THREE.Group(); g.add(gr); floors[i] = { g: gr, P, y: i * FH }; shells[i] = g;
     }
     for (let i = 0; i < FLOORS; i++) makeFloor(i);
@@ -219,18 +258,19 @@ async function boot() {
     // glass lift shaft with a moving cab
     const cab = new THREE.Group(); tower.add(cab);
     (function lift() {
-        const top = FLOORS * FH;
+        const top = FLOORS * FH, n0 = tower.children.length;
         [[-1.4, -1.4], [1.4, -1.4], [-1.4, 1.4], [1.4, 1.4]].forEach(c => box(tower, 0.2, top + 0.4, 0.2, 0.06, mat(0xe9edfa), LIFTX + c[0], top / 2, AISLE + c[1]));
         const sh = new THREE.Mesh(new THREE.BoxGeometry(2.8, top, 2.8), glass); sh.position.set(LIFTX, top / 2, AISLE); tower.add(sh);
         box(tower, 3.2, 0.3, 3.2, 0.1, mat(0xf4f6fd), LIFTX, top + 0.15, AISLE);
         box(cab, 2.1, 0.12, 2.1, 0.05, mat(0xf4f6fd), 0, 0.02, 0); box(cab, 2.1, 0.12, 2.1, 0.05, glow(0xf28a1e), 0, 2.7, 0);
         [[-1, -1], [1, -1], [-1, 1], [1, 1]].forEach(c => box(cab, 0.07, 2.7, 0.07, 0.02, STEEL(), c[0] * 1.02, 1.35, c[1] * 1.02));
         const cg = new THREE.Mesh(new THREE.BoxGeometry(2.1, 2.5, 2.1), glass); cg.position.y = 1.35; cab.add(cg); cab.position.set(LIFTX, 0, AISLE);
+        OLDX.push(...tower.children.slice(n0));
     })();
 
     // roof, sign, plinth
     (function dressing() {
-        const top = PLAN[7], y = 7 * FH + FH;
+        const top = PLAN[7], y = 7 * FH + FH, n1 = tower.children.length;
         box(tower, top.w + 0.4, 0.4, top.d + 0.4, 0.12, mat(0xf4f6fd), 0, y - 0.2, 0);
         const sign = ctex(1024, 128, (x, w, h) => { x.fillStyle = '#0f1730'; x.fillRect(0, 0, w, h); x.fillStyle = '#fff'; x.font = '700 62px Geist, Helvetica, Arial'; x.textAlign = 'center'; x.textBaseline = 'middle'; x.fillText('YOUR PARTNER TECHNOLOGIES', w / 2, h / 2 + 2); x.fillStyle = '#f28a1e'; x.fillRect(0, h - 10, w, 10); });
         const sg = new THREE.Mesh(new THREE.PlaneGeometry(14, 1.75), new THREE.MeshBasicMaterial({ map: sign })); sg.position.set(0, y + 1.4, 0.2); tower.add(sg); box(tower, 14.4, 2.05, 0.3, 0.1, mat(0x0f1730), 0, y + 1.4, 0);
@@ -240,6 +280,7 @@ async function boot() {
         for (let k = 0; k < 16; k++) { const tx = -37 + k * 4.9 + ((k * 7) % 3), tz = 21 + ((k * 5) % 4) * 1.1, tr = new THREE.Group(); tr.position.set(tx, 0, tz); base.add(tr); cyl(tr, 0.12, 0.16, 0.9, mat(0x8a5a3a), 0, 0.45, 0, 8); ball(tr, 0.9 + (k % 3) * 0.15, mat(k % 2 ? 0x3fbf7f : 0x2f9e66), 0, 1.5, 0); blob(base, tx, tz, 2.4, 2.4); }
         const ps = ctex(1024, 160, (x, w, h) => { x.fillStyle = '#fff'; x.fillRect(0, 0, w, h); x.fillStyle = '#0f1730'; x.font = '700 70px Geist, Helvetica, Arial'; x.textAlign = 'center'; x.textBaseline = 'middle'; x.fillText('Your Partner Technologies', w / 2, h / 2); x.fillStyle = '#f28a1e'; x.fillRect(80, h - 16, w - 160, 8); });
         const plate = new THREE.Mesh(new THREE.PlaneGeometry(12, 1.9), new THREE.MeshBasicMaterial({ map: ps })); plate.position.set(-14, 0.9, 22.2); base.add(plate); box(base, 12.3, 2.2, 0.2, 0.08, mat(0xe7ebf8), -14, 0.9, 22.05);
+        OLDX.push(base, ...tower.children.slice(n1));
     })();
 
     // ------------------------------------------------------------------ rooms
@@ -360,14 +401,17 @@ async function boot() {
             plant(g, -P.w / 2 + 1, 4.0, 1.2); plant(g, P.w / 2 - 1, -P.d / 2 + 1, 1.4); }
     }
     const FLAME = { m: null };
-    let lobbyOld = null, recepAgent = null, RECEP = null;
+    let lobbyOld = null, recepAgent = null, RECEP = null, FIT = null;   // FIT: the fit-out of every floor (hww-fit.js), loaded after the reception
     furnish();
     // the real reception: loaded after the scene is up; the placeholder lobby above stays until it is ready (and if it fails)
     setTimeout(() => import('./hww-reception.js').then(m => m.buildReception({ scene, renderer, parent: floors[0].g, LOWQ, FH, shadowMat })).then(R => {
         RECEP = R; lobbyOld.visible = false;
         if (recepAgent) { const dy = recepAgent.g.position.y - recepAgent.base; const f = 1.5; recepAgent.st.root.scale.multiplyScalar(f); recepAgent.base = 68 * SC * f + 0.02; recepAgent.g.position.set(-12.4, recepAgent.base + dy, -3.85); recepAgent.bl.position.set(-12.4, 0.02, -3.85); }
         document.dispatchEvent(new Event('ypt:reception'));
+        return import('./hww-fit.js').then(m => m.buildFit({ renderer, FH, PLAN, floors, shells, ROOM, BLK, LOWQ, PLANTS, PBRS, recep: { X1: RECEP.X1, spots: RECEP.spots, clamp: RECEP.clamp, walls: RECEP.walls, AX: -1.2, HX: 12.4 } })).then(F => { FIT = F; document.dispatchEvent(new Event('ypt:fit')); }).catch(e => console.error('floor fit-out did not load', e));
     }).catch(e => console.error('reception did not load, keeping the simple lobby', e)), 400);
+    // the real exterior (facade, lift, roof, plaza, lawn, trees): loaded after the scene is up; the pastel exterior above stays until it is ready (and if it fails)
+    if (!/[?&]nooutdoor/.test(location.search)) setTimeout(() => import('./hww-outdoor.js').then(m => m.buildOutdoor({ scene, renderer, world, tower, floors, shells, cab, PLAN, FH, FLOORS, LIFTX, AISLE, LOWQ, A, old: OLDX })).then(o => { OUT = o; o.relight(nightOn || disco); document.dispatchEvent(new Event('ypt:outdoor')); }).catch(e => console.error('outdoor did not load, keeping the simple exterior', e)), 900);
 
     // ------------------------------------------------------------------ Alya, the escort (no visitor character: the camera is the visitor)
     const A = { x: 2, y: 0, z: 20, f: 0, goal: null, walking: false, yaw: 0, ride: false };
@@ -414,7 +458,7 @@ async function boot() {
 
 
     // ------------------------------------------------------------------ stepping inside the reception (first person: stand, look all round, zoom with the field of view)
-    const IN = { on: false, spot: 0, yaw: 0, pitch: 0, fov: 68, fly: null, px: 0, pz: 0, py: 1.6, mv: { f: 0, b: 0, l: 0, r: 0 }, bob: 0 };
+    const IN = { on: false, f: 0, spot: 0, yaw: 0, pitch: 0, fov: 68, fly: null, px: 0, pz: 0, py: 1.6, mv: { f: 0, b: 0, l: 0, r: 0 }, bob: 0 };
     const tmpE = new THREE.Euler(0, 0, 0, 'YXZ'), qA = new THREE.Quaternion(), vA = new THREE.Vector3();
     const inPanel = (() => {
         const d = document.createElement('div'); d.className = 'hww-in'; d.hidden = true;
@@ -433,29 +477,42 @@ async function boot() {
         return d;
     })();
     const clearMv = () => { IN.mv.f = IN.mv.b = IN.mv.l = IN.mv.r = 0; pad.querySelectorAll('.on').forEach(b => b.classList.remove('on')); };
-    const spots = () => (RECEP ? RECEP.spots : []);
-    function spotPose(i) { const sp = spots()[i]; return { pos: new THREE.Vector3(sp.x, sp.y, sp.z), yaw: sp.yaw, pitch: sp.pitch }; }
+    const spots = () => (FIT ? FIT.spots[IN.f] || [] : (RECEP && IN.f === 0 ? RECEP.spots : []));
+    function spotPose(i) { const sp = spots()[i]; return { pos: new THREE.Vector3(sp.x, sp.y + IN.f * FH, sp.z), yaw: sp.yaw, pitch: sp.pitch }; }
     function poseQuat(yaw, pitch) { tmpE.set(pitch, yaw, 0); return new THREE.Quaternion().setFromEuler(tmpE); }
     const ease = t => t * t * (3 - 2 * t);
-    function showShell(inside) { alyaA.g.visible = !inside; alyaA.bl.visible = !inside; for (let i = 2; i < FLOORS; i++) if (shells[i]) shells[i].visible = !inside; if (floors[1]) floors[1].g.visible = !inside; if (RECEP) RECEP.inside.visible = inside; }
+    function showShell(inside, f) { if (f == null) f = IN.f; alyaA.g.visible = !inside; alyaA.bl.visible = !inside; for (let i = 0; i < FLOORS; i++) { if (shells[i]) shells[i].visible = !inside || i <= f + 1; if (floors[i]) floors[i].g.visible = !inside || i === f; if (FIT && FIT.inside[i]) FIT.inside[i].visible = inside && i === f; } if (RECEP) RECEP.inside.visible = inside && f === 0; }
     function goSpot(i, fast) {
         const n = spots().length; if (!n) return; IN.spot = (i + n) % n; const P = spotPose(IN.spot);
         document.getElementById('hww-in-name').textContent = spots()[IN.spot].name + ' · ' + (IN.spot + 1) + ' of ' + n;
         IN.fly = { t: 0, dur: fast ? 0.01 : 1.1, from: { pos: camera.position.clone(), q: camera.quaternion.clone(), fov: camera.fov }, to: { pos: P.pos, q: poseQuat(P.yaw, P.pitch), fov: IN.fov }, arriveYaw: P.yaw, arrivePitch: P.pitch };
         IN.yaw = P.yaw; IN.pitch = P.pitch; clearMv();
     }
-    function enterInside(i) {
-        if (!RECEP || IN.on) return false;
+    // the spot on floor f nearest to x (so stepping in from a room puts you in that room)
+    function spotNear(f, x) { const l = FIT ? FIT.spots[f] || [] : (f === 0 && RECEP ? RECEP.spots : []); let b = 0, bd = 1e9; l.forEach((s, k) => { const d = Math.abs((s.sx == null ? s.x : s.sx) - x) + (k % 2 ? 0.3 : 0); if (d < bd) { bd = d; b = k; } }); return b; }
+    function enterInside(i, f) {
+        if (!RECEP || IN.on) return false; f = f || 0; if (f > 0 && !FIT) return false; IN.f = f;
         ++tok; if (walkRes) { walkRes(false); walkRes = null; A.goal = null; }
         IN.on = true; IN.fov = 68; mode = 'inside'; following = false; camera.near = 0.1; camera.updateProjectionMatrix();
-        stage.classList.add('inside'); stage.style.touchAction = 'none'; inPanel.hidden = false; pad.hidden = false; RECEP.wake && RECEP.wake();
+        stage.classList.add('inside'); stage.style.touchAction = 'none'; inPanel.hidden = false; pad.hidden = false; if (f === 0) RECEP.wake && RECEP.wake();
         goSpot(i || 0); return true;
+    }
+    function goFloor(f) {   // the lift, from inside: ride to another floor and stand at its first spot
+        if (!IN.on || !FIT || f === IN.f || f < 0 || f >= FLOORS || IN.fly) return false; const from = IN.f; IN.f = f; clearMv();
+        const n = spots().length; if (!n) { IN.f = from; return false; } const k = spotNear(f, IN.px), P = (IN.spot = k, spotPose(k));
+        document.getElementById('hww-in-name').textContent = spots()[k].name + ' · ' + (k + 1) + ' of ' + n;
+        IN.yaw = P.yaw; IN.pitch = P.pitch; showShell(true, f);
+        IN.fly = { t: 0, dur: 1.1, from: { pos: camera.position.clone(), q: camera.quaternion.clone(), fov: camera.fov }, to: { pos: P.pos, q: poseQuat(P.yaw, P.pitch), fov: IN.fov } }; return true;
+    }
+    function stepIn() {   // "Step inside" from the building view: the floor Alya is on, at the room nearest to her
+        const f = Math.max(0, Math.min(FLOORS - 1, A.f || 0)); return enterInside(spotNear(f, A.x), f);
     }
     function leaveInside(fast) {
         if (!IN.on) return; const wasFly = IN.fly;
         showShell(false);
         const from = { pos: camera.position.clone(), q: camera.quaternion.clone(), fov: camera.fov };
-        mode = 'room'; destF = 0; user.yaw = 0; user.pitch = 0; user.zoom = Math.min(user.zoom, 1.0); const R = ROOM.lobby; if (R) shotRoom(R); Object.assign(rig, shot);
+        const rooms = Object.values(ROOM).filter(r => r.f === IN.f); let R = rooms[0]; rooms.forEach(r => { if (Math.abs(r.x - IN.px) < Math.abs(R.x - IN.px)) R = r; });
+        mode = 'room'; destF = R.f; user.yaw = 0; user.pitch = 0; user.zoom = Math.min(user.zoom, 1.0); A.f = R.f; A.x = R.x; A.y = R.f * FH; A.z = AISLE; A.goal = null; cab.position.y = A.y; if (R) shotRoom(R); Object.assign(rig, shot);
         const keepFov = camera.fov; camera.fov = 30; camera.near = 0.5; camera.updateProjectionMatrix(); apply(rig);
         const to = { pos: camera.position.clone(), q: camera.quaternion.clone(), fov: 30 };
         camera.position.copy(from.pos); camera.quaternion.copy(from.q); camera.fov = keepFov; camera.updateProjectionMatrix();
@@ -480,7 +537,7 @@ async function boot() {
         if (fw || sd) {   // walk: forward is where you look (flat), strafe is across it; the room keeps you out of the furniture
             const v = (keyShift ? 3.2 : 1.8) * dt, sy = Math.sin(IN.yaw), cy = Math.cos(IN.yaw), n = Math.hypot(fw, sd) || 1;
             const nx = IN.px + ((-sy * fw + cy * sd) / n) * v, nz = IN.pz + ((-cy * fw - sy * sd) / n) * v;
-            const q = RECEP.clamp ? RECEP.clamp(nx, nz) : [nx, nz]; IN.px = q[0]; IN.pz = q[1]; IN.bob += dt * 8;
+            const q = FIT ? FIT.clamp(IN.f, nx, nz) : (RECEP.clamp ? RECEP.clamp(nx, nz) : [nx, nz]); IN.px = q[0]; IN.pz = q[1]; IN.bob += dt * 8;
         }
         camera.position.set(IN.px, IN.py + (fw || sd ? Math.sin(IN.bob) * 0.018 : 0), IN.pz); camera.quaternion.copy(poseQuat(IN.yaw, IN.pitch));
         if (Math.abs(camera.fov - IN.fov) > 0.01) { camera.fov = IN.fov; camera.updateProjectionMatrix(); }
@@ -534,10 +591,10 @@ async function boot() {
     function tilt(d) { user.pitch = Math.max(-0.5, Math.min(1.2, user.pitch + d)); }
     function zoom(k) {
         if (IN.on) { zoomInside(k); return; }
-        if (k < 1 && user.zoom <= 0.47 && RECEP && mode !== 'overview' && mode !== 'ride' && floorAtView() === 0 && Math.abs(rig.tx - (-12.4)) < 9) { enterInside(0); return; }   // zoomed in as far as it goes: step into the reception
+        if (k < 1 && user.zoom <= 0.47 && RECEP && mode !== 'overview' && mode !== 'ride') { const f = floorAtView(); if (f === 0 || FIT) { enterInside(spotNear(f, rig.tx), f); return; } }   // zoomed in as far as it goes: step into the room
         user.zoom = Math.max(0.45, Math.min(zmax(), user.zoom * k));
     }
-    function relight() { const on = nightOn || disco; scene.background = on ? NIGHT : DAY; scene.fog.color.set(on ? 0x14183d : 0xf1f0fb); hemi.intensity = nightOn ? 1.0 : disco ? 1.5 : 1.9; key.intensity = nightOn ? 1.1 : disco ? 1.7 : 2.3; rim.intensity = on ? 0.5 : 1.1; strips.forEach(s => s.scale.set(1, on ? 2.2 : 1, on ? 3 : 1)); }
+    function relight() { const on = nightOn || disco; scene.background = on ? NIGHT : DAY; scene.fog.color.set(on ? 0x14183d : 0xf1f0fb); hemi.intensity = nightOn ? 1.0 : disco ? 1.5 : 1.9; key.intensity = nightOn ? 1.1 : disco ? 1.7 : 2.3; rim.intensity = on ? 0.5 : 1.1; strips.forEach(s => s.scale.set(1, on ? 2.2 : 1, on ? 3 : 1)); if (FIT && FIT.setNight) FIT.setNight(on); if (RECEP && RECEP.setNight) RECEP.setNight(on); PBRS.forEach(m => { m.envMapIntensity = (m.userData.env0 == null ? 0.5 : m.userData.env0) * (on ? 0.3 : 1); }); if (OUT) OUT.relight(on); }
     function setNight(on) { nightOn = on; relight(); }
     // clicking a room on the model asks the tour to go there; a click is told from a drag by distance
     let down = null;
@@ -599,7 +656,7 @@ async function boot() {
     function frame(now) {
         requestAnimationFrame(frame);
         const dt = Math.min(0.25, (now - last) / 1000); last = now; const t = now / 1000;
-        stepAlya(dt, t); animate(t, dt); if (RECEP) RECEP.tick(dt, (alyaA.g.visible && A.y < 1 ? [{ x: A.x, z: A.z, agent: true }] : []).concat(IN.on ? [{ x: camera.position.x, z: camera.position.z }] : []));
+        stepAlya(dt, t); animate(t, dt); if (FIT) FIT.tick(dt, IN.on ? [{ x: camera.position.x, z: camera.position.z }] : []); if (RECEP) RECEP.tick(dt, (alyaA.g.visible && A.y < 1 ? [{ x: A.x, z: A.z, agent: true }] : []).concat(IN.on ? [{ x: camera.position.x, z: camera.position.z }] : []));
         if (following) shot.tx = Math.max(-20, Math.min(20, A.x * 0.5 + shot.tx * 0.5));
         const k = 1 - Math.exp(-dt * shot.rate);
         for (const p of ['tx', 'ty', 'tz', 'dist', 'yaw', 'pitch', 'turn']) rig[p] += (shot[p] - rig[p]) * k;
@@ -630,7 +687,7 @@ async function boot() {
     }
     Object.assign(rig, shot);
     requestAnimationFrame(frame);
-    window.HWW3D = { scene, camera, enterReception: enterInside, exitReception: leaveInside, A, renderer, to, overview, place, enter, look, tilt, zoom, setNight, setDisco, rooms: ROOM, onRoom: null, live, rig, ready: true };
+    window.HWW3D = { scene, camera, enterReception: enterInside, exitReception: leaveInside, stepIn, goFloor, isInside: () => IN.on, A, renderer, to, overview, place, enter, look, tilt, zoom, setNight, setDisco, rooms: ROOM, onRoom: null, live, rig, ready: true };
     document.documentElement.setAttribute('data-hww3d', 'ready');
     document.dispatchEvent(new Event('ypt:hww3d'));
 }

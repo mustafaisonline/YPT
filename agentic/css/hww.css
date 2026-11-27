@@ -77,7 +77,8 @@
 
 /* stepping inside the reception: the tour controls give way to a small panel */
 .hww-ctl .k-in { --k: #f28a1e; --kd: #b9680c; }
-.hww-stage.inside .hww-say, .hww-stage.inside .hww-choices, .hww-stage.inside .hww-floors, .hww-stage.inside .hww-ctl { display: none !important; }
+.hww-stage.inside .hww-say, .hww-stage.inside .hww-choices, .hww-stage.inside .hww-ctl { display: none !important; }
+.hww-stage.inside .hww-floors { z-index: 46; }
 .hww-stage.inside #hww-canvas { cursor: grab; touch-action: none; }
 .hww-in { position: absolute; z-index: 45; left: 50%; bottom: 74px; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 10px; width: max-content; max-width: calc(100% - 20px); }
 .hww-in-bar { display: flex; align-items: center; gap: 12px; padding: 8px 10px; border-radius: 999px; background: rgba(15, 23, 48, 0.82); backdrop-filter: blur(8px); color: #fff; box-shadow: 0 12px 26px -12px rgba(0, 0, 0, 0.6); }

@@ -328,7 +328,8 @@ export async function buildReception(ctx) {
     const R = 0.3;
     return {
         group: root, inside, screen,
-        wake,
+        setNight(on) { ceil.material.color.setScalar(on ? 0.4 : 1); cm.color.set(on ? 0x6e6a62 : 0xe4ded0); },
+        wake, X1, walls: [[X1 - 0.06, X1 + 0.06, ZB, DZ1 - 1.0], [X1 - 0.06, X1 + 0.06, DZ1 + 1.0, ZF]],
         clamp(x, z) {   // keep a walker (radius R) in the room and out of the furniture; the two doors lead out, a few steps either way
             const inHall = Math.abs(z - DZ1) < DW1 / 2 - 0.2, inFront = Math.abs(x - DX2) < DW2 / 2 - 0.2;
             let xmax = X1 - 0.45, zmax = ZF - 0.4;
