@@ -1167,3 +1167,7 @@ a.pg-card--link:hover, a.pg-card--link:focus-visible { transform: translateY(-3p
     body.has-promo.has-fs .ind-pick { right: 8px; }
 }
 @media (max-width: 480px) { .pg-card .pg-val { font-size: 0.92rem; word-break: normal; overflow-wrap: anywhere; } .promo strong { margin-left: 6px; } }
+/* offer pop-up: the yellow $100 mark must not cover the line above it; tag and button stay visible on phones */
+.sc-card strong { line-height: 1.18; }
+.sc-card strong b { display: inline-block; line-height: 1.12; margin-top: 6px; }
+@media (max-width: 640px) { .sc-card .promo-tag, .sc-card .promo-go { display: inline-flex; } .sc-card .promo-tag { align-self: flex-start; } }
