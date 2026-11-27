@@ -396,17 +396,21 @@ async function boot() {
     const wait = ms => new Promise(r => setTimeout(r, REDUCED ? 0 : ms));
     let holdNext = false, destF = 0;
     async function to(id) {
-        const R = ROOM[id]; if (!R) return false; const my = ++tok; mode = 'room'; user.yaw = 0; A.ride = false; const tgtY = R.f * FH; destF = R.f;
-        const hold = holdNext; holdNext = false; if (hold) { shotRoom(R); shot.tx = R.x; }   // the visitor dragged the view here: the camera stays on this floor and Alya comes to it
+        const R = ROOM[id]; if (!R) return false; const my = ++tok; user.yaw = 0; A.ride = false; const tgtY = R.f * FH; destF = R.f;
+        // The visitor moved the view themselves (drag or scroll): the camera stays exactly where they left it. Alya walks to the lift
+        // in front of them, rides, and comes out on the floor they are looking at.
+        const hold = holdNext; holdNext = false; mode = hold ? 'free' : 'room'; if (hold) following = false;
         if (Math.abs(A.y - tgtY) > 0.05) {                                   // a different floor: walk to the glass lift and ride it
             const cur = Math.max(0, Math.min(FLOORS - 1, Math.round(A.y / FH))), here = Object.values(ROOM).find(r => r.f === cur);
             if (Math.abs(A.x - LIFTX) > 0.05) { if (!hold) { if (here) shotRoom(here); shot.tx = Math.min(PLAN[cur].w / 2 - 8, 14); } if (!await walkTo(LIFTX, A.y, AISLE, 9) || my !== tok) return false; }
-            A.ride = true; mode = 'ride'; if (!hold) shotRide();
+            if (!hold) { A.ride = true; mode = 'ride'; shotRide(); } else A.ride = true;
             const tick = hold ? 0 : setInterval(() => { shot.ty = A.y + 3; }, 40);
             const ok = await walkTo(LIFTX, tgtY, AISLE, Math.max(9, Math.abs(tgtY - A.y) / 2.4)); clearInterval(tick);
             if (!ok || my !== tok) return false;
-            A.ride = false; A.f = R.f; mode = 'room'; shotRoom(R); shot.tx = hold ? R.x : LIFTX - 7; await wait(400); if (my !== tok) return false;
+            A.ride = false; A.f = R.f;
+            if (!hold) { mode = 'room'; shotRoom(R); shot.tx = LIFTX - 7; } await wait(400); if (my !== tok) return false;
         }
+        if (hold) { const vx = Math.max(-18, Math.min(18, shot.tx)); const ok = await walkTo(vx, tgtY, AISLE, 9); return ok && my === tok; }
         shotRoom(R); following = true;
         const ok = await walkTo(R.x, tgtY, AISLE, 9); following = false;
         if (!ok || my !== tok) return false;
