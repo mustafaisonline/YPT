@@ -202,3 +202,22 @@ body.ps-lock .sm-box { z-index: 5 !important; }
 .ps-p-i { background: #fdf0d9; color: #9a5d08; } .ps-p-w { background: #fff1c9; color: #8a6200; } .ps-p-g { background: #dff6e6; color: #14703a; }
 @media (min-width: 1021px) { .ps-personas { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); } }
 @media (max-width: 720px) { .ps-kpis3 { grid-template-columns: 1fr; } }
+
+/* product tiles, grouped by category */
+.pt-cat { margin-bottom: 44px; }
+.pt-cathead { display: flex; align-items: baseline; gap: 16px 22px; flex-wrap: wrap; margin-bottom: 18px; }
+.pt-cathead h2 { font-size: clamp(22px, 2.4vw, 30px); letter-spacing: -0.02em; }
+.pt-cathead p { color: var(--muted, #52607f); font-size: 15px; }
+.pt-grid { display: flex; flex-wrap: wrap; gap: 18px; }
+.pt { position: relative; width: 190px; display: flex; flex-direction: column; align-items: flex-start; gap: 6px; text-align: left; padding: 16px 16px 14px; border-radius: 24px; background: #fff; border: 1.5px solid #e3e8f6; box-shadow: 0 5px 0 var(--soft); cursor: pointer; transition: transform 0.18s, box-shadow 0.18s, border-color 0.18s; font: inherit; color: inherit; }
+.pt:hover, .pt:focus-visible { transform: translateY(-4px); border-color: var(--c); box-shadow: 0 9px 0 var(--soft), 0 18px 30px -16px var(--c); }
+.pt-ic { position: relative; display: grid; place-items: center; width: 74px; height: 74px; border-radius: 22px; background: linear-gradient(145deg, var(--c), var(--cd)); margin-bottom: 6px; }
+.pt-ic > svg { width: 44px; height: 44px; }
+.pt-ag { position: absolute; right: -14px; bottom: -12px; width: 40px; height: 40px; border-radius: 50%; background: #fff; border: 2px solid var(--soft); display: grid; place-items: center; overflow: hidden; }
+.pt-ag > span { width: 34px; height: 34px; display: block; }
+.pt b { font-size: 16px; line-height: 1.2; letter-spacing: -0.01em; }
+.pt-tag { font-size: 12.5px; line-height: 1.35; color: var(--muted, #52607f); min-height: 2.7em; }
+.pt-go { margin-top: 4px; font: 700 13px/1 var(--sans); color: var(--cd); }
+.pt-go i { font-style: normal; display: inline-block; transition: transform 0.18s; } .pt:hover .pt-go i { transform: translateX(4px); }
+.ps-agent > svg { width: 44px; height: 44px; }
+@media (max-width: 720px) { .pt-grid { gap: 12px; } .pt { width: calc(50% - 6px); padding: 14px 12px 12px; } .pt-ic { width: 64px; height: 64px; } .pt-ic > svg { width: 38px; height: 38px; } }

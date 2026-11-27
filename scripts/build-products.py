@@ -26,18 +26,36 @@ CK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3
 FLIP = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12a8 8 0 0 1 14-5.3M20 12a8 8 0 0 1-14 5.3M18 3v4h-4M6 21v-4h4"/></svg>'
 
 # --------------------------------------------------------------------------------------------- products
+
+ICONS = {
+    'wholesale': '<path d="M12 18h24l-2 20H14z"/><path d="M18 18v-4a6 6 0 0 1 12 0v4"/>',
+    'world': '<circle cx="24" cy="24" r="15"/><path d="M9 24h30M24 9c-8 8-8 22 0 30M24 9c8 8 8 22 0 30"/>',
+    'ims': '<path d="M14 8h16l6 6v26H14z"/><path d="M30 8v6h6"/><path d="M19 29l4 4 8-9"/>',
+    'staff': '<path d="M7 14h13v20H7zM28 14h13v20H28z"/><path d="M22 24h4M25 21l3 3-3 3"/>',
+    'ecard': '<rect x="7" y="12" width="34" height="24" rx="4"/><circle cx="18" cy="22" r="4"/><path d="M26 20h10M26 26h8M12 31h24"/>',
+    'nexus': '<path d="M24 10l18 8-18 8-18-8z"/><path d="M14 23v8c4 4 16 4 20 0v-8M42 18v10"/>',
+}
+CATS = [('standard', 'Standard products', 'Ready to use today. Open one to see what it does, then ask for a demo.'),
+        ('agentic', 'Agentic AI products', 'Designed, built and checked by the YPT agent team. Each one has its own builder agent.')]
+CATLABEL = {'standard': 'Standard product', 'agentic': 'Agentic AI product'}
 P = [
-    dict(id='wholesale', n='01', name='Online Wholesale &amp; Retail Management System', tag='Sell wholesale and retail goods online, and run the orders behind them', ag='forge', who='Jun', role='Builder', c='#f28a1e', cd='#b9680c', soft='#fdf0d9',
+    dict(id='ecard', cat='standard', short='eCardForever', n='S1', name='eCardForever', tag='Your permanent digital identity', ag='', who='', role='', c='#e0467f', cd='#b02a5f', soft='#fde6f0',
+         say='', feats=['Digital profile', 'Themes and editor', 'Shareable link'],
+         draft=['A cloud profile page for you or your business', 'A card editor with themes', 'Contact details and action buttons', 'A permanent public link to share', 'Installable as an app on a phone', 'Search-friendly public profiles'], art=''),
+    dict(id='nexus', cat='standard', short='Data AI Nexus', n='S2', name='Data AI Nexus', tag='Learn, practise and get certified in data and AI', ag='', who='', role='', c='#2e9b5f', cd='#1e7a45', soft='#e1f5e9',
+         say='', feats=['Knowledge hub', 'Training programs', 'Certificates'],
+         draft=['A knowledge hub of data and AI topics', 'Training programs for learners and teams', 'Sign-up by role: learner, trainer, administrator', 'Role tests and interviews', 'Certificates as PDFs', 'Installable as an app on a phone'], art=''),
+    dict(id='wholesale', cat='agentic', short='Wholesale &amp; Retail', n='01', name='Online Wholesale &amp; Retail Management System', tag='Sell wholesale and retail goods online, and run the orders behind them', ag='forge', who='Jun', role='Builder', c='#f28a1e', cd='#b9680c', soft='#fdf0d9',
          say='I built the storefront and the admin behind it, so a business can sell online from day one.', feats=['Online catalogue', 'Wholesale pricing', 'Orders and stock'], full=True,
          art='<rect x="14" y="14" width="212" height="12" rx="6" fill="#fff" opacity=".9"/><circle cx="22" cy="20" r="3" fill="#f28a1e"/>' + ''.join(f'<g transform="translate({14 + i * 54} 36)"><rect width="46" height="62" rx="9" fill="#fff"/><rect x="11" y="8" width="24" height="24" rx="7" fill="{col}"/><rect x="8" y="38" width="30" height="4" rx="2" fill="#c9d1ea"/><rect x="8" y="46" width="18" height="8" rx="4" fill="#f28a1e"/></g>' for i, col in enumerate(['#e0a24a', '#d35c3a', '#7ba05b', '#e8c45a']))),
-    dict(id='world', n='02', name='Supply the World', tag='Import and export, run end to end', ag='atlas', who='Wei', role='Architect', c='#2457f5', cd='#1a3fd0', soft='#e6ecff',
+    dict(id='world', cat='agentic', short='Supply the World', n='02', name='Supply the World', tag='Import and export, run end to end', ag='atlas', who='Wei', role='Architect', c='#2457f5', cd='#1a3fd0', soft='#e6ecff',
          say='I mapped the whole chain, from supplier to port to customer, so every shipment has a place and an owner.', feats=['Shipments and routes', 'Trade documents', 'Supplier and buyer records'],
          draft=['Shipment and route tracking', 'Import and export documents in one place', 'Supplier and buyer records', 'Customs and compliance checklist', 'Status updates at every step', 'Reports across all shipments'],
          art='<circle cx="120" cy="64" r="46" fill="#fff" opacity=".92"/><path d="M74 64h92M120 18c-20 14-20 74 0 92M120 18c20 14 20 74 0 92M82 40h76M82 88h76" stroke="#9db6ff" stroke-width="2" fill="none"/><path d="M40 98C70 40 150 30 206 40" stroke="#2457f5" stroke-width="3" stroke-dasharray="2 7" stroke-linecap="round" fill="none"/><circle cx="40" cy="98" r="7" fill="#f28a1e"/><circle cx="206" cy="40" r="7" fill="#14b8a6"/><rect x="126" y="28" width="22" height="12" rx="3" fill="#2457f5"/><rect x="130" y="22" width="6" height="6" rx="1" fill="#1a3fd0"/>'),
-    dict(id='ims', n='03', name='Invoice Management System', tag='Invoices handled, not chased', ag='aegis', who='Mei', role='Governance', c='#14b8a6', cd='#0b8678', soft='#dff6f1',
+    dict(id='ims', cat='agentic', short='Invoice Management', n='03', name='Invoice Management System', tag='Invoices handled, not chased', ag='aegis', who='Mei', role='Governance', c='#14b8a6', cd='#0b8678', soft='#dff6f1',
          say='I keep every invoice numbered, every payment matched and every change on record. Nothing slips through.', feats=['Invoices and receipts', 'Ageing and statements', 'Audit trail'], full=True,
          art=''.join(f'<g transform="translate({22 + i * 10} {16 + i * 10}) "><rect width="150" height="84" rx="10" fill="#fff" opacity="{.55 + i * .2}"/></g>' for i in range(3)) + '<rect x="52" y="46" width="60" height="6" rx="3" fill="#c9d1ea"/><rect x="52" y="60" width="96" height="5" rx="2.5" fill="#dde3f4"/><rect x="52" y="72" width="80" height="5" rx="2.5" fill="#dde3f4"/><rect x="52" y="84" width="40" height="5" rx="2.5" fill="#dde3f4"/><g transform="translate(150 70)"><circle r="22" fill="#14b8a6"/><path d="M-9 0l6 7 12-14" stroke="#fff" stroke-width="4.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g>'),
-    dict(id='staff', n='04', name='Staff Transfer Management', tag='Move people between teams and sites without the paperwork', ag='sage', who='Lin', role='Enablement', c='#7a4cf0', cd='#5a35c0', soft='#eee8fe',
+    dict(id='staff', cat='agentic', short='Staff Transfer', n='04', name='Staff Transfer Management', tag='Move people between teams and sites without the paperwork', ag='sage', who='Lin', role='Enablement', c='#7a4cf0', cd='#5a35c0', soft='#eee8fe',
          say='I walk each move through, from the request to the first day, so no one is left wondering what comes next.', feats=['Transfer requests', 'Manager approvals', 'Handover checklist'],
          draft=['Transfer requests with reasons', 'Manager and HR approvals', 'Handover checklist', 'Transfer history per person', 'Notifications to everyone involved', 'Reports by team and site'],
          art='<rect x="16" y="24" width="64" height="84" rx="12" fill="#fff" opacity=".92"/><rect x="160" y="24" width="64" height="84" rx="12" fill="#fff" opacity=".92"/>' + ''.join(f'<rect x="{x}" y="{y}" width="12" height="12" rx="3" fill="#c9bdf7"/>' for x in (26, 44, 62) for y in (36, 56)) + ''.join(f'<rect x="{x}" y="{y}" width="12" height="12" rx="3" fill="#c9bdf7"/>' for x in (170, 188, 206) for y in (36, 56)) + '<path d="M86 66h68" stroke="#7a4cf0" stroke-width="4" stroke-linecap="round"/><path d="M146 56l12 10-12 10" stroke="#7a4cf0" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/><g class="mv"><circle cx="120" cy="50" r="11" fill="#f28a1e"/><rect x="109" y="64" width="22" height="22" rx="9" fill="#f28a1e"/></g>'),
@@ -376,6 +394,11 @@ def use(pid):
     globals().update(DATASETS[pid])
 
 
+def agent_or_icon(p):
+    if p['ag']: return f'<span data-ag="{p["ag"]}" data-v="head"></span>'
+    return f'<svg viewBox="0 0 48 48" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">{ICONS[p["id"]]}</svg>'
+
+
 def sheet(p):
     use(p['id']) if p['id'] in DATASETS else None
     tabs = [('overview', 'Overview'), ('features', 'Features')]
@@ -388,8 +411,8 @@ def sheet(p):
 <div class="ps" id="ps-{p['id']}" role="dialog" aria-modal="true" aria-labelledby="ps-{p['id']}-title" hidden style="--c:{p['c']};--cd:{p['cd']};--soft:{p['soft']}">
   <div class="ps-sheet">
     <header class="ps-head">
-      <span class="ps-agent"><span data-ag="{p['ag']}" data-v="head"></span></span>
-      <div class="ps-ht"><p class="mono">Product {p['n']} · Built with {p['who']}, {p['role']}</p><h2 id="ps-{p['id']}-title">{p['name']}</h2><p class="ps-tag">{p['tag']}</p></div>
+      <span class="ps-agent">{agent_or_icon(p)}</span>
+      <div class="ps-ht"><p class="mono">{CATLABEL[p['cat']]}{(' · Built with ' + p['who'] + ', ' + p['role']) if p['who'] else ''}</p><h2 id="ps-{p['id']}-title">{p['name']}</h2><p class="ps-tag">{p['tag']}</p></div>
       <a class="btn ps-demo" href="contact.html">Ask for a demo <span class="arr">→</span></a>
       <button type="button" class="ps-x" data-close aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
     </header>
@@ -411,25 +434,16 @@ DATASETS = {'wholesale': WHOLESALE, 'ims': IMS}
 
 cards = ''
 sheets = ''
+tilehtml = {c: '' for c, _, _ in CATS}
 for p in P:
-    chips = ''.join(f'<li>{f}</li>' for f in p['feats'])
-    cards += f'''
-        <article class="prod rv" id="{p['id']}" style="--c:{p['c']};--cd:{p['cd']};--soft:{p['soft']}" data-who="{p['who']}" data-name="{p['name']}">
-            <div class="prod-face prod-front">
-                <div class="prod-art"><svg viewBox="0 0 240 124" aria-hidden="true">{p['art']}</svg>
-                    <span class="prod-n mono">Product {p['n']}</span>
-                    <span class="prod-agent"><span data-ag="{p['ag']}" data-v="head"></span></span>
-                </div>
-                <div class="prod-body">
-                    <h3>{p['name']}</h3>
-                    <p class="prod-tag">{p['tag']}</p>
-                    <ul class="prod-feats">{chips}</ul>
-                    <p class="prod-by mono">Built with {p['who']} · {p['role']}</p>
-                    <div class="prod-go"><a class="btn btn--solid" href="contact.html">Ask for a demo <span class="arr">→</span></a><button type="button" class="btn prod-flip" data-open="{p['id']}" aria-haspopup="dialog">{FLIP} Features</button></div>
-                </div>
-                <div class="prod-say" role="note"><b>{p['who']}</b><span>{p['say']}</span></div>
-            </div>
-        </article>'''
+    badge = f'<span class="pt-ag"><span data-ag="{p["ag"]}" data-v="head"></span></span>' if p['ag'] else ''
+    tilehtml[p['cat']] += f'''
+                <button type="button" class="pt" id="{p['id']}" data-open="{p['id']}" aria-haspopup="dialog" data-name="{p['name']}" data-who="{p['who']}" style="--c:{p['c']};--cd:{p['cd']};--soft:{p['soft']}">
+                    <span class="pt-ic"><svg viewBox="0 0 48 48" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">{ICONS[p['id']]}</svg>{badge}</span>
+                    <b>{p['short']}</b>
+                    <span class="pt-tag">{p['tag']}</span>
+                    <span class="pt-go">Open <i aria-hidden="true">→</i></span>
+                </button>'''
     sheets += sheet(p)
 
 main = f'''<main>
@@ -437,12 +451,12 @@ main = f'''<main>
         <div class="wrap prod-head-in">
             <div>
                 <p class="mono eyebrow"><i></i>Products</p>
-                <h1 class="h1">Products our agents <span class="hl">built for you.</span></h1>
-                <p class="lede">Four working products, each one designed, built and checked by the YPT agent team and the people who steer them. Pick the one closest to your business and open it to see everything it does.</p>
+                <h1 class="h1">Products <span class="hl">built for you.</span></h1>
+                <p class="lede">Two ready-to-use products and four agentic AI products built by the YPT agent team. Pick an icon to open the product and see everything it does. The demo button is inside.</p>
             </div>
             <div class="guide-bubble" id="guide-bubble">
                 <span class="gb-ag" data-ag="guide"></span>
-                <div class="gb-say"><b>Alya</b><span id="gb-text">Hi, I'm Alya. Four products below. Hover one and its builder will tell you about it.</span>
+                <div class="gb-say"><b>Alya</b><span id="gb-text">Hi, I'm Alya. Pick any product icon and I will tell you about it.</span>
                     <span class="gb-btns"><a class="btn btn--solid" href="#products">See the products</a><a class="btn" href="contact.html">Talk to a person</a></span></div>
             </div>
         </div>
@@ -450,8 +464,7 @@ main = f'''<main>
 
     <section class="sec" id="products" style="padding-top:36px">
         <div class="wrap">
-            <div class="prod-grid">{cards}
-            </div>
+            {''.join(f'<div class="pt-cat"><div class="pt-cathead"><h2>{t}</h2><p>{d}</p></div><div class="pt-grid">{tilehtml[c]}</div></div>' for c, t, d in CATS)}
         </div>
     </section>
 

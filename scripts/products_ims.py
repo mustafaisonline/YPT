@@ -181,6 +181,31 @@ SHOTS = [
 SHOTALT = 'Tally'
 
 
+def _donut(parts, cols, label):
+    import math
+    r, cx, cy, circ = 46, 60, 60, 2 * math.pi * 46; off = 0; out = []
+    for (lab, v), col in zip(parts, cols):
+        ln = v / 100 * circ
+        out.append(f'<circle r="{r}" cx="{cx}" cy="{cy}" fill="none" stroke="{col}" stroke-width="22" stroke-dasharray="{ln:.1f} {circ - ln:.1f}" stroke-dashoffset="{-off:.1f}" transform="rotate(-90 {cx} {cy})"/>'); off += ln
+    svg = f'<svg viewBox="0 0 120 120" class="ps-donut" role="img" aria-label="{E(label)}">{"".join(out)}</svg>'
+    return '<div class="ps-donutwrap">' + svg + '<ul class="ps-leg">' + ''.join(f'<li><i style="background:{c}"></i>{l} <b>{v}%</b></li>' for (l, v), c in zip(parts, cols)) + '</ul></div>'
+
+
+def _bars(rows, col, unit=''):
+    m = max(v for _, v in rows)
+    return '<ul class="ps-bars">' + ''.join(f'<li><span>{E(l)}</span><div><i style="width:{v / m * 100:.0f}%;background:{col}"></i></div><b>{v}{unit}</b></li>' for l, v in rows) + '</ul>'
+
+
+def _line():
+    import math
+    n = 12; vals = [18 + i * 2.6 + 7 * math.sin(i / 1.4) for i in range(n)]
+    mx, mn = max(vals), min(vals); w, h = 420, 150
+    pts = [(i * w / (n - 1), h - 16 - (v - mn) / (mx - mn) * (h - 44)) for i, v in enumerate(vals)]
+    line = ' '.join(f'{x:.1f},{y:.1f}' for x, y in pts)
+    grid = ''.join(f'<line x1="0" x2="{w}" y1="{y}" y2="{y}"/>' for y in (30, 70, 110))
+    return f'<svg viewBox="0 0 {w} {h}" class="ps-chart" role="img" aria-label="Sample chart: amount invoiced per month for the last twelve months"><g class="grid">{grid}</g><polygon class="area" points="0,{h} {line} {w},{h}"/><polyline class="ln" pathLength="1" points="{line}"/><circle cx="{pts[-1][0]:.1f}" cy="{pts[-1][1]:.1f}" r="5"/></svg>'
+
+
 def DASH():
     kpis = [('Invoiced', 'PKR 412,600.00', '14 invoices'), ('Outstanding', 'PKR 138,200.00', '5 open invoices'), ('Overdue', 'PKR 42,500.00', '2 overdue invoices')]
     k = ''.join(f'<div class="ps-kpi"><p class="mono">{E(a)}</p><b class="ps-kpi-m">{E(b)}</b><span>{E(c)}</span></div>' for a, b, c in kpis)
@@ -196,8 +221,16 @@ def DASH():
            '<tr><td>2026-11-12</td><td>INV-0011</td><td>Invoice</td><td class="r">88,000.00</td><td class="r">103,000.00</td></tr></tbody></table>')
     exp = ['Customers', 'Customer contacts', 'Customer addresses', 'Products and services', 'Tax codes', 'Payment terms', 'Invoices', 'Invoice lines', 'Receipts', 'Receipt allocations', 'Number series']
     ex = ''.join(f'<li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3h7l4 4v14H7zM14 3v4h4M9 13h6M9 17h6"/></svg><div><b>{E(t)}</b></div><em class="mono">CSV</em></li>' for t in exp)
-    return ('<p class="ps-note"><b>Sample data.</b> These figures are invented to show what the screens look like. Your own figures appear here as you invoice.</p>'
-            f'<div class="ps-kpis ps-kpis3">{k}</div>'
+    charts = [
+        ('Invoiced per month, last 12 months', _line(), 'wide'),
+        ('Invoices by status', _donut([('Paid', 46), ('Partly paid', 18), ('Issued', 36)], ['#14b8a6', '#f28a1e', '#2457f5'], 'Sample chart: invoices by status'), ''),
+        ('Outstanding by age', _bars([('Current', 62), ('1-30 days', 34), ('31-60 days', 43), ('61-90 days', 0), ('Over 90 days', 0)], '#f28a1e', 'k'), ''),
+        ('Money received by method', _bars([('Bank', 54), ('Cash', 27), ('Cheque', 13), ('Card', 6)], '#14b8a6', '%'), ''),
+        ('Top customers by amount invoiced', _bars([('Customer A', 140), ('Customer B', 96), ('Customer C', 71), ('Customer D', 58), ('Customer E', 39)], '#7a4cf0', 'k'), ''),
+    ]
+    ch = ''.join(f'<div class="ps-card ps-chartcard {w_}"><h5 class="mono">{t}</h5>{c}</div>' for t, c, w_ in charts)
+    return ('<p class="ps-note"><b>Sample data.</b> These figures are invented to show what the screens look like. The charts are drawn from the amounts, dates and statuses the product already keeps; the current screens show them as tiles and tables. Your own figures appear as you invoice.</p>'
+            f'<div class="ps-kpis ps-kpis3">{k}</div><div class="ps-charts">{ch}</div>'
             f'<div class="ps-card ps-tblcard"><h5 class="mono">Latest invoices</h5><table class="ps-tbl"><thead><tr><th>Invoice</th><th>Customer</th><th>Status</th><th class="r">Total</th></tr></thead><tbody>{inv}</tbody></table></div>'
             f'<h4 class="ps-h4">On every customer: who owes what, and for how long</h4><div class="ps-card ps-tblcard"><h5 class="mono">Ageing of open invoices</h5>{age}</div>'
             f'<div class="ps-card ps-tblcard"><h5 class="mono">Statement</h5>{stm}</div>'

@@ -9,8 +9,8 @@
     var plain = function (s) { return (s || '').replace('&amp;', '&'); };
 
     // ---------- Alya
-    $$('.prod').forEach(function (c) {
-        function on() { if (!T || open) return; clearTimeout(tm); T.textContent = 'That is the ' + plain(c.getAttribute('data-name')) + ', with ' + c.getAttribute('data-who') + '. Press Features to see everything it does.'; }
+    $$('.pt').forEach(function (c) {
+        function on() { if (!T || open) return; clearTimeout(tm); var w = c.getAttribute('data-who'); T.textContent = 'That is ' + plain(c.getAttribute('data-name')) + (w ? ', built with ' + w + '.' : '.') + ' Open it to see everything it does.'; }
         function off() { if (!T) return; clearTimeout(tm); tm = setTimeout(function () { T.textContent = base; }, 900); }
         c.addEventListener('mouseenter', on); c.addEventListener('mouseleave', off); c.addEventListener('focusin', on); c.addEventListener('focusout', off);
     });
@@ -41,7 +41,7 @@
             setTimeout(function () { s.classList.remove('anim'); }, 900);   // fallback: never leave it half open
         }
         var x = $('[data-close]', s); if (x) x.focus({ preventScroll: true });
-        if (T) T.textContent = 'This is everything the ' + plain($('#' + id).getAttribute('data-name')) + ' does. Use the tabs: overview, features, modules, concept map and dashboards.';
+        if (T) T.textContent = 'This is everything ' + plain($('#' + id).getAttribute('data-name')) + ' does. Use the tabs: overview, features, modules, concept map and dashboards.';
     }
 
     function closeSheet() {
@@ -59,8 +59,7 @@
         if (e.target === backdrop) { closeSheet(); return; }
         var ps = e.target.closest('.ps');
         if (ps && !e.target.closest('.ps-sheet')) { closeSheet(); return; }
-        var card = e.target.closest('.prod');
-        if (card && !open && !e.target.closest('a, button')) openSheet(card.id, card.querySelector('[data-open]'));
+        
     });
     document.addEventListener('keydown', function (e) {
         if (!open) return;
