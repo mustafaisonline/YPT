@@ -254,3 +254,5 @@ body.ps-lock .sm-box { z-index: 5 !important; }
 @media (max-width: 720px) { .pt-logo img { width: 64px; height: 64px; } }
 /* phones: the close button no longer covers the sheet's eyebrow line */
 @media (max-width: 640px) { .ps-head { padding-top: 54px; } .ps-x { top: 8px; } }
+a.ps-ready { text-decoration: none; cursor: pointer; transition: transform 0.12s, box-shadow 0.12s; }
+a.ps-ready:hover, a.ps-ready:focus-visible { transform: translateY(-2px); box-shadow: 0 5px 0 rgba(0, 0, 0, 0.14); }

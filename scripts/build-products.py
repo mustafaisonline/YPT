@@ -39,10 +39,10 @@ CATS = [('agentic', 'Agentic AI', 'Designed, built and checked by the YPT agent 
         ('standard', 'Standard', 'Live online and ready for everyone to use. Open one to see what it does.')]
 CATLABEL = {'standard': 'Standard', 'agentic': 'Agentic AI'}
 P = [
-    dict(id='ecard', cat='standard', short='eCardForever', logo='img/products/ecard/logo.png', full=True, n='S1', name='eCardForever', tag='Your permanent digital identity', ag='', who='', role='', c='#e0467f', cd='#b02a5f', soft='#fde6f0',
+    dict(id='ecard', cat='standard', url='https://ecardforever.com', short='eCardForever', logo='img/products/ecard/logo.png', full=True, n='S1', name='eCardForever', tag='Your permanent digital identity', ag='', who='', role='', c='#e0467f', cd='#b02a5f', soft='#fde6f0',
          say='', feats=['Digital profile', 'Themes and editor', 'Shareable link'],
          draft=['A cloud profile page for you or your business', 'A card editor with themes', 'Contact details and action buttons', 'A permanent public link to share', 'Installable as an app on a phone', 'Search-friendly public profiles'], art=''),
-    dict(id='nexus', cat='standard', short='Data &amp; AI Nexus', logo='img/products/nexus/logo.png', full=True, n='S2', name='Data &amp; AI Nexus', tag='Learn, practise and get certified in data and AI', ag='', who='', role='', c='#2e9b5f', cd='#1e7a45', soft='#e1f5e9',
+    dict(id='nexus', cat='standard', url='https://dataainexus.com', short='Data &amp; AI Nexus', logo='img/products/nexus/logo.png', full=True, n='S2', name='Data &amp; AI Nexus', tag='Learn, practise and get certified in data and AI', ag='', who='', role='', c='#2e9b5f', cd='#1e7a45', soft='#e1f5e9',
          say='', feats=['Knowledge hub', 'Training programs', 'Certificates'],
          draft=['A knowledge hub of data and AI topics', 'Training programs for learners and teams', 'Sign-up by role: learner, trainer, administrator', 'Role tests and interviews', 'Certificates as PDFs', 'Installable as an app on a phone'], art=''),
     dict(id='wholesale', cat='agentic', short='Wholesale &amp; Retail', n='01', name='Online Wholesale &amp; Retail Management System', tag='Sell wholesale and retail goods online, and run the orders behind them', ag='forge', who='Jun', role='Builder', c='#f28a1e', cd='#b9680c', soft='#fdf0d9',
@@ -415,7 +415,7 @@ def sheet(p):
     <header class="ps-head">
       <span class="ps-agent">{agent_or_icon(p)}</span>
       <div class="ps-ht"><p class="mono">{CATLABEL[p['cat']]}{(' · Built with ' + p['who'] + ', ' + p['role']) if p['who'] else ''}</p><h2 id="ps-{p['id']}-title">{p['name']}</h2><p class="ps-tag">{p['tag']}</p></div>
-      {('<span class="ps-ready"><i></i>Ready to use online</span>' if p['cat'] == 'standard' else '<a class="btn ps-demo" href="contact.html">Ask for a demo <span class="arr">→</span></a>')}
+      {(f'<a class="ps-ready" href="{p["url"]}" target="_blank" rel="noopener"><i></i>Ready to use online <span class="arr">↗</span></a>' if p['cat'] == 'standard' else '<a class="btn ps-demo" href="contact.html">Ask for a demo <span class="arr">→</span></a>')}
       <button type="button" class="ps-x" data-close aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
     </header>
     <div class="ps-tabs" role="tablist" aria-label="Sections">{tb}</div>
