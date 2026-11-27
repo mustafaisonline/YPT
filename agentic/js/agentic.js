@@ -487,12 +487,16 @@
         // Top-right control: a hint until something is moved, then a button that sends everyone home.
         var dragUi = document.createElement('button');
         dragUi.className = 'hero-drag'; dragUi.type = 'button';
-        dragUi.innerHTML = '<span class="hd-hint"><b>\u2725</b>Drag any agent anywhere</span><span class="hd-reset"><b>\u21ba</b>Bring the agents back</span>';
-        dragUi.setAttribute('aria-label', 'Bring the agents back to their places');
+        dragUi.innerHTML = '<span class="hd-hint"><b>\u2725</b></span><span class="hd-reset"><b>\u21ba</b></span>';
+        var setDragTip = function (moved) {
+            var s = moved ? 'Bring the agents back' : 'Drag any agent anywhere';
+            dragUi.title = s; dragUi.setAttribute('aria-label', s);
+        };
+        setDragTip(false);
         hero.appendChild(dragUi);
         dragUi.addEventListener('click', function () {
             if (!dragUi.classList.contains('moved')) return;
-            dragUi.classList.remove('moved');
+            dragUi.classList.remove('moved'); setDragTip(false);
             var moved = flyers.map(function (f) { return f.parentNode; }).filter(function (w) { return w._ox || w._oy; });
             var from = moved.map(function (w) { return [w._ox, w._oy]; }), t0 = performance.now(), dur = REDUCED ? 1 : 520;
             moved.forEach(function (w) { w.classList.add('dragging'); });
@@ -547,7 +551,7 @@
                     f._dragged = true; setTimeout(function () { f._dragged = false; }, 60);
                     dragging = false; wrap.classList.remove('dragging'); document.body.classList.remove('is-dragging');
                     coolUntil = Date.now() + 500; // do not open the takeover just because it was dropped under the pointer
-                    dragUi.classList.add('moved');
+                    dragUi.classList.add('moved'); setDragTip(true);
                 };
                 window.addEventListener('pointermove', move); window.addEventListener('pointerup', up);
             });
@@ -1075,8 +1079,7 @@
     function syncPicker() {
         var L = window.YPT_LOOK;
         if (!picker) return;
-        $('.ind-btn .ind-dot-ico', picker).innerHTML = icoHTML(L.id);
-        $('.ind-lab b', picker).innerHTML = L.id === 'general' ? 'Choose yours' : '<span class="full">' + esc(L.name) + '</span><span class="short">' + esc(L.short) + '</span>';
+        $('.ind-btn .ind-dot-ico', picker).innerHTML = icoHTML('general'); // always the globe
         $('.ind-btn', picker).title = L.id === 'general' ? 'Choose your industry' : 'Industry: ' + L.name + ' (click to change)';
         $$('.ind-list button', picker).forEach(function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-id') === L.id ? 'true' : 'false'); });
     }
@@ -1104,10 +1107,10 @@
         picker = document.createElement('div');
         picker.className = 'ind-pick';
         picker.innerHTML = '<button type="button" class="ind-btn" aria-haspopup="true" aria-expanded="false" aria-label="Choose your industry"><span class="ind-dot-ico"></span>' +
-            '<span class="ind-lab"><small>Industry</small><b></b></span>' +
+            '<span class="ind-lab"><small>Industry</small></span>' +
             '<svg class="ind-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>' +
             '<ul class="ind-list" hidden>' + INDUSTRIES.map(function (i) {
-                return '<li><button type="button" data-id="' + i.id + '">' + icoHTML(i.id) + '<span class="ind-name">' + esc(i.name) + '</span>' +
+                return '<li><button type="button" data-id="' + i.id + '">' + (i.id === 'general' ? '' : icoHTML(i.id)) + '<span class="ind-name">' + esc(i.name) + '</span>' +
                     '<span class="ind-ag" aria-hidden="true">' + agentSVG(BY_ID.guide, { head: true, look: i }) + '</span>' +
                     '<svg class="ind-ok" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg></button></li>';
             }).join('') + '</ul>';
