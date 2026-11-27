@@ -370,12 +370,13 @@
         /* Wide screens: SAM sits high, the seven agents fan out in one calm smile-shaped arc below him (stage 1 to 7, left to right),
            and only a few quiet labels float in the gaps. Small screens keep the compact ring. */
         var WIDE = window.matchMedia('(min-width: 1021px)').matches, CY = WIDE ? 23 : 50;
-        var POS = WIDE ? { vera: [7, 52], atlas: [21, 66], spark: [36, 75], forge: [50, 79], aegis: [64, 75], orca: [79, 66], sage: [93, 52] }
+        var POS = WIDE ? { vera: [20, 60], atlas: [40, 76], spark: [60, 76] }
                        : { vera: [50, 10], atlas: [83, 24], spark: [91, 69], forge: [73, 91], aegis: [31, 91], orca: [7, 68], sage: [17, 23] };
         var CHIPS = WIDE ? [['Requirements interview', 19, 22], ['Data model', 81, 22], ['Guardrails', 50, 56]] : [['Requirements interview', 24, 38], ['Data model', 78, 41], ['Guardrails', 40, 77], ['Human-in-the-loop', 68, 5]];
         field.style.setProperty('--cy', CY + '%');
         var html = '<svg class="links" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">';
-        AGENTS.forEach(function (a) { html += '<line x1="50" y1="' + CY + '" x2="' + POS[a.id][0] + '" y2="' + POS[a.id][1] + '"/>'; });
+        AGENTS.forEach(function (a) { if (!POS[a.id]) return; html += '<line x1="50" y1="' + CY + '" x2="' + POS[a.id][0] + '" y2="' + POS[a.id][1] + '"/>'; });
+        if (WIDE) html += '<line x1="50" y1="' + CY + '" x2="81" y2="60"/>';
         html += '</svg>';
         CHIPS.forEach(function (c, i) {
             html += '<div class="fly" data-depth="' + (0.5 + (i % 3) * 0.3) + '" style="left:' + c[1] + '%;top:' + c[2] + '%">' +
@@ -389,7 +390,7 @@
             chart: '<path d="M4 20V4M4 20h16M8 16v-4M12 16V8M16 16v-6"/>',
             code: '<path d="M8 8l-4 4 4 4M16 8l4 4-4 4M13 6l-2 12"/>'
         };
-        (WIDE ? [['chat', 35, 42, '#fdf0d9', '#d9820b'], ['db', 65, 42, '#dff6f1', '#0b8f80'], ['flow', 95, 30, '#e6ecff', '#1a3fd0'], ['chart', 5, 30, '#fde5df', '#d94a31']]
+        (WIDE ? [['code', 10, 11, '#fde6f0', '#cf2f76'], ['chat', 31, 3, '#fdf0d9', '#d9820b'], ['db', 66, 3, '#dff6f1', '#0b8f80'], ['shield', 79, 4, '#eee8fe', '#6537d6'], ['flow', 93, 21, '#e6ecff', '#1a3fd0'], ['chart', 24, 40, '#fde5df', '#d94a31']]
          : [['chat', 36, 25, '#fdf0d9', '#d9820b'], ['db', 64, 28, '#dff6f1', '#0b8f80'], ['shield', 68, 72, '#eee8fe', '#6537d6'],
          ['flow', 97, 38, '#e6ecff', '#1a3fd0'], ['chart', 3, 82, '#fde5df', '#d94a31'], ['code', 99, 88, '#fde6f0', '#cf2f76']]).forEach(function (t, i) {
             html += '<div class="fly" data-depth="' + (0.7 + (i % 3) * 0.4) + '" style="left:' + t[1] + '%;top:' + t[2] + '%">' +
@@ -414,11 +415,15 @@
             '<span class="core-ask"><span id="core-type"></span><i class="caret"></i>' +
             '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></span></div>';
         AGENTS.forEach(function (a, i) {
+            if (!POS[a.id]) return;
             html += '<div class="fly" data-depth="' + (1 + (i % 3) * 0.5) + '" style="left:' + POS[a.id][0] + '%;top:' + POS[a.id][1] + '%">' +
                 '<button class="fly-ag" data-spot="' + a.id + '" aria-label="Meet ' + a.name + ', the ' + a.role + '">' +
                 agentEl(a) +
                 '<span class="tag"><i class="stg">' + (i + 1) + '</i>' + a.name + ' <b>· ' + a.role.replace(' Agent', '') + '</b></span></button></div>';
         });
+        if (WIDE) html += '<div class="fly" data-depth="1.2" style="left:81%;top:60%"><a class="team" href="agents.html" aria-label="Meet the rest of the team: Jun, Mei, Farid and Lin">' +
+            '<span class="team-heads">' + AGENTS.slice(3).map(function (b) { return agentEl(b, { head: true }); }).join('') + '</span>' +
+            '<span class="team-t"><i class="stg">4</i>More team members</span><span class="team-s">Build \u00b7 Govern \u00b7 Launch \u00b7 Enable</span></a></div>';
         field.innerHTML = html;
         // One agent at a time speaks up, so visitors see what each can do without hovering.
         // The "your solution" tile types example requests, to show you talk to what we build.
