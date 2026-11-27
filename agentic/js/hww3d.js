@@ -384,9 +384,14 @@ async function boot() {
     function shotRoom(R) { const S = SHOTS[R.id] || { yaw: 0.12 * yawSign, pitch: 0.1 }; Object.assign(shot, { tx: R.x, ty: R.f * FH + 1.9, tz: 0, dist: Math.max(21, fitDist(R.span + 9)) * (S.k || 1), yaw: S.yaw, pitch: S.pitch, turn: 0, rate: 2.0 }); yawSign = -yawSign; }
     function shotOverview() { Object.assign(shot, { tx: 5, ty: 17, tz: 0, dist: Math.max(100, fitDist(74)), yaw: 0.42, pitch: 0.2, turn: 1, rate: 1.2 }); }
     function shotRide() { Object.assign(shot, { tx: LIFTX - 5, ty: A.y + 3, tz: 2, dist: 32, yaw: -0.45, pitch: 0.12, turn: 0, rate: 2.4 }); }
+    // zooming out can go all the way to the opening wide shot (the whole building); on the way the view drifts to that shot's centre
+    const overviewDist = () => Math.max(100, fitDist(74));
+    const zmax = () => Math.max(1.9, overviewDist() / Math.max(8, rig.dist));
     function apply(r) {
-        const yaw = r.yaw + user.yaw, cp = Math.cos(r.pitch), sp = Math.sin(r.pitch), d = r.dist * user.zoom;
-        camera.position.set(r.tx + Math.sin(yaw) * cp * d, r.ty + sp * d, r.tz + Math.cos(yaw) * cp * d); camera.lookAt(r.tx, r.ty, r.tz);
+        const zm = zmax(), w = zm > 1 ? Math.max(0, Math.min(1, (user.zoom - 1) / (zm - 1))) : 0, e = w * w * (3 - 2 * w);
+        const tx = r.tx + (5 - r.tx) * e, ty = r.ty + (17 - r.ty) * e, tz = r.tz * (1 - e), ya = r.yaw + (0.42 - r.yaw) * e, pi = r.pitch + (0.2 - r.pitch) * e;
+        const yaw = ya + user.yaw, cp = Math.cos(pi), sp = Math.sin(pi), d = r.dist * user.zoom;
+        camera.position.set(tx + Math.sin(yaw) * cp * d, ty + sp * d, tz + Math.cos(yaw) * cp * d); camera.lookAt(tx, ty, tz);
     }
     function resize() { const w = stage.clientWidth, h = stage.clientHeight; if (!w || !h) return; renderer.setSize(w, h, false); camera.aspect = w / h; camera.updateProjectionMatrix(); if (mode === 'overview') shotOverview(); }
     new ResizeObserver(resize).observe(stage); resize();
@@ -420,7 +425,7 @@ async function boot() {
     function place(id) { const R = ROOM[id]; ++tok; if (walkRes) { walkRes(false); walkRes = null; } A.goal = null; A.f = R.f; A.x = R.x; A.y = R.f * FH; A.z = AISLE; mode = 'room'; shotRoom(R); Object.assign(rig, shot); user.yaw = 0; cab.position.y = A.y; }
     function enter() { A.f = 0; A.x = 2; A.y = 0; A.z = 20; A.goal = null; cab.position.y = 0; }
     function look(d) { user.yaw = Math.max(-1.2, Math.min(1.2, user.yaw + d)); }
-    function zoom(k) { user.zoom = Math.max(0.45, Math.min(1.9, user.zoom * k)); }
+    function zoom(k) { user.zoom = Math.max(0.45, Math.min(zmax(), user.zoom * k)); }
     function relight() { const on = nightOn || disco; scene.background = on ? NIGHT : DAY; scene.fog.color.set(on ? 0x14183d : 0xf1f0fb); hemi.intensity = nightOn ? 1.0 : disco ? 1.5 : 1.9; key.intensity = nightOn ? 1.1 : disco ? 1.7 : 2.3; rim.intensity = on ? 0.5 : 1.1; strips.forEach(s => s.scale.set(1, on ? 2.2 : 1, on ? 3 : 1)); }
     function setNight(on) { nightOn = on; relight(); }
     // clicking a room on the model asks the tour to go there; a click is told from a drag by distance
@@ -464,7 +469,7 @@ async function boot() {
     }, { passive: false });
     let pz = 1;                                                                                    // Safari pinch
     stage.addEventListener('gesturestart', e => { e.preventDefault(); pz = user.zoom; });
-    stage.addEventListener('gesturechange', e => { e.preventDefault(); user.zoom = Math.max(0.45, Math.min(1.9, pz / e.scale)); });
+    stage.addEventListener('gesturechange', e => { e.preventDefault(); user.zoom = Math.max(0.45, Math.min(zmax(), pz / e.scale)); });
 
     // ------------------------------------------------------------------ render loop
     let last = performance.now();
