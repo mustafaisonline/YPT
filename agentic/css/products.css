@@ -162,3 +162,6 @@ body.ps-lock { overflow: hidden; }
     .ps-onto-wrap, .ps-ond-box { display: none; } .ps-onto-list { display: flex; }
     .ps-kpis { grid-template-columns: repeat(2, 1fr); } .ps-charts { grid-template-columns: 1fr; } .ps-bars li { grid-template-columns: 96px 1fr 36px; }
 }
+
+/* the site-mode switch (Agentic AI) sits behind an open product sheet */
+body.ps-lock .sm-box { z-index: 5 !important; }
