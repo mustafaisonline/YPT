@@ -40,7 +40,7 @@
 .hww-floors button:hover { background: #2457f5; }
 .hww-floors button.on { background: #f28a1e; padding-left: 12px; }
 .hww-floors button.on b { background: rgba(255, 255, 255, 0.3); }
-.hww-step { position: absolute; z-index: 41; right: 14px; bottom: 14px; display: flex; gap: 6px; padding: 7px 10px; border-radius: 999px; background: rgba(15, 23, 48, 0.7); }
+.hww-step { position: absolute; z-index: 41; left: 50%; transform: translateX(-50%); bottom: 14px; display: flex; gap: 6px; padding: 7px 10px; border-radius: 999px; background: rgba(15, 23, 48, 0.7); }
 .hww-step i { width: 8px; height: 8px; border-radius: 50%; background: rgba(255, 255, 255, 0.3); transition: background 0.3s, transform 0.3s; }
 .hww-step i.done { background: #5eead4; }
 .hww-step i.on { background: #f28a1e; transform: scale(1.5); }
