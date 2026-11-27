@@ -1137,3 +1137,9 @@ code { font-family: var(--mono); font-size: 0.9em; background: var(--p-blue); pa
 .team-t { display: inline-flex; align-items: center; gap: 7px; font-size: 14px; font-weight: 700; color: var(--ink); white-space: nowrap; }
 .team-t .stg { font-style: normal; display: grid; place-items: center; min-width: 20px; height: 20px; padding: 0 4px; border-radius: 999px; background: var(--ink); color: var(--white); font-size: 11px; }
 .team-s { font-size: 11.5px; font-weight: 500; color: var(--quiet); white-space: nowrap; }
+
+/* Everything in the hero field can be picked up and moved; the top-right button puts it all back. */
+.core-fly { z-index: 2; }
+.core-fly .core { position: relative; left: auto; top: auto; margin: 0 !important; }
+.field .core, .field .chip, .field .tool, .field .team { cursor: grab; -webkit-user-select: none; user-select: none; touch-action: pan-y; }
+.field .fly.dragging .core, .field .fly.dragging .chip, .field .fly.dragging .tool, .field .fly.dragging .team { cursor: grabbing; box-shadow: 0 30px 40px -14px rgba(15, 23, 48, 0.5); }

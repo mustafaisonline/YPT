@@ -409,11 +409,11 @@
             '<circle cx="27" cy="26.500" r="1.700" fill="#1f1512"/><circle cx="37" cy="26.500" r="1.700" fill="#1f1512"/>' +
             '<path d="M29 35.500q3 2 6 0" fill="none" stroke="#f0bd96" stroke-width="1.400" stroke-linecap="round"/>' +
             '</svg>';
-        html += '<div class="core"><div class="core-who"><span class="core-av" aria-hidden="true">' + ARMAN + '</span>' +
+        html += '<div class="fly core-fly" data-depth="0.35" style="left:50%;top:' + CY + '%"><div class="core"><div class="core-who"><span class="core-av" aria-hidden="true">' + ARMAN + '</span>' +
             '<span class="core-name"><b>SAM (FDE)</b><small>Forward Deployed Engineer</small></span></div>' +
             '<span class="core-sub">I\u2019m your HUMAN Lead</span>' +
             '<span class="core-ask"><span id="core-type"></span><i class="caret"></i>' +
-            '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></span></div>';
+            '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></span></div></div>';
         AGENTS.forEach(function (a, i) {
             if (!POS[a.id]) return;
             html += '<div class="fly" data-depth="' + (1 + (i % 3) * 0.5) + '" style="left:' + POS[a.id][0] + '%;top:' + POS[a.id][1] + '%">' +
@@ -494,6 +494,11 @@
         var setOffset = function (wrap, ox, oy) {
             wrap._ox = ox; wrap._oy = oy; placeFly(wrap);
             var fr = field.getBoundingClientRect();
+            if (wrap._core) { // SAM moved: every line starts from wherever he is now
+                lines.forEach(function (l) { l.setAttribute('x1', (50 + ox / fr.width * 100).toFixed(2)); l.setAttribute('y1', (CY + oy / fr.height * 100).toFixed(2)); });
+                return;
+            }
+            if (!wrap._line) return;
             wrap._line.setAttribute('x2', (wrap._home[0] + ox / fr.width * 100).toFixed(2));
             wrap._line.setAttribute('y2', (wrap._home[1] + oy / fr.height * 100).toFixed(2));
         };
@@ -502,7 +507,7 @@
         dragUi.className = 'hero-drag'; dragUi.type = 'button';
         dragUi.innerHTML = '<span class="hd-hint"><b>\u2725</b></span><span class="hd-reset"><b>\u21ba</b></span>';
         var setDragTip = function (moved) {
-            var s = moved ? 'Bring the agents back' : 'Drag any agent anywhere';
+            var s = moved ? 'Put everything back' : 'Drag anything anywhere';
             dragUi.title = s; dragUi.setAttribute('aria-label', s);
         };
         setDragTip(false);
@@ -510,7 +515,7 @@
         dragUi.addEventListener('click', function () {
             if (!dragUi.classList.contains('moved')) return;
             dragUi.classList.remove('moved'); setDragTip(false);
-            var moved = flyers.map(function (f) { return f.parentNode; }).filter(function (w) { return w._ox || w._oy; });
+            var moved = $$('.fly', field).filter(function (w) { return w._ox || w._oy; });
             var from = moved.map(function (w) { return [w._ox, w._oy]; }), t0 = performance.now(), dur = REDUCED ? 1 : 520;
             moved.forEach(function (w) { w.classList.add('dragging'); });
             (function glide(now) {
@@ -520,6 +525,39 @@
                 else moved.forEach(function (w) { w.classList.remove('dragging'); });
             })(t0);
         });
+        // Drag: pick anything in the hero up and put it anywhere (agents, SAM, labels, icons, the team card).
+        // An agent's line to SAM stretches to follow it; if SAM moves, every line follows him.
+        var dragify = function (handle, wrap, home, line, suppressClick, isCore) {
+            wrap._home = home; wrap._line = line; wrap._core = !!isCore;
+            handle.addEventListener('pointerdown', function (e) {
+                if (e.pointerType === 'touch' || e.button > 0) return; // touch keeps normal scrolling
+                clearTimeout(spotT);
+                var sx = e.clientX, sy = e.clientY, ox0 = wrap._ox || 0, oy0 = wrap._oy || 0, moved = false;
+                var fr = field.getBoundingClientRect(), hr = hero.getBoundingClientRect();
+                var homeX = fr.left + home[0] / 100 * fr.width, homeY = fr.top + home[1] / 100 * fr.height;
+                var top = hr.top + (document.querySelector('.nav') ? document.querySelector('.nav').offsetHeight : 0) + 50;
+                var move = function (ev) {
+                    var dx = ev.clientX - sx, dy = ev.clientY - sy;
+                    if (!moved && Math.abs(dx) + Math.abs(dy) < 7) return;
+                    if (!moved) { moved = true; dragging = true; clearTimeout(spotT); wrap.classList.add('dragging'); document.body.classList.add('is-dragging'); }
+                    // keep it inside the hero so it can never be lost off-screen
+                    var nx = Math.max(hr.left + 60, Math.min(hr.right - 60, homeX + ox0 + dx));
+                    var ny = Math.max(top, Math.min(hr.bottom - 80, homeY + oy0 + dy));
+                    setOffset(wrap, nx - homeX, ny - homeY);
+                };
+                var up = function () {
+                    window.removeEventListener('pointermove', move); window.removeEventListener('pointerup', up);
+                    if (!moved) return;
+                    handle._dragged = true; setTimeout(function () { handle._dragged = false; }, 60);
+                    dragging = false; wrap.classList.remove('dragging'); document.body.classList.remove('is-dragging');
+                    coolUntil = Date.now() + 500; // do not open the takeover just because it was dropped under the pointer
+                    dragUi.classList.add('moved'); setDragTip(true);
+                };
+                window.addEventListener('pointermove', move); window.addEventListener('pointerup', up);
+            });
+            if (suppressClick) handle.addEventListener('click', function (e) { if (handle._dragged) { e.preventDefault(); e.stopPropagation(); } }, true);
+            handle.addEventListener('dragstart', function (e) { e.preventDefault(); });
+        };
         flyers.forEach(function (f) {
             var id = f.getAttribute('data-spot');
             // Click (or tap) an agent: it spins up into the air and flies off the right edge of the
@@ -538,37 +576,16 @@
                 launch();
             });
 
-            // Drag: pick the agent up and put it anywhere in the hero. Its name tag travels with it
-            // and its line to "Your solution" stretches to follow.
-            var wrap = f.parentNode, line = lines[AGENTS.indexOf(BY_ID[id])];
-            wrap._home = POS[id]; wrap._line = line;
-            f.addEventListener('pointerdown', function (e) {
-                if (e.pointerType === 'touch' || e.button > 0) return; // touch keeps normal scrolling
-                clearTimeout(spotT);
-                var sx = e.clientX, sy = e.clientY, ox0 = wrap._ox || 0, oy0 = wrap._oy || 0, moved = false;
-                var fr = field.getBoundingClientRect(), hr = hero.getBoundingClientRect();
-                var homeX = fr.left + POS[id][0] / 100 * fr.width, homeY = fr.top + POS[id][1] / 100 * fr.height;
-                var top = hr.top + (document.querySelector('.nav') ? document.querySelector('.nav').offsetHeight : 0) + 50;
-                var move = function (ev) {
-                    var dx = ev.clientX - sx, dy = ev.clientY - sy;
-                    if (!moved && Math.abs(dx) + Math.abs(dy) < 7) return;
-                    if (!moved) { moved = true; dragging = true; clearTimeout(spotT); wrap.classList.add('dragging'); document.body.classList.add('is-dragging'); }
-                    // keep the agent inside the hero so it can never be lost off-screen
-                    var nx = Math.max(hr.left + 60, Math.min(hr.right - 60, homeX + ox0 + dx));
-                    var ny = Math.max(top, Math.min(hr.bottom - 80, homeY + oy0 + dy));
-                    setOffset(wrap, nx - homeX, ny - homeY);
-                };
-                var up = function () {
-                    window.removeEventListener('pointermove', move); window.removeEventListener('pointerup', up);
-                    if (!moved) return;
-                    f._dragged = true; setTimeout(function () { f._dragged = false; }, 60);
-                    dragging = false; wrap.classList.remove('dragging'); document.body.classList.remove('is-dragging');
-                    coolUntil = Date.now() + 500; // do not open the takeover just because it was dropped under the pointer
-                    dragUi.classList.add('moved'); setDragTip(true);
-                };
-                window.addEventListener('pointermove', move); window.addEventListener('pointerup', up);
-            });
-            f.addEventListener('dragstart', function (e) { e.preventDefault(); });
+            dragify(f, f.parentNode, POS[id], lines[AGENTS.indexOf(BY_ID[id])], false);
+        });
+        // everything else in the field is draggable too
+        $$('.fly', field).forEach(function (w) {
+            if (w.querySelector('.fly-ag')) return;
+            var h = w.firstElementChild, home = [parseFloat(w.style.left), parseFloat(w.style.top)];
+            if (!h) return;
+            if (h.classList.contains('core')) dragify(h, w, home, null, false, true);
+            else if (h.classList.contains('team')) dragify(h, w, home, lines[lines.length - 1], true);
+            else dragify(h, w, home, null, true);
         });
         // "What else can I do?": the solution's agent takes the hero and lists what it can do,
         // one speech cloud at a time, each cloud landing as a line item.
