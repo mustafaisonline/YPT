@@ -1,0 +1,4 @@
+RobotExpressive.glb
+Character by Tomas Laulhe (https://www.patreon.com/quaternius), modifications by Don McCurdy.
+Released under CC0 1.0 (public domain): https://creativecommons.org/publicdomain/zero/1.0/
+Source: three.js examples, models/gltf/RobotExpressive.

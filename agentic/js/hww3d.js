@@ -2,6 +2,7 @@
 // page, built through window.YPT_AG3D from agents3d.js), furniture modelled in code, one WebGL scene, one directed camera.
 import * as THREE from './vendor/three.module.min.js';
 import { RoundedBoxGeometry } from './vendor/RoundedBoxGeometry.js';
+import { GLTFLoader } from './vendor/GLTFLoader.js';
 
 const stage = document.getElementById('hww-stage');
 if (stage) boot().catch(e => { console.error('hww3d', e); stage.classList.add('no3d'); document.dispatchEvent(new Event('ypt:hww3d-fail')); });
@@ -335,7 +336,7 @@ async function boot() {
         { const f = 0, g = floors[f].g, P = PLAN[f];
             room('lobby', f, -12.4, 11, 11); room('academy', f, -1.2, 11, 11); room('hall', f, 12.4, 13, 13);
             rug(g, -12.4, 0, 9, 7, 0xffe2bd); wallSign(f, -12.4, 'WELCOME', 'Reception');
-            box(g, 4.4, 1.05, 1.1, 0.2, mat(C.white), -12.4, 0.52, -2.2); box(g, 4.6, 0.1, 1.3, 0.05, mat(C.walnut), -12.4, 1.08, -2.2); box(g, 4.4, 0.3, 0.06, 0.03, glow(C.orange), -12.4, 0.8, -1.64); blob(g, -12.4, -2.2, 6, 2.6); agent(g, -12.4, -3.0, { scale: 1.0, hover: 0.6 });
+            box(g, 4.4, 1.05, 1.1, 0.2, mat(C.white), -12.4, 0.52, -2.2); box(g, 4.6, 0.1, 1.3, 0.05, mat(C.walnut), -12.4, 1.08, -2.2); box(g, 4.4, 0.3, 0.06, 0.03, glow(C.orange), -12.4, 0.8, -1.64); blob(g, -12.4, -2.2, 6, 2.6); RECEPTION.g = g; RECEPTION.stand = agent(g, -12.4, -3.0, { scale: 1.0, hover: 0.6 });
             sofa(g, -16.2, -0.8, 3.0, C.teal, 0.5); sofa(g, -8.4, -0.6, 2.6, C.blue, -0.5); table(g, -12.4, 0.2, 1.2, 0.8, C.wood, 0.4); plant(g, -17.6, -3.6, 1.6); plant(g, -7.2, -3.6, 1.4);
             wallSign(f, -1.2, 'ACADEMY', 'Stage 7 · Lin'); board(g, -1.2, 1.5, -P.d / 2 + 0.2, 5.4, 2.0, 'deck'); rug(g, -1.2, 0.1, 9.6, 6.2, 0xd8e5ff);
             agent(g, -3.6, -3.0, { def: LEAD('sage'), scale: 1.25, full: true, hover: 0.1, face: 0.2 });
@@ -350,8 +351,26 @@ async function boot() {
             agent(g, 0, 4.2, { scale: 0.95, patrol: { x0: -16, x1: 16, sp: 2.6 }, extra: true });
             plant(g, -P.w / 2 + 1, 4.0, 1.2); plant(g, P.w / 2 - 1, -P.d / 2 + 1, 1.4); }
     }
-    const FLAME = { m: null };
+    const FLAME = { m: null }, RECEPTION = { g: null, stand: null, mixer: null, wave: null, idle: null, next: 4 };
     furnish();
+
+    // Reception upgrade (desktop only): a downloaded, animated CC0 character (public domain) greets visitors at the desk.
+    // On phones, or if the file cannot load, the code-built agent stays.
+    if (!matchMedia('(max-width: 900px)').matches) {
+        new GLTFLoader().load('models/RobotExpressive.glb', gltf => {
+            try {
+                const m = gltf.scene, bb = new THREE.Box3().setFromObject(m), h = bb.max.y - bb.min.y || 1, k = 0.5;
+                m.scale.setScalar(k); m.position.set(-12.4, 0, -3.5); m.rotation.y = 0.12;
+                m.traverse(o => { if (o.isMesh) o.frustumCulled = false; if (o.isMesh && o.material) { o.material.envMapIntensity = 0; if (o.material.color) o.material.color.multiplyScalar(1.0); } });
+                RECEPTION.g.add(m); blob(RECEPTION.g, -12.4, -3.1, 1.6, 1.0);
+                const mx = new THREE.AnimationMixer(m), by = n => gltf.animations.find(a => a.name === n);
+                RECEPTION.idle = mx.clipAction(by('Idle')); RECEPTION.wave = mx.clipAction(by('Wave'));
+                RECEPTION.wave.setLoop(THREE.LoopOnce, 1); RECEPTION.wave.clampWhenFinished = false; RECEPTION.idle.play(); RECEPTION.mixer = mx; mx.update(0.01); m.updateMatrixWorld(true);
+                if (RECEPTION.stand) { RECEPTION.stand.g.visible = false; RECEPTION.stand.bl.visible = false; }
+                const tm = mx; tm.addEventListener('finished', () => { RECEPTION.wave.fadeOut(0.3); RECEPTION.idle.reset().fadeIn(0.3).play(); });
+            } catch (e) { console.warn('reception model', e); }
+        }, undefined, e => console.warn('reception model failed', e && e.message || e));
+    }
 
     // ------------------------------------------------------------------ Alya, the escort (no visitor character: the camera is the visitor)
     const A = { x: 2, y: 0, z: 20, f: 0, goal: null, walking: false, yaw: 0, ride: false };
@@ -433,6 +452,7 @@ async function boot() {
         requestAnimationFrame(frame);
         const dt = Math.min(0.25, (now - last) / 1000); last = now; const t = now / 1000;
         stepAlya(dt, t); animate(t, dt);
+        if (RECEPTION.mixer) { RECEPTION.mixer.update(dt); RECEPTION.next -= dt; if (RECEPTION.next < 0 && !REDUCED) { RECEPTION.next = 6 + rnd() * 3; RECEPTION.wave.reset().fadeIn(0.25).play(); RECEPTION.idle.fadeOut(0.25); } }
         if (following) shot.tx = Math.max(-20, Math.min(20, A.x * 0.5 + shot.tx * 0.5));
         const k = 1 - Math.exp(-dt * shot.rate);
         for (const p of ['tx', 'ty', 'tz', 'dist', 'yaw', 'pitch', 'turn']) rig[p] += (shot[p] - rig[p]) * k;
