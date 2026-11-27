@@ -313,6 +313,7 @@ def build():
 {sprite}
 <section class="hww" id="hww" aria-label="How We Work: a tour of our building">
   <div class="hww-stage" id="hww-stage">
+    <a class="hww-home" href="index.html" aria-label="Your Partner Technologies home" title="Home"><img src="assets/images/ypt-logo-320.png" alt=""></a>
     <p class="no3d-note">Your browser cannot show the 3D tower. The tour text still works, and every floor is listed below.</p>
     <div class="hww-say" id="hww-say">
       <div class="hww-who"><span class="hww-name">Alya</span><span class="hww-chip" id="hww-chip"></span></div>
