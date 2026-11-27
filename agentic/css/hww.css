@@ -71,3 +71,6 @@
 }
 
 .hww-ctl .k-rot { --k: #0ea5e9; --kd: #0b78a8; }
+
+/* phones: the fixed site-type selector sits at the bottom right, so the control bar rides above it */
+@media (max-width: 900px) { .hww-ctl { bottom: 62px; } }
