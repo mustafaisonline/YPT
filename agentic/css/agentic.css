@@ -320,6 +320,7 @@ body.has-promo .fs-btn { position: absolute; z-index: 7; right: 14px; top: calc(
 .more-arr { flex: none; width: 46px; height: 46px; border-radius: 50%; display: grid; place-items: center; background: var(--ink); color: var(--white); font-size: 18px; transition: transform 0.3s var(--ease), background 0.3s; }
 .more-can:hover { transform: translateY(-4px) scale(1.02); box-shadow: 0 34px 56px -24px rgba(130, 87, 240, 0.85); animation: none; }
 .more-can:hover .more-ag { transform: scale(1.14) rotate(-6deg); }
+.more-ag.spin { animation: agspin 0.56s cubic-bezier(0.3, 0, 0.2, 1) both; }
 .more-can:hover .more-arr { transform: translateX(5px); background: var(--primary); }
 .more-can:hover .ag-eyes-n { opacity: 0; } .more-can:hover .ag-eyes-h { opacity: 1; }
 @keyframes nudge { 0%, 80%, 100% { transform: rotate(0); } 84% { transform: rotate(-1.4deg) scale(1.015); } 88% { transform: rotate(1.4deg) scale(1.015); } 92% { transform: rotate(-0.8deg); } }

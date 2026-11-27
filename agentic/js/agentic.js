@@ -364,7 +364,7 @@
     // ------------------------------------------------------------------
     var field = $('#field');
     if (field) {
-        var POS = { vera: [50, 9], atlas: [84, 22], spark: [91, 57], forge: [79, 92], aegis: [21, 87], orca: [9, 54], sage: [17, 20] }; /* clockwise from the top: stage 1 to 7 */
+        var POS = { vera: [50, 10], atlas: [84, 22], spark: [92, 67], forge: [78, 94], aegis: [25, 92], orca: [8, 66], sage: [18, 20] }; /* clockwise from the top: stage 1 to 7 */
         var CHIPS = [['Requirements interview', 24, 38], ['Data model', 78, 41], ['Guardrails', 40, 77], ['Human-in-the-loop', 68, 5]];
         var html = '<svg class="links" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">';
         AGENTS.forEach(function (a) { html += '<line x1="50" y1="50" x2="' + POS[a.id][0] + '" y2="' + POS[a.id][1] + '"/>'; });
@@ -635,11 +635,13 @@
                 capBusy = true;
                 flyOff($('.more-ag', capsBtn), function () { capBusy = false; openCaps(); });
             };
+            // Hover only makes the agent spin, like the hero agents; it flies off on a click or tap.
+            var capAg = $('.more-ag', capsBtn), capSpinT = 0;
             capsBtn.addEventListener('pointerenter', function (e) {
-                if (e.pointerType !== 'mouse' || Date.now() < coolUntil) return;
-                clearTimeout(spotT); spotT = setTimeout(capLaunch, 160);
+                if (e.pointerType !== 'mouse' || capBusy || capAg.classList.contains('spin')) return;
+                capAg.classList.add('spin');
+                clearTimeout(capSpinT); capSpinT = setTimeout(function () { capAg.classList.remove('spin'); }, 600);
             });
-            capsBtn.addEventListener('pointerleave', function () { clearTimeout(spotT); });
             capsBtn.addEventListener('click', capLaunch);
         }
         hero.addEventListener('mouseleave', closeSpot);

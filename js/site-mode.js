@@ -46,7 +46,7 @@
         s.textContent =
             '.sm-box{position:fixed;bottom:calc(14px + env(safe-area-inset-bottom));right:14px;z-index:2147483000;display:flex;align-items:center;gap:6px;' +
             'background:rgba(15,23,48,.92);color:#fff;border:1px solid rgba(255,255,255,.22);border-radius:999px;' +
-            'padding:3px 4px 3px 11px;font:600 12px/1 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;' +
+            'padding:3px;font:600 12px/1 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;' +
             'box-shadow:0 4px 14px rgba(0,0,0,.25);backdrop-filter:blur(8px)}' +
             '.sm-box label{opacity:.8;font-weight:500;white-space:nowrap}' +
             '.sm-box select{appearance:none;-webkit-appearance:none;background:#2457f5;color:#fff;border:0;border-radius:999px;' +
@@ -74,7 +74,7 @@
     function box() {
         var d = document.createElement('div');
         d.className = 'sm-box';
-        d.innerHTML = '<label for="sm-sel">Site type</label><select id="sm-sel" aria-label="Site type">' +
+        d.innerHTML = '<select id="sm-sel" aria-label="Site type">' +
             '<option value="standard">Standard</option><option value="agentic">Agentic AI</option></select>';
         var sel = d.querySelector('select');
         sel.value = inAgentic ? 'agentic' : 'standard';
