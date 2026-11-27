@@ -1,9 +1,9 @@
 /* YPT site-mode: Standard <-> Agentic AI version switch (CR-002).
  * Loaded by BOTH versions. Standard pages live at /, agentic pages at /agentic/.
  * - Choice is kept in localStorage ("ypt-site-mode" = standard | agentic).
- * - First visit on the standard site, no choice yet: a pop-up asks once.
+ * - Agentic AI is the default: a visitor with no choice yet lands on the agentic version (no pop-up).
  * - A "Site type" list box (top right) always lets the visitor switch.
- * - No server redirects; crawlers (no stored choice) always get the standard pages.
+ * - No server redirects; crawlers (no stored choice) still get the standard pages, so search keeps indexing them.
  * - ?site=standard or ?site=agentic sets the choice from a link.
  */
 (function () {
@@ -32,14 +32,15 @@
         history.replaceState(null, '', path + clean + location.hash);
     }
 
+    var isBot = /bot|crawl|spider|slurp|lighthouse|headless/i.test(navigator.userAgent);
     var mode = get();
     // Returning visitor who chose the other version: send them there before the page paints.
     if (mode === 'agentic' && !inAgentic) { location.replace(twin('agentic')); return; }
     if (mode === 'standard' && inAgentic) { location.replace(twin('standard')); return; }
+    // No choice yet: Agentic AI is the default. Visitors (not crawlers) land on the agentic twin of the page.
+    if (!mode && !inAgentic && !isBot) { location.replace(twin('agentic')); return; }
     // Arrived on an /agentic/ link with no choice yet: that link is their choice.
     if (!mode && inAgentic) { set('agentic'); mode = 'agentic'; }
-
-    var isBot = /bot|crawl|spider|slurp|lighthouse|headless/i.test(navigator.userAgent);
 
     function css() {
         var s = document.createElement('style');
@@ -82,29 +83,8 @@
         document.body.appendChild(d);
     }
 
-    function popup() {
-        var o = document.createElement('div');
-        o.className = 'sm-ov';
-        o.setAttribute('role', 'dialog'); o.setAttribute('aria-modal', 'true'); o.setAttribute('aria-labelledby', 'sm-t');
-        o.innerHTML = '<div class="sm-card"><p class="sm-k">New</p><h2 id="sm-t">Do you want to see our agentic version of this website?</h2>' +
-            '<p>Same content, rebuilt around a crew of AI agents that guide you through each page.</p>' +
-            '<button class="sm-yes" type="button">Yes, show me the agentic version</button>' +
-            '<button class="sm-no" type="button">No thanks, keep the standard site</button>' +
-            '<small>You can switch any time using &ldquo;Site type&rdquo; at the top right.</small></div>';
-        document.body.appendChild(o);
-        var yes = o.querySelector('.sm-yes'), no = o.querySelector('.sm-no');
-        function close(v) { set(v); if (v === 'agentic') { location.href = twin('agentic'); } else { o.remove(); document.removeEventListener('keydown', esc); } }
-        function esc(e) { if (e.key === 'Escape') close('standard'); }
-        yes.onclick = function () { close('agentic'); };
-        no.onclick = function () { close('standard'); };
-        document.addEventListener('keydown', esc);
-        yes.focus();
-    }
-
     function ready() {
         css(); box();
-        var isHome = path === '/' || path === '/index.html';
-        if (!mode && !inAgentic && !isBot && isHome) setTimeout(popup, 900);
     }
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', ready); else ready();
 })();
