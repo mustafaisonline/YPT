@@ -4,11 +4,14 @@ in every HTML page. Run it before each push that changes those files:  python3 s
 """
 import os, re, sys, time
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-stamp = sys.argv[1] if len(sys.argv) > 1 else time.strftime('%Y%m%d%H%M')
+args = [a for a in sys.argv[1:] if a != '--all']
+ALL = '--all' in sys.argv  # --all also re-stamps the standard pages (needed only when js/site-mode.js changes)
+stamp = args[0] if args else time.strftime('%Y%m%d%H%M')
 pat = re.compile(r'((?:agentic\.css|agentic\.js|agents3d\.js|site-mode\.js))(\?v=[0-9A-Za-z]+)?(")')
 n = 0
 for d, _, fs in os.walk(ROOT):
     if any(x in d for x in ('/.git', '/node_modules', '/scripts', '/change-requests')): continue
+    if not ALL and not (d + '/').startswith(ROOT + '/agentic/'): continue
     for f in fs:
         if not f.endswith('.html'): continue
         p = os.path.join(d, f)

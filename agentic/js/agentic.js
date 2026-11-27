@@ -364,7 +364,7 @@
     // ------------------------------------------------------------------
     var field = $('#field');
     if (field) {
-        var POS = { vera: [50, 10], atlas: [84, 22], spark: [92, 67], forge: [78, 94], aegis: [25, 92], orca: [8, 66], sage: [18, 20] }; /* clockwise from the top: stage 1 to 7 */
+        var POS = { vera: [50, 10], atlas: [83, 24], spark: [91, 69], forge: [73, 91], aegis: [31, 91], orca: [7, 68], sage: [17, 23] }; /* clockwise from the top: stage 1 to 7 */
         var CHIPS = [['Requirements interview', 24, 38], ['Data model', 78, 41], ['Guardrails', 40, 77], ['Human-in-the-loop', 68, 5]];
         var html = '<svg class="links" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">';
         AGENTS.forEach(function (a) { html += '<line x1="50" y1="50" x2="' + POS[a.id][0] + '" y2="' + POS[a.id][1] + '"/>'; });
@@ -400,7 +400,7 @@
             '<path d="M29 35.500q3 2 6 0" fill="none" stroke="#f0bd96" stroke-width="1.400" stroke-linecap="round"/>' +
             '</svg>';
         html += '<div class="core"><div class="core-who"><span class="core-av" aria-hidden="true">' + ARMAN + '</span>' +
-            '<span class="core-name"><b>SAM</b><small>Forward Deployed Engineer (FDE)</small></span></div>' +
+            '<span class="core-name"><b>SAM (FDE)</b><small>Forward Deployed Engineer</small></span></div>' +
             '<span class="core-sub">I\u2019m your HUMAN Lead</span>' +
             '<span class="core-ask"><span id="core-type"></span><i class="caret"></i>' +
             '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></span></div>';
