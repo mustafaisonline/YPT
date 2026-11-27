@@ -56,6 +56,7 @@
             '.sm-box select:focus-visible{outline:2px solid #f28a1e;outline-offset:2px}' +
             '.sm-box select option{color:#111;background:#fff}' +
             '@media (max-width:900px){.sm-box{top:auto;bottom:calc(10px + env(safe-area-inset-bottom));right:auto;left:10px}}' +
+            '.sm-box.sm-docked{top:auto;left:auto;z-index:45}' +
             '.sm-ov{position:fixed;inset:0;z-index:2147483001;background:rgba(7,12,28,.66);display:flex;align-items:center;justify-content:center;padding:16px;' +
             'font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;animation:smf .25s ease}' +
             '@keyframes smf{from{opacity:0}to{opacity:1}}' +
@@ -81,6 +82,24 @@
         sel.value = inAgentic ? 'agentic' : 'standard';
         sel.addEventListener('change', function () { go(sel.value); });
         document.body.appendChild(d);
+        attach(d);
+    }
+
+    // Agentic pages have the bottom-right guide agent: dock the box right above it.
+    function attach(d) {
+        var g = document.querySelector('.guide-ag');
+        if (!g) return;
+        d.className += ' sm-docked';
+        function place() {
+            var r = g.getBoundingClientRect();
+            if (!r.height) return;
+            d.style.right = Math.max(8, document.documentElement.clientWidth - r.right) + 'px';
+            d.style.bottom = Math.round(window.innerHeight - r.top + 6) + 'px';
+        }
+        place();
+        window.addEventListener('resize', place);
+        if (window.ResizeObserver) new ResizeObserver(place).observe(g);
+        [300, 1200, 3000].forEach(function (ms) { setTimeout(place, ms); });
     }
 
     function popup() {
