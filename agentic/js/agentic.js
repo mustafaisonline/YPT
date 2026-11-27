@@ -400,9 +400,8 @@
             '<path d="M29 35.500q3 2 6 0" fill="none" stroke="#f0bd96" stroke-width="1.400" stroke-linecap="round"/>' +
             '</svg>';
         html += '<div class="core"><div class="core-who"><span class="core-av" aria-hidden="true">' + ARMAN + '</span>' +
-            '<span class="core-name"><b>Sam</b><small>Forward Deployed Engineer (FDE)</small></span></div>' +
+            '<span class="core-name"><b>SAM</b><small>Forward Deployed Engineer (FDE)</small></span></div>' +
             '<span class="core-sub">I\u2019m your HUMAN Lead</span>' +
-            '<strong>YOUR SOLUTION</strong>' +
             '<span class="core-ask"><span id="core-type"></span><i class="caret"></i>' +
             '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></span></div>';
         AGENTS.forEach(function (a, i) {
@@ -1110,7 +1109,7 @@
             '<span class="ind-lab"><small>Industry</small></span>' +
             '<svg class="ind-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>' +
             '<ul class="ind-list" hidden>' + INDUSTRIES.map(function (i) {
-                return '<li><button type="button" data-id="' + i.id + '">' + (i.id === 'general' ? '' : icoHTML(i.id)) + '<span class="ind-name">' + esc(i.name) + '</span>' +
+                return '<li><button type="button" data-id="' + i.id + '">' + icoHTML(i.id) + '<span class="ind-name">' + esc(i.name) + '</span>' +
                     '<span class="ind-ag" aria-hidden="true">' + agentSVG(BY_ID.guide, { head: true, look: i }) + '</span>' +
                     '<svg class="ind-ok" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg></button></li>';
             }).join('') + '</ul>';
