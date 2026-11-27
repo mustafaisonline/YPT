@@ -599,7 +599,7 @@ async function boot() {
     function frame(now) {
         requestAnimationFrame(frame);
         const dt = Math.min(0.25, (now - last) / 1000); last = now; const t = now / 1000;
-        stepAlya(dt, t); animate(t, dt); if (RECEP) RECEP.tick(dt);
+        stepAlya(dt, t); animate(t, dt); if (RECEP) RECEP.tick(dt, (alyaA.g.visible && A.y < 1 ? [{ x: A.x, z: A.z, agent: true }] : []).concat(IN.on ? [{ x: camera.position.x, z: camera.position.z }] : []));
         if (following) shot.tx = Math.max(-20, Math.min(20, A.x * 0.5 + shot.tx * 0.5));
         const k = 1 - Math.exp(-dt * shot.rate);
         for (const p of ['tx', 'ty', 'tz', 'dist', 'yaw', 'pitch', 'turn']) rig[p] += (shot[p] - rig[p]) * k;

@@ -146,21 +146,25 @@ export async function buildReception(ctx) {
             doors.forEach(d => x.clearRect(d[0] * ppm, 0, (d[1] - d[0]) * ppm, h));
         });
     }
-    function glassDoor(par, x, z, ry, w) {                                                                                           // a double door with a dark metal frame, brass pulls and a kick plate
+    const doors = [];
+    function glassDoor(par, x, z, ry, w, wx, wz, reachP, reachA) {   // an automatic sliding door: a dark frame, a sensor, and two glass leaves that slide apart when someone comes near, from either side
         const g = new THREE.Group(); g.position.set(x, 0, z); g.rotation.y = ry; par.add(g);
-        const H = 2.55, T = 0.09, fm = frontM;
-        bx(T, H, 0.1, fm, -w / 2, H / 2, 0, g); bx(T, H, 0.1, fm, w / 2, H / 2, 0, g); bx(w + T, T, 0.1, fm, 0, H, 0, g); bx(0.05, H, 0.08, fm, 0, H / 2, 0, g);
-        for (const sx of [-1, 1]) { bx(w / 2 - 0.08, H - 0.1, 0.03, new THREE.MeshPhongMaterial({ color: 0xcfe0ff, transparent: true, opacity: 0.12, shininess: 160, specular: 0xffffff, depthWrite: false }), sx * w / 4, H / 2 - 0.02, 0, g);
-            bx(w / 2 - 0.08, 0.26, 0.05, brass, sx * w / 4, 0.14, 0, g);
-            for (const sz of [-1, 1]) mesh(new THREE.CylinderGeometry(0.018, 0.018, 0.95, 12), brass, sx * 0.14, 1.05, sz * 0.07, g); }
-        bx(w + 0.2, 0.012, 0.16, brass, 0, 0.007, 0, g);                                                                              // threshold
-        return g;
+        const H = 2.55, T = 0.09, fm = frontM, glassM = new THREE.MeshPhongMaterial({ color: 0xcfe0ff, transparent: true, opacity: 0.16, shininess: 160, specular: 0xffffff, depthWrite: false });
+        bx(T, H, 0.12, fm, -w / 2 - T / 2, H / 2, 0, g); bx(T, H, 0.12, fm, w / 2 + T / 2, H / 2, 0, g); bx(w + 2 * T, 0.16, 0.14, fm, 0, H + 0.02, 0, g);
+        bx(0.3, 0.07, 0.1, plain(0x0b0d12, { roughness: 0.3 }), 0, H - 0.08, 0.07, g); bx(0.12, 0.012, 0.012, emissive(0x3ddc97), 0, H - 0.08, 0.125, g);   // sensor with a green light
+        bx(w, 0.02, 0.2, brass, 0, 0.006, 0, g);                                                                                                               // threshold
+        bx(w, 0.03, 0.05, fm, 0, H - 0.1, 0.045, g);                                                                                                           // track
+        const leaves = [-1, 1].map(sx => { const L = new THREE.Group(); L.position.set(sx * w / 4, 0, 0.045); g.add(L);
+            bx(w / 2 - 0.02, H - 0.14, 0.025, glassM, 0, H / 2 - 0.05, 0, L); bx(w / 2 - 0.02, 0.24, 0.035, brass, 0, 0.13, 0, L);                              // glass and kick plate
+            bx(0.035, H - 0.14, 0.04, fm, -sx * (w / 4 - 0.03), H / 2 - 0.05, 0, L); bx(0.035, H - 0.14, 0.04, fm, sx * (w / 4 - 0.03), H / 2 - 0.05, 0, L);   // leaf edges
+            mesh(new THREE.CylinderGeometry(0.015, 0.015, 0.8, 12), brass, -sx * (w / 4 - 0.1), 1.05, 0.03, L); L.userData.x0 = sx * w / 4; L.userData.sx = sx; return L; });
+        const d = { leaves, w, open: 0, x: wx, z: wz, reachP, reachA }; doors.push(d); return d;
     }
     const part = mesh(new THREE.PlaneGeometry(ZF - ZB, 3.0), partGlass, X1, 1.55, 0); part.rotation.y = Math.PI / 2;
-    const DZ1 = 2.0, DW1 = 1.9;
+    const DZ1 = 2.7, DW1 = 2.0;   // on Alya's walking line, so she passes through it
     const partEtch = mesh(new THREE.PlaneGeometry(ZF - ZB, 3.0), new THREE.MeshBasicMaterial({ map: etch(ZF - ZB, 3.0, [[ZF - (DZ1 + DW1 / 2 + 0.05) - ZB, ZF - (DZ1 - DW1 / 2 - 0.05) - ZB]]), transparent: true, depthWrite: false, toneMapped: false, side: THREE.DoubleSide, opacity: 0.95 }), X1 + 0.004, 1.55, 0); partEtch.rotation.y = Math.PI / 2;
     const frontM = plain(0x23262f, { metalness: 0.7, roughness: 0.45 });
-    glassDoor(root, X1, DZ1, Math.PI / 2, DW1);
+    glassDoor(root, X1, DZ1, Math.PI / 2, DW1, X1, DZ1, 1.9, 4.2);
     bx(0.12, 0.06, ZF - ZB, frontM, X1, 3.07, 0);
     for (const zz of [ZB + 0.06, 0.0, ZF - 0.06]) bx(0.1, 3.1, 0.1, frontM, X1, 1.55, zz);
     // skirting
@@ -186,7 +190,7 @@ export async function buildReception(ctx) {
     mesh(new THREE.PlaneGeometry(X1 - X0, 3.0), new THREE.MeshBasicMaterial({ map: etch(X1 - X0, 3.0, [[DX2 - DW2 / 2 - 0.05 - X0, DX2 + DW2 / 2 + 0.05 - X0]]), transparent: true, depthWrite: false, toneMapped: false, side: THREE.DoubleSide, opacity: 0.95 }), CX, 1.55, ZF - 0.014, inside);
     for (let k = 0; k <= 6; k++) { const mx = X0 + k * (X1 - X0) / 6; if (Math.abs(mx - DX2) > DW2 / 2 + 0.1) bx(0.07, 3.1, 0.07, frontM, mx, 1.55, ZF - 0.02, inside); }
     bx(X1 - X0, 0.08, 0.08, frontM, CX, 3.07, ZF - 0.02, inside);
-    glassDoor(inside, DX2, ZF - 0.02, 0, DW2);
+    glassDoor(inside, DX2, ZF - 0.02, 0, DW2, DX2, ZF, 2.0, 0);
 
     // ------------------------------------------------------------------ the reception desk (built in code)
     const DZ = DZ_, dW = 5.0;
@@ -286,8 +290,8 @@ export async function buildReception(ctx) {
         put('modern_arm_chair_01', { x: CX - 1.9, z: 3.25, ry: -Math.PI / 2 - 0.25, h: 0.88, shadow: [1.8, 1.8] }),
         put('coffee_table_round_01', { x: CX - 3.1, z: 1.9, w: 1.05, shadow: [1.6, 1.6] }),
         put('Ottoman_01', { x: CX - 3.1, z: 3.7, ry: 0.2, w: 0.85, shadow: [1.3, 1.3] }),
-        put('mid_century_lounge_chair', { x: CX + 3.7, z: 2.0, ry: -2.3, h: 0.98, shadow: [1.8, 1.8] }),
-        put('side_table_tall_01', { x: CX + 2.7, z: 3.4, h: 0.82, shadow: [0.9, 0.9] }),
+        put('mid_century_lounge_chair', { x: CX + 3.75, z: -0.3, ry: -2.0, h: 0.98, shadow: [1.8, 1.8] }),
+        put('side_table_tall_01', { x: CX + 3.4, z: 0.95, h: 0.82, shadow: [0.9, 0.9] }),
         put('modern_wooden_cabinet', { x: CX + 3.4, z: ZB + 0.5, w: 1.9, shadow: [2.6, 1.2] }),
         put('modern_ceiling_lamp_01', { x: CX - 3.1, z: 1.9, y: 1.75, s: 1.0 }),
         put('modern_ceiling_lamp_01', { x: CX - 2.9, z: -1.9, y: 2.0, s: 1.0 }),
@@ -320,17 +324,24 @@ export async function buildReception(ctx) {
     let acc = 0, tt = 0;
     const blockers = [   // furniture footprints: x0, x1, z0, z1 (walk-around collisions)
         [CX - 2.7, CX + 2.7, DZ_ - 0.8, DZ_ + 0.95], [CX - 5.3, CX - 3.9, 0.7, 3.1], [CX - 2.4, CX - 1.4, 0.05, 1.05], [CX - 2.4, CX - 1.4, 2.75, 3.75], [CX - 3.75, CX - 2.45, 1.25, 2.55], [CX - 3.6, CX - 2.6, 3.25, 4.15],
-        [CX + 3.15, CX + 4.25, 1.5, 2.5], [CX + 2.4, CX + 3.0, 3.1, 3.7], [CX + 2.35, CX + 4.5, ZB, ZB + 1.0], [CX - 5.5, CX - 4.4, ZB, ZB + 1.4], [CX + 4.5, X1, ZB, ZB + 1.5], [X0, X0 + 1.0, ZF - 1.5, ZF], [CX + 3.95, CX + 4.75, 4.3, 5.1]];
+        [CX + 3.2, CX + 4.3, -0.85, 0.25], [CX + 3.1, CX + 3.7, 0.65, 1.25], [CX + 2.35, CX + 4.5, ZB, ZB + 1.0], [CX - 5.5, CX - 4.4, ZB, ZB + 1.4], [CX + 4.5, X1, ZB, ZB + 1.5], [X0, X0 + 1.0, ZF - 1.5, ZF], [CX + 3.95, CX + 4.75, 4.3, 5.1]];
     const R = 0.3;
     return {
         group: root, inside, screen,
         wake,
-        clamp(x, z) {   // keep a walker (radius R) inside the room and out of the furniture
-            x = Math.max(X0 + 0.45, Math.min(X1 - 0.45, x)); z = Math.max(ZB + 0.5, Math.min(ZF - 0.4, z));
-            for (const b of blockers) { const x0 = b[0] - R, x1 = b[1] + R, z0 = b[2] - R, z1 = b[3] + R; if (x > x0 && x < x1 && z > z0 && z < z1) { const d = [x - x0, x1 - x, z - z0, z1 - z], m = Math.min(...d); if (m === d[0]) x = x0; else if (m === d[1]) x = x1; else if (m === d[2]) z = z0; else z = z1; } }
+        clamp(x, z) {   // keep a walker (radius R) in the room and out of the furniture; the two doors lead out, a few steps either way
+            const inHall = Math.abs(z - DZ1) < DW1 / 2 - 0.2, inFront = Math.abs(x - DX2) < DW2 / 2 - 0.2;
+            let xmax = X1 - 0.45, zmax = ZF - 0.4;
+            if (inHall && x > X1 - 1) xmax = X1 + 2.6; if (inFront && z > ZF - 1) zmax = ZF + 2.6;
+            if (!(inHall && x > X1 - 0.6) && !(inFront && z > ZF - 0.6)) { x = Math.min(x, X1 - 0.45); z = Math.min(z, ZF - 0.4); }
+            x = Math.max(X0 + 0.45, Math.min(xmax, x)); z = Math.max(ZB + 0.5, Math.min(zmax, z));
+            if (x < X1 - 0.3 && z < ZF - 0.3) for (const b of blockers) { const x0 = b[0] - R, x1 = b[1] + R, z0 = b[2] - R, z1 = b[3] + R; if (x > x0 && x < x1 && z > z0 && z < z1) { const d = [x - x0, x1 - x, z - z0, z1 - z], m = Math.min(...d); if (m === d[0]) x = x0; else if (m === d[1]) x = x1; else if (m === d[2]) z = z0; else z = z1; } }
             return [x, z];
         },
-        tick(dt) { acc += dt; tt += dt; if (acc > 5) { acc = 0; slideI++; drawSlide(slideI); } if (sculpt) sculpt.rotation.y = tt * 0.4; },
+        tick(dt, actors) {   // actors: [{x, z, r}] people or agents near enough to open the doors
+            for (const d of doors) { const near = actors && actors.some(a => Math.hypot(a.x - d.x, a.z - d.z) < (a.agent ? d.reachA : d.reachP)); d.open += Math.max(-1, Math.min(1, (near ? 1 : 0) - d.open)) * Math.min(1, dt * 3.2) * (near ? 1.2 : 0.9); d.open = Math.max(0, Math.min(1, d.open));
+                for (const L of d.leaves) L.position.x = L.userData.x0 + L.userData.sx * d.w * 0.46 * d.open * d.open * (3 - 2 * d.open); }
+            acc += dt; tt += dt; if (acc > 5) { acc = 0; slideI++; drawSlide(slideI); } if (sculpt) sculpt.rotation.y = tt * 0.4; },
         spots: [   // where you can stand: x, z, eye height, yaw (0 faces the back wall), pitch
             { name: 'Entrance', x: CX + 1.6, z: 4.9, y: 1.62, yaw: 0.0, pitch: -0.04 },
             { name: 'Lounge', x: CX - 5.0, z: 3.9, y: 1.45, yaw: -0.95, pitch: -0.02 },
