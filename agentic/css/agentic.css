@@ -336,7 +336,7 @@ body.has-promo .fs-btn { position: absolute; z-index: 7; right: 14px; top: calc(
    underneath and a soft drop shadow. They are placed on whole pixels (see placeFly in agentic.js)
    and do not drift, so their text stays sharp. */
 .core {
-    position: absolute; left: 50%; top: 50%; z-index: 2; margin: -52px 0 0 -124px; /* even size, centred without a fractional transform */
+    position: absolute; left: 50%; top: var(--cy, 50%); z-index: 2; margin: -52px 0 0 -124px; /* even size, centred without a fractional transform */
     width: 248px; padding: 18px 16px 16px; text-align: center;
     background: var(--white); border: 1.5px solid #c3cdea; border-radius: 22px;
     box-shadow: 0 7px 0 #c3cdea, 0 26px 34px -16px rgba(15, 23, 48, 0.45);

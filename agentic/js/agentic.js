@@ -367,10 +367,15 @@
     // ------------------------------------------------------------------
     var field = $('#field');
     if (field) {
-        var POS = { vera: [50, 10], atlas: [83, 24], spark: [91, 69], forge: [73, 91], aegis: [31, 91], orca: [7, 68], sage: [17, 23] }; /* clockwise from the top: stage 1 to 7 */
-        var CHIPS = [['Requirements interview', 24, 38], ['Data model', 78, 41], ['Guardrails', 40, 77], ['Human-in-the-loop', 68, 5]];
+        /* Wide screens: SAM sits high, the seven agents fan out in one calm smile-shaped arc below him (stage 1 to 7, left to right),
+           and only a few quiet labels float in the gaps. Small screens keep the compact ring. */
+        var WIDE = window.matchMedia('(min-width: 1021px)').matches, CY = WIDE ? 23 : 50;
+        var POS = WIDE ? { vera: [7, 52], atlas: [21, 66], spark: [36, 75], forge: [50, 79], aegis: [64, 75], orca: [79, 66], sage: [93, 52] }
+                       : { vera: [50, 10], atlas: [83, 24], spark: [91, 69], forge: [73, 91], aegis: [31, 91], orca: [7, 68], sage: [17, 23] };
+        var CHIPS = WIDE ? [['Requirements interview', 19, 22], ['Data model', 81, 22], ['Guardrails', 50, 56]] : [['Requirements interview', 24, 38], ['Data model', 78, 41], ['Guardrails', 40, 77], ['Human-in-the-loop', 68, 5]];
+        field.style.setProperty('--cy', CY + '%');
         var html = '<svg class="links" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">';
-        AGENTS.forEach(function (a) { html += '<line x1="50" y1="50" x2="' + POS[a.id][0] + '" y2="' + POS[a.id][1] + '"/>'; });
+        AGENTS.forEach(function (a) { html += '<line x1="50" y1="' + CY + '" x2="' + POS[a.id][0] + '" y2="' + POS[a.id][1] + '"/>'; });
         html += '</svg>';
         CHIPS.forEach(function (c, i) {
             html += '<div class="fly" data-depth="' + (0.5 + (i % 3) * 0.3) + '" style="left:' + c[1] + '%;top:' + c[2] + '%">' +
@@ -384,8 +389,9 @@
             chart: '<path d="M4 20V4M4 20h16M8 16v-4M12 16V8M16 16v-6"/>',
             code: '<path d="M8 8l-4 4 4 4M16 8l4 4-4 4M13 6l-2 12"/>'
         };
-        [['chat', 36, 25, '#fdf0d9', '#d9820b'], ['db', 64, 28, '#dff6f1', '#0b8f80'], ['shield', 68, 72, '#eee8fe', '#6537d6'],
-         ['flow', 97, 38, '#e6ecff', '#1a3fd0'], ['chart', 3, 82, '#fde5df', '#d94a31'], ['code', 99, 88, '#fde6f0', '#cf2f76']].forEach(function (t, i) {
+        (WIDE ? [['chat', 35, 42, '#fdf0d9', '#d9820b'], ['db', 65, 42, '#dff6f1', '#0b8f80'], ['flow', 95, 30, '#e6ecff', '#1a3fd0'], ['chart', 5, 30, '#fde5df', '#d94a31']]
+         : [['chat', 36, 25, '#fdf0d9', '#d9820b'], ['db', 64, 28, '#dff6f1', '#0b8f80'], ['shield', 68, 72, '#eee8fe', '#6537d6'],
+         ['flow', 97, 38, '#e6ecff', '#1a3fd0'], ['chart', 3, 82, '#fde5df', '#d94a31'], ['code', 99, 88, '#fde6f0', '#cf2f76']]).forEach(function (t, i) {
             html += '<div class="fly" data-depth="' + (0.7 + (i % 3) * 0.4) + '" style="left:' + t[1] + '%;top:' + t[2] + '%">' +
                 '<div class="tool" style="background:' + t[3] + ';color:' + t[4] + ';--dur:' + (7 + i * 1.1) + 's;--delay:-' + (i * 1.3) + 's">' +
                 '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + ICONS[t[0]] + '</svg></div></div>';
