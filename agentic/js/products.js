@@ -99,7 +99,7 @@
                 var i = m.getAttribute('data-m');
                 $$('.ps-mod', s).forEach(function (x) { x.classList.toggle('on', x === m); });
                 $$('.ps-moddet', s).forEach(function (d) { d.hidden = d.getAttribute('data-m') !== i; });
-                var det = $('.ps-moddet:not([hidden])', s), body = $('.ps-body', s); if (window.innerWidth < 721) { if (det) det.scrollIntoView({ block: 'nearest' }); } else if (body) body.scrollTo({ top: Math.max(0, $('.ps-modules', s).offsetTop - 12), behavior: REDUCED ? 'auto' : 'smooth' });
+                var det = $('.ps-moddet:not([hidden])', s), body = $('.ps-body', s); if (window.innerWidth < 721) { if (det) det.scrollIntoView({ block: 'nearest' }); } else if (body) { var dy = $('.ps-modules', s).getBoundingClientRect().top - body.getBoundingClientRect().top - 12; if (dy < 0) body.scrollTo({ top: Math.max(0, body.scrollTop + dy), behavior: REDUCED ? 'auto' : 'smooth' }); }
             });
         });
 

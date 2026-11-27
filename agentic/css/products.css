@@ -188,3 +188,17 @@ body.ps-lock .sm-box { z-index: 5 !important; }
 .ps-lb-x:hover, .ps-lb-x:focus-visible { background: var(--c); }
 @media (max-width: 720px) { .ps-lb { grid-template-columns: 1fr; grid-template-rows: 1fr; padding: 54px 8px 14px; } .ps-lb-n { position: absolute; bottom: 14px; width: 46px; height: 46px; } .ps-lb-prev { left: 14px; } .ps-lb-next { right: 14px; } .ps-shots { grid-template-columns: 1fr; } }
 @media (prefers-reduced-motion: reduce) { .ps-lb { animation: none; } }
+
+/* tables and pills used by the invoice product's dashboard tab */
+.ps-kpis3 { grid-template-columns: repeat(3, 1fr); }
+.ps-kpi-m { font-size: clamp(22px, 2.4vw, 32px); }
+.ps-tblcard { margin-top: 16px; overflow-x: auto; }
+.ps-tbl { width: 100%; border-collapse: collapse; font-size: 14.5px; margin-top: 8px; }
+.ps-tbl th { text-align: left; font: 600 11px/1 var(--mono, monospace); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted, #52607f); padding: 10px 12px; border-bottom: 1.5px solid #e3e8f6; white-space: nowrap; }
+.ps-tbl td { padding: 11px 12px; border-bottom: 1px solid #eef1fa; white-space: nowrap; }
+.ps-tbl tbody tr:last-child td { border-bottom: 0; }
+.ps-tbl .r { text-align: right; font-variant-numeric: tabular-nums; }
+.ps-pill { display: inline-block; padding: 3px 10px; border-radius: 99px; font-size: 12px; font-weight: 700; }
+.ps-p-i { background: #fdf0d9; color: #9a5d08; } .ps-p-w { background: #fff1c9; color: #8a6200; } .ps-p-g { background: #dff6e6; color: #14703a; }
+@media (min-width: 1021px) { .ps-personas { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); } }
+@media (max-width: 720px) { .ps-kpis3 { grid-template-columns: 1fr; } }

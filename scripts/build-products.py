@@ -6,7 +6,7 @@ The wholesale & retail product's content comes from the real project (its code, 
 on purpose (no city, currency, wallet brands or seeded product names). The other three products only carry draft Overview and
 Features tabs until their real content is supplied: nothing is invented for modules, ontology or dashboards.
 """
-import re, os, math, html
+import re, os, sys, math, html
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 os.chdir(os.path.join(ROOT, 'agentic'))
 E = html.escape
@@ -35,8 +35,7 @@ P = [
          draft=['Shipment and route tracking', 'Import and export documents in one place', 'Supplier and buyer records', 'Customs and compliance checklist', 'Status updates at every step', 'Reports across all shipments'],
          art='<circle cx="120" cy="64" r="46" fill="#fff" opacity=".92"/><path d="M74 64h92M120 18c-20 14-20 74 0 92M120 18c20 14 20 74 0 92M82 40h76M82 88h76" stroke="#9db6ff" stroke-width="2" fill="none"/><path d="M40 98C70 40 150 30 206 40" stroke="#2457f5" stroke-width="3" stroke-dasharray="2 7" stroke-linecap="round" fill="none"/><circle cx="40" cy="98" r="7" fill="#f28a1e"/><circle cx="206" cy="40" r="7" fill="#14b8a6"/><rect x="126" y="28" width="22" height="12" rx="3" fill="#2457f5"/><rect x="130" y="22" width="6" height="6" rx="1" fill="#1a3fd0"/>'),
     dict(id='ims', n='03', name='Invoice Management System', tag='Invoices handled, not chased', ag='aegis', who='Mei', role='Governance', c='#14b8a6', cd='#0b8678', soft='#dff6f1',
-         say='I make sure every invoice is checked, approved and traceable. Nothing slips through.', feats=['Create and send invoices', 'Approvals and tracking', 'Payment status at a glance'],
-         draft=['Create and send invoices', 'Approval workflow before sending', 'Payment status tracking', 'Reminders for overdue invoices', 'Full audit trail', 'Reports and exports'],
+         say='I keep every invoice numbered, every payment matched and every change on record. Nothing slips through.', feats=['Invoices and receipts', 'Ageing and statements', 'Audit trail'], full=True,
          art=''.join(f'<g transform="translate({22 + i * 10} {16 + i * 10}) "><rect width="150" height="84" rx="10" fill="#fff" opacity="{.55 + i * .2}"/></g>' for i in range(3)) + '<rect x="52" y="46" width="60" height="6" rx="3" fill="#c9d1ea"/><rect x="52" y="60" width="96" height="5" rx="2.5" fill="#dde3f4"/><rect x="52" y="72" width="80" height="5" rx="2.5" fill="#dde3f4"/><rect x="52" y="84" width="40" height="5" rx="2.5" fill="#dde3f4"/><g transform="translate(150 70)"><circle r="22" fill="#14b8a6"/><path d="M-9 0l6 7 12-14" stroke="#fff" stroke-width="4.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g>'),
     dict(id='staff', n='04', name='Staff Transfer Management', tag='Move people between teams and sites without the paperwork', ag='sage', who='Lin', role='Enablement', c='#7a4cf0', cd='#5a35c0', soft='#eee8fe',
          say='I walk each move through, from the request to the first day, so no one is left wondering what comes next.', feats=['Transfer requests', 'Manager approvals', 'Handover checklist'],
@@ -206,8 +205,26 @@ GROUPCOL = {'people': '#7a4cf0', 'sales': '#f28a1e', 'catalogue': '#14b8a6', 'tr
 GROUPNAME = {'people': 'People', 'sales': 'Sales', 'catalogue': 'Catalogue', 'trust': 'Trust', 'store': 'Store'}
 
 
+TAX = '''<div class="ps-tax">
+<div class="ps-card"><h5 class="mono">Buyer types and prices</h5><ul class="ps-flow"><li>Public shopper <b>retail price</b></li><li>Shopkeeper <b>trade price</b></li><li>Wholesaler <b>wholesale price</b></li></ul><p>Trade and wholesale prices unlock only after a staff member approves the account.</p></div>
+<div class="ps-card"><h5 class="mono">How the catalogue is organised</h5><ul class="ps-flow ps-h"><li>Category</li><li>Product</li><li>Pack size</li><li>Price by buyer type</li></ul><p>Stock and orders attach to the pack size, so every size is counted on its own.</p></div>
+<div class="ps-card"><h5 class="mono">An order&#39;s life</h5><ul class="ps-flow ps-h"><li>Placed</li><li>Confirmed</li><li>Packed</li><li>Out for delivery</li><li>Delivered</li></ul><p>Cancelled is possible before delivery and returns the stock.</p></div>
+<div class="ps-card"><h5 class="mono">A payment&#39;s life</h5><ul class="ps-flow ps-h"><li>Awaiting</li><li>Submitted</li><li>Verified</li><li>or Rejected</li></ul><p>Cash orders go straight to pay on delivery, then paid on delivery.</p></div>
+<div class="ps-card"><h5 class="mono">Who may do what</h5><ul class="ps-flow"><li>Guest <b>browse, buy, track</b></li><li>Customer <b>+ account and order history</b></li><li>Order desk <b>orders, payments, stock</b></li><li>Administrator <b>everything</b></li></ul></div>
+</div>'''
+LEGEND = ('people', 'catalogue', 'sales', 'trust')
+CANVAS = (1000, 620)
+JTITLE = 'The journey of an order'
+DASHTAB = 'Dashboards and reports'
+MODINTRO = 'Thirteen modules. Pick one to see exactly what a person can do in it. Nothing here is deleted for good: records are hidden or deactivated, so the history is always there.'
+FEATINTRO = '{n} features, grouped by what they do for the buyer and for the owner. Open the Modules tab to see them by screen.'
+ONTOHINT = 'The arrows read as a sentence: <b>Buyer places Order</b>, <b>Order contains Order line</b>.'
+SHOTDIR = 'img/products/wholesale'
+SHOTNOTE = 'The shop shown is a sample store with sample records.'
+
+
 def onto_svg():
-    W, H = 1000, 620; nw, nh = 170, 52
+    W, H = CANVAS; nw, nh = 170, 52
     s = [f'<svg class="ps-onto" viewBox="0 0 {W} {H}" role="group" aria-label="How the parts of the product connect">']
     s.append('<defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 1l9 4-9 4z" fill="#8a96b8"/></marker></defs>')
     def edge_pts(a, b):
@@ -236,16 +253,10 @@ def onto_panel():
             if b_ == k: rel.append(f'{ONTO[a_][0]} {v} it')
         cards[k] = (lab, grp, d, fields, rel)
     detail = ''.join(f'<div class="ps-ond" data-k="{k}" hidden><span class="ps-grp mono" style="--nc:{GROUPCOL[g]}">{GROUPNAME[g]}</span><h4>{E(l)}</h4><p>{E(d)}</p><p class="mono ps-sub">Holds</p><ul>' + ''.join(f'<li>{E(f)}</li>' for f in fl) + '</ul><p class="mono ps-sub">Connects to</p><ul>' + ''.join(f'<li>{E(r)}</li>' for r in rl) + '</ul></div>' for k, (l, g, d, fl, rl) in cards.items())
-    intro = '<div class="ps-ond ps-ond-intro"><h4>Pick any box</h4><p>Each box is a thing the product keeps track of. The arrows read as a sentence: <b>Buyer places Order</b>, <b>Order contains Order line</b>. Select a box to see what it holds and what it connects to.</p></div>'
-    legend = ''.join(f'<li><i style="background:{GROUPCOL[g]}"></i>{GROUPNAME[g]}</li>' for g in ('people', 'catalogue', 'sales', 'trust'))
+    intro = '<div class="ps-ond ps-ond-intro"><h4>Pick any box</h4><p>Each box is a thing the product keeps track of. ' + ONTOHINT + ' Select a box to see what it holds and what it connects to.</p></div>'
+    legend = ''.join(f'<li><i style="background:{GROUPCOL[g]}"></i>{GROUPNAME[g]}</li>' for g in LEGEND)
     lst = ''.join(f'<li><b>{E(l)}</b> <span>{E(d)}</span><em>' + '; '.join(rl) + '</em></li>' for k, (l, g, d, fl, rl) in cards.items())
-    tax = '''<div class="ps-tax">
-<div class="ps-card"><h5 class="mono">Buyer types and prices</h5><ul class="ps-flow"><li>Public shopper <b>retail price</b></li><li>Shopkeeper <b>trade price</b></li><li>Wholesaler <b>wholesale price</b></li></ul><p>Trade and wholesale prices unlock only after a staff member approves the account.</p></div>
-<div class="ps-card"><h5 class="mono">How the catalogue is organised</h5><ul class="ps-flow ps-h"><li>Category</li><li>Product</li><li>Pack size</li><li>Price by buyer type</li></ul><p>Stock and orders attach to the pack size, so every size is counted on its own.</p></div>
-<div class="ps-card"><h5 class="mono">An order&#39;s life</h5><ul class="ps-flow ps-h"><li>Placed</li><li>Confirmed</li><li>Packed</li><li>Out for delivery</li><li>Delivered</li></ul><p>Cancelled is possible before delivery and returns the stock.</p></div>
-<div class="ps-card"><h5 class="mono">A payment&#39;s life</h5><ul class="ps-flow ps-h"><li>Awaiting</li><li>Submitted</li><li>Verified</li><li>or Rejected</li></ul><p>Cash orders go straight to pay on delivery, then paid on delivery.</p></div>
-<div class="ps-card"><h5 class="mono">Who may do what</h5><ul class="ps-flow"><li>Guest <b>browse, buy, track</b></li><li>Customer <b>+ account and order history</b></li><li>Order desk <b>orders, payments, stock</b></li><li>Administrator <b>everything</b></li></ul></div>
-</div>'''
+    tax = TAX
     extras = ''.join(f'<li><b>{E(a_)}</b> {E(b_)}</li>' for a_, b_ in EXTRAS)
     return (f'<div class="ps-ontology"><div class="ps-onto-wrap">{onto_svg()}<ul class="ps-legend">{legend}</ul></div>'
             f'<aside class="ps-ond-box" aria-live="polite">{intro}{detail}</aside></div>'
@@ -305,7 +316,7 @@ def modules_panel():
     for i, (n, p, w, v) in enumerate(MODULES):
         rows = ''.join(f'<div class="ps-verb"><div class="ps-vl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{ICON[k]}"/></svg><b>{ {"Remove": "Remove / hide", "Automatic": "Happens by itself"}.get(k, k)}</b></div><ul>' + ''.join(f'<li>{E(x)}</li>' for x in items) + '</ul></div>' for k, items in v.items())
         det += f'<div class="ps-moddet" data-m="{i}"{"" if i == 0 else " hidden"}><h4>{E(n)}</h4><p class="ps-purpose">{E(p)}</p><p class="mono ps-who">Used by: {E(w)}</p>{rows}</div>'
-    return (f'<p class="ps-intro">Thirteen modules. Pick one to see exactly what a person can do in it. Nothing here is deleted for good: records are hidden or deactivated, so the history is always there.</p>'
+    return (f'<p class="ps-intro">{E(MODINTRO)}</p>'
             f'<div class="ps-modules"><nav class="ps-modnav" aria-label="Modules">{nav}</nav><div class="ps-modbody">{det}</div></div>')
 
 
@@ -317,7 +328,7 @@ def overview_panel():
     return (f'<p class="ps-lead">{E(LEAD)}</p><p class="ps-about">{E(ABOUT)}</p><div class="ps-nums">{gl}</div>'
             f'<h4 class="ps-h4">The problems it takes off your desk</h4><ul class="ps-prob">{prob}</ul>'
             f'<h4 class="ps-h4">Who uses it</h4><div class="ps-personas">{pers}</div>'
-            f'<h4 class="ps-h4">The journey of an order</h4><ol class="ps-journey">{jr}</ol>')
+            f'<h4 class="ps-h4">{E(JTITLE)}</h4><ol class="ps-journey">{jr}</ol>')
 
 
 def features_panel(p):
@@ -328,7 +339,7 @@ def features_panel(p):
     for g, items in FEATURES:
         out.append(f'<section class="ps-fg"><h4 class="ps-h4">{E(g)}</h4><ul class="ps-fgrid">' + ''.join(f'<li class="ps-fi">{CK}<div><b>{E(t)}</b><span>{E(d)}</span></div></li>' for t, d in items) + '</ul></section>')
     total = sum(len(i) for _, i in FEATURES)
-    return f'<p class="ps-intro">{total} features, grouped by what they do for the buyer and for the owner. Open the Modules tab to see them by screen.</p>' + ''.join(out)
+    return '<p class="ps-intro">' + E(FEATINTRO.format(n=total)) + '</p>' + ''.join(out)
 
 
 def overview_draft(p):
@@ -346,8 +357,8 @@ SHOTS = [
 
 
 def shots_panel():
-    th = ''.join(f'<button type="button" class="ps-shot" data-i="{i}" aria-label="Open screenshot {i + 1} of {len(SHOTS)}: {t}"><span class="ps-shot-img"><img src="img/products/wholesale/{f}.jpg" alt="{t}" loading="lazy" width="1440" height="813"></span><b>{t}</b><span>{d}</span></button>' for i, (f, t, d) in enumerate(SHOTS))
-    return f'<p class="ps-lead">Real screens from the working product. Open any one to see it large. The shop shown is a sample store with sample records.</p><div class="ps-shots">{th}</div>'
+    th = ''.join(f'<button type="button" class="ps-shot" data-i="{i}" aria-label="Open screenshot {i + 1} of {len(SHOTS)}: {t}"><span class="ps-shot-img"><img src="{SHOTDIR}/{f}.jpg" alt="{t}" loading="lazy" width="1440" height="813"></span><b>{t}</b><span>{d}</span></button>' for i, (f, t, d) in enumerate(SHOTS))
+    return f'<p class="ps-lead">Real screens from the working product. Open any one to see it large. {E(SHOTNOTE)}</p><div class="ps-shots">{th}</div>'
 
 
 def lightbox():
@@ -360,11 +371,17 @@ def lightbox():
             '</div>')
 
 
+
+def use(pid):
+    globals().update(DATASETS[pid])
+
+
 def sheet(p):
+    use(p['id']) if p['id'] in DATASETS else None
     tabs = [('overview', 'Overview'), ('features', 'Features')]
-    if p.get('full'): tabs += [('modules', 'Modules'), ('ontology', 'Concept map'), ('dash', 'Dashboards and reports'), ('shots', 'Screenshots')]
+    if p.get('full'): tabs += [('modules', 'Modules'), ('ontology', 'Concept map'), ('dash', DASHTAB), ('shots', 'Screenshots')]
     panels = {'overview': overview_panel() if p.get('full') else overview_draft(p), 'features': features_panel(p)}
-    if p.get('full'): panels.update({'modules': modules_panel(), 'ontology': onto_panel(), 'dash': dashboard_panel(), 'shots': shots_panel()})
+    if p.get('full'): panels.update({'modules': modules_panel(), 'ontology': onto_panel(), 'dash': DASH(), 'shots': shots_panel()})
     tb = ''.join(f'<button type="button" role="tab" id="ps-{p["id"]}-t-{k}" aria-controls="ps-{p["id"]}-p-{k}" aria-selected="{"true" if i == 0 else "false"}" tabindex="{0 if i == 0 else -1}" data-tab="{k}">{lab}</button>' for i, (k, lab) in enumerate(tabs))
     pn = ''.join(f'<div class="ps-panel" role="tabpanel" id="ps-{p["id"]}-p-{k}" aria-labelledby="ps-{p["id"]}-t-{k}" data-tab="{k}"{"" if i == 0 else " hidden"} tabindex="0">{panels[k]}</div>' for i, (k, _) in enumerate(tabs))
     return f'''
@@ -382,6 +399,15 @@ def sheet(p):
   </div>
 </div>'''
 
+
+WHOLESALE = {k: globals()[k] for k in ('LEAD', 'ABOUT', 'PROBLEMS', 'PERSONAS', 'GLANCE', 'JOURNEY', 'JTITLE', 'FEATURES', 'FEATINTRO', 'MODULES', 'MODINTRO', 'ONTO', 'POS', 'EDGES', 'EXTRAS', 'GROUPCOL', 'GROUPNAME', 'LEGEND', 'CANVAS', 'ONTOHINT', 'TAX', 'SHOTS', 'SHOTDIR', 'SHOTNOTE', 'DASHTAB')}
+WHOLESALE['DASH'] = dashboard_panel
+sys.path.insert(0, os.path.join(ROOT, 'scripts'))
+import products_ims
+IMS = {k: getattr(products_ims, k) for k in list(WHOLESALE)}
+IMS['DASH'] = products_ims.DASH
+IMS['DASHTAB'] = 'Dashboard and statements'
+DATASETS = {'wholesale': WHOLESALE, 'ims': IMS}
 
 cards = ''
 sheets = ''
