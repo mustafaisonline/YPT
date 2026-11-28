@@ -4,6 +4,7 @@ import * as THREE from './vendor/three.module.min.js';
 import { RoundedBoxGeometry } from './vendor/RoundedBoxGeometry.js';
 import { RoomEnvironment } from './vendor/RoomEnvironment.js';
 import { mergeGeometries } from './vendor/BufferGeometryUtils.js';
+import { IMS } from './hww-ims.js';
 
 const stage = document.getElementById('hww-stage');
 if (stage) boot().catch(e => { console.error('hww3d', e); stage.classList.add('no3d'); document.dispatchEvent(new Event('ypt:hww3d-fail')); });
@@ -117,6 +118,7 @@ async function boot() {
         deck(x, w, h) { x.fillStyle = '#fbfcff'; x.fillRect(0, 0, w, h); x.fillStyle = '#2457f5'; rr(x, w * .08, h * .12, w * .5, h * .12, 8); x.fill(); x.fillStyle = 'rgba(15,23,48,.35)'; [.34, .46, .58].forEach(p => { rr(x, w * .08, h * p, w * .6, 10, 5); x.fill(); }); x.fillStyle = '#ffd36a'; x.beginPath(); x.arc(w * .8, h * .55, h * .2, 0, 7); x.fill(); x.fillStyle = '#14b8a6'; x.beginPath(); x.moveTo(w * .8, h * .55); x.arc(w * .8, h * .55, h * .2, 0, 4); x.fill(); },
         stage(x, w, h) { x.fillStyle = '#2a1050'; x.fillRect(0, 0, w, h); const g = x.createLinearGradient(0, 0, w, 0); g.addColorStop(0, '#ff5f9e'); g.addColorStop(.5, '#ffd36a'); g.addColorStop(1, '#5eead4'); x.fillStyle = g; x.font = '700 ' + h * .55 + 'px Geist, Arial'; x.textAlign = 'center'; x.textBaseline = 'middle'; x.fillText('LAUNCH DAY', w / 2, h * .52, w * .9); }
     };
+    Object.assign(art, IMS);   // the real Invoice Management System content (js/hww-ims.js) for the walls and laptop screens
     function label(text, w, h, bg, fg, sub) {
         return ctex(512, Math.round(512 * h / w), (x, W, H) => {
             x.fillStyle = bg; rr(x, 0, 0, W, H, H * .2); x.fill(); x.fillStyle = fg; x.textAlign = 'center'; x.textBaseline = 'middle';
@@ -132,13 +134,14 @@ async function boot() {
         const m = new THREE.Mesh(new THREE.PlaneGeometry(w, h), new THREE.MeshBasicMaterial({ map: label(text, w, h, bg || '#0f1730', fg || '#fff', sub), transparent: true })); m.position.set(x, y, z); g.add(m);
         const f = new THREE.Mesh(mergedGeo('signframe' + w + '_' + h, () => [part(BG(w + 0.08, 0.03, 0.05), 0xd2a84e, 0, h / 2 + 0.01, -0.03), part(BG(w + 0.08, 0.03, 0.05), 0xd2a84e, 0, -h / 2 - 0.01, -0.03), part(BG(0.03, h + 0.08, 0.05), 0xd2a84e, -w / 2 - 0.02, 0, -0.03), part(BG(0.03, h + 0.08, 0.05), 0xd2a84e, w / 2 + 0.02, 0, -0.03)]), PM.vc); f.position.copy(m.position); g.add(f); return m;
     }
+    const BTW = LOWQ ? 768 : 1024;
     function board(g, x, y, z, w, h, kind, ry) {
         h = Math.min(h, 2.0); y = Math.min(y, 1.5);
         const o = new THREE.Group(); o.position.set(x, y, z); o.rotation.y = ry || 0; g.add(o);
         const fr = new THREE.Mesh(mergedGeo('bfr' + w + '_' + h, () => [part(BG(w + 0.14, h + 0.14, 0.07), 0x0b0d12, 0, 0, 0), part(BG(w + 0.17, 0.02, 0.09), 0xd2a84e, 0, h / 2 + 0.08, 0), part(BG(w + 0.17, 0.02, 0.09), 0xd2a84e, 0, -h / 2 - 0.08, 0), part(BG(0.02, h + 0.17, 0.09), 0xd2a84e, -w / 2 - 0.08, 0, 0), part(BG(0.02, h + 0.17, 0.09), 0xd2a84e, w / 2 + 0.08, 0, 0)]), PM.vc); o.add(fr);
-        const s = new THREE.Mesh(new THREE.PlaneGeometry(w, h), new THREE.MeshBasicMaterial({ map: ctex(512, Math.max(64, Math.round(512 * h / w)), art[kind]) })); s.position.z = 0.04; o.add(s); return o;
+        const s = new THREE.Mesh(new THREE.PlaneGeometry(w, h), new THREE.MeshBasicMaterial({ map: ctex(BTW, Math.max(64, Math.round(BTW * h / w)), art[kind]) })); s.position.z = 0.04; o.add(s); return o;
     }
-    let _lap; const lapTex = () => _lap || (_lap = ctex(256, 164, art.code));
+    const _lap = []; let _lapN = 0; const lapTex = () => { const k = _lapN++ % 3; return _lap[k] || (_lap[k] = ctex(512, 329, art[['lapInvoices', 'lapDash', 'lapCode'][k]])); };
     function laptop(p, x, y, z, rot) {
         const g = new THREE.Group(); g.position.set(x, y, z); g.rotation.y = rot || 0; p.add(g);
         g.add(new THREE.Mesh(mergedGeo('laptop', () => [part(BG(0.6, 0.02, 0.4), 0xb9bfc9, 0, 0.01, 0), part(BG(0.6, 0.4, 0.015), 0x1a1c22, 0, 0.215, -0.19, -0.2)]), PM.vc));
@@ -322,13 +325,13 @@ async function boot() {
             room('board', f, -3.8, 13, 13); room('csuite', f, 6.2, 9, 9);
             wallSign(f, -3.8, 'BOARDROOM', 'Strategy · money · risk · people'); rug(g, -3.8, -0.4, 11, 5.6, 0xd9c8ff);
             box(g, 8.6, 0.12, 2.6, 0.1, mat(C.walnut), -3.8, 0.8, -0.5); box(g, 6.6, 0.7, 1.4, 0.1, mat(0x4f311d), -3.8, 0.4, -0.5); blob(g, -3.8, -0.5, 10.4, 4.4);
-            board(g, -3.8, 1.5, -P.d / 2 + 0.2, 4.2, 1.4, 'deck');
+            board(g, -3.8, 1.5, -P.d / 2 + 0.2, 4.2, 1.4, 'brief');
             for (let k = 0; k < 5; k++) { const x = -6.8 + k * 1.5; chair(g, x, -2.3, 0x2b3358, 0); agent(g, x, -2.0, { scale: 0.95, hover: 0.5 }); }
             for (let k = 0; k < 3; k++) { const x = -5.6 + k * 1.8; chair(g, x, 1.3, 0x2b3358, Math.PI); agent(g, x, 1.5, { scale: 0.95, hover: 0.5, extra: k === 1 }); }
             ['CEO', 'CFO', 'CTO'].forEach((t, k) => { const x = 4.2 + k * 2.55; glassCube(g, x, -1.7, 2.3, 2.9, 0xe9b949); desk(g, x, -2.2, 1.7); chair(g, x, -1.2, 0x2b3358, Math.PI); agent(g, x, -1.4, { scale: 0.9, hover: 0.55 }); sign(g, x, 2.85, -0.2, 1.5, t, '#e9b949', '#1b1233'); });
             cornerPlants(f); }
         // ---------- 6 Business
-        { const f = 6, g = floors[f].g, P = PLAN[f]; const Z = [['directors', -9.6, 'DIRECTORS', 'VPs · C-1', 'roadmap'], ['sales', -3.3, 'SALES & MARKETING', 'First conversations', 'funnel'], ['procure', 3.1, 'PROCUREMENT & FINANCE', 'Vendors · billing', 'chart'], ['legalhr', 9.4, 'LEGAL & HR', 'Contracts · people', 'checks']];
+        { const f = 6, g = floors[f].g, P = PLAN[f]; const Z = [['directors', -9.6, 'DIRECTORS', 'VPs · C-1', 'roadmap'], ['sales', -3.3, 'SALES & MARKETING', 'First conversations', 'funnel'], ['procure', 3.1, 'PROCUREMENT & FINANCE', 'Vendors · billing', 'methods'], ['legalhr', 9.4, 'LEGAL & HR', 'Contracts · people', 'roles']];
             Z.forEach((z, i) => {
                 room(z[0], f, z[1], 6, 6); wallSign(f, z[1], z[2], z[3]); rug(g, z[1], -0.6, 5.4, 4.6, [0xf9d9a8, 0xd9e6ff, 0xd9f3e4, 0xf3d9f0][i]); board(g, z[1], 1.5, -P.d / 2 + 0.2, 3.2, 1.2, z[4]);
                 pods(f, z[1] - 1.1, -0.2, 2, 2.3, [C.orange, C.blue, C.green, C.purple][i]); if (i % 2) shelf(g, z[1] + 2.5, -P.d / 2 + 0.6, 1.0, 1.9);
@@ -340,9 +343,9 @@ async function boot() {
             room('sam', f, -9.4, 7, 7); room('discovery', f, -0.8, 8, 8); room('architect', f, 8.6, 9, 9);
             glassCube(g, -9.4, -0.6, 6, 5.2, 0xf28a1e); rug(g, -9.4, -0.6, 5.4, 4.6, 0xffe2bd); desk(g, -8.6, -1.3, 2.6); standee(g, -10.6, -1.4, samTex, 1.7, 2.2); laptop(g, -9.1, 0.8, -1.2, 0); chair(g, -7.6, -0.4, C.orange, Math.PI); plant(g, -11.6, 1.4, 1.1);
             sign(g, -9.4, 3.0, -P.d / 2 + 0.2, 4.6, 'SAM', '#f28a1e', '#fff', 'Your single point of contact');
-            wallSign(f, -0.8, 'DISCOVERY STUDIO', 'Stage 1 · Siti'); board(g, -0.8, 1.5, -P.d / 2 + 0.2, 5.4, 2.0, 'sticky'); rug(g, -0.8, 0.2, 7, 5, 0xcfe0ff);
+            wallSign(f, -0.8, 'DISCOVERY STUDIO', 'Stage 1 · Siti'); board(g, -0.8, 1.5, -P.d / 2 + 0.2, 5.4, 2.0, 'needs'); rug(g, -0.8, 0.2, 7, 5, 0xcfe0ff);
             roundTable(g, -0.6, 0.4, 1.3, C.white); agent(g, -2.7, -0.8, { def: LEAD('vera'), scale: 1.25, full: true, hover: 0.1, face: 0.3 }); agent(g, 0.7, 1.2, { scale: 0.9 }); agent(g, -1.2, 1.5, { scale: 0.9, extra: true }); agent(g, 1.9, -0.6, { scale: 0.9 });
-            wallSign(f, 8.6, 'ARCHITECTURE ROOM', 'Stage 2 · Wei'); board(g, 6.5, 1.5, -P.d / 2 + 0.2, 3.6, 2.0, 'blueprint'); board(g, 10.7, 1.5, -P.d / 2 + 0.2, 3.6, 2.0, 'blueprint'); rug(g, 8.6, -0.2, 8.4, 4.6, 0xd2dcff);
+            wallSign(f, 8.6, 'ARCHITECTURE ROOM', 'Stage 2 · Wei'); board(g, 6.5, 1.5, -P.d / 2 + 0.2, 3.6, 2.0, 'erd'); board(g, 10.7, 1.5, -P.d / 2 + 0.2, 3.6, 2.0, 'modmap'); rug(g, 8.6, -0.2, 8.4, 4.6, 0xd2dcff);
             table(g, 8.4, 0.0, 3.4, 1.4, C.white); agent(g, 6.4, -1.4, { def: LEAD('atlas'), scale: 1.25, full: true, hover: 0.1, face: -0.2 }); agent(g, 9.2, -1.1, { scale: 0.9 }); agent(g, 10.8, 0.6, { scale: 0.9, extra: true }); cornerPlants(f); }
         // ---------- 4 Pilot
         { const f = 4, g = floors[f].g, P = PLAN[f];
@@ -350,12 +353,12 @@ async function boot() {
             wallSign(f, -4.5, 'PILOT BAY', 'Stage 3 · Aiman'); board(g, -4.5, 1.5, -P.d / 2 + 0.2, 6.2, 2.0, 'kanban'); board(g, -9.4, 1.5, -P.d / 2 + 0.2, 3, 1.8, 'roadmap'); rug(g, -4.5, 0.2, 9.4, 5, 0xc9ece4);
             roundTable(g, -2.2, 0.6, 1.1, C.white, 1.05); laptop(g, -2.2, 1.12, 0.6, 0); agent(g, -2.2, -0.7, { scale: 0.9 }); agent(g, -0.9, 1.0, { scale: 0.9, extra: true });
             agent(g, -5.8, -0.9, { def: LEAD('spark'), scale: 1.25, full: true, hover: 0.1, face: 0.25 }); pods(f, -9.2, 0.6, 2, 2.4, C.teal);
-            [0, 1].forEach(k => { const x = 7.2 + k * 4.4; wallSign(f, x, 'MEETING ' + (k + 1), 'Demos & workshops'); glassCube(g, x, -0.8, 4, 4.4, 0xaed9ff); table(g, x, -0.8, 2.4, 1.1, C.white); board(g, x, 1.5, -P.d / 2 + 0.2, 2.6, 1.3, k ? 'chart' : 'deck'); agent(g, x - 1.1, -1.7, { scale: 0.85 }); agent(g, x + 1.0, -1.6, { scale: 0.85, extra: true }); });
+            [0, 1].forEach(k => { const x = 7.2 + k * 4.4; wallSign(f, x, 'MEETING ' + (k + 1), 'Demos & workshops'); glassCube(g, x, -0.8, 4, 4.4, 0xaed9ff); table(g, x, -0.8, 2.4, 1.1, C.white); board(g, x, 1.5, -P.d / 2 + 0.2, 2.6, 1.3, k ? 'monthly' : 'journey'); agent(g, x - 1.1, -1.7, { scale: 0.85 }); agent(g, x + 1.0, -1.6, { scale: 0.85, extra: true }); });
             cornerPlants(f); }
         // ---------- 3 Build
         { const f = 3, g = floors[f].g, P = PLAN[f];
             room('engineering', f, -6, 14, 14); room('testlab', f, 10.4, 10, 10);
-            wallSign(f, -6, 'ENGINEERING FLOOR', 'Stage 4 · Jun'); board(g, -9.2, 1.5, -P.d / 2 + 0.2, 4.6, 1.8, 'code'); board(g, -3.8, 1.5, -P.d / 2 + 0.2, 4.4, 1.8, 'build'); board(g, 0.6, 1.5, -P.d / 2 + 0.2, 4, 1.8, 'chart');
+            wallSign(f, -6, 'ENGINEERING FLOOR', 'Stage 4 · Jun'); board(g, -9.2, 1.5, -P.d / 2 + 0.2, 4.6, 1.8, 'code'); board(g, -3.8, 1.5, -P.d / 2 + 0.2, 4.4, 1.8, 'build'); board(g, 0.6, 1.5, -P.d / 2 + 0.2, 4, 1.8, 'ageing');
             workRow(f, -11.2, -2.6, 5, 2.8, 0x7aa2ff); workRow(f, -11.2, 0.4, 5, 2.8, 0x5eead4); agent(g, 2.4, 1.3, { def: LEAD('forge'), scale: 1.25, full: true, hover: 0.1, face: -0.2 });
             wallSign(f, 10.4, 'TEST LAB', 'QA & automation');
             const dev = new THREE.Mesh(new THREE.PlaneGeometry(7.6, 2.0), new THREE.MeshBasicMaterial({ map: ctex(1024, 270, (x, w, h) => { x.fillStyle = '#10183a'; x.fillRect(0, 0, w, h); for (let i = 0; i < 10; i++) for (let k = 0; k < 3; k++) { x.fillStyle = ['#2457f5', '#14b8a6', '#8b5cf6', '#f28a1e'][(i + k) % 4]; rr(x, 12 + i * 100, 10 + k * 84, 78, 74, 10); x.fill(); x.fillStyle = '#fff'; x.globalAlpha = .6; x.fillRect(24 + i * 100, 26 + k * 84, 54, 8); x.fillRect(24 + i * 100, 42 + k * 84, 34, 8); x.globalAlpha = 1; } }) })); dev.position.set(10.4, 1.5, -P.d / 2 + 0.2); g.add(dev); box(g, 7.8, 2.2, 0.08, 0.05, DARK(), 10.4, 1.5, -P.d / 2 + 0.14);
@@ -364,15 +367,15 @@ async function boot() {
         // ---------- 2 Govern
         { const f = 2, g = floors[f].g, P = PLAN[f];
             room('checks', f, -10.4, 7, 7); room('governance', f, -1, 9, 9); room('audit', f, 10, 9, 9);
-            wallSign(f, -10.4, 'CHECKLISTS', 'Security · compliance · risk'); board(g, -11.7, 1.5, -P.d / 2 + 0.2, 2.2, 2.0, 'checks'); board(g, -9.1, 1.5, -P.d / 2 + 0.2, 2.2, 2.0, 'checks'); rug(g, -10.4, 0.2, 6, 4.6, 0xcdeedc); pods(f, -11.4, 0.4, 2, 2.4, C.green);
-            wallSign(f, -1, 'GOVERNANCE OFFICE', 'Stage 5 · Mei'); board(g, -1, 1.5, -P.d / 2 + 0.2, 3.6, 2.0, 'shield'); rug(g, -1, 0.2, 8, 4.8, 0xd5efe0); table(g, -1, 0.0, 3.4, 1.3, C.white);
+            wallSign(f, -10.4, 'CHECKLISTS', 'Security · compliance · risk'); board(g, -11.7, 1.5, -P.d / 2 + 0.2, 2.2, 2.0, 'checksA'); board(g, -9.1, 1.5, -P.d / 2 + 0.2, 2.2, 2.0, 'checksB'); rug(g, -10.4, 0.2, 6, 4.6, 0xcdeedc); pods(f, -11.4, 0.4, 2, 2.4, C.green);
+            wallSign(f, -1, 'GOVERNANCE OFFICE', 'Stage 5 · Mei'); board(g, -1, 1.5, -P.d / 2 + 0.2, 3.6, 2.0, 'audit'); rug(g, -1, 0.2, 8, 4.8, 0xd5efe0); table(g, -1, 0.0, 3.4, 1.3, C.white);
             agent(g, -3.2, -1.2, { def: LEAD('aegis'), scale: 1.25, full: true, hover: 0.1, face: 0.2 }); agent(g, -0.2, -1.2, { scale: 0.9 }); agent(g, 1.4, 1.2, { scale: 0.9, extra: true });
             wallSign(f, 10, 'AUDIT & REVIEW', 'Responsible-AI · data protection'); shelf(g, 7.6, -P.d / 2 + 0.6, 2.2, 2.2); shelf(g, 12.4, -P.d / 2 + 0.6, 2.2, 2.2); rug(g, 10, 0.2, 8, 4.6, 0xd9f3e4); pods(f, 8.8, 0.3, 2, 2.6, C.teal);
             cornerPlants(f); }
         // ---------- 1 Launch
         { const f = 1, g = floors[f].g, P = PLAN[f];
             room('mission', f, -3.5, 16, 16); room('launchpad', f, 12.5, 5, 5);
-            wallSign(f, -3.5, 'MISSION CONTROL', 'Stage 6 · Farid'); board(g, -8.4, 1.5, -P.d / 2 + 0.2, 5.4, 2.0, 'mission'); board(g, -2.4, 1.5, -P.d / 2 + 0.2, 5.4, 2.0, 'chart'); board(g, 3.2, 1.5, -P.d / 2 + 0.2, 5, 2.0, 'mission');
+            wallSign(f, -3.5, 'MISSION CONTROL', 'Stage 6 · Farid'); board(g, -8.4, 1.5, -P.d / 2 + 0.2, 5.4, 2.0, 'kpis'); board(g, -2.4, 1.5, -P.d / 2 + 0.2, 5.4, 2.0, 'status'); board(g, 3.2, 1.5, -P.d / 2 + 0.2, 5, 2.0, 'latest');
             workRow(f, -11.5, -2.6, 4, 2.9, 0x5eead4); workRow(f, -11.5, 0.4, 4, 2.9, 0x7aa2ff); agent(g, 1.2, 1.2, { def: LEAD('orca'), scale: 1.25, full: true, hover: 0.1, face: -0.25 });
             const rk = new THREE.Group(); rk.position.set(12.5, 0, -1); rk.scale.setScalar(0.62); g.add(rk); cyl(rk, 0.4, 0.4, 3.6, mat(0xf6f8ff), 0, 2.1, 0, 24); const nose = new THREE.Mesh(new THREE.ConeGeometry(0.4, 1.2, 24), mat(C.orange)); nose.position.y = 4.5; rk.add(nose); ball(rk, 0.2, mat(0x5eead4), 0, 2.8, 0.38);
             [0, 2.1, 4.2].forEach(a => { const fin = box(rk, 0.08, 1.1, 0.9, 0.03, mat(C.orange), Math.cos(a) * 0.45, 0.8, Math.sin(a) * 0.45); fin.rotation.y = -a; });
@@ -387,10 +390,10 @@ async function boot() {
             rug(lob, -12.4, 0, 9, 7, 0xffe2bd); sign(lob, -12.4, 3.0, -P.d / 2 + 0.2, 4.6, 'WELCOME', '#0f1730', '#fff', 'Reception');
             box(lob, 4.4, 1.05, 1.1, 0.2, mat(C.white), -12.4, 0.52, -2.2); box(lob, 4.6, 0.1, 1.3, 0.05, mat(C.walnut), -12.4, 1.08, -2.2); box(lob, 4.4, 0.3, 0.06, 0.03, glow(C.orange), -12.4, 0.8, -1.64); blob(lob, -12.4, -2.2, 6, 2.6); recepAgent = agent(g, -12.4, -3.0, { scale: 1.0, hover: 0.6 });
             sofa(lob, -16.2, -0.8, 3.0, C.teal, 0.5); sofa(lob, -8.4, -0.6, 2.6, C.blue, -0.5); table(lob, -12.4, 0.2, 1.2, 0.8, C.wood, 0.4); plant(lob, -17.6, -3.6, 1.6); plant(lob, -7.2, -3.6, 1.4);
-            wallSign(f, -1.2, 'ACADEMY', 'Stage 7 · Lin'); board(g, -1.2, 1.5, -P.d / 2 + 0.2, 5.4, 2.0, 'deck'); rug(g, -1.2, 0.1, 9.6, 6.2, 0xd8e5ff);
+            wallSign(f, -1.2, 'ACADEMY', 'Stage 7 · Lin'); board(g, -1.2, 1.5, -P.d / 2 + 0.2, 5.4, 2.0, 'training'); rug(g, -1.2, 0.1, 9.6, 6.2, 0xd8e5ff);
             agent(g, -3.6, -3.0, { def: LEAD('sage'), scale: 1.25, full: true, hover: 0.1, face: 0.2 });
             for (let r = 0; r < 2; r++) for (let k = 0; k < 4; k++) { const x = -4.6 + k * 2.4, z = -1.0 + r * 1.9; desk(g, x, z, 1.5); agent(g, x, z - 0.8, { scale: 0.85, hover: 0.55, extra: r === 1 && k % 2 === 1 }); }
-            wallSign(f, 12.4, 'THE HALL', 'Where launches are celebrated'); box(g, 9.4, 0.5, 3.6, 0.15, mat(0x3a1a6b), 12.4, 0.25, -3.6); board(g, 12.4, 1.5, -P.d / 2 + 0.2, 6.2, 1.6, 'stage');
+            wallSign(f, 12.4, 'THE HALL', 'Where launches are celebrated'); box(g, 9.4, 0.5, 3.6, 0.15, mat(0x3a1a6b), 12.4, 0.25, -3.6); board(g, 12.4, 1.5, -P.d / 2 + 0.2, 6.2, 1.6, 'launch');
             [-1, 1].forEach(s => box(g, 1.1, 3.0, 0.25, 0.1, mat(0xc2185b), 12.4 + s * 4.6, 1.6, -P.d / 2 + 0.5));
             const tiles = []; for (let i = 0; i < 6; i++) for (let k = 0; k < 3; k++) { const t = box(g, 1.35, 0.04, 1.35, 0.03, glow(0xe8e0ff), 8.2 + i * 1.5, 0.06, -0.8 + k * 1.5); t.userData.tile = (i + k) % 4; tiles.push(t); }
             const dg = new THREE.Group(); dg.position.set(12.4, FH - 0.55, 0.4); g.add(dg); dg.add(new THREE.Mesh(new THREE.IcosahedronGeometry(0.6, 1), new THREE.MeshPhongMaterial({ color: 0xffffff, shininess: 200, flatShading: true, emissive: 0x222244 }))); cyl(dg, 0.02, 0.02, 0.5, STEEL(), 0, 0.8, 0, 6);
